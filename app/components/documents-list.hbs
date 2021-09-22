@@ -1,0 +1,9 @@
+<h2>{{@title}}</h2>
+
+<ul>
+  {{#each @document as |doc|}}
+    <li>
+         <button type="button" {{on 'click' (fn this.showDocument doc)}}>{{doc}}</button>
+    </li>
+  {{/each}}
+</ul>
