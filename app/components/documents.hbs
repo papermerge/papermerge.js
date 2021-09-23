@@ -1,0 +1,15 @@
+<label>
+  <span>Search</span>
+  <Input @value={{this.query}} class="light" />
+</label>
+
+
+<div class="documents">
+  <ul class="results">
+    <Documents::Filter @docs={{@docs}} @query={{this.query}} as |results|>
+      {{#each results as |doc|}}
+        <li><Document @doc={{doc}} /></li>
+      {{/each}}
+    </Documents::Filter>
+  </ul>
+</div>

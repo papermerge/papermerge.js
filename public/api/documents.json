@@ -15,7 +15,14 @@
                 "title": "Invoice 2.pdf",
                 "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
             }
+        },
+        {
+            "type": "document",
+            "id": 3,
+            "attributes": {
+                "title": "Some.pdf",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
+            }
         }
-
     ]
 }
