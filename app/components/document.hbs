@@ -3,7 +3,12 @@
         src={{@doc.image}}
         alt="A picture of {{@doc.title}}"
     />
+
   <div class="details">
-    <h3>{{@doc.title}}</h3>
+    <h3>
+        <LinkTo @route="document" @model={{@doc}}>
+            {{@doc.title}}
+        </LinkTo>
+    </h3>
   </div>
 </div>

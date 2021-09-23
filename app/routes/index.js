@@ -8,7 +8,7 @@ export default class IndexRoute extends Route {
     return data.map((model) => {
       let { attributes } = model;
       let type = 'document';
-      console.log(attributes);
+
       return { type, ...attributes };
     });
   }

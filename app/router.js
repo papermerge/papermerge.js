@@ -10,4 +10,5 @@ Router.map(function () {
   this.route('documents');
   this.route('about');
   this.route('contact', { path: '/getting-in-touch' });
+  this.route('document', { path: '/document/:document_id' });
 });
