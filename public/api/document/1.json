@@ -1,8 +1,8 @@
 {
     "data": {
         "type": "document",
+        "id": 1,
         "attributes": {
-            "id": 1,
             "title": "Invoice 1.pdf",
             "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
         }
