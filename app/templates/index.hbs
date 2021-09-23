@@ -1,5 +1,14 @@
-<div class="jumbo">
-  <div class="right tomster"></div>
+<Jumbo>
   <h2>Welcome to Papermerge!</h2>
   <p>We hope you find exactly what you're looking for in a place to stay.</p>
+
+  <LinkTo @route="about" class="button">About Us</LinkTo>
+</Jumbo>
+
+<div class="documents">
+  <ul class="results">
+    {{#each @model as |model|}}
+      <li><Document @doc={{model}} /></li>
+    {{/each}}
+  </ul>
 </div>
