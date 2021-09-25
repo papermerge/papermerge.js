@@ -2,7 +2,8 @@
   <div class="icon {{@node.type}}"></div>
   <div class="details">
     <h3>
-      <LinkTo @route="{{@node.type}}" @model={{@node}}>
+      {{! When the user clicks on the link, Ember will run the Route's model hook with params.<model>_id. On the other hand, IF A MODEL OBJECT WAS PASSED INSTEAD OF THE ID, THE MODEL HOOK WILL NOT RUN. This is the reason I pass @node.id ;) }}
+      <LinkTo @route="{{@node.type}}" @model={{@node.id}}>
           {{@node.title}}
       </LinkTo>
     </h3>
