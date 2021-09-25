@@ -5,9 +5,9 @@
 
 
 <div class="nodes">
-  <ul class="results">
+  <ul class="results grid">
       {{#each @nodes as |node|}}
-        <li><Node @node={{node}} /></li>
+        <li class="item"><Node @node={{node}} /></li>
       {{/each}}
   </ul>
 </div>
