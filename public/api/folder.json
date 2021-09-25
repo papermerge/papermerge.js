@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "type": "document",
+            "id": 1,
+            "attributes": {
+                "title": "invoice.pdf"
+            }
+        },
+        {
+            "type": "document",
+            "id": 2,
+            "attributes": {
+                "title": "payment_1.pdf"
+            }
+        },
+        {
+            "type": "document",
+            "id": 3,
+            "attributes": {
+                "title": "payment_2.pdf"
+            }
+        },
+        {
+            "type": "folder",
+            "id": 4,
+            "attributes": {
+                "title": "My Documents"
+            }
+        }
+    ]
+}
