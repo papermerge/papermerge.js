@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-export default class documentssFilterComponent extends Component {
+export default class NodesFilterComponent extends Component {
   get results() {
     let { docs, query } = this.args;
 

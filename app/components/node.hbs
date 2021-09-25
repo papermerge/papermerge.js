@@ -1,0 +1,11 @@
+<div class="node item">
+  <div class="icon {{@node.type}}"></div>
+  <div class="details">
+    {{@node.type}}
+    <h3>
+      <LinkTo @route="{{@node.type}}" @model={{@node}}>
+          {{@node.title}}
+      </LinkTo>
+    </h3>
+  </div>
+</div>

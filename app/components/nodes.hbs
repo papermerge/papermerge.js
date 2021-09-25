@@ -1,0 +1,13 @@
+<label>
+  <span>Search</span>
+  <Input @value={{this.query}} class="light" />
+</label>
+
+
+<div class="nodes">
+  <ul class="results">
+      {{#each @nodes as |node|}}
+        <li><Node @node={{node}} /></li>
+      {{/each}}
+  </ul>
+</div>
