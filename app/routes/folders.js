@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 export default class FolderRoute extends Route {
   async model(params) {
-    let response = await fetch(`/api/folder/${params.folder_id}.json`);
+    let response = await fetch(`/api/folder.json`);
     let { data } = await response.json();
 
     return data.map((model) => {
