@@ -6,6 +6,6 @@ export default class FolderRoute extends Route {
   @service store;
 
   async model(params) {
-    this.store.findAll('folder');
+    return this.store.findAll('folder');
   }
 }
