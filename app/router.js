@@ -12,8 +12,7 @@ Router.map(function () {
   this.route('contact', { path: '/getting-in-touch' });
   this.route('document', { path: '/document/:document_id' });
 
-  this.route('folders', { path: '/folders/' });
-  this.route('folder', { path: '/folder/:folder_id' });
+  this.route('node', { path: '/node/:node_id' });
 
   this.route('tags', function () {
     this.route('add');

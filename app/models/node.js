@@ -1,15 +1,15 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class NodeModel extends Model {
-  @attr('string') title;
-  @attr('string') type;
-  @attr parent;
+  @attr title;
+  @hasMany('node',  { polymorphic: true }) children;
+  @belongsTo('node', { inverse: 'children' }) parent;
 
   get is_folder() {
-    return this.type === "folder";
+    return this.type == "folder";
   }
 
   get is_document() {
-    return this.type === "document";
+    return this.type == "document";
   }
 }

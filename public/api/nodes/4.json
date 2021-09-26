@@ -1,0 +1,29 @@
+{
+  "data": {
+    "type": "node",
+    "id": 4,
+    "attributes": {
+      "title": "My Documents"
+    },
+    "relationships": {
+      "children": {
+        "data": [
+          {
+            "id": 5,
+            "type": "document",
+            "attributes": {
+                "title": "Contract 1.pdf"
+              }
+          },
+          {
+            "id": 6,
+            "type": "document",
+            "attributes": {
+              "title": "Contract 2.pdf"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

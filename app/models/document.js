@@ -7,4 +7,12 @@ export default class DocumentModel extends NodeModel {
   get type() {
     return 'document';
   }
+
+  get is_folder() {
+    return false;
+  }
+
+  get is_document() {
+    return true;
+  }
 }
