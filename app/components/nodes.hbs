@@ -3,9 +3,7 @@ All Nodes
   <ul class="results">
       {{#each @nodes as |node|}}
         <li class="item">
-          title={{ @node.title }}
-          type={{@node.type}}
-          {{#if @node.is_document }}
+          {{#if node.is_document }}
             <Document @model={{node}} />
           {{ else }}
             <Folder @model={{node}} />

@@ -8,11 +8,14 @@ export default class IndexRoute extends Route {
   async model() {
     let response = await fetch('/api/nodes.json');
     let { data } = await response.json();
+    let ret;
 
-    return data.map((model) => {
+    ret = data.map((model) => {
       let { id, type, attributes } = model;
 
       return this.store.createRecord('node',{ id, type, ...attributes });
     });
+
+    return ret;
   }
 }

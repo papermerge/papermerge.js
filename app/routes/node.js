@@ -6,6 +6,9 @@ export default class FolderRoute extends Route {
   @service store;
 
   async model(params) {
-    return this.store.findRecord('node', params.node_id, {include: "children"});
+    return this.store.findRecord(
+      'node',
+      params.node_id, {include: "children"}
+    );
   }
 }
