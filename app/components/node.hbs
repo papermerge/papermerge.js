@@ -3,9 +3,20 @@
   <div class="details">
     <h3>
       {{! When the user clicks on the link, Ember will run the Route's model hook with params.<model>_id. On the other hand, IF A MODEL OBJECT WAS PASSED INSTEAD OF THE ID, THE MODEL HOOK WILL NOT RUN. This is the reason I pass @node.id ;) }}
-      <LinkTo @route="{{@node.type}}" @model={{@node.id}}>
+      {{#if @node.is_folder }}
+        IS FOLDER
+        <LinkTo
+            {{ on "click" (fn this.updateBreadcrumb @node) }}
+            @route="{{@node.type}}"
+            @model={{@node.id}}>
           {{@node.title}}
-      </LinkTo>
+        </LinkTo>
+      {{else}}
+        {{! node for document }}
+        <LinkTo @route="{{@node.type}}" @model={{@node.id}}>
+          {{@node.title}}
+        </LinkTo>
+      {{/if}}
     </h3>
   </div>
 </div>

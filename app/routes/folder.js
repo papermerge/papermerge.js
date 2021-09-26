@@ -1,13 +1,11 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
 
 export default class FolderRoute extends Route {
-  async model(params) {
-    let response = await fetch(`/api/folder/${params.folder_id}.json`);
-    let { data } = await response.json();
+  @service store;
 
-    return data.map((model) => {
-      let { id, type, attributes } = model;
-      return { id, type, ...attributes };
-    });
+  async model(params) {
+    return this.store.findRecord('folder', params.node_id);
   }
 }
