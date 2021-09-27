@@ -1,6 +1,29 @@
-<div class="container">
-  <NavBar />
-  <div class="body">
-    {{outlet}}
+<BsNavbar as |navbar|>
+  <div class="navbar-header">
+    <navbar.toggle />
+    <a class="navbar-brand" href="/">Papermerge</a>
   </div>
+  <navbar.content>
+    <navbar.nav as |nav|>
+      <nav.item>
+        <nav.linkTo @route="index">Home</nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="tags">Tags</nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="automates">Automates</nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="about">About</nav.linkTo>
+      </nav.item>
+      <nav.item>
+        <nav.linkTo @route="contact">Contact</nav.linkTo>
+      </nav.item>
+    </navbar.nav>
+  </navbar.content>
+</BsNavbar>
+
+<div class="container">
+  {{outlet}}
 </div>

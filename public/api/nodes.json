@@ -2,27 +2,30 @@
   "data": [
     {
       "id": 1,
-      "type": "document",
+      "type": "node",
       "attributes": {
         "model": "document",
         "title": "invoice.pdf"
       }
     }, {
       "id": 2,
-      "type": "document",
+      "type": "node",
       "attributes": {
+        "model": "document",
         "title": "payment_1.pdf"
       }
     }, {
       "id": 3,
-      "type": "document",
+      "type": "node",
       "attributes": {
+        "model": "document",
         "title": "payment_2.pdf"
       }
     }, {
       "id": 4,
-      "type": "folder",
+      "type": "node",
       "attributes": {
+        "model": "folder",
         "title": "My Documents"
       }
     }

@@ -1,0 +1,50 @@
+{
+  "data": {
+    "type": "node",
+    "id": 7,
+    "attributes": {
+      "title": "BVG Tickets"
+    },
+    "relationships": {
+      "children": {
+        "data": [
+          {
+            "id": 8,
+            "type": "document",
+            "attributes": {
+                "title": "Fahrschein-1.pdf"
+              }
+          },
+          {
+            "id": 9,
+            "type": "document",
+            "attributes": {
+              "title": "Fahrschein-2.pdf"
+            }
+          },
+          {
+            "id": 10,
+            "type": "document",
+            "attributes": {
+              "title": "Fahrschein-3.pdf"
+            }
+          },
+          {
+            "id": 11,
+            "type": "document",
+            "attributes": {
+              "title": "Fahrschein-4.pdf"
+            }
+          },
+          {
+            "id": 12,
+            "type": "document",
+            "attributes": {
+              "title": "Fahrschein-5.pdf"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

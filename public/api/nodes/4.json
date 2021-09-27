@@ -21,6 +21,13 @@
             "attributes": {
               "title": "Contract 2.pdf"
             }
+          },
+          {
+            "id": 7,
+            "type": "node",
+            "attributes": {
+              "title": "BVG Tickets"
+            }
           }
         ]
       }
