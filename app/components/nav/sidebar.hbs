@@ -1,0 +1,29 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Papermerge</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <LinkTo @route="index" class="nav-link text-white" aria-current="page">
+          <i class="bi-folder me-2"></i>Documents
+        </LinkTo>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="bi-inbox me-2"></i>Inbox
+        </a>
+      </li>
+      <li>
+        <LinkTo @route="automates" class="nav-link text-white">
+          <i class="bi-play me-2"></i>Automates
+        </LinkTo>
+      </li>
+      <li>
+        <LinkTo @route="tags" class="nav-link text-white">
+          <i class="bi-tag me-2"></i>Tags
+        </LinkTo>
+      </li>
+    </ul>
+</div>

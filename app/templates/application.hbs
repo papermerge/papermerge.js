@@ -1,29 +1,9 @@
-<BsNavbar as |navbar|>
-  <div class="navbar-header">
-    <navbar.toggle />
-    <a class="navbar-brand" href="/">Papermerge</a>
+<main>
+  <Nav::Sidebar />
+  <div class="w-100">
+    <Nav::Topbar />
+    <div class="container p-2">
+      {{outlet}}
+    </div>
   </div>
-  <navbar.content>
-    <navbar.nav as |nav|>
-      <nav.item>
-        <nav.linkTo @route="index">Home</nav.linkTo>
-      </nav.item>
-      <nav.item>
-        <nav.linkTo @route="tags">Tags</nav.linkTo>
-      </nav.item>
-      <nav.item>
-        <nav.linkTo @route="automates">Automates</nav.linkTo>
-      </nav.item>
-      <nav.item>
-        <nav.linkTo @route="about">About</nav.linkTo>
-      </nav.item>
-      <nav.item>
-        <nav.linkTo @route="contact">Contact</nav.linkTo>
-      </nav.item>
-    </navbar.nav>
-  </navbar.content>
-</BsNavbar>
-
-<div class="container">
-  {{outlet}}
-</div>
+</main>

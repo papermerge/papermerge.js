@@ -1,4 +1,13 @@
-@import "ember-bootstrap/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
 .results.list > .item {
     padding: 0.25rem 1rem;

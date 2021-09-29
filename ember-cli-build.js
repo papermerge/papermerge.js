@@ -8,9 +8,7 @@ module.exports = function (defaults) {
       extension: 'scss',
     },
   });
-  // Use `app.import` to add additional libraries to the generated
-  // output files.
-  //
+  app.import('node_modules/bootstrap-icons/font/bootstrap-icons.css');
   // If you need to use different assets in different
   // environments, specify an object as the first parameter. That
   // object's keys should be the environment name and the values

@@ -1,0 +1,9 @@
+<div class="tags">
+  <ul class="results">
+      {{#each @tags as |tag|}}
+        <li class="item">
+            <Tag @model={{tag}} />
+        </li>
+      {{/each}}
+  </ul>
+</div>
