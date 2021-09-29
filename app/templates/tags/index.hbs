@@ -1,5 +1,54 @@
 <h1>Tags Index</h1>
 
-<LinkTo @route="tags.add" class="btn btn-success">New</LinkTo>
+<button class="btn btn-success" type="button" {{on "click" this.onToggleNew}}>New</button>
+{{#if this.new}}
+<div>
+    <p>
+        <Input type="text" @value={{this.new_name}}/>
+        <Input type="text" @value={{this.new_description}} />
+        <Input @type="color" @value={{this.new_fg_color}} />
+        <Input @type="color" @value={{this.new_bg_color}} />
+    </p>
+    <p>
+        <Input @type="checkbox" @checked={{this.pinned}} />Is Pinned?
+    </p>
+    <button
+        type="button"
+        {{on "click" this.onCreate}}
+        class="btn btn-success">
+        Create Tag
+    </button>
+    <button
+        type="button"
+        {{on "click" this.onCancel}}
+        class="btn btn-secondary">
+        Cancel
+    </button>
+</div>
+{{/if}}
 
-<Tags @tags={{@model}} />
+<div class="tags">
+
+  <table class="table table-striped">
+    <thead>
+      <tr class="text-uppercase">
+        <th class="border-top-0">Tag Name</th>
+        <th class="border-top-0">Pinned?</th>
+        <th class="border-top-0">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each @model as |tag|}}
+        <tr>
+          <td>
+            <LinkTo @route="tags.edit" @model={{tag.id}}>
+              {{tag.name}}
+            </LinkTo>
+          </td>
+          <td>{{tag.pinned}}</td>
+          <td>{{tag.description}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
