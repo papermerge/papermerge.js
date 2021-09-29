@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "tag",
+      "attributes": {
+        "name": "important",
+        "fg_color": "#ffffff",
+        "bg_color": "#ff0000",
+        "description": "",
+        "pinned": "true"
+      }
+    }, {
+      "id": 2,
+      "type": "tag",
+      "attributes": {
+        "name": "paid",
+        "fg-color": "#ffffff",
+        "bg-color": "#ff0000",
+        "description": "",
+        "pinned": "true"
+      }
+    }, {
+      "id": 3,
+      "type": "tag",
+      "attributes": {
+        "name": "unpaid",
+        "fg-color": "#ffffff",
+        "bg-color": "#ff0000",
+        "description": "",
+        "pinned": "true"
+      }
+    }, {
+      "id": 4,
+      "type": "tag",
+      "attributes": {
+        "name": "invoice",
+        "fg-color": "#ffffff",
+        "bg-color": "#ff0000",
+        "description": "",
+        "pinned": "true"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+    "data": {
+        "type": "tag",
+        "id": 1,
+        "attributes": {
+            "name": "important",
+            "fg_color": "#ffffff",
+            "bg_color": "#ff0000",
+            "description": "",
+            "pinned": "true"
+        }
+    }
+}

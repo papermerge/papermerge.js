@@ -1,9 +1,26 @@
 <div class="tags">
-  <ul class="results">
+  <table class="table table-striped">
+    <thead>
+      <tr class="text-uppercase">
+        <th class="border-top-0"><input type="checkbox" /></th>
+        <th class="border-top-0">Tag Name</th>
+        <th class="border-top-0">Pinned?</th>
+        <th class="border-top-0">Description</th>
+      </tr>
+    </thead>
+    <tbody>
       {{#each @tags as |tag|}}
-        <li class="item">
-            <Tag @model={{tag}} />
-        </li>
+        <tr>
+          <th scope="row"><input type="checkbox" /></th>
+          <td>
+            <LinkTo @route="tags.edit" @model={{tag.id}}>
+              {{tag.name}}
+            </LinkTo>
+          </td>
+          <td>{{tag.pinned}}</td>
+          <td>{{tag.description}}</td>
+        </tr>
       {{/each}}
-  </ul>
+    </tbody>
+  </table>
 </div>

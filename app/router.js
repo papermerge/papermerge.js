@@ -16,7 +16,7 @@ Router.map(function () {
 
   this.route('tags', function () {
     this.route('add');
-    this.route('tag', { path: '/:tag_id' });
+    this.route('edit', { path: ':tag_id/edit' });
     this.route('index', { path: '/' });
   });
 

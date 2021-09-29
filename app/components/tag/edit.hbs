@@ -1,0 +1,31 @@
+<h1>Edit {{@model.name}} Tag</h1>
+
+<form>
+    <div class="mb-3">
+        <label for="tag" class="form-label">Name</label>
+        <Input id="tag-name" @type="text" @value="{{@model.name}}" />
+    </div>
+    <div class="mb-3">
+        <Input id="tag-pinned" @type="checkbox" @checked={{true}} />
+        <label for="tag" class="form-label">Pinned?</label>
+        <p>
+            <small class="form-text text-muted">
+                Pinned tag will be displayed under Documents menu.
+                It serves as shortcut to quickly filter folders/documents
+                associated with this tag
+            </small>
+        </p>
+    </div>
+    <div class="mb-3">
+        <label for="tag" class="form-label">Foreground Color</label>
+        <Input id="tag-fg-color" @type="color" />
+    </div>
+    <div class="mb-3">
+        <label for="tag" class="form-label">Background Color</label>
+        <Input id="tag-bg-color" @type="color" />
+    </div>
+    <div class="mb-3">
+        <label for="tag" class="form-label">Description</label>
+        <Input id="tag-description" @type="text" />
+    </div>
+</form>
