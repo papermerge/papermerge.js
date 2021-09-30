@@ -1,0 +1,67 @@
+<button class="btn btn-success" type="button" {{on "click" this.onToggleNew}}>
+    New
+</button>
+
+{{#if this.form_visible}}
+    <form>
+        <div class="row my-2">
+            <div class="col-md-1">
+                <Tag::Item
+                    @name={{this.new_name}}
+                    @fg_color={{this.new_fg_color}}
+                    @bg_color={{this.new_bg_color}} />
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <label for="name" class="form-label">Name</label>
+                <Input
+                    id="name"
+                    @type="text"
+                    @value={{this.new_name}}
+                    class="form-control"
+                />
+            </div>
+            <div class="col-md-5">
+                <label for="description" class="form-label">Description</label>
+                <Input
+                    id="description"
+                    @type="text"
+                    @value={{this.new_description}}
+                    class="form-control"
+                />
+            </div>
+            <div class="col-md-1">
+                <label for="fg_color" class="form-label">Fg Color</label>
+                <Input id="fg_color" @type="color" @value={{this.new_fg_color}} class="form-control form-control-color" />
+            </div>
+            <div class="col-md-1">
+                <label for="bg_color" class="form-label">Bg Color</label>
+                <Input id="bg_color" @type="color" @value={{this.new_bg_color}} class="form-control form-control-color" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <Input @type="checkbox" @checked={{this.pinned}} class="form-check-input" id="is_pinned" />
+                <label class="form-check-label" for="is_pinned">Is Pinned?</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <button
+                    type="button"
+                    {{on "click" this.onCreate}}
+                    class="btn btn-success">
+                    Create Tag
+                </button>
+                <button
+                    type="button"
+                    {{on "click" this.onCancel}}
+                    class="btn btn-secondary">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+{{/if}}

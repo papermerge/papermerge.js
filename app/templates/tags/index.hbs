@@ -1,35 +1,10 @@
 <h1>Tags Index</h1>
 
-<button class="btn btn-success" type="button" {{on "click" this.onToggleNew}}>New</button>
-{{#if this.new}}
-<div>
-    <p>
-        <Input type="text" @value={{this.new_name}}/>
-        <Input type="text" @value={{this.new_description}} />
-        <Input @type="color" @value={{this.new_fg_color}} />
-        <Input @type="color" @value={{this.new_bg_color}} />
-    </p>
-    <p>
-        <Input @type="checkbox" @checked={{this.pinned}} />Is Pinned?
-    </p>
-    <button
-        type="button"
-        {{on "click" this.onCreate}}
-        class="btn btn-success">
-        Create Tag
-    </button>
-    <button
-        type="button"
-        {{on "click" this.onCancel}}
-        class="btn btn-secondary">
-        Cancel
-    </button>
-</div>
-{{/if}}
+<Tag::New />
 
 <div class="tags">
 
-  <table class="table table-striped">
+  <table class="table table-striped align-middle">
     <thead>
       <tr class="text-uppercase">
         <th class="border-top-0">Tag Name</th>
@@ -41,11 +16,16 @@
       {{#each @model as |tag|}}
         <tr>
           <td>
-            <LinkTo @route="tags.edit" @model={{tag.id}}>
-              {{tag.name}}
+            <LinkTo @route="tags.edit" @model={{tag.id}} class="tag-link">
+              <Tag::Item
+                  @name={{tag.name}}
+                  @fg_color={{tag.fg_color}}
+                  @bg_color={{tag.bg_color}} />
             </LinkTo>
           </td>
-          <td>{{tag.pinned}}</td>
+          <td>
+            <Common::Boolean @value={{tag.pinned}} />
+          </td>
           <td>{{tag.description}}</td>
         </tr>
       {{/each}}

@@ -15,8 +15,8 @@
       "type": "tag",
       "attributes": {
         "name": "paid",
-        "fg-color": "#ffffff",
-        "bg-color": "#ff0000",
+        "fg_color": "#ffffff",
+        "bg_color": "#006684",
         "description": "",
         "pinned": "true"
       }
@@ -25,8 +25,8 @@
       "type": "tag",
       "attributes": {
         "name": "unpaid",
-        "fg-color": "#ffffff",
-        "bg-color": "#ff0000",
+        "fg_color": "#ffffff",
+        "bg_color": "#0000ff",
         "description": "",
         "pinned": "true"
       }
@@ -35,8 +35,8 @@
       "type": "tag",
       "attributes": {
         "name": "invoice",
-        "fg-color": "#ffffff",
-        "bg-color": "#ff0000",
+        "fg_color": "#ffffff",
+        "bg_color": "#661200",
         "description": "",
         "pinned": "true"
       }
