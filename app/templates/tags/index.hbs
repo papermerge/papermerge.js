@@ -1,32 +1,21 @@
-<h1>Tags Index</h1>
-
-<Tag::New />
+<p class="my-2">
+  <Tag::New />
+</p>
 
 <div class="tags">
-
   <table class="table table-striped align-middle">
     <thead>
       <tr class="text-uppercase">
         <th class="border-top-0">Tag Name</th>
         <th class="border-top-0">Pinned?</th>
         <th class="border-top-0">Description</th>
+        <th class="border-top-0">Action</th>
       </tr>
     </thead>
     <tbody>
       {{#each @model as |tag|}}
         <tr>
-          <td>
-            <LinkTo @route="tags.edit" @model={{tag.id}} class="tag-link">
-              <Tag::Item
-                  @name={{tag.name}}
-                  @fg_color={{tag.fg_color}}
-                  @bg_color={{tag.bg_color}} />
-            </LinkTo>
-          </td>
-          <td>
-            <Common::Boolean @value={{tag.pinned}} />
-          </td>
-          <td>{{tag.description}}</td>
+          <Tag::TableRow @tag={{tag}} />
         </tr>
       {{/each}}
     </tbody>

@@ -1,0 +1,45 @@
+{{! `eq` helper is provided by ember-truth-helpers addon !}}
+{{#if  (eq this.edit_mode_id @tag.id)}}
+  {{! inline edit }}
+  <td>
+      <Tag::Item
+        @name={{@tag.name}}
+        @fg_color={{@tag.fg_color}}
+        @bg_color={{@tag.bg_color}} />
+
+      <label for="name" class="form-label">Name</label>
+      <Input
+        id="name"
+        @type="text"
+        @value={{@tag.name}}
+        class="form-control"
+      />
+  </td>
+  <td>
+  </td>
+  <td>{{tag.description}}</td>
+  <td>
+    <button class="btn btn-secondary" {{on "click" (fn this.onCancel)}}>
+    Cancel
+    </button>
+  </td>
+{{else}}
+  <td>
+    <Tag::Item
+        @name={{@tag.name}}
+        @fg_color={{@tag.fg_color}}
+        @bg_color={{@tag.bg_color}} />
+  </td>
+  <td>
+    <Common::Boolean @value={{@tag.pinned}} />
+  </td>
+  <td>{{@tag.description}}</td>
+  <td>
+    <button class="btn btn-link" {{on "click" (fn this.onEdit @tag)}}>
+    Edit
+    </button>
+    <button class="btn btn-link" {{on "click" (fn this.onRemove @tag)}}>
+    Remove
+    </button>
+  </td>
+{{/if}}

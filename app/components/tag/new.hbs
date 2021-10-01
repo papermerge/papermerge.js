@@ -5,9 +5,9 @@
 {{#if this.form_visible}}
     <form>
         <div class="row my-2">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <Tag::Item
-                    @name={{this.new_name}}
+                    @name={{default_string this.new_name "preview"}}
                     @fg_color={{this.new_fg_color}}
                     @bg_color={{this.new_bg_color}} />
             </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="row mb-2">
             <div class="col">
-                <Input @type="checkbox" @checked={{this.pinned}} class="form-check-input" id="is_pinned" />
+                <Input @type="checkbox" @checked={{this.new_pinned}} class="form-check-input" id="is_pinned" />
                 <label class="form-check-label" for="is_pinned">Is Pinned?</label>
             </div>
         </div>
@@ -51,16 +51,26 @@
             <div class="col">
                 <button
                     type="button"
-                    {{on "click" this.onCreate}}
-                    class="btn btn-success">
-                    Create Tag
-                </button>
-                <button
-                    type="button"
                     {{on "click" this.onCancel}}
                     class="btn btn-secondary">
                     Cancel
                 </button>
+                {{#if this.new_name }}
+                    <button
+                        type="button"
+                        {{on "click" this.onCreate}}
+                        class="btn btn-success">
+                        Create Tag
+                    </button>
+                {{else}}
+                    <button
+                        type="button"
+                        {{on "click" this.onCreate}}
+                        disabled
+                        class="btn btn-success">
+                        Create Tag
+                    </button>
+                {{/if}}
             </div>
         </div>
     </form>
