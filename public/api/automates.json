@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "automate",
+      "attributes": {
+        "name": "zdf",
+        "match": "ZDF",
+        "matching_algorithm": "any",
+        "is_case_sensitive": false
+      }
+    }, {
+      "id": 2,
+      "type": "automate",
+      "attributes": {
+        "name": "groceries",
+        "match": "LIDL|LDL",
+        "matching_algorithm": "any",
+        "is_case_sensitive": false
+      }
+    }
+  ]
+}

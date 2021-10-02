@@ -1,4 +1,38 @@
-<h1>Automates Index</h1>
-
-
 <LinkTo @route="automates.add" class="btn btn-success">New</LinkTo>
+
+<div class="tags">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr class="text-uppercase">
+        <th class="border-top-0">Name</th>
+        <th class="border-top-0">Match</th>
+        <th class="border-top-0">Destination</th>
+        <th class="border-top-0">Tags</th>
+        <th class="border-top-0">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each @model as |automate|}}
+        <tr>
+          <td>
+            {{automate.name}}
+          </td>
+          <td>
+            {{automate.match}}
+          </td>
+          <td>
+            {{automate.dst_folder}}
+          </td>
+          <td>
+            ...
+          </td>
+          <td>
+            <button class="btn btn-link"> Edit
+          </button>
+          <button class="btn btn-link">Remove</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
