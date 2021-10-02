@@ -1,6 +1,5 @@
-<button class="btn btn-success" type="button" {{on "click" this.onToggleNew}}>
-    <i class="bi bi-plus-lg mx-1"></i>New
-</button>
+<Button::New @onClick={{this.onToggleNew}} />
+
 
 {{#if this.form_visible}}
     <form>
