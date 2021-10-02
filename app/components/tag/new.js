@@ -3,15 +3,14 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
-
 const COLORS = [
-  "#ff0000",
-  "#0000ff",
-  "#006684",
-  "#661200",
-  "#ce5c00",
-  "#5c3566",
-  "#4e9a06"
+  '#ff0000',
+  '#0000ff',
+  '#006684',
+  '#661200',
+  '#ce5c00',
+  '#5c3566',
+  '#4e9a06'
 ]
 
 function _random_color() {
