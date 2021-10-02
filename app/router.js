@@ -10,6 +10,7 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('documents');
+  this.route('inbox');
   this.route('document', { path: '/document/:document_id' });
 
   this.route('node', { path: '/node/:node_id' });
