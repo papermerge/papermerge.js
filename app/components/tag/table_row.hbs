@@ -1,5 +1,4 @@
-{{! `eq` helper is provided by ember-truth-helpers addon !}}
-{{#if  (eq this.edit_mode_id @tag.id)}}
+{{#if  (is_equal this.edit_mode_id @tag.id)}}
   {{! inline edit }}
   <td>
       <p class="my-2">
