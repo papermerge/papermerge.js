@@ -10,5 +10,7 @@ export default class BreadcrumbComponent extends Component {
   ]);
 
   @action
-  change(node_id) {}
+  change(node_id) {
+    console.log(node_id);
+  }
 }
