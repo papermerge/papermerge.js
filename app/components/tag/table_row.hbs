@@ -2,25 +2,42 @@
 {{#if  (eq this.edit_mode_id @tag.id)}}
   {{! inline edit }}
   <td>
-      <Tag::Item
-        @name={{@tag.name}}
-        @fg_color={{@tag.fg_color}}
-        @bg_color={{@tag.bg_color}} />
-
-      <label for="name" class="form-label">Name</label>
+      <p class="my-2">
+        <Tag::Item
+          @name={{@tag.name}}
+          @fg_color={{@tag.fg_color}}
+          @bg_color={{@tag.bg_color}} />
+      </p>
       <Input
         id="name"
         @type="text"
         @value={{@tag.name}}
         class="form-control"
       />
+      <div class="d-flex flex-row">
+        <Input id="fg_color" @type="color" @value={{@tag.fg_color}} class="form-control form-control-color" />
+        <Input id="bg_color" @type="color" @value={{@tag.bg_color}} class="form-control form-control-color" />
+      </div>
   </td>
   <td>
+    <Input @type="checkbox" @checked={{@tag.pinned}} class="form-check-input" id="is_pinned" />
   </td>
-  <td>{{tag.description}}</td>
+  <td>
+      <Input
+        id="description"
+        @type="text"
+        @value={{@tag.description}}
+        class="form-control" />
+  </td>
   <td>
     <button class="btn btn-secondary" {{on "click" (fn this.onCancel)}}>
     Cancel
+    </button>
+    <button
+        type="button"
+        class="btn btn-success"
+        {{on "click" (fn this.onSaveChanges @tag)}}>
+        Save Changes
     </button>
   </td>
 {{else}}

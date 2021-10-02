@@ -22,6 +22,19 @@
                     @value={{this.new_name}}
                     class="form-control"
                 />
+                <div class="d-flex flex-row my-1">
+                    <Input id="fg_color" @type="color" @value={{this.new_fg_color}} class="form-control form-control-color" />
+                    <Input id="bg_color" @type="color" @value={{this.new_bg_color}} class="form-control form-control-color" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label class="form-check-label" for="is_pinned">Is Pinned?</label>
+                <div>
+                    <Input
+                        @type="checkbox"
+                        @checked={{this.new_pinned}}
+                        class="form-check-input" id="is_pinned" />
+                </div>
             </div>
             <div class="col-md-5">
                 <label for="description" class="form-label">Description</label>
@@ -32,45 +45,32 @@
                     class="form-control"
                 />
             </div>
-            <div class="col-md-1">
-                <label for="fg_color" class="form-label">Fg Color</label>
-                <Input id="fg_color" @type="color" @value={{this.new_fg_color}} class="form-control form-control-color" />
-            </div>
-            <div class="col-md-1">
-                <label for="bg_color" class="form-label">Bg Color</label>
-                <Input id="bg_color" @type="color" @value={{this.new_bg_color}} class="form-control form-control-color" />
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col">
-                <Input @type="checkbox" @checked={{this.new_pinned}} class="form-check-input" id="is_pinned" />
-                <label class="form-check-label" for="is_pinned">Is Pinned?</label>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col">
-                <button
-                    type="button"
-                    {{on "click" this.onCancel}}
-                    class="btn btn-secondary">
-                    Cancel
-                </button>
-                {{#if this.new_name }}
+            <div class="col-md-3">
+                <label for="action" class="form-label">Action</label>
+                <div>
                     <button
                         type="button"
-                        {{on "click" this.onCreate}}
-                        class="btn btn-success">
-                        Create Tag
+                        {{on "click" this.onCancel}}
+                        class="btn btn-secondary">
+                        Cancel
                     </button>
-                {{else}}
-                    <button
-                        type="button"
-                        {{on "click" this.onCreate}}
-                        disabled
-                        class="btn btn-success">
-                        Create Tag
-                    </button>
-                {{/if}}
+                    {{#if this.new_name }}
+                        <button
+                            type="button"
+                            {{on "click" this.onCreate}}
+                            class="btn btn-success">
+                            Create Tag
+                        </button>
+                    {{else}}
+                        <button
+                            type="button"
+                            {{on "click" this.onCreate}}
+                            disabled
+                            class="btn btn-success">
+                            Create Tag
+                        </button>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </form>
