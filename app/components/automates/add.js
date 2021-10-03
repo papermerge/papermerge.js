@@ -18,7 +18,9 @@ class AddAutomateComponent extends Component {
     Creates new automate and redirects to automates
     index view.
     */
-    let automate = {
+    let automate;
+
+    automate = {
       name: this.name,
       match: this.match,
       dst_folder: this.dst_folder,
