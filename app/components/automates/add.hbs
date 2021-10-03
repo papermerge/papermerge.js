@@ -15,12 +15,12 @@
 </div>
 <div class="mb-3">
   <Label @for="matching_algorithm" @text="Matching Algorithm" />
-  <select class="form-select" aria-label="Any">
+  <Select class="form-select">
     <option value="1" selected>Any</option>
     <option value="2">All</option>
     <option value="3">Literal</option>
     <option value="4">Regular Expression</option>
-  </select>
+  </Select>
 </div>
 <div class="mb-3">
   <input type="checkbox" class="form-control-checkbox" id="is_case_sensitive" />
@@ -37,11 +37,11 @@
 </div>
 <div class="mb-3">
   <Label @for="dst_folder" @text="Destination Folder" />
-  <select class="form-select">
+  <Select id="dst_folder" name="dst_folder">
     <option value="1">---</option>
     <option value="2">My Documents</option>
     <option value="3">Some Other Folder</option>
-  </select>
+  </Select>
 </div>
 <div class="mb-3">
   <Button::Submit @onClick={{this.onSubmit}} />
