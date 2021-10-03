@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <label for="name" class="form-label">Name</label>
+  <input type="email" class="form-control" id="name" placeholder="name@example.com" />
+</div>
+<div class="mb-3">
+  <label for="match" class="form-label">Match</label>
+  <input type="text" class="form-control" id="match" />
+</div>
+<div class="mb-3">
+  <label for="matching_algorithm" class="form-label">Matching Algorithm</label>
+  <select class="form-select" aria-label="Any">
+    <option value="1" selected>Any</option>
+    <option value="2">All</option>
+    <option value="3">Literal</option>
+    <option value="4">Regular Expression</option>
+  </select>
+</div>
+<div class="mb-3">
+  <input type="checkbox" class="form-control-checkbox" id="is_case_sensitive" />
+  <label for="is_case_sensitive" class="form-label">Is case sensitive</label>
+</div>
+<div class="mb-3">
+  <label for="tags" class="form-label">Tags</label>
+  <input type="text" class="form-control" id="tags" />
+  <small class="form-text text-muted">
+    These tags will be assigned to matched document.
+  </small>
+</div>
+<div class="mb-3">
+  <label for="matching_algorithm" class="form-label">Destination Folder</label>
+  <select class="form-select">
+    <option value="1">---</option>
+    <option value="2">My Documents</option>
+    <option value="3">Some Other Folder</option>
+  </select>
+</div>
+<div class="mb-3">
+  <Button::Submit @onClick={{this.onSubmit}} />
+  <Button::Cancel @route="automates"/>
+</div>

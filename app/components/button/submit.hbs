@@ -1,0 +1,15 @@
+{{#if @route}}
+  <LinkTo
+      @route={{@route}}
+      class="bi bi-check-lg">
+        {{this.text}}
+  </LinkTo>
+{{else}}
+  <button
+    class="btn btn-primary mx-2"
+    type="button"
+    {{on "click" @onClick}}>
+      <i class="bi bi-check-lg"></i>
+    {{this.text}}
+  </button>
+{{/if}}
