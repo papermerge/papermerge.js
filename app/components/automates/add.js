@@ -6,11 +6,17 @@ import { inject as service } from '@ember/service';
 
 class AddAutomateComponent extends Component {
   /*
-  Component/Form to create new automate.
+  Form like component to create new automate.
   */
 
   @service store;
   @service router;
+
+  @tracked dst_folder;
+  @tracked name;
+  @tracked match;
+  @tracked is_case_sensitive = false;
+  @tracked matching_alg;
 
   get dst_folder_options() {
     return [
@@ -18,6 +24,16 @@ class AddAutomateComponent extends Component {
       {'key': '1', 'value': 'My Documents'},
       {'key': '2', 'value': 'XXX Some Folder'},
       {'key': '3', 'value': 'Invoices'}
+    ]
+  }
+
+  get matching_alg_options() {
+    return [
+      {'key': '---', 'value': '---'},
+      {'key': '1', 'value': 'Any'},
+      {'key': '2', 'value': 'All'},
+      {'key': '3', 'value': 'Literal'},
+      {'key': '4', 'value': 'Regular Expression'}
     ]
   }
 
@@ -34,7 +50,7 @@ class AddAutomateComponent extends Component {
       match: this.match,
       dst_folder: this.dst_folder,
       is_case_sensitive: this.is_case_sensitive,
-      matching_algorithm: this.matching_algorithm
+      matching_algorithm: this.matching_alg
     };
 
     this.store.createRecord(
@@ -43,6 +59,16 @@ class AddAutomateComponent extends Component {
     ).save();
 
     this.router.transitionTo('automates');
+  }
+
+  @action
+  onChangeDstFolder(event) {
+    this.dst_folder = event.target.value;
+  }
+
+  @action
+  onChangeMatchingAlg(event) {
+    this.matching_alg = event.target.value;
   }
 }
 

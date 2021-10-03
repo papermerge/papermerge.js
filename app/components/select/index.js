@@ -3,12 +3,12 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 class SelectComponent extends Component {
-  @tracked value = null;
+  @tracked value;
 
   @action
-  onSelect(event) {
-    console.log(`value=${event.target.value}`);
-    this.value = event.target.value;
+  onChange(event) {
+    console.log("On change!");
+    this.args.onChange(event);
   }
 }
 

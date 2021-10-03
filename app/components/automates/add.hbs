@@ -6,7 +6,6 @@
     placeholder="Automate's name" />
 </div>
 <div class="mb-3">
-  {{this.the_var}}
   <Label @for="match" @text="Match" />
   <Input @value={{this.match}}
     class="form-control"
@@ -15,15 +14,15 @@
 </div>
 <div class="mb-3">
   <Label @for="matching_algorithm" @text="Matching Algorithm" />
-  <Select class="form-select">
-    <option value="1" selected>Any</option>
-    <option value="2">All</option>
-    <option value="3">Literal</option>
-    <option value="4">Regular Expression</option>
-  </Select>
+  <Select @options={{this.matching_alg_options}}
+    @onChange={{this.onChangeMatchingAlg}}
+    name="matching_algorithm"/>
 </div>
 <div class="mb-3">
-  <input type="checkbox" class="form-control-checkbox" id="is_case_sensitive" />
+  <Input @checked={{this.is_case_sensitive}}
+    @type="checkbox"
+    class="form-control-checkbox"
+    id="is_case_sensitive" />
   <Label @for="is_case_sensitive" @text="Is case sensitive" />
 </div>
 <div class="mb-3">
@@ -37,9 +36,8 @@
 </div>
 <div class="mb-3">
   <Label @for="dst_folder" @text="Destination Folder" />
-  {{this.dst_folder}}
   <Select @options={{this.dst_folder_options}}
-    @value={{this.dst_folder}}
+    @onChange={{this.onChangeDstFolder}}
     name="dst_folder" />
 </div>
 <div class="mb-3">
