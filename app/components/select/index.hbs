@@ -1,5 +1,8 @@
 <select
+  {{on 'change' this.onSelect}}
   class="form-select"
   ...attributes>
-  {{yield}}
+  {{#each @options as |opt|}}
+    <option value="{{opt.key}}">{{opt.value}}</option>
+  {{/each}}
 </select>

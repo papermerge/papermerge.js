@@ -12,6 +12,15 @@ class AddAutomateComponent extends Component {
   @service store;
   @service router;
 
+  get dst_folder_options() {
+    return [
+      {'key': '---', 'value': '---'},
+      {'key': '1', 'value': 'My Documents'},
+      {'key': '2', 'value': 'XXX Some Folder'},
+      {'key': '3', 'value': 'Invoices'}
+    ]
+  }
+
   @action
   onSubmit() {
     /*

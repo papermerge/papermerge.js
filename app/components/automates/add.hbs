@@ -37,11 +37,10 @@
 </div>
 <div class="mb-3">
   <Label @for="dst_folder" @text="Destination Folder" />
-  <Select id="dst_folder" name="dst_folder">
-    <option value="1">---</option>
-    <option value="2">My Documents</option>
-    <option value="3">Some Other Folder</option>
-  </Select>
+  {{this.dst_folder}}
+  <Select @options={{this.dst_folder_options}}
+    @value={{this.dst_folder}}
+    name="dst_folder" />
 </div>
 <div class="mb-3">
   <Button::Submit @onClick={{this.onSubmit}} />
