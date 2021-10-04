@@ -15,7 +15,9 @@ Router.map(function () {
 
   this.route('node', { path: '/node/:node_id' });
 
-  this.route('tags', function () {
+  this.route('tags');
+
+  this.route('groups', function() {
     this.route('index', { path: '/' });
   });
 

@@ -17,7 +17,6 @@ export default class TableRowComponent extends Component {
 
   @action
   onEdit(tag) {
-    console.log(`TAG ID = ${tag.id}`);
     this.edit_mode_id = tag.id;
   }
 

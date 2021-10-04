@@ -71,6 +71,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "ember-bootstrap-icons": "0.0.1"
   }
 }

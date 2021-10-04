@@ -9,6 +9,9 @@ module.exports = function (defaults) {
     },
   });
   app.import('node_modules/bootstrap-icons/font/bootstrap-icons.css');
+  // There is a type in fontawesome NPM's namespace.
+  // It is '@fortawesome' instead of '@fontawesome'!
+  app.import("node_modules/@fortawesome/fontawesome-free/css/all.css");
   // If you need to use different assets in different
   // environments, specify an object as the first parameter. That
   // object's keys should be the environment name and the values

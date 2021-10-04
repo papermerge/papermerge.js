@@ -1,15 +1,29 @@
 {{#if @route}}
+  {{! render <a> based component }}
   <LinkTo
       @route={{@route}}
       class="bi bi-check-lg">
         {{this.text}}
   </LinkTo>
 {{else}}
-  <button
-    class="btn btn-primary mx-2"
-    type="button"
-    {{on "click" @onClick}}>
-      <i class="bi bi-check-lg"></i>
-    {{this.text}}
-  </button>
-{{/if}}
+  {{! render <button> based component }}
+  {{#if @enabled}}
+    <button
+      class="btn btn-primary mx-2"
+      type="button"
+      {{on "click" @onClick}}>
+        <i class="bi bi-check-lg"></i>
+      {{this.text}}
+    </button>
+  {{else}}
+    {{! render a disabled button }}
+    <button
+      class="btn btn-primary mx-2"
+      type="button"
+      disabled
+      {{on "click" @onClick}}>
+        <i class="bi bi-check-lg"></i>
+      {{this.text}}
+    </button>
+  {{/if}}  {{! if enabled }}
+{{/if}}  {{! if route }}

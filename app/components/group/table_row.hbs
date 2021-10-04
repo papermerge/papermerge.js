@@ -1,0 +1,27 @@
+{{#if  (is_equal this.edit_mode_id @group.id)}}
+  {{! inline edit }}
+  <td>
+      <Input
+        id="name"
+        @type="text"
+        @value={{@group.name}}
+        class="form-control"
+      />
+  </td>
+  <td>
+    <Button::Cancel
+      @onClick={{this.onCancel}} />
+    <Button::Submit
+        @onClick={{(fn this.onSaveChanges @group)}}
+        @enabled={{true}}
+        @text="Save Changes" />
+  </td>
+{{else}}
+  <td>
+    {{@group.name}}
+  </td>
+  <td>
+    <Button::Link @text="Edit" {{on "click" (fn this.onEdit @group)}} />
+    <Button::Link @text="Remove" {{on "click" (fn this.onRemove @group)}} />
+  </td>
+{{/if}}

@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "group",
+      "attributes": {
+        "name": "accounnting"
+      }
+    }, {
+      "id": 2,
+      "type": "group",
+      "attributes": {
+        "name": "development"
+      }
+    }
+  ]
+}

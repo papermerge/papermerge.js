@@ -1,11 +1,12 @@
-import { attr } from '@ember-data/model';
-import NodeModel from './node';
+import Model, { attr } from '@ember-data/model';
 
 
-export default class TagModel extends NodeModel {
+class TagModel extends Model {
   @attr name;
   @attr fg_color;
   @attr bg_color;
   @attr description;
   @attr pinned;
 }
+
+export default TagModel;
