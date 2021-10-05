@@ -1,7 +1,7 @@
 import { underscore } from '@ember/string';
-import JSONAPISerializer from '@ember-data/serializer/json-api';
+import RESTSerializer from '@ember-data/serializer/rest';
 
-export default class ApplicationSerializer extends JSONAPISerializer {
+export default class ApplicationSerializer extends RESTSerializer {
   keyForAttribute(attr) {
     return underscore(attr);
   }
