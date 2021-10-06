@@ -21,7 +21,11 @@
     {{@group.name}}
   </td>
   <td>
-    <Button::Link @text="Edit" {{on "click" (fn this.onEdit @group)}} />
-    <Button::Link @text="Remove" {{on "click" (fn this.onRemove @group)}} />
+    <Button::Link
+      @text="Edit"
+      @onClick={{(fn this.onEdit @group)}} />
+    <Button::Link
+      @text="Remove"
+      @onClick={{(fn this.onRemove @group)}} />
   </td>
 {{/if}}
