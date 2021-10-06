@@ -1,1 +1,34 @@
-<h1>Roles</h1>
+<Button::New @route="roles.add" />
+
+<div class="tags">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr class="text-uppercase">
+        <th class="border-top-0">Name</th>
+        <th class="border-top-0">Created</th>
+        <th class="border-top-0">Modified</th>
+        <th class="border-top-0">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each @model as |role|}}
+        <tr>
+          <td>
+            {{role.name}}
+          </td>
+          <td>
+            {{role.created_at}}
+          </td>
+          <td>
+            {{role.updated_at}}
+          </td>
+          <td>
+            <button class="btn btn-link"> Edit
+          </button>
+          <button class="btn btn-link">Remove</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
