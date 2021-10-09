@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { A } from '@ember/array';
 import { inject as service } from '@ember/service';
 
 
@@ -8,14 +9,22 @@ class AddRoleComponent extends Component {
   @service store;
   @service router;
 
-  @tracked dst_folder;
-  @tracked name;
-  @tracked match;
-  @tracked is_case_sensitive = false;
-  @tracked matching_alg;
+  @tracked name = "default name";
+  permissions = A([
+    {name: 'one', isChecked: true},
+    {name: 'two'}
+  ]);
+
+  @action
+  onChange(permission, checked) {
+    permission.isChecked = checked;
+  }
 
   @action
   onSubmit() {
+    console.log(this.name);
+    console.log(this.permissions);
+    /*
     let role;
 
     role = {
@@ -28,6 +37,7 @@ class AddRoleComponent extends Component {
     ).save();
 
     this.router.transitionTo('roles');
+    */
   }
 }
 
