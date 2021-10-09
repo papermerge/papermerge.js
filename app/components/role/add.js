@@ -9,11 +9,8 @@ class AddRoleComponent extends Component {
   @service store;
   @service router;
 
-  @tracked name = "default name";
-  permissions = A([
-    {name: 'one', isChecked: true},
-    {name: 'two'}
-  ]);
+  @tracked name = "";
+  permissions = A([]);
 
   @action
   onChange(permission, checked) {
