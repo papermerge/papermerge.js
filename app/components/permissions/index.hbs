@@ -1,3 +1,11 @@
-{{#each this.permissions as |perm|}}
-  <Permission @permission={{perm}} @onChange={{@onChange}} />
-{{/each}}
+<div class="d-flex flex-wrap permissions">
+  {{#each this.permission_groups as |perm_group|}}
+    <div class="m-2 permission-group">
+      <Input @type="checkbox" />
+      <label>{{perm_group.model}}</label>
+      {{#each perm_group.perms as |perm|}}
+        <Permission @permission={{perm}} @onChange={{@onChange}} />
+      {{/each}}
+      </div>
+  {{/each}}
+</div>

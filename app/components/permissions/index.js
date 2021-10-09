@@ -1,13 +1,21 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
 
 
 class PermissionsComponent extends Component {
-  @service store;
 
-  get permissions() {
-    return this.args.permissions;
+  get permission_groups() {
+    let groups = this.args.permissions.map(item => item.content_type.get('model')),
+      result = [];
+
+    groups = new Set(groups);
+
+    groups.forEach(model => {
+      let perms = this.args.permissions.filter(item => item.content_type.get('model') === model);
+      result.push({model, perms}); // same as result.push({mode: model, perms: perms})
+    });
+
+
+    return result;
   }
 }
 
