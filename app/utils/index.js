@@ -1,7 +1,7 @@
 
 function group_perms_by_model(permissions) {
   /*
-    Groups permission objects by model.
+    Groups an array of permissions objects by model.
 
     `permissions` is an array of objects, each of which containas `content_type` attribute
     which in turn has a `model` attribute.
