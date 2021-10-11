@@ -1,6 +1,5 @@
 import Model, { attr } from '@ember-data/model';
 
-
 class TagModel extends Model {
   @attr name;
   @attr fg_color;

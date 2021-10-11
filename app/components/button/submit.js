@@ -33,9 +33,8 @@ class ButtonSubmitComponent extends Component {
   */
 
   get text() {
-    return this.args.text || "Submit";
+    return this.args.text || 'Submit';
   }
-
 }
 
 export default ButtonSubmitComponent;

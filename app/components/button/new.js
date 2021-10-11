@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 
-
 class ButtonNewComponent extends Component {
   /*
   "New Button" component. Renders a button as either
@@ -25,7 +24,7 @@ class ButtonNewComponent extends Component {
   */
 
   get text() {
-    return this.args.text || "New";
+    return this.args.text || 'New';
   }
 }
 

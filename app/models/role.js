@@ -1,6 +1,5 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
-
 class RoleModel extends Model {
   @attr name;
   @hasMany('permissions') permissions;

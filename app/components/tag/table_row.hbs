@@ -29,7 +29,7 @@
         class="form-control" />
   </td>
   <td>
-    <button class="btn btn-secondary" {{on "click" (fn this.onCancel)}}>
+    <button class="btn btn-secondary" type="button" {{on "click" this.onCancel}}>
     Cancel
     </button>
     <button
@@ -51,10 +51,10 @@
   </td>
   <td>{{@tag.description}}</td>
   <td>
-    <button class="btn btn-link" {{on "click" (fn this.onEdit @tag)}}>
+    <button class="btn btn-link" type="button" {{on "click" (fn this.onEdit @tag)}}>
     Edit
     </button>
-    <button class="btn btn-link" {{on "click" (fn this.onRemove @tag)}}>
+    <button class="btn btn-link" type="button" {{on "click" (fn this.onRemove @tag)}}>
     Remove
     </button>
   </td>

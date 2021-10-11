@@ -3,23 +3,23 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
-
 export default class NewGroupComponent extends Component {
-
   @service store;
   @tracked form_visible = false;
-  @tracked new_name = "";
+  @tracked new_name = '';
 
   @action
   onToggleNew() {
-    this.form_visible =  !this.form_visible;
+    this.form_visible = !this.form_visible;
   }
 
   @action
   onCreate() {
-    this.store.createRecord('group', {
+    this.store
+      .createRecord('group', {
         name: this.new_name,
-    }).save();
+      })
+      .save();
 
     this._empty_form();
   }
@@ -33,7 +33,7 @@ export default class NewGroupComponent extends Component {
     /*
     Resets the form to initial state
     */
-    this.new_name = "";
+    this.new_name = '';
     this.form_visible = false;
   }
 }

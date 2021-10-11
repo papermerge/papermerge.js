@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
-
 class AddAutomateComponent extends Component {
   /*
   Form like component to create new automate.
@@ -20,21 +19,21 @@ class AddAutomateComponent extends Component {
 
   get dst_folder_options() {
     return [
-      {'key': '---', 'value': '---'},
-      {'key': '1', 'value': 'My Documents'},
-      {'key': '2', 'value': 'XXX Some Folder'},
-      {'key': '3', 'value': 'Invoices'}
-    ]
+      { key: '---', value: '---' },
+      { key: '1', value: 'My Documents' },
+      { key: '2', value: 'XXX Some Folder' },
+      { key: '3', value: 'Invoices' },
+    ];
   }
 
   get matching_alg_options() {
     return [
-      {'key': '---', 'value': '---'},
-      {'key': '1', 'value': 'Any'},
-      {'key': '2', 'value': 'All'},
-      {'key': '3', 'value': 'Literal'},
-      {'key': '4', 'value': 'Regular Expression'}
-    ]
+      { key: '---', value: '---' },
+      { key: '1', value: 'Any' },
+      { key: '2', value: 'All' },
+      { key: '3', value: 'Literal' },
+      { key: '4', value: 'Regular Expression' },
+    ];
   }
 
   @action
@@ -50,13 +49,10 @@ class AddAutomateComponent extends Component {
       match: this.match,
       dst_folder: this.dst_folder,
       is_case_sensitive: this.is_case_sensitive,
-      matching_algorithm: this.matching_alg
+      matching_algorithm: this.matching_alg,
     };
 
-    this.store.createRecord(
-      'automate',
-      automate
-    ).save();
+    this.store.createRecord('automate', automate).save();
 
     this.router.transitionTo('automates');
   }

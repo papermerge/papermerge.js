@@ -1,4 +1,3 @@
-
 function group_perms_by_model(permissions) {
   /*
     Groups an array of permissions objects by model.
@@ -31,16 +30,16 @@ function group_perms_by_model(permissions) {
           },
         ]
   */
-  let groups = permissions.map(item => item.content_type.get('model')),
+  let groups = permissions.map((item) => item.content_type.get('model')),
     result = [];
 
   groups = new Set(groups);
 
-  groups.forEach(model => {
+  groups.forEach((model) => {
     let perms = permissions.filter(
-      item => item.content_type.get('model') === model
+      (item) => item.content_type.get('model') === model
     );
-    result.push({model, perms}); // same as result.push({mode: model, perms: perms})
+    result.push({ model, perms }); // same as result.push({mode: model, perms: perms})
   });
 
   return result;
@@ -56,12 +55,9 @@ function are_sets_equal(set1, set2) {
   let same_size, same_values;
 
   same_size = (a, b) => a.size === b.size;
-  same_values = (a, b) => [...a].every(value => b.has(value));
+  same_values = (a, b) => [...a].every((value) => b.has(value));
 
   return same_size(set1, set2) && same_values(set1, set2);
 }
 
-export {
-  group_perms_by_model,
-  are_sets_equal
-};
+export { group_perms_by_model, are_sets_equal };

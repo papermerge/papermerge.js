@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-
 class RolesRoute extends Route {
   @service store;
 
