@@ -46,4 +46,16 @@ function group_perms_by_model(permissions) {
   return result;
 }
 
-export default group_perms_by_model;
+function are_sets_equal(set1, set2) {
+  let same_size, same_values;
+
+  same_size = (a, b) => a.size === b.size;
+  same_values = (a, b) => [...a].every(value => b.has(value));
+
+  return same_size(set1, set2) && same_values(set1, set2);
+}
+
+export {
+  group_perms_by_model,
+  are_sets_equal
+};

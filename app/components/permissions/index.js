@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import group_perms_by_model from 'papermerge/utils';
+import { group_perms_by_model } from 'papermerge/utils';
 
 
 

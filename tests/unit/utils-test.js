@@ -1,5 +1,8 @@
 import { module, test } from 'qunit';
-import group_perms_by_model from 'papermerge/utils';
+import {
+  are_sets_equal,
+  group_perms_by_model
+} from 'papermerge/utils';
 
 class FakeContentType {
   constructor(name) {
@@ -13,7 +16,28 @@ class FakeContentType {
 
 
 module('Unit | Utility', function() {
-  test('group_perms_by_model works for basic case', function(assert) {
+
+  test('are_sets_qual', function(assert) {
+    let set1, set2;
+
+    set1 = new Set([8, 1]);
+    set2 = new Set([1, 8]);
+
+    assert.true(
+      are_sets_equal(set1, set2),
+      'set[1, 8] expected to be eq to set[8, 1]'
+    );
+
+    set1 = new Set([8, 1]);
+    set2 = new Set([1, 8, 2]);
+
+    assert.false(
+      are_sets_equal(set1, set2),
+      'set[1, 8, 2] expected NOT to be eq to set[8, 1]'
+    );
+  });
+
+  test('group_perms_by_model', function(assert) {
       let grouped_permissions,
         permissions,
         expected_result,
@@ -86,8 +110,7 @@ module('Unit | Utility', function() {
       models = new Set(grouped_permissions.map(item => item.model));
       expected_models = new Set(['m1', 'm2']);
 
-      areSetsEqual = (a, b) => a.size === b.size && [...a].every(value => b.has(value));
-      assert.true(areSetsEqual(models, expected_models));
+      assert.true(are_sets_equal(models, expected_models));
 
   });
 });
