@@ -47,6 +47,12 @@ function group_perms_by_model(permissions) {
 }
 
 function are_sets_equal(set1, set2) {
+  /*
+    Returns `true` if given sets are equal and `false` otherwise.
+
+    `set1` and `set2` are expected to be instances of javascript `Set`
+    class.
+  */
   let same_size, same_values;
 
   same_size = (a, b) => a.size === b.size;
