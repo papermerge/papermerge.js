@@ -1,15 +1,15 @@
 {{#if @route}}
   <LinkTo
       @route={{@route}}
-      class="btn btn-success">
+      class="btn btn-success" ...attributes>
         <i class="bi bi-plus-lg mx-1"></i>
         {{this.text}}
   </LinkTo>
 {{else}}
   <button
-    class="btn btn-success"
     type="button"
-    {{on "click" @onClick}}>
+    {{on "click" @onClick}}
+    class="btn btn-success" ...attributes>
       <i class="bi bi-plus-lg mx-1"></i>
     {{this.text}}
   </button>
