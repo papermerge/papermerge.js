@@ -37,7 +37,9 @@ function group_perms_by_model(permissions) {
   groups = new Set(groups);
 
   groups.forEach(model => {
-    let perms = permissions.filter(item => item.content_type.get('model') === model);
+    let perms = permissions.filter(
+      item => item.content_type.get('model') === model
+    );
     result.push({model, perms}); // same as result.push({mode: model, perms: perms})
   });
 
