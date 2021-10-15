@@ -12,22 +12,7 @@
     </thead>
     <tbody>
       {{#each @model as |role|}}
-        <tr>
-          <td>
-            {{role.name}}
-          </td>
-          <td>
-            {{role.created_at}}
-          </td>
-          <td>
-            {{role.updated_at}}
-          </td>
-          <td>
-            <button class="btn btn-link" type="button"> Edit
-          </button>
-          <button class="btn btn-link" type="button">Remove</button>
-          </td>
-        </tr>
+        <Role::TableRow @role={{role}} />
       {{/each}}
     </tbody>
   </table>

@@ -1,0 +1,18 @@
+<tr>
+  <td>
+    {{@role.name}}
+  </td>
+  <td>
+    {{@role.created_at}}
+  </td>
+  <td>
+    {{@role.updated_at}}
+  </td>
+  <td>
+    <button class="btn btn-link" type="button"> Edit
+  </button>
+  <Button::Link
+    @text="Remove"
+    @onClick={{(fn this.onRemove @role)}} />
+  </td>
+</tr>
