@@ -6,6 +6,10 @@
     placeholder="Role's name" />
 </div>
 
+<Permissions
+  @permissions={{@role.permissions}}
+  @onChange={{this.onChange}} />
+
 <div class="mb-3">
   <Button::Submit @onClick={{this.onSubmit}} />
   <Button::Cancel @route="roles"/>
