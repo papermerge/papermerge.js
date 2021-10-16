@@ -1,0 +1,12 @@
+<div class="mb-3">
+  <Label @for="name" @text="Name" />
+  <Input @value={{@role.name}}
+    class="form-control"
+    id="name"
+    placeholder="Role's name" />
+</div>
+
+<div class="mb-3">
+  <Button::Submit @onClick={{this.onSubmit}} />
+  <Button::Cancel @route="roles"/>
+</div>

@@ -9,8 +9,8 @@
     {{@role.updated_at}}
   </td>
   <td>
-    <button class="btn btn-link" type="button"> Edit
-  </button>
+  <LinkTo @route="roles.edit" @model={{@role}}>Edit
+  </LinkTo>
   <Button::Link
     @text="Remove"
     @onClick={{(fn this.onRemove @role)}} />
