@@ -2,29 +2,24 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import { group_perms_by_model } from 'papermerge/utils';
 
 
 class EditRoleComponent extends Component {
   @service store;
   @service router;
 
-  @tracked name = '';
-  chosen_permissions = [];
+  permission_states = [];
 
-  @action
-  onChange(permission, checked) {
-    if (checked) {
-      this.chosen_permissions.push(permission);
-    } else {
-      this.chosen_permissions = this.chosen_permissions.filter(
-        item => item.id != permission.id
-      );
-    }
+  get permission_groups() {
+    return group_perms_by_model(this.args.all_permissions);
   }
 
   @action
   onSubmit() {
+    let role = this.args.role;
 
+    role.save();
     this.router.transitionTo('roles');
   }
 }

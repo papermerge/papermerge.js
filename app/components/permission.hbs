@@ -1,7 +1,7 @@
   <div>
     <Input
       @type="checkbox"
-      @checked="{{@permission.isChecked}}"
+      @checked={{this.isChecked}}
       {{on "change" (fn this.onChange @permission)}}
     />
     <span class="mx-1">{{@permission.name}}</span>
