@@ -12,7 +12,7 @@
       <Input @type="checkbox" />
       <label>{{perm_group.model}}</label>
       {{#each perm_group.perms as |perm|}}
-        <Permission @permission={{perm}} @role={{@role}} @onChange={{this.onChange}} />
+        <Permission @permission={{perm}} @role={{@role}} />
       {{/each}}
       </div>
   {{/each}}

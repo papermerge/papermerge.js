@@ -6,12 +6,6 @@ import { inject as service } from '@ember/service';
 class PermissionComponent extends Component {
   @service store;
 
-  @action
-  onChange(permission, event) {
-    let checked = event.target.checked;
-    this.args.onChange(permission, checked);
-  }
-
   get isChecked() {
     let role_perm_ids;
 
