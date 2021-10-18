@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import { group_perms_by_model } from 'papermerge/utils';
 
 
 class AddRoleComponent extends Component {
@@ -9,32 +10,26 @@ class AddRoleComponent extends Component {
   @service router;
 
   @tracked name = '';
-  chosen_permissions = [];
 
-  @action
-  onChange(permission, checked) {
-    if (checked) {
-      this.chosen_permissions.push(permission);
-    } else {
-      this.chosen_permissions = this.chosen_permissions.filter(
-        item => item.id != permission.id
-      );
+  get role() {
+    if (!this.new_role) {
+      this.new_role = this.store.createRecord('role', {});
     }
+
+    return this.new_role;
+  }
+
+  get permission_groups() {
+    return group_perms_by_model(this.args.all_permissions);
   }
 
   @action
   onSubmit() {
-    let role;
 
-    role = {
-      name: this.name,
-      permissions: this.chosen_permissions
-    };
-
-    this.store.createRecord(
-      'role',
-      role
-    ).save();
+    if (this.new_role && this.name) {
+      this.new_role.name = this.name;
+      this.new_role.save();
+    }
 
     this.router.transitionTo('roles');
   }
