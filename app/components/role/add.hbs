@@ -8,17 +8,16 @@
 
 <div class="d-flex flex-wrap permissions">
   {{#each this.permission_groups as |perm_group|}}
-    <div class="m-2 permission-group">
-      <Input @type="checkbox" />
-      <label>{{perm_group.model}}</label>
-      {{#each perm_group.perms as |perm|}}
-        <Permission @permission={{perm}} @role={{this.role}} />
-      {{/each}}
-      </div>
+  <Role::PermissionGroup
+    @perm_group={{perm_group}}
+    @role={{this.role}} />
   {{/each}}
 </div>
 
 <div class="mb-3">
-  <Button::Submit @onClick={{this.onSubmit}} />
-  <Button::Cancel @route="roles"/>
+  <Button::Submit
+    @onClick={{this.onSubmit}}
+    @disabled={{this.disabled}} />
+  <Button::Cancel
+    @onClick={{this.onCancel}} />
 </div>

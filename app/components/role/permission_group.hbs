@@ -1,0 +1,13 @@
+<div class="m-2 permission-group">
+  <Input
+    @type="checkbox"
+    @checked={{this.isChecked}}
+    {{on "change" this.onChangeGroupPermissions}} />
+  <label>{{@perm_group.model}}</label>
+  {{#each @perm_group.perms as |perm|}}
+    <Role::Permission
+      @permission={{perm}}
+      @role={{@role}}
+      @onChange={{this.onChange}} />
+  {{/each}}
+</div>

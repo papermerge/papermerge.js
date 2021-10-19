@@ -6,10 +6,7 @@ import { group_perms_by_model } from 'papermerge/utils';
 
 
 class EditRoleComponent extends Component {
-  @service store;
   @service router;
-
-  permission_states = [];
 
   get permission_groups() {
     return group_perms_by_model(this.args.all_permissions);
