@@ -1,38 +1,12 @@
-<Button::New @route="automates.add" />
+<Button::New @route="automates.add" class="automates-add" />
 
-<div class="tags">
-  <table class="table table-striped align-middle">
-    <thead>
-      <tr class="text-uppercase">
-        <th class="border-top-0">Name</th>
-        <th class="border-top-0">Match</th>
-        <th class="border-top-0">Destination</th>
-        <th class="border-top-0">Tags</th>
-        <th class="border-top-0">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @model as |automate|}}
-        <tr>
-          <td>
-            {{automate.name}}
-          </td>
-          <td>
-            {{automate.match}}
-          </td>
-          <td>
-            {{automate.dst_folder}}
-          </td>
-          <td>
-            ...
-          </td>
-          <td>
-            <button class="btn btn-link" type="button"> Edit
-          </button>
-          <button class="btn btn-link" type="button">Remove</button>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+<Table @titles={{array
+    'name'
+    'match'
+    'destination'
+    'tags'
+    'action'}}>
+  {{#each @model as |automate|}}
+    <Automate::TableRow @automate={{automate}} />
+  {{/each}}
+</Table>

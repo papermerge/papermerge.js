@@ -1,1 +1,12 @@
-<h1>Users</h1>
+<Button::New @route="users.add" class="users-add"/>
+
+<Table @titles={{array
+    'username'
+    'email'
+    'is_superuser'
+    'is_active'
+    'action'}}>
+  {{#each @model as |user|}}
+    <User::TableRow @user={{user}} />
+  {{/each}}
+</Table>

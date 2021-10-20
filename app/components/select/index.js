@@ -7,7 +7,6 @@ class SelectComponent extends Component {
 
   @action
   onChange(event) {
-    console.log('On change!');
     this.args.onChange(event);
   }
 }

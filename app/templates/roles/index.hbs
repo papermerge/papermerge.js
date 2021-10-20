@@ -1,17 +1,7 @@
-<Button::New @route="roles.add" class="add-role"/>
+<Button::New @route="roles.add" class="roles-add"/>
 
-<div class="tags">
-  <table class="table table-striped align-middle">
-    <thead>
-      <tr class="text-uppercase">
-        <th class="border-top-0">Name</th>
-        <th class="border-top-0">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @model as |role|}}
-        <Role::TableRow @role={{role}} />
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+<Table @titles={{array 'title' 'action'}}>
+  {{#each @model as |role|}}
+    <Role::TableRow @role={{role}} />
+  {{/each}}
+</Table>

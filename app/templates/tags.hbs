@@ -1,23 +1,7 @@
-<p class="my-2">
-  <Tag::New />
-</p>
+<Tag::New />
 
-<div class="tags">
-  <table class="table table-striped align-middle">
-    <thead>
-      <tr class="text-uppercase">
-        <th class="border-top-0">Tag Name</th>
-        <th class="border-top-0">Pinned?</th>
-        <th class="border-top-0">Description</th>
-        <th class="border-top-0">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @model as |tag|}}
-        <tr>
-          <Tag::TableRow @tag={{tag}} />
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+<Table @titles={{array 'Tag Name' 'Pinned?' 'Description' 'Action' }}>
+  {{#each @model as |tag|}}
+    <Tag::TableRow @tag={{tag}} />
+  {{/each}}
+</Table>

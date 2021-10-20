@@ -3,10 +3,11 @@
     {{@role.name}}
   </td>
   <td>
-  <LinkTo @route="roles.edit" @model={{@role.id}}>Edit
-  </LinkTo>
-  <Button::Link
-    @text="Remove"
-    @onClick={{(fn this.onRemove @role)}} />
+    <LinkTo
+      @route="roles.edit"
+      @model={{@role.id}}>Edit</LinkTo>
+    <Button::Link
+      @text="Remove"
+      @onClick={{(fn this.onRemove @role)}} />
   </td>
 </tr>

@@ -1,19 +1,8 @@
-<p class="my-2">
-  <Group::New />
-</p>
+<Group::New />
 
-<table class="table table-striped align-middle">
-  <thead>
-    <tr class="text-uppercase">
-      <th class="border-top-0">Group Name</th>
-      <th class="border-top-0">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each @model as |group|}}
-      <tr>
-        <Group::TableRow @group={{group}} />
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+
+<Table @titles={{array 'group name' 'action'}}>
+  {{#each @model as |group|}}
+    <Group::TableRow @group={{group}} />
+  {{/each}}
+</Table>

@@ -1,0 +1,14 @@
+<div class="tags">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr class="text-uppercase">
+        {{#each @titles as |title|}}
+          <th class="border-top-0">{{title}}</th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      {{yield}}
+    </tbody>
+  </table>
+</div>

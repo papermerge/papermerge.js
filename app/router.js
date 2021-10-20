@@ -15,9 +15,9 @@ Router.map(function () {
 
   this.route('tags');
 
-  this.route('users', function () {
+  this.route('automates', function () {
     this.route('add');
-    this.route('edit', { path: '/:user_id/edit' });
+    this.route('edit', { path: '/:automate_id/edit' });
     this.route('index', { path: '/' });
   });
 
@@ -27,13 +27,14 @@ Router.map(function () {
     this.route('index', { path: '/' });
   });
 
-  this.route('groups', function () {
+  this.route('users', function () {
+    this.route('add');
+    this.route('edit', { path: '/:user_id/edit' });
+    this.route('change_password', { path: '/:user_id/change-password'});
     this.route('index', { path: '/' });
   });
 
-  this.route('automates', function () {
-    this.route('add');
-    this.route('edit', { path: '/:automate_id/edit' });
+  this.route('groups', function () {
     this.route('index', { path: '/' });
   });
 

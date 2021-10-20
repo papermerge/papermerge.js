@@ -1,0 +1,81 @@
+<div class="row mb-3">
+  <div class="col">
+    <Label @for="username" @text="Username" />
+    <Input @value={{@user.username}}
+      class="form-control"
+      id="username"
+      placeholder="username" />
+  </div>
+
+  <div class="col">
+    <Label @for="email" @text="Email Address" />
+    <Input @value={{@user.email}}
+      class="form-control"
+      id="email"
+      placeholder="Email address" />
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col">
+    <Label @for="first_name" @text="First Name" />
+    <Input @value={{@user.first_name}}
+      class="form-control"
+      id="first_name"
+      placeholder="first name" />
+  </div>
+
+  <div class="col">
+    <Label @for="last_name" @text="Last Name" />
+    <Input @value={{@user.last_name}}
+      class="form-control"
+      id="last_name"
+      placeholder="last name" />
+  </div>
+</div>
+
+<div class="mb-3">
+  <Label @for="groups" @text="Groups" />
+  <div>
+    {{#each @all_groups as |opt|}}
+      <span class="m-2">
+        <Input @type="checkbox" />
+        <Label @text={{opt.name}} />
+      </span>
+    {{/each}}
+  </div>
+</div>
+
+<div class="mb-3">
+  <Label @for="role" @text="Role" />
+  <select class="form-control">
+  {{#each @all_roles as |opt|}}
+    <option value="{{opt.id}}">{{opt.name}}</option>
+  {{/each}}
+</select>
+</div>
+
+<div class="mb-3">
+  <Input
+    @type="checkbox"
+    @checked={{@user.is_superuser}} />
+  <Label @for="is_superuser" @text="Is Superuser" />
+</div>
+<div class="mb-3">
+  <Input
+    @type="checkbox"
+    @checked={{@user.is_staff}} />
+  <Label @for="is_staff" @text="Is Staff" />
+</div>
+<div class="mb-3">
+  <Input
+    @type="checkbox"
+    @checked={{@user.is_active}} />
+  <Label @for="is_active" @text="Is Active" />
+</div>
+
+<div class="mb-3">
+  <Button::Submit
+    @onClick={{this.onSubmit}} />
+  <Button::Cancel @route="users"/>
+</div>
