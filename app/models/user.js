@@ -13,6 +13,12 @@ class UserModel extends Model {
   @attr created_at;
   @attr updated_at;
   @belongsTo('role') role;
+
+  changePassword(new_password) {
+    const adapter = this.store.adapterFor('user');
+
+    return adapter.changePassword(this, new_password);
+  }
 }
 
 export default UserModel;
