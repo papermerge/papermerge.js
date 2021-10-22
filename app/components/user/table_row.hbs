@@ -13,12 +13,12 @@
   </td>
   <td>
     <LinkTo
-      @route="users.edit"
+      @route="authenticated.users.edit"
       @model={{@user.id}}>Edit</LinkTo>
     <Button::Link @text="Remove"
       @onClick={{(fn this.onRemove @user)}} />
     <LinkTo
-      @route="users.change_password"
+      @route="authenticated.users.change_password"
       @model={{@user.id}}>Change Password</LinkTo>
   </td>
 </tr>

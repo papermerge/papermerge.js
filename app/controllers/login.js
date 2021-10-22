@@ -15,7 +15,15 @@ export default class LoginController extends Controller {
     let { identification, password } = this;
 
 
-    await this.session.authenticate('authenticator:oauth2', identification, password);
+    try {
+      await this.session.authenticate(
+        'authenticator:auth-token',
+        identification,
+        password
+      );
+    } catch (error) {
+      this.errorMessage = error;
+    }
 
     if (this.session.isAuthenticated) {
       // What to do with all this success?
