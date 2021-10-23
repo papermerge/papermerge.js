@@ -47,7 +47,7 @@ class AddUserComponent extends Component {
       this.new_user.save();
     }
 
-    this.router.transitionTo('users');
+    this.router.transitionTo('authenticated.users');
   }
 
 }

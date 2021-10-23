@@ -54,7 +54,7 @@ class AddAutomateComponent extends Component {
 
     this.store.createRecord('automate', automate).save();
 
-    this.router.transitionTo('automates');
+    this.router.transitionTo('authenticated.automates');
   }
 
   @action
