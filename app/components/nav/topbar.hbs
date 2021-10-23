@@ -13,9 +13,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+        {{#if session.isAuthenticated}}
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <Button::Link @text="Logout" @onClick={{this.logout}} />
         </li>
+        {{/if }}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

@@ -1,7 +1,27 @@
 import Base from 'ember-simple-auth/authenticators/base';
 
 
-class AuthToken extends Base {
+export default class AuthToken extends Base {
+  /*
+  Simple token based authenticator
+
+  Sends to the server username and password. If credentials are valid, servers
+  sends back a token. Token string returned from the server is then passed
+  back and forth between client and server via `Token` header.
+  */
+
+  async restore(data) {
+    /**
+     * Restores session token from the cookie.
+    */
+    let { token } = data;
+
+    if (token) {
+      return data;
+    } else {
+      throw 'no valid session data';
+    }
+  }
 
   async authenticate(username, password) {
     let response, error;
@@ -21,15 +41,4 @@ class AuthToken extends Base {
       throw new Error(error.non_field_errors[0]);
     }
   }
-
-  restore(data) {
-    //pass
-  }
-
-  invalidate(data) {
-    //pass
-  }
 }
-
-
-export default AuthToken;
