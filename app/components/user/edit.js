@@ -13,7 +13,7 @@ class EditUserComponent extends Component {
     let user = this.args.user;
 
     user.save();
-    this.router.transitionTo('users');
+    this.router.transitionTo('authenticated.users');
   }
 }
 

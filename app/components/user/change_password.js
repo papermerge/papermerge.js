@@ -30,7 +30,7 @@ class ChangeUserPasswordComponent extends Component {
     let user = this.args.user;
 
     user.changePassword(this.new_password_1);
-    this.router.transitionTo('users');
+    this.router.transitionTo('authenticated.users');
   }
 }
 

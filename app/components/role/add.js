@@ -34,13 +34,13 @@ class AddRoleComponent extends Component {
       this.new_role.save();
     }
 
-    this.router.transitionTo('roles');
+    this.router.transitionTo('authenticated.roles');
   }
 
   @action
   onCancel() {
     this.new_role.unloadRecord();
-    this.router.transitionTo('roles');
+    this.router.transitionTo('authenticated.roles');
   }
 }
 

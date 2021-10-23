@@ -17,7 +17,7 @@ class EditRoleComponent extends Component {
     let role = this.args.role;
 
     role.save();
-    this.router.transitionTo('roles');
+    this.router.transitionTo('authenticated.roles');
   }
 }
 
