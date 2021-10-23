@@ -14,9 +14,12 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
 
   @computed('session.data.authenticated.token')
   get headers() {
-    let _headers = {};
+    let _headers = {},
+      token;
+
     if (this.session.isAuthenticated) {
-      _headers['Token'] = this.session.data.authenticated.token;
+      token = this.session.data.authenticated.token;
+      _headers['Authorization'] = `Token ${token}`;
     }
 
     return _headers;
