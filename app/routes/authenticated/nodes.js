@@ -5,8 +5,10 @@ export default class FolderRoute extends Route {
   @service store;
 
   async model(params) {
-    return this.store.findRecord('node', params.node_id, {
-      include: 'children',
-    });
+    let response, adapter;
+
+    adapter = this.store.adapterFor('node');
+
+    return adapter.findNode(params.node_id);
   }
 }

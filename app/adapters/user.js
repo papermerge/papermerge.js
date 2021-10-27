@@ -16,4 +16,19 @@ export default class UserAdapter extends ApplicationAdapter {
     });
   }
 
+  urlForQueryRecord(query) {
+    /**
+     * this.store.queryRecord('user', { me: true }) will
+     * query /api/users/me/ endpoint
+     * */
+    let originalUrl = super.urlForQueryRecord(...arguments);
+
+    if (query.me) {
+      delete query.me;
+      return `${originalUrl}/me`;
+    }
+
+    return originalUrl;
+  }
+
 }

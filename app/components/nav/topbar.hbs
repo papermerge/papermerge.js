@@ -8,28 +8,24 @@
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        {{#if session.isAuthenticated}}
-        <li class="nav-item">
-          <Button::Link @text="Logout" @onClick={{this.logout}} />
-        </li>
-        {{/if }}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+        </form>
+        {{#if this.session.isAuthenticated}}
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user mx-2"></i><span>{{this.currentUser.user.username}}</span>
+            </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li class="dropdown-item">Documentation</li>
+            <li class="dropdown-item">About</li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+              <i class="fa fa-sign-out-alt"></i>
+              <Button::Link @text="Logout" @onClick={{this.logout}} class="dropdown-item" />
+            </li>
           </ul>
-        </li>
-      </ul>
+        </div>
+        {{/if }}
+
     </div>
   </div>
 </nav>

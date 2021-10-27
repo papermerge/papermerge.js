@@ -12,7 +12,9 @@ Router.map(function () {
     this.route('inbox');
     this.route('document', { path: '/document/:document_id' });
 
-    this.route('node', { path: '/node/:node_id' });
+    this.route('nodes', { path: '/nodes/:node_id' });
+    this.route('nodes', { path: '/nodes/' });
+
 
     this.route('tags');
 

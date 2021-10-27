@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
@@ -8,6 +10,7 @@ module.exports = function (defaults) {
       extension: 'scss',
     },
   });
+
   app.import('node_modules/bootstrap-icons/font/bootstrap-icons.css');
   // There is a type in fontawesome NPM's namespace.
   // It is '@fortawesome' instead of '@fontawesome'!
