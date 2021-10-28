@@ -13,6 +13,8 @@ class UserModel extends Model {
   @attr created_at;
   @attr updated_at;
   @belongsTo('role') role;
+  @belongsTo('node') home_folder;
+  @belongsTo('node') inbox_folder;
 
   changePassword(new_password) {
     const adapter = this.store.adapterFor('user');

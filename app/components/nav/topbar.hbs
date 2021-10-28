@@ -1,31 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         {{#if this.session.isAuthenticated}}
           <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-user mx-2"></i><span>{{this.currentUser.user.username}}</span>
             </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="dropdown-item">Documentation</li>
-            <li class="dropdown-item">About</li>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <li class="dropdown-item">
+              <i class="fa fa-book-open mx-2"></i>
+              <a href="https://docs.papermerge.io">Documentation</a>
+            </li>
+            <li class="dropdown-item">
+              <i class="fa fa-question-circle mx-2"></i>
+              <a href="#">About</a>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li>
-              <i class="fa fa-sign-out-alt"></i>
+              <i class="fa fa-sign-out-alt mx-2"></i>
               <Button::Link @text="Logout" @onClick={{this.logout}} class="dropdown-item" />
             </li>
           </ul>
         </div>
         {{/if }}
-
     </div>
   </div>
 </nav>
