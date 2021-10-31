@@ -1,6 +1,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "./tag";
 @import "./button";
+@import "./node";
 @import "./nav/sidebar";
 
 
@@ -24,41 +25,3 @@ main {
     margin: 1rem;
 }
 
-.item {
-
-    display: flex;
-
-    .icon {
-        width: 4rem;
-        height: 3rem;
-    }
-
-    .icon.folder {
-        background-image: url("/assets/images/folder.svg");
-        background-size: 100% 88%;
-    }
-
-    .icon.document {
-        background-image: url("/assets/images/document.svg");
-        background-size: 100% 100%;
-    }
-
-    &.checked {
-        background-color:  #e6f5ff;
-        outline: 1px solid #A6DAFF;
-    }
-
-    &:hover {
-        background-color: #8ed2fe66;
-        outline: 1px solid #6fc5ff;
-         //border: 1px solid $result_list_hover_border_color;
-    }
-    .title {
-        a {
-            text-decoration: none;
-        }
-        text-align: center;
-        opacity: 1;
-        z-index: 0;
-   }
-}
