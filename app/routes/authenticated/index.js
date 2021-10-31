@@ -9,6 +9,8 @@ export default class IndexRoute extends BaseRoute {
   async model(params) {
     let adapter, ret;
 
+    await this.currentUser.loadCurrentUser();
+
     adapter = this.store.adapterFor('node');
 
     if (!params.node_id) {
