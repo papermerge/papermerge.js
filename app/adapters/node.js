@@ -9,4 +9,5 @@ export default class NodeAdapter extends ApplicationAdapter {
 
     return ret;
   }
+
 }

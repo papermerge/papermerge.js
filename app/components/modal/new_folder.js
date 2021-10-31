@@ -9,17 +9,23 @@ import { Modal } from 'bootstrap';
 export default class NewFolderComponent extends Component {
   @tracked title = '';
   @service store;
+  @service currentUser;
 
   @action
   onSubmit() {
-    let new_folder;
 
-    new_folder = this.store.createRecord('node');
-    new_folder.title = this.title;
-    new_folder.save();
+    this.currentUser.user.home_folder.then((home_folder) => {
+      let new_folder;
 
-    this.args.onClose();
-    this.title = '';
+      new_folder = this.store.createRecord('folder');
+      new_folder.title = this.title;
+      new_folder.parent = home_folder;
+      new_folder.save();
+
+      this.args.onClose();
+      this.title = '';
+    });
+
   }
 
   @action
