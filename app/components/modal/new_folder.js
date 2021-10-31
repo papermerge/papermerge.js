@@ -11,6 +11,12 @@ export default class NewFolderComponent extends Component {
   onSubmit() {
     console.log(`title=${this.title}`);
     this.args.onClose();
+    this.title = '';
   }
 
+  @action
+  onCancel() {
+    this.args.onClose();
+    this.title = '';
+  }
 }

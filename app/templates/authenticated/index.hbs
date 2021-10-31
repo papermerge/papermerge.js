@@ -6,7 +6,7 @@
   </button>
 
   <button class="btn btn-bordered btn-light btn-flat"
-  type="button" {{on "click" this.newFolder }}>
+  type="button" {{on "click" this.openNewFolderModal }}>
     <i class="fa fa-plus mr-1 text-success"></i>
     New Folder
   </button>
@@ -16,5 +16,5 @@ Documents and Folders will be displayed here!
 
 <Modal::NewFolder
   id="new-folder"
-  @onClose={{this.closeNewFolder}}
-  {{show-when this.show_new_folder}} />
+  @onClose={{this.closeNewFolderModal}}
+  {{show-when this.show_new_folder_modal}} />

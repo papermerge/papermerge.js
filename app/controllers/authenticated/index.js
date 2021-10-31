@@ -4,15 +4,15 @@ import { tracked } from "@glimmer/tracking";
 
 export default class IndexController extends Controller {
 
-  @tracked show_new_folder = false;
+  @tracked show_new_folder_modal = false;
 
   @action
-  newFolder() {
-    this.show_new_folder = true;
+  openNewFolderModal() {
+    this.show_new_folder_modal = true;
   }
 
   @action
-  closeNewFolder() {
-    this.show_new_folder = false;
+  closeNewFolderModal() {
+    this.show_new_folder_modal = false;
   }
 }
