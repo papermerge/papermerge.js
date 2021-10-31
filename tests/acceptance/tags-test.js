@@ -9,8 +9,6 @@ module('Acceptance | tags', function (hooks) {
     await visit('/tags');
 
     assert.equal(currentURL(), '/tags');
-    assert
-      .dom('.add-tag')
-      .hasText('New', 'The user can add new tag');
+    assert.dom('.add-tag').hasText('New', 'The user can add new tag');
   });
 });

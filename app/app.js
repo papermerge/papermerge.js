@@ -4,7 +4,6 @@ import loadInitializers from 'ember-load-initializers';
 import config from 'papermerge/config/environment';
 import 'bootstrap';
 
-
 export default class App extends Application {
   modulePrefix = config.modulePrefix;
   podModulePrefix = config.podModulePrefix;

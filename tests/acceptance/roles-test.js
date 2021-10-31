@@ -9,8 +9,6 @@ module('Acceptance | roles', function (hooks) {
     await visit('/roles');
 
     assert.equal(currentURL(), '/roles');
-    assert
-      .dom('.add-role')
-      .hasText('New', 'The user can add new role');
+    assert.dom('.add-role').hasText('New', 'The user can add new role');
   });
 });

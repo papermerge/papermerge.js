@@ -1,8 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
-
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class LoginController extends Controller {
   @tracked errorMessage;
@@ -13,7 +12,6 @@ export default class LoginController extends Controller {
     event.preventDefault();
 
     let { identification, password } = this;
-
 
     try {
       await this.session.authenticate(

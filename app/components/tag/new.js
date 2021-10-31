@@ -50,13 +50,15 @@ export default class NewTagComponent extends Component {
 
   @action
   onCreate() {
-    this.store.createRecord('tag', {
-      name: this.new_name,
-      description: this.new_description,
-      pinned: this.new_pinned,
-      bg_color: this.new_bg_color,
-      fg_color: this.new_fg_color,
-    }).save();
+    this.store
+      .createRecord('tag', {
+        name: this.new_name,
+        description: this.new_description,
+        pinned: this.new_pinned,
+        bg_color: this.new_bg_color,
+        fg_color: this.new_fg_color,
+      })
+      .save();
 
     this._empty_form();
   }

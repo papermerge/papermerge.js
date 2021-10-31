@@ -7,14 +7,13 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('authenticated', { path: '' }, function() {
+  this.route('authenticated', { path: '' }, function () {
     this.route('documents');
     this.route('inbox');
     this.route('document', { path: '/document/:document_id' });
 
     this.route('nodes', { path: '/nodes/:node_id' });
     this.route('nodes', { path: '/nodes/' });
-
 
     this.route('tags');
 
@@ -33,7 +32,7 @@ Router.map(function () {
     this.route('users', function () {
       this.route('add');
       this.route('edit', { path: '/:user_id/edit' });
-      this.route('change_password', { path: '/:user_id/change-password'});
+      this.route('change_password', { path: '/:user_id/change-password' });
       this.route('index', { path: '/' });
     });
 

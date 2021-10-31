@@ -1,6 +1,5 @@
 import Base from 'ember-simple-auth/authenticators/base';
 
-
 export default class AuthToken extends Base {
   /*
   Simple token based authenticator
@@ -13,7 +12,7 @@ export default class AuthToken extends Base {
   async restore(data) {
     /**
      * Restores session token from the cookie.
-    */
+     */
     let { token } = data;
 
     if (token) {
@@ -27,11 +26,11 @@ export default class AuthToken extends Base {
     let response, error;
 
     response = await fetch('http://localhost:8000/api/auth-token/', {
-      'method': 'POST',
-      'headers': {
-        'Content-Type': 'application/json'
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username, password})
+      body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {

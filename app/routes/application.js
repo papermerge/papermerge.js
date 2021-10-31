@@ -12,8 +12,8 @@ export default class ApplicationRoute extends Route {
   async _loadCurrentUser() {
     try {
       await this.currentUser.loadCurrentUser();
-    } catch(err) {
+    } catch (err) {
       await this.session.invalidate();
     }
   }
-};
+}

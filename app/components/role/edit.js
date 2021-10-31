@@ -4,7 +4,6 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { group_perms_by_model } from 'papermerge/utils';
 
-
 class EditRoleComponent extends Component {
   @service router;
 

@@ -1,6 +1,8 @@
+
 <Modal::Base
   @title="Create Folder"
   @actionTitle="Create"
+  @onClose={{@onClose}}
   @onSubmit={{this.onSubmit}}
   ...attributes
 >
@@ -9,6 +11,6 @@
     id="folder-title"
     class="form-control"
     @type="text"
-    @value="{{this.title}}"
+    @value={{this.title}}
   />
 </Modal::Base>

@@ -1,8 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-
-
 class PermissionGroupComponent extends Component {
   /*
   A permission group is a set of four permissions
@@ -28,13 +26,12 @@ class PermissionGroupComponent extends Component {
     `this.args.perm_group.perms`) are included in
     `this.args.role.permissions`.
     */
-    let role_perm_ids,
-      group_perm_ids;
+    let role_perm_ids, group_perm_ids;
 
-    role_perm_ids = this.args.role.permissions.map(p => p.id);
-    group_perm_ids = this.args.perm_group.perms.map(p => p.id);
+    role_perm_ids = this.args.role.permissions.map((p) => p.id);
+    group_perm_ids = this.args.perm_group.perms.map((p) => p.id);
 
-    return group_perm_ids.every(v => role_perm_ids.includes(v));
+    return group_perm_ids.every((v) => role_perm_ids.includes(v));
   }
 
   set isChecked(value) {
@@ -72,13 +69,13 @@ class PermissionGroupComponent extends Component {
     if (value) {
       // user chose to select (he checked) all
       // permissions in the group
-      this.args.perm_group.perms.forEach(perm => {
+      this.args.perm_group.perms.forEach((perm) => {
         that.addPermission(role, perm);
       });
     } else {
       // user chose to unselect (i.e. he unchecked) all
       // permissions in the group
-      this.args.perm_group.perms.forEach(perm => {
+      this.args.perm_group.perms.forEach((perm) => {
         that.removePermission(role, perm);
       });
     }

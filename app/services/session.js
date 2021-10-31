@@ -1,7 +1,6 @@
 import { inject as service } from '@ember/service';
 import BaseSessionService from 'ember-simple-auth/services/session';
 
-
 export default class SessionService extends BaseSessionService {
   @service currentUser;
 
@@ -9,7 +8,7 @@ export default class SessionService extends BaseSessionService {
     super.handleAuthentication(...arguments);
     try {
       await this.currentUser.loadCurrentUser();
-    } catch(err) {
+    } catch (err) {
       await this.invalidate();
     }
   }

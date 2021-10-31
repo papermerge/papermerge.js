@@ -1,16 +1,18 @@
-import { Modal } from 'bootstrap';
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { tracked } from "@glimmer/tracking";
 
 export default class IndexController extends Controller {
 
+  @tracked show_new_folder = false;
+
   @action
-  newFolder(modal_elem_id) {
-    let modal, dom_elem;
+  newFolder() {
+    this.show_new_folder = true;
+  }
 
-    dom_elem = document.getElementById(modal_elem_id);
-
-    modal = new Modal(dom_elem, {});
-    modal.show();
+  @action
+  closeNewFolder() {
+    this.show_new_folder = false;
   }
 }

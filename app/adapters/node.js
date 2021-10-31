@@ -1,8 +1,6 @@
 import ApplicationAdapter from './application';
 
-
 export default class NodeAdapter extends ApplicationAdapter {
-
   findNode(node_id) {
     let url, ret;
 

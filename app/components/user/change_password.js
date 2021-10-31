@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
-
 class ChangeUserPasswordComponent extends Component {
   @service router;
 
@@ -12,10 +11,10 @@ class ChangeUserPasswordComponent extends Component {
 
   get disabled() {
     /**
-    * If both password inputs are empty submit button is disabled.
-    * Also, submit form button will be disabled if given
-    * passwords do not match.
-    */
+     * If both password inputs are empty submit button is disabled.
+     * Also, submit form button will be disabled if given
+     * passwords do not match.
+     */
     if (this.new_password_1 && new_password_2) {
       if (this.new_password_1 === this.new_password_2) {
         return false;

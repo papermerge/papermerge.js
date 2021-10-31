@@ -1,6 +1,5 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-
 class UserModel extends Model {
   @attr username;
   @attr email;

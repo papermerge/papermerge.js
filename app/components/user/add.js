@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
-
 class AddUserComponent extends Component {
   /*
   Form component to add new user.
@@ -49,7 +48,6 @@ class AddUserComponent extends Component {
 
     this.router.transitionTo('authenticated.users');
   }
-
 }
 
 export default AddUserComponent;
