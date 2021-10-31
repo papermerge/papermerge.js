@@ -12,9 +12,13 @@
   </button>
 </div>
 
-Documents and Folders will be displayed here!
 
 <Modal::NewFolder
   id="new-folder"
   @onClose={{this.closeNewFolderModal}}
   {{show-when this.show_new_folder_modal}} />
+
+{{@model.title}}
+
+
+<Panel @nodes={{model.children}} />
