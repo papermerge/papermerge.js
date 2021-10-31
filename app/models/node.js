@@ -3,6 +3,7 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 export default class NodeModel extends Model {
   @attr title;
   @attr model;
+  @belongsTo('folder', { inverse: null }) parent;
   @hasMany('node', { polymorphic: true }) descendants;
 
   get is_folder() {
