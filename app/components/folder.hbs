@@ -1,6 +1,9 @@
 <div class="node folder">
     <div class="icon folder"></div>
     <div class="title">
-        {{@model.title}}
+        <LinkTo
+            @route="authenticated.nodes" @model={{@model}}>
+            {{@model.title}}
+        </LinkTo>
     </div>
 </div>

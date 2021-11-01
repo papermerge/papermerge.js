@@ -13,7 +13,6 @@ Router.map(function () {
     this.route('document', { path: '/document/:document_id' });
 
     this.route('nodes', { path: '/nodes/:node_id' });
-    this.route('nodes', { path: '/nodes/' });
 
     this.route('tags');
 
