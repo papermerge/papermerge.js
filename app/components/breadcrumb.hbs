@@ -1,7 +1,11 @@
-<ul>
-  {{#each this.path as |path_item|}}
-    <li>
-      {{path_item.title}}
-    </li>
-  {{/each}}
-</ul>
+<nav aria-label="breadcrumb" class="m-2">
+   <ol class="breadcrumb">
+    {{#each this.nodes as |node|}}
+      <li class="breadcrumb-item">
+        <LinkTo
+          @route="authenticated.nodes"
+          @model={{node}}>{{node.title}}</LinkTo>
+      </li>
+    {{/each}}
+  </ol>
+</nav>

@@ -3,6 +3,8 @@ import { action } from '@ember/object';
 import { tracked } from "@glimmer/tracking";
 
 
-export default class IndexController extends Controller {
+export default class NodesController extends Controller {
+  queryParams = ['extrapanelc'];
 
+  @tracked extrapanelc = null;
 }

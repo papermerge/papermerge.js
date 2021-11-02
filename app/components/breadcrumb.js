@@ -3,14 +3,21 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-export default class BreadcrumbComponent extends Component {
-  @tracked path = A([
-    { id: 1, title: 'Some Folder 1' },
-    { id: 2, title: 'Some Folder 2' },
-  ]);
 
-  @action
-  change(node_id) {
-    console.log(node_id);
+export default class BreadcrumbComponent extends Component {
+
+  get nodes() {
+    let current,
+      _nodes = [];
+
+    current = this.args.node;
+
+    while (current && current.get('id')) {
+      _nodes.push(current);
+      current = current.get('parent');
+    }
+
+    return _nodes.reverse();
   }
+
 }
