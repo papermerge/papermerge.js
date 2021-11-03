@@ -4,7 +4,5 @@ import { tracked } from "@glimmer/tracking";
 
 
 export default class NodesController extends Controller {
-  queryParams = ['extrapanelc'];
-
-  @tracked extrapanelc = null;
+  queryParams = ['extranode_id'];
 }

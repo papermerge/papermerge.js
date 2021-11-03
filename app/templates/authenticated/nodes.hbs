@@ -1,7 +1,13 @@
-<Panel
-  @node={{@model}}
-  @nodes={{@model.children}} />
+<div class="panels d-flex">
+  <Panel
+    @node={{this.mainnode}}
+    @nodes={{this.mainnode.children}}
+    @extranode={{this.extranode}} />
 
-{{#if this.extrapanelc}}
-  Extra Panel={{this.extrapanelc}}!
-{{/if}}
+  {{#if this.extranode}}
+    <Panel
+      @node={{this.extranode}}
+      @nodes={{this.extranode.children}}
+      @mainnode={{this.mainnode}} />
+  {{/if}}
+</div>
