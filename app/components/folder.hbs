@@ -1,11 +1,6 @@
 <div class="node folder">
-    <div class="icon folder"></div>
-    <div class="title">
-        <LinkTo
-            @route="authenticated.nodes"
-            @model={{@model.id}}
-            @query={{this.query}}>
-                {{@model.title}}
-        </LinkTo>
-    </div>
+  <div class="icon folder"></div>
+  <div class="title">
+    {{yield}}
+  </div>
 </div>

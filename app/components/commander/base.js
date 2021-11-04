@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 
-export default class PanelComponent extends Component {
+export default class BaseCommanderComponent extends Component {
   @tracked show_new_folder_modal = false;
 
   @action
@@ -15,5 +15,8 @@ export default class PanelComponent extends Component {
   @action
   closeNewFolderModal() {
     this.show_new_folder_modal = false;
+  }
+
+  get url() {
   }
 }

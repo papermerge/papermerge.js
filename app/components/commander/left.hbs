@@ -1,0 +1,44 @@
+<div class="panel commander">
+  <div>
+    <button class="btn btn-bordered btn-light btn-flat"
+    type="button">
+      <i class="fa fa-upload mr-1 text-success"></i>
+      Upload
+    </button>
+
+    <button class="btn btn-bordered btn-light btn-flat"
+    type="button" {{on "click" this.openNewFolderModal }}>
+      <i class="fa fa-plus mr-1 text-success"></i>
+      New Folder
+    </button>
+  </div>
+
+  <Modal::NewFolder
+    id="new-folder"
+    @node={{@node}}
+    @onClose={{this.closeNewFolderModal}}
+    {{show-when this.show_new_folder_modal}} />
+
+  <Breadcrumb::Left
+    @node={{@node}}
+    @extranode={{@extranode}} />
+
+  {{#each @nodes as |node|}}
+    <Folder @model={{node}}>
+      {{#if @extranode}}
+        <LinkTo
+          @route="authenticated.nodes"
+          @model={{node.id}}
+          @query={{hash extranode_id=@extranode.id}}>
+            {{node.title}}
+        </LinkTo>
+      {{else}}
+        <LinkTo
+          @route="authenticated.nodes"
+          @model={{node.id}}>
+            {{node.title}}
+        </LinkTo>
+      {{/if}}
+    </Folder>
+  {{/each}}
+</div>

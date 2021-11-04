@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel commander">
   <div>
     <button class="btn btn-bordered btn-light btn-flat"
     type="button">
@@ -19,9 +19,18 @@
     @onClose={{this.closeNewFolderModal}}
     {{show-when this.show_new_folder_modal}} />
 
-  <Breadcrumb @node={{@node}} @extranode={{@extranode}} />
+  <Breadcrumb::Right
+    @node={{@node}}
+    @extranode={{@extranode}} />
 
   {{#each @nodes as |node|}}
-    <Folder @model={{node}} @extranode={{@extranode}} />
+    <Folder @model={{node}}>
+      <LinkTo
+        @route="authenticated.nodes"
+        @model={{@extranode.id}}
+        @query={{hash extranode_id=node.id}}>
+          {{node.title}}
+      </LinkTo>
+    </Folder>
   {{/each}}
 </div>

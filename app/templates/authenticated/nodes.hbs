@@ -1,13 +1,17 @@
 <div class="panels d-flex">
-  <Panel
+  <Commander::Left
     @node={{this.mainnode}}
     @nodes={{this.mainnode.children}}
     @extranode={{this.extranode}} />
 
   {{#if this.extranode}}
-    <Panel
+    <Commander::Right
       @node={{this.extranode}}
       @nodes={{this.extranode.children}}
-      @mainnode={{this.mainnode}} />
+      @extranode={{this.mainnode}} />
+  {{else this.extradoc}}
+    <Viewer::Right
+      @doc={{this.extradoc}}
+      @extranode={{this.mainnode}} />
   {{/if}}
 </div>
