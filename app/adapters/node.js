@@ -1,9 +1,10 @@
 import ApplicationAdapter from './application';
 
+
 export default class NodeAdapter extends ApplicationAdapter {
 
   findNode(node_id) {
-    let url, ret, json, query;
+    let url, ret;
 
     url = this.buildURL('nodes', node_id);
 
@@ -12,6 +13,5 @@ export default class NodeAdapter extends ApplicationAdapter {
       ret = this.store.peekRecord('folder', node.data.id);
       return ret;
     });
-
   }
 }

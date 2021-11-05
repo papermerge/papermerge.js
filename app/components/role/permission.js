@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
+
 
 class PermissionComponent extends Component {
   get isChecked() {
