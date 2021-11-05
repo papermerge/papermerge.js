@@ -1,0 +1,10 @@
+<div class="panel-mode">
+  <button type="button" class="btn btn-light mx-1"
+    {{on "click" @onPanelToggle}}>
+    {{#if @dualPanelMode}}
+      <i class="bi-x"></i>
+    {{else}}
+      <i class="bi-layout-split"></i>
+    {{/if}}
+  </button>
+</div>

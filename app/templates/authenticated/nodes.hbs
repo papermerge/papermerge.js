@@ -2,16 +2,16 @@
   <Commander::Left
     @node={{this.mainnode}}
     @nodes={{this.mainnode.children}}
-    @extranode={{this.extranode}} />
+    @extranode={{this.extranode}}
+    @onPanelToggle={{this.onPanelToggle}}
+    @dualPanelMode={{this.dualpanel_mode}} />
 
-  {{#if this.extranode}}
+  {{#if this.dualpanel_mode}}
     <Commander::Right
       @node={{this.extranode}}
       @nodes={{this.extranode.children}}
-      @extranode={{this.mainnode}} />
-  {{else this.extradoc}}
-    <Viewer::Right
-      @doc={{this.extradoc}}
-      @extranode={{this.mainnode}} />
+      @extranode={{this.mainnode}}
+      @onPanelToggle={{this.onPanelToggle}}
+      @dualPanelMode={{this.dualpanel_mode}} />
   {{/if}}
 </div>

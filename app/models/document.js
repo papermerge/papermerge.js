@@ -4,15 +4,7 @@ import NodeModel from './node';
 export default class DocumentModel extends NodeModel {
   @attr image;
 
-  get type() {
+  get nodeType() {
     return 'document';
-  }
-
-  get is_folder() {
-    return false;
-  }
-
-  get is_document() {
-    return true;
   }
 }
