@@ -11,7 +11,7 @@ for **digital archives**. Instead of having piles of paper documents all over
 your desk, office or drawers - you can quickly scan them and configure your
 scanner to directly upload to Papermerge DMS.
 
-## What is Digital Archives?
+## What is a Digital Archive?
 
 Simply put a digital archive is a scanned document. In broader sense, digital
 archives are documents whose content does not change in time; a good example of
