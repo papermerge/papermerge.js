@@ -2,8 +2,7 @@
 
 PapermergeJS is frontend part i.e. web-based user interface of Papermerge
 Document Management System. It is meant to be used in conjunction with
-[Papermerge REST API backend server]
-(https://github.com/papermerge/papermerge-core).
+[Papermerge REST API backend server](https://github.com/papermerge/papermerge-core).
 
 ## Prerequisites
 
