@@ -1,16 +1,20 @@
 # PapermergeJS
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+PapermergeJS is frontend part i.e. web-based user interface of Papermerge
+Document Management System. It is meant to be used in conjunction with
+[Papermerge REST API backend server]
+(https://github.com/papermerge/papermerge-core).
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+In general, all you need to run this application is a modern web browser like
+Google Chrome or Mozilla Firefox, however if you plan to run application in
+development mode, you will need some extras:
 
-* [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with npm)
 * [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+
+Technically speaking, PapermergeJS is written using [EmberJS](https://emberjs.com/) web framework.
 
 ## Installation
 
@@ -24,9 +28,6 @@ You will need the following things properly installed on your computer.
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
 
 ### Running Tests
 
