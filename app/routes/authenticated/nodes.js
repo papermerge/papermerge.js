@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { tracked } from "@glimmer/tracking";
 import RSVP from 'rsvp';
 
 
@@ -14,7 +13,7 @@ export default class FolderRoute extends Route {
   };
 
   model(params) {
-    let response, adapter;
+    let adapter;
 
     adapter = this.store.adapterFor('node');
 
@@ -38,6 +37,7 @@ export default class FolderRoute extends Route {
     } else {
       _controller.set('dualpanel_mode', false);
       _controller.set('mainnode', model);
+      _controller.set('extranode', undefined);
     }
   }
 }

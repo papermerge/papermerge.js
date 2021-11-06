@@ -12,6 +12,7 @@ export default class NodesController extends Controller {
 
   @action
   onPanelToggle() {
+
     if (this.extranode_id) {
       this.extranode_id = null;
     } else {
