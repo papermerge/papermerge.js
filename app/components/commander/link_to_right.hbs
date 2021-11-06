@@ -1,6 +1,6 @@
 <LinkTo
   @route="authenticated.nodes"
-  @model={{@extranode.id}}
-  @query={{hash extranode_id=@node.id}}>
-    {{@node.title}}
+  @model={{@node.id}}
+  @query={{hash extranode_id=@extranode.id}}>
+    {{@extranode.title}}
 </LinkTo>
