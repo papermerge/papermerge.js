@@ -3,6 +3,7 @@
 @import "./button";
 @import "./node";
 @import "./nav/sidebar";
+@import "./nav/topbar";
 
 
 main {
@@ -25,3 +26,11 @@ main {
     margin: 1rem;
 }
 
+.central-bar {
+  background-color: #f8f9fa;
+}
+
+
+.commander {
+  background-color: white;
+}
