@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 
-export default class BaseCommanderComponent extends Component {
+export default class CommanderComponent extends Component {
   @tracked show_new_folder_modal = false;
 
   @action
@@ -15,5 +15,4 @@ export default class BaseCommanderComponent extends Component {
   closeNewFolderModal() {
     this.show_new_folder_modal = false;
   }
-
 }

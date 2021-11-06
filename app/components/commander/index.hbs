@@ -1,0 +1,18 @@
+<div class="panel commander row">
+  <div class="d-flex justify-content-between">
+    <Commander::ActionButtons
+      @openNewFolderModal={{this.openNewFolderModal}} />
+
+    <Commander::ActionModes
+      @onPanelToggle={{@onPanelToggle}}
+      @dualPanelMode={{@dualPanelMode}} />
+  </div>
+
+  <Modal::NewFolder
+    id="new-folder"
+    @node={{@node}}
+    @onClose={{this.closeNewFolderModal}}
+    {{show-when this.show_new_folder_modal}} />
+
+  {{yield}}
+</div>
