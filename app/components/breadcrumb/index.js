@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 
 
-export default class BaseBreadcrumbComponent extends Component {
+export default class BreadcrumbComponent extends Component {
 
   get nodes() {
     let current,

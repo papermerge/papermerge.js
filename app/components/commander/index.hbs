@@ -14,5 +14,25 @@
     @onClose={{this.closeNewFolderModal}}
     {{show-when this.show_new_folder_modal}} />
 
-  {{yield}}
+  <Breadcrumb
+    @node={{@node}}
+    @extranode={{@extranode}}
+    @hint={{@hint}} />
+
+  {{#each @node.children as |node|}}
+    {{#let (component node.nodeType) as |NodeType|}}
+      {{! NodeType is either <Folder /> or <Document />}}
+      <NodeType @model={{node}}>
+        {{#if (is_equal @hint "left")}}
+          <Commander::LinkToLeft
+            @node={{node}}
+            @extranode={{@extranode}} />
+        {{else}}
+          <Commander::LinkToRight
+              @node={{node}}
+              @extranode={{@node}} />
+        {{/if}}
+      </NodeType>
+    {{/let}}
+  {{/each}}
 </div>

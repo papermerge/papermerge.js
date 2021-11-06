@@ -1,43 +1,17 @@
 <div class="panels d-flex">
   <Commander
+    @node={{this.mainnode}}
+    @extranode={{this.extranode}}
     @onPanelToggle={{this.onPanelToggle}}
-    @dualPanelMode={{this.dualpanel_mode}} >
-
-    <Breadcrumb::Left
-      @node={{@node}}
-      @extranode={{@extranode}} />
-
-    {{#each this.mainnode.children as |node|}}
-      {{#let (component node.nodeType) as |NodeType|}}
-        {{! NodeType is either <Folder /> or <Document />}}
-        <NodeType @model={{node}}>
-          <Commander::LinkToLeft
-            @node={{node}}
-            @extranode={{this.extranode}} />
-        </NodeType>
-      {{/let}}
-    {{/each}}
-  </Commander>
+    @dualPanelMode={{this.dualpanel_mode}}
+    @hint="left" />
 
   {{#if this.dualpanel_mode}}
     <Commander
+      @node={{this.extranode}}
+      @extranode={{this.mainnode}}
       @onPanelToggle={{this.onPanelToggle}}
-      @dualPanelMode={{this.dualpanel_mode}} >
-
-      <Breadcrumb::Right
-        @node={{@node}}
-        @extranode={{@extranode}} />
-
-        {{#each this.extranode.children as |node|}}
-          {{#let (component node.nodeType) as |NodeType|}}
-            {{! NodeType is either <Folder /> or <Document />}}
-            <NodeType @model={{node}}>
-              <Commander::LinkToRight
-                @node={{node}}
-                @extranode={{this.mainnode}} />
-            </NodeType>
-          {{/let}}
-        {{/each}}
-    </Commander>
+      @dualPanelMode={{this.dualpanel_mode}}
+      @hint="right"  />
   {{/if}}
 </div>

@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb" class="m-2">
+   <ol class="breadcrumb">
+    {{#each this.nodes as |node|}}
+      <li class="breadcrumb-item">
+        {{#if (is_equal @hint "left")}}
+          <Commander::LinkToLeft
+            @node={{node}}
+            @extranode={{@extranode}} />
+        {{else}}
+          <Commander::LinkToRight
+            @node={{node}}
+            @extranode={{@node}} />
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+</nav>
