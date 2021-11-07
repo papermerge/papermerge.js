@@ -7,7 +7,7 @@ export default class IndexRoute extends BaseRoute {
   @service currentUser;
 
   async model(params) {
-    let adapter, ret;
+    let adapter;
 
     await this.currentUser.loadCurrentUser();
 
