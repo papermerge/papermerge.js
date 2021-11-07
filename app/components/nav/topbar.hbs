@@ -16,16 +16,24 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
             <li class="dropdown-item">
               <i class="fa fa-book-open mx-2"></i>
-              <a href="https://docs.papermerge.io">Documentation</a>
+              <a
+                href="https://docs.papermerge.io"
+                class="text-decoration-none">
+                Documentation
+              </a>
             </li>
             <li class="dropdown-item">
               <i class="fa fa-question-circle mx-2"></i>
-              <a href="#">About</a>
+              <a href="#" class="text-decoration-none">About</a>
             </li>
             <li><hr class="dropdown-divider"></li>
-            <li>
-              <i class="fa fa-sign-out-alt mx-2"></i>
-              <Button::Link @text="Logout" @onClick={{this.logout}} class="dropdown-item" />
+            <li class="dropdown-item">
+              <i class="fa fa-sign-out-alt"></i>
+              <button
+                class="btn btn-link text-decoration-none"
+                {{on "click" this.logout}}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>
