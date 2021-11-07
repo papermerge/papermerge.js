@@ -19,4 +19,5 @@ export default class IndexRoute extends Route {
       that.replaceWith("authenticated.nodes", home_folder.id);
     });
   }
+
 }

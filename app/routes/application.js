@@ -11,4 +11,8 @@ export default class ApplicationRoute extends BaseRoute {
       return this.currentUser.user.home_folder;
     }
   }
+
+  setupController(controller, model) {
+    controller.set('home_folder', model);
+  }
 }

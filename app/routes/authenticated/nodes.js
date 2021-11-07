@@ -34,7 +34,8 @@ export default class FolderRoute extends Route {
   }
 
   setupController(controller, model) {
-    let _controller = this.controllerFor('authenticated.nodes');
+    let _controller = this.controllerFor('authenticated.nodes'),
+      _auth_controller = this.controllerFor('authenticated');
 
     if (model.extranode) {
       _controller.set('dualpanel_mode', true);
@@ -45,6 +46,6 @@ export default class FolderRoute extends Route {
     }
 
     _controller.set('mainnode', model.node);
-    _controller.set('home_folder', model.home_folder);
+    _auth_controller.set('home_folder', model.home_folder);
   }
 }

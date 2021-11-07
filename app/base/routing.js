@@ -9,5 +9,19 @@ export default class BaseRoute extends Route {
   async beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
     await this.currentUser.loadCurrentUser();
+    if (this.currentUser.user) {
+      await this.currentUser.user.home_folder;
+    }
+  }
+
+  setupController(controller, model) {
+    super.setupController(...arguments);
+
+    let app_controller = this.controllerFor('authenticated');
+
+    this.currentUser.user.home_folder.then((home_folder) => {
+      app_controller.set('home_folder', home_folder);
+    });
+
   }
 }

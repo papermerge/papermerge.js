@@ -1,13 +1,9 @@
-import Route from '@ember/routing/route';
+import BaseRoute from 'papermerge/base/routing';
 import { inject as service } from '@ember/service';
 
-export default class RolesRoute extends Route {
-  @service store;
-  @service session;
 
-  beforeModel(transition) {
-    this.session.requireAuthentication(transition, 'login');
-  }
+export default class RolesRoute extends BaseRoute {
+  @service store;
 
   async model() {
     return this.store.findAll('role');
