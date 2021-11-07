@@ -1,5 +1,6 @@
 import Base from 'ember-simple-auth/authenticators/base';
 
+
 export default class AuthToken extends Base {
   /*
   Simple token based authenticator
