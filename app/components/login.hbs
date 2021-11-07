@@ -1,0 +1,38 @@
+<form>
+  <div class="mb-3 form-floating">
+    <Input id='identification'
+      class="form-control"
+      placeholder="Username or email"
+      @value={{this.username}} />
+    <label for="identification" class="form-label">Username or Email</label>
+  </div>
+
+  <div class="mb-3 form-floating">
+    <Input id='password'
+      class="form-control"
+      placeholder="Enter Password"
+      @type="password"
+      @value={{this.password}} />
+      <label for="password" class="form-label">Password</label>
+  </div>
+
+  {{#if this.disabled}}
+  <button
+    class="btn btn-block btn-primary btn-lg w-100"
+    disabled
+    type="submit">Sign In</button>
+  {{else}}
+    <button
+    class="btn btn-block btn-primary btn-lg w-100"
+    type="submit"
+    {{on "click" this.onSubmit}}>Sign In</button>
+  {{/if}}
+  <div class="mt-3">
+    <input type="checkbox" id="remember" name="remember">
+    <label class="font-weight-normal my-2" for="remember">
+      Remember Me
+    </label>
+  </div>
+
+  {{yield}}
+</form>

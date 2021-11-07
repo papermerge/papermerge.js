@@ -9,15 +9,11 @@ export default class LoginController extends Controller {
   @service session;
 
   @action
-  async authenticate(event) {
-    event.preventDefault();
-
-    let { identification, password } = this;
-
+  async authenticate(username, password) {
     try {
       await this.session.authenticate(
         'authenticator:auth-token',
-        identification,
+        username,
         password
       );
     } catch (error) {
@@ -30,13 +26,4 @@ export default class LoginController extends Controller {
     }
   }
 
-  @action
-  updateIdentification(event) {
-    this.identification = event.target.value;
-  }
-
-  @action
-  updatePassword(event) {
-    this.password = event.target.value;
-  }
 }
