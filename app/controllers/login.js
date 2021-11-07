@@ -20,7 +20,7 @@ export default class LoginController extends Controller {
         password
       );
     } catch (error) {
-      this.errorMessage = error;
+      this.errorMessage = "Invalid credentials";
     }
 
     if (this.session.isAuthenticated) {
