@@ -19,6 +19,18 @@ main {
     overflow-y: hidden;
 }
 
+
+.brand-image {
+  width: 2rem;
+  opacity: 0.8;
+}
+
+.brand-text {
+  padding-top: 0.5rem;
+  opacity: 0.8;
+  font-weight: 300 !important;
+}
+
 .results.list > .item {
     padding: 0.25rem 1rem;
     margin: 0.5rem 1rem;
