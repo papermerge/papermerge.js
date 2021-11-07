@@ -1,14 +1,54 @@
-<form {{on "submit" this.authenticate}}>
+<main class="form-sign-in">
+  <div>
+    <div class="papermerge-logo">
+      <img src="/assets/images/logo_120x116_wbg.png">
+    </div>
 
-  <label for="identification">Login</label>
-  <input id='identification' placeholder="Enter Login" value={{this.identification}} {{on "change" this.updateIdentification}}>
+    <div class="card px-2 py-3">
+      <div class="card-body">
 
-  <label for="password">Password</label>
-  <input id='password' placeholder="Enter Password" value={{this.password}} {{on "change" this.updatePassword}}>
+        <p class="card-title text-secondary">
+          Please sign in to start your session
+        </p>
 
-  <button type="submit">Login</button>
-  {{#if this.errorMessage}}
-    <p>{{this.errorMessage}}</p>
-  {{/if}}
+        <form {{on "submit" this.authenticate}}>
 
-</form>
+          <div class="mb-3 form-floating">
+            <input id='identification'
+              class="form-control"
+              placeholder="Username or email"
+              value={{this.identification}}
+              {{on "change" this.updateIdentification}}>
+            <label for="identification" class="form-label">Username or Email</label>
+          </div>
+
+          <div class="mb-3 form-floating">
+            <input id='password'
+              class="form-control"
+              placeholder="Enter Password"
+              type="password"
+              value={{this.password}}
+              {{on "change" this.updatePassword}}>
+              <label for="password" class="form-label">Password</label>
+          </div>
+
+          <button
+            class="btn btn-block btn-success btn-lg w-100"
+            type="submit">Sign In</button>
+
+          <div class="mt-3">
+            <input type="checkbox" id="remember" name="remember">
+            <label class="font-weight-normal my-2" for="remember">
+              Remember Me
+            </label>
+          </div>
+
+          {{#if this.errorMessage}}
+            <p class="text-danger">{{this.errorMessage}}</p>
+          {{/if}}
+        </form>
+
+      </div> <!-- card-body -->
+    </div> <!-- card -->
+  </div>
+</main>

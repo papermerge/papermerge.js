@@ -4,7 +4,11 @@
 @import "./node";
 @import "./nav/sidebar";
 @import "./nav/topbar";
+@import "./login.scss";
 
+body {
+    background-color: #e9ecef;
+}
 
 main {
     display: flex;
