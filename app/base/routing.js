@@ -3,8 +3,10 @@ import { inject as service } from '@ember/service';
 
 export default class BaseRoute extends Route {
   @service session;
+  @service currentUser;
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
+    await this.currentUser.loadCurrentUser();
   }
 }

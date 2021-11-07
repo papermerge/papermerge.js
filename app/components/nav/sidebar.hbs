@@ -1,7 +1,8 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-open" >
+    {{this.args.homeFolder}}
     <LinkTo
         @route="authenticated.nodes"
-        @model="{{this.home_id}}"
+        @model="{{@home_folder.id}}"
         class="d-flex brand text-white text-decoration-none">
           <img
             src="/assets/images/logo_bbg.svg"
@@ -14,7 +15,7 @@
       <li class="nav-item">
         <LinkTo
           @route="authenticated.nodes"
-          @model="{{this.home_id}}"
+          @model="{{@home_folder.id}}"
           class="nav-link text-white {{this.active}}" aria-current="page">
           <i class="fa fa-home me-2"></i>Home
         </LinkTo>

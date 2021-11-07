@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 
 export default class FolderRoute extends Route {
   @service store;
+  @service currentUser;
 
   queryParams = {
     extranode_id: {
@@ -12,19 +13,24 @@ export default class FolderRoute extends Route {
     }
   };
 
-  model(params) {
+  async model(params) {
     let adapter;
 
     adapter = this.store.adapterFor('node');
+    await this.currentUser.loadCurrentUser();
 
     if (params.extranode_id) {
       return RSVP.hash({
         node: adapter.findNode(params.node_id),
-        extranode: adapter.findNode(params.extranode_id)
+        extranode: adapter.findNode(params.extranode_id),
+        home_folder: this.currentUser.user.home_folder
       });
     }
 
-    return adapter.findNode(params.node_id);
+    return RSVP.hash({
+      node: adapter.findNode(params.node_id),
+      home_folder: this.currentUser.user.home_folder
+    });
   }
 
   setupController(controller, model) {
@@ -32,12 +38,13 @@ export default class FolderRoute extends Route {
 
     if (model.extranode) {
       _controller.set('dualpanel_mode', true);
-      _controller.set('mainnode', model.node);
       _controller.set('extranode', model.extranode);
     } else {
       _controller.set('dualpanel_mode', false);
-      _controller.set('mainnode', model);
       _controller.set('extranode', undefined);
     }
+
+    _controller.set('mainnode', model.node);
+    _controller.set('home_folder', model.home_folder);
   }
 }
