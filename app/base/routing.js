@@ -14,7 +14,7 @@ export default class BaseRoute extends Route {
     }
   }
 
-  setupController(controller, model) {
+  setupController() {
     super.setupController(...arguments);
 
     let app_controller = this.controllerFor('authenticated');
