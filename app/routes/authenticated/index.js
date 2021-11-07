@@ -8,6 +8,8 @@ export default class IndexRoute extends Route {
   @service currentUser;
 
   async beforeModel(transition) {
+    /* Redirects to user's home folder
+    */
     let that = this;
 
     this.session.requireAuthentication(transition, 'login');
