@@ -1,13 +1,10 @@
 <div>
-  <button class="btn btn-bordered btn-light btn-flat"
-  type="button">
-    <i class="fa fa-upload mr-1 text-success"></i>
-    Upload
-  </button>
+  <Button::Upload @node={{@node}} />
 
-  <button class="btn btn-bordered btn-light btn-flat"
-  type="button" {{on "click" @openNewFolderModal }}>
-    <i class="fa fa-plus mr-1 text-success"></i>
+  <button
+    class="btn btn-bordered btn-light btn-flat"
+    type="button" {{on "click" @openNewFolderModal }}>
+      <i class="fa fa-plus mr-1 text-success"></i>
     New Folder
   </button>
 </div>

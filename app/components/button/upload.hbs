@@ -1,0 +1,12 @@
+<input
+  type="file"
+  multiple="true"
+  hidden="true"
+  {{on "change" this.onUploadChange }} />
+
+<button
+  class="btn btn-bordered btn-light btn-flat"
+  type="button" {{on "click" this.onClickProxyUpload }}>
+    <i class="fa fa-upload mr-1 text-success"></i>
+    Upload
+</button>

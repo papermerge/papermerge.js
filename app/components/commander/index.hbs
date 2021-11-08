@@ -1,11 +1,13 @@
 <div class="panel commander col m-2 p-2">
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
-      @openNewFolderModal={{this.openNewFolderModal}} />
+      @openNewFolderModal={{this.openNewFolderModal}}
+      @node={{@node}} />
 
     <Commander::ActionModes
       @onPanelToggle={{@onPanelToggle}}
-      @dualPanelMode={{@dualPanelMode}} />
+      @dualPanelMode={{@dualPanelMode}}
+      @onViewModeChange={{this.onViewModeChange}} />
   </div>
 
   <Modal::NewFolder
@@ -19,20 +21,22 @@
     @extranode={{@extranode}}
     @hint={{@hint}} />
 
-  {{#each @node.children as |node|}}
-    {{#let (component node.nodeType) as |NodeType|}}
-      {{! NodeType is either <Folder /> or <Document />}}
-      <NodeType @model={{node}}>
-        {{#if (is_equal @hint "left")}}
-          <Commander::LinkToLeft
-            @node={{node}}
-            @extranode={{@extranode}} />
-        {{else}}
-          <Commander::LinkToRight
-            @node={{@extranode}}
-            @extranode={{node}} />
-        {{/if}}
-      </NodeType>
-    {{/let}}
-  {{/each}}
+  <div class="view-mode-{{this.view_mode}}">
+    {{#each @node.children as |node|}}
+      {{#let (component node.nodeType) as |NodeType|}}
+        {{! NodeType is either <Folder /> or <Document />}}
+        <NodeType @model={{node}}>
+          {{#if (is_equal @hint "left")}}
+            <Commander::LinkToLeft
+              @node={{node}}
+              @extranode={{@extranode}} />
+          {{else}}
+            <Commander::LinkToRight
+              @node={{@extranode}}
+              @extranode={{node}} />
+          {{/if}}
+        </NodeType>
+      {{/let}}
+    {{/each}}
+  </div>
 </div>

@@ -1,0 +1,24 @@
+<button
+  id="view-mode"
+  type="button"
+  data-bs-toggle="dropdown"
+  class="btn btn-light dropdown-toggle mx-1">
+    <i class="bi-grid"></i>
+</button>
+<ul class="dropdown-menu"
+  aria-expand="false"
+  aria-labelledby="display-mode">
+
+  {{#each this.items as |item|}}
+    <li class="dropdown-item">
+      <button
+        class="btn btn-link text-decoration-none"
+        {{on "click" (fn this.onItemClick item)}}>
+        <span class="px-2">{{ item.title }}</span>
+        {{#if (is_equal this.current_item item.value) }}
+            <i class="bi-check-lg text-success"></i>
+        {{/if}}
+      </button>
+    </li> <!-- dropdown-item -->
+  {{/each}}
+</ul> <!-- dropdown-menu -->

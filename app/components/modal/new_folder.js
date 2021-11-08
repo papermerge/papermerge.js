@@ -3,8 +3,6 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-import { Modal } from 'bootstrap';
-
 
 export default class NewFolderComponent extends Component {
   @tracked title = '';
