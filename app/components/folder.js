@@ -1,7 +1,7 @@
-import Component from '@glimmer/component';
+import NodeComponent from "./node";
 
 
-export default class FolderComponent extends Component {
+export default class FolderComponent extends NodeComponent {
 
   get query() {
     if (this.args.extranode) {
@@ -16,4 +16,5 @@ export default class FolderComponent extends Component {
   get model() {
     return this.args.model;
   }
+
 }

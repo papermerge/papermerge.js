@@ -2,6 +2,8 @@
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}
+      @openRenameModal={{this.openRenameModal}}
+      @selectedNodes={{this.selected_nodes}}
       @node={{@node}} />
 
     <Commander::ActionModes
@@ -16,6 +18,12 @@
     @onClose={{this.closeNewFolderModal}}
     {{show-when this.show_new_folder_modal}} />
 
+  <Modal::RenameNode
+    id="rename-node"
+    @selectedNodes={{this.selected_nodes}}
+    @onClose={{this.closeRenameModal}}
+    {{show-when this.show_rename_node_modal}} />
+
   <Breadcrumb
     @node={{@node}}
     @extranode={{@extranode}}
@@ -25,7 +33,9 @@
     {{#each @node.children as |node|}}
       {{#let (component node.nodeType) as |NodeType|}}
         {{! NodeType is either <Folder /> or <Document />}}
-        <NodeType @model={{node}}>
+        <NodeType
+          @model={{node}}
+          @onCheckboxChange={{this.onCheckboxChange}} >
           {{#if (is_equal @hint "left")}}
             <Commander::LinkToLeft
               @node={{node}}

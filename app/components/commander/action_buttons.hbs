@@ -1,10 +1,49 @@
 <div>
-  <Button::Upload @node={{@node}} />
+  {{#if this.one_node_selected}}
+    <button
+      class="btn btn-success"
+      type="button"
+      {{on "click" this.onRename}}>
+        <i class="fa fa-edit"></i>
+      Rename
+    </button>
+    <button
+      class="btn btn-success"
+      type="button">
+        <i class="fa fa-download"></i>
+      Download
+    </button>
+    <button
+      class="btn btn-danger mx-5"
+      type="button"
+      {{on "click" this.onDelete}}>
+        <i class="fa fa-times"></i>
+      Delete
+    </button>
+  {{else if this.multiple_nodes_selected}}
+    <button
+      class="btn btn-success"
+      type="button">
+        <i class="fa fa-download"></i>
+      Download
+    </button>
+    <button
+      class="btn btn-danger mx-5"
+      type="button"
+      {{on "click" this.onDelete}}>
+        <i class="fa fa-times"></i>
+      Delete
+    </button>
+  {{else}}
+    {{! No nodes are currently selected }}
+    <Button::Upload
+      @node={{@node}} />
 
-  <button
-    class="btn btn-bordered btn-light btn-flat"
-    type="button" {{on "click" @openNewFolderModal }}>
-      <i class="fa fa-plus mr-1 text-success"></i>
-    New Folder
-  </button>
+    <button
+      class="btn btn-success"
+      type="button" {{on "click" @openNewFolderModal }}>
+        <i class="fa fa-plus mr-1"></i>
+      New Folder
+    </button>
+  {{/if}}
 </div>
