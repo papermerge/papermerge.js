@@ -3,6 +3,7 @@
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}
       @openRenameModal={{this.openRenameModal}}
+      @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
       @selectedNodes={{this.selected_nodes}}
       @node={{@node}} />
 
@@ -24,6 +25,12 @@
     @onClose={{this.closeRenameModal}}
     {{show-when this.show_rename_node_modal}} />
 
+  <Modal::DeleteNode
+    id="rename-node"
+    @selectedNodes={{this.selected_nodes}}
+    @onClose={{this.closeConfirmDeletionModal}}
+    {{show-when this.show_confirm_deletion_modal}} />
+
   <Breadcrumb
     @node={{@node}}
     @extranode={{@extranode}}
@@ -35,6 +42,7 @@
         {{! NodeType is either <Folder /> or <Document />}}
         <NodeType
           @model={{node}}
+          @selectedNodes={{this.selected_nodes}}
           @onCheckboxChange={{this.onCheckboxChange}} >
           {{#if (is_equal @hint "left")}}
             <Commander::LinkToLeft

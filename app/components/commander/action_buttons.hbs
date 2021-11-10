@@ -16,7 +16,7 @@
     <button
       class="btn btn-danger mx-5"
       type="button"
-      {{on "click" this.onDelete}}>
+      {{on "click" @openConfirmDeletionModal}}>
         <i class="fa fa-times"></i>
       Delete
     </button>
@@ -30,7 +30,7 @@
     <button
       class="btn btn-danger mx-5"
       type="button"
-      {{on "click" this.onDelete}}>
+       {{on "click" @openConfirmDeletionModal}}>
         <i class="fa fa-times"></i>
       Delete
     </button>

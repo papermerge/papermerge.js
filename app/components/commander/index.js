@@ -11,6 +11,8 @@ export default class CommanderComponent extends Component {
   // show rename node modal dialog?
   @tracked show_rename_node_modal = false;
 
+  @tracked show_confirm_deletion_modal = false;
+
   // nodes are displayed as list or as grid?
   @tracked view_mode = 'list';
 
@@ -29,6 +31,18 @@ export default class CommanderComponent extends Component {
   @action
   closeRenameModal() {
     this.show_rename_node_modal = false;
+    this.selected_nodes = A([]);
+  }
+
+  @action
+  openConfirmDeletionModal() {
+    this.show_confirm_deletion_modal = true;
+  }
+
+  @action
+  closeConfirmDeletionModal() {
+    this.show_confirm_deletion_modal = false;
+    this.selected_nodes = A([]);
   }
 
   @action

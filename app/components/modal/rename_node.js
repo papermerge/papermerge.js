@@ -1,9 +1,10 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
+import BaseComponent from "./base";
 
-export default class RenameNodeComponent extends Component {
+
+export default class RenameNodeComponent extends BaseComponent {
   @service store;
   @service currentUser;
 
@@ -38,9 +39,9 @@ export default class RenameNodeComponent extends Component {
       (node) => {
         node.title = this.title;
         node.save();
+        this.args.onClose();
+        this.title = '';
     });
-
-    this.args.onClose();
   }
 
   @action

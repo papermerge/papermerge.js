@@ -25,9 +25,4 @@ export default class ActionButtonsComponent extends Component {
       this.args.selectedNodes[0]
     );
   }
-
-  @action
-  onDelete() {
-
-  }
 }

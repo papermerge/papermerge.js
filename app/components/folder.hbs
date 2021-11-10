@@ -1,6 +1,7 @@
 <div class="node folder {{if this.is_selected "checked"}}">
   <Input
     @type="checkbox"
+    @checked={{this.is_selected}}
     {{on "change" this.onCheckboxChange}} />
   <div class="icon folder"></div>
   <div class="title">
