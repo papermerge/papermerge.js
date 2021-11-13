@@ -6,10 +6,23 @@ export default class DocumentRoute extends Route {
   @service store;
 
   async model(params) {
-    let adapter;
+    let doc_adapter,
+      page_adapter,
+      document_version,
+      pages,
+      pages_with_url;
 
-    adapter = this.store.adapterFor('document');
-    return adapter.getDocumentVersion(params.document_id);
+    page_adapter = this.store.adapterFor('page');
+    doc_adapter = this.store.adapterFor('document');
+    document_version  = await doc_adapter.getDocumentVersion(params.document_id);
+    pages = await document_version.pages;
+    pages_with_url = await page_adapter.loadBinaryImages(pages);
+    console.log("document_version returned");
+    console.log(pages_with_url);
+    return {
+      'document_version': document_version,
+      'pages': pages_with_url
+    }
   }
 
   renderTemplate() {

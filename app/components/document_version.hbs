@@ -1,5 +1,7 @@
-Page Count = {{@model.page_count}}
+Page Count = {{@model.document_version.page_count}}
 
-{{#each @model.pages as |page|}}
-  {{page.number}}
-{{/each}}
+<div class="d-flex flex-column">
+  {{#each @model.pages as |page|}}
+    <Page @page={{page}} />
+  {{/each}}
+</div>
