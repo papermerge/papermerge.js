@@ -6,6 +6,13 @@ export default class DocumentRoute extends Route {
   @service store;
 
   async model(params) {
-    return this.store.findRecord('document', params.document_id);
+    let adapter;
+
+    adapter = this.store.adapterFor('document');
+    return adapter.getDocumentVersion(params.document_id);
+  }
+
+  renderTemplate() {
+    this.render('authenticated.document_version');
   }
 }
