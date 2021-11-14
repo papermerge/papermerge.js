@@ -1,11 +1,11 @@
 {{@model.document_version.document.title}}
 
 <div class="d-flex">
-  <DocumentVersion::Thumbnails @pages={{@model.pages}} />
+  <Viewer::Thumbnails @pages={{@model.pages}} />
 
   <div class="d-flex flex-column pages">
     {{#each @model.pages as |page|}}
-      <DocumentVersion::Page @page={{page}} />
+      <Viewer::Page @page={{page}} />
     {{/each}}
   </div>
 </div>

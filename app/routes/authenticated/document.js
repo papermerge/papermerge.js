@@ -26,6 +26,6 @@ export default class DocumentRoute extends Route {
   }
 
   renderTemplate() {
-    this.render('authenticated.document_version');
+    this.render('authenticated.viewer');
   }
 }
