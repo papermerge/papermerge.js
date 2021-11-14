@@ -45,11 +45,11 @@
           @selectedNodes={{this.selected_nodes}}
           @onCheckboxChange={{this.onCheckboxChange}} >
           {{#if (is_equal @hint "left")}}
-            <Commander::LinkToLeft
+            <Folder::LinkToLeft
               @node={{node}}
               @extranode={{@extranode}} />
           {{else}}
-            <Commander::LinkToRight
+            <Folder::LinkToRight
               @node={{@extranode}}
               @extranode={{node}} />
           {{/if}}

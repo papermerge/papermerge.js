@@ -1,0 +1,14 @@
+{{#if @extranode}}
+  <LinkTo
+    @route="authenticated.nodes"
+    @model={{@node.id}}
+    @query={{hash extranode_id=@extranode.id}}>
+      {{@node.title}}
+  </LinkTo>
+{{else}}
+  <LinkTo
+    @route="authenticated.document"
+    @model={{@node.id}}>
+      {{@node.title}}
+  </LinkTo>
+{{/if}}

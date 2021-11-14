@@ -1,4 +1,4 @@
-import NodeComponent from "./node";
+import NodeComponent from "../node";
 
 
 export default class DocumentComponent extends NodeComponent {

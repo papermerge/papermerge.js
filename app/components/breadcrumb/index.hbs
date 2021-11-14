@@ -3,11 +3,15 @@
     {{#each this.nodes as |node|}}
       <li class="breadcrumb-item">
         {{#if (is_equal @hint "left")}}
-          <Commander::LinkToLeft
-            @node={{node}}
-            @extranode={{@extranode}} />
+          {{#if (is_equal node.nodeType "document") }}
+            <Document::LinkToLeft @node={{node}} />
+          {{else}}
+            <Folder::LinkToLeft
+              @node={{node}}
+              @extranode={{@extranode}} />
+          {{/if}}
         {{else}}
-          <Commander::LinkToRight
+          <Folder::LinkToRight
             @node={{@extranode}}
             @extranode={{node}} />
         {{/if}}
