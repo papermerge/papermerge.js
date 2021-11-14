@@ -44,21 +44,10 @@
           @model={{node}}
           @selectedNodes={{this.selected_nodes}}
           @onCheckboxChange={{this.onCheckboxChange}} >
-          {{#if (is_equal @hint "left")}}
-            {{#if (is_equal node.nodeType "folder")}}
-              <Folder::LinkToLeft
-                @node={{node}}
-                @extranode={{@extranode}} />
-            {{else}}
-              <Document::LinkToLeft
-                @node={{node}}
-                @extranode={{@extranode}} />
-            {{/if}}
-          {{else}}
-            <Folder::LinkToRight
-              @node={{@extranode}}
-              @extranode={{node}} />
-          {{/if}}
+            <DualLinkTo
+              @node={{node}}
+              @extranode={{@extranode}}
+              @hint={{@hint}} />
         </NodeType>
       {{/let}}
     {{/each}}

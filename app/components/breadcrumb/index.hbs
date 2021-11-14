@@ -2,19 +2,10 @@
    <ol class="breadcrumb">
     {{#each this.nodes as |node|}}
       <li class="breadcrumb-item">
-        {{#if (is_equal @hint "left")}}
-          {{#if (is_equal node.nodeType "document") }}
-            <Document::LinkToLeft @node={{node}} />
-          {{else}}
-            <Folder::LinkToLeft
-              @node={{node}}
-              @extranode={{@extranode}} />
-          {{/if}}
-        {{else}}
-          <Folder::LinkToRight
-            @node={{@extranode}}
-            @extranode={{node}} />
-        {{/if}}
+        <DualLinkTo
+          @node={{node}}
+          @extranode={{@extranode}}
+          @hint={{@hint}} />
       </li>
     {{/each}}
   </ol>
