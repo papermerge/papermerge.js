@@ -1,11 +1,8 @@
-{{@model.document_version.document.title}}
+<Breadcrumb
+  @node={{@model.document_version.document}}
+  @hint="left" />
 
 <div class="d-flex">
   <Viewer::Thumbnails @pages={{@model.pages}} />
-
-  <div class="d-flex flex-column pages">
-    {{#each @model.pages as |page|}}
-      <Viewer::Page @page={{page}} />
-    {{/each}}
-  </div>
+  <Viewer::Pages @pages={{@model.pages}} />
 </div>
