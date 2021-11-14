@@ -6,10 +6,6 @@
     {{on "change" this.onCheckboxChange}} />
   <div class="icon document"></div>
   <div class="title">
-    <LinkTo
-      @route="authenticated.document"
-      @model={{@model.id}}>
-      {{@model.title}}
-    </LinkTo>
+    {{yield}}
   </div>
 </div>

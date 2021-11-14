@@ -45,9 +45,15 @@
           @selectedNodes={{this.selected_nodes}}
           @onCheckboxChange={{this.onCheckboxChange}} >
           {{#if (is_equal @hint "left")}}
-            <Folder::LinkToLeft
-              @node={{node}}
-              @extranode={{@extranode}} />
+            {{#if (is_equal node.nodeType "folder")}}
+              <Folder::LinkToLeft
+                @node={{node}}
+                @extranode={{@extranode}} />
+            {{else}}
+              <Document::LinkToLeft
+                @node={{node}}
+                @extranode={{@extranode}} />
+            {{/if}}
           {{else}}
             <Folder::LinkToRight
               @node={{@extranode}}

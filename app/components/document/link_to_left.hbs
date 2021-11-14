@@ -1,6 +1,6 @@
 {{#if @extranode}}
   <LinkTo
-    @route="authenticated.nodes"
+    @route="authenticated.document"
     @model={{@node.id}}
     @query={{hash extranode_id=@extranode.id}}>
       {{@node.title}}

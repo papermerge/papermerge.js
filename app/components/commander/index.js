@@ -5,6 +5,15 @@ import { action } from '@ember/object';
 
 
 export default class CommanderComponent extends Component {
+  /*
+    Arguments:
+
+    @node = current node/folder
+    @extranode = extract node to display (on second panel)
+    @hint = "left" | "right" indicates which of two sides
+    is current panel displayed. @hint is "left" indicates that
+    commander is displayed in left panel.
+  */
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
 
