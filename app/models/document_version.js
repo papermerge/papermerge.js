@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 
 export default class DocumentVersionModel extends Model {
@@ -7,4 +7,5 @@ export default class DocumentVersionModel extends Model {
   @attr page_count; // total page count
   @attr lang; // languate used for this page
   @hasMany('pages') pages;
+  @belongsTo('document') document;
 }

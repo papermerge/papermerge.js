@@ -1,0 +1,20 @@
+
+.thumbnails {
+  .thumbnail {
+    margin: 1rem;
+    img {
+      width: 6rem;
+    }
+  }
+}
+
+.pages {
+  overflow: scroll;
+  height: 100vh;
+
+  .page {
+    img {
+      width: 100%;
+    }
+  }
+}
