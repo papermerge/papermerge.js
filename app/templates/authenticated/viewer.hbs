@@ -1,1 +1,17 @@
-<Viewer @model={{@model}} />
+<div class="panels d-flex row">
+  <Viewer
+    @model={{@model}}
+    @extranode={{this.extranode}}
+    @onPanelToggle={{this.onPanelToggle}}
+    @dualPanelMode={{this.dualpanel_mode}}
+    @hint="left" />
+
+  {{#if this.dualpanel_mode}}
+    <Commander
+      @node={{this.extranode}}
+      @extranode={{this.mainnode}}
+      @onPanelToggle={{this.onPanelToggle}}
+      @dualPanelMode={{this.dualpanel_mode}}
+      @hint="right" />
+  {{/if}}
+</div>

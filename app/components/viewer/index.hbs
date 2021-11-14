@@ -1,8 +1,11 @@
-<Breadcrumb
-  @node={{@model.document_version.document}}
-  @hint="left" />
+<div class="panel viewer col m-2 p-2">
+  <Breadcrumb
+    @node={{@model.document_version.document}}
+    @extranode={{@extranode}}
+    @hint="left" />
 
-<div class="d-flex">
-  <Viewer::Thumbnails @pages={{@model.pages}} />
-  <Viewer::Pages @pages={{@model.pages}} />
+  <div class="d-flex">
+    <Viewer::Thumbnails @pages={{@model.pages}} />
+    <Viewer::Pages @pages={{@model.pages}} />
+  </div>
 </div>
