@@ -1,8 +1,13 @@
 <div class="panel viewer col m-2 p-2">
-  <Breadcrumb
+  <div class="d-flex justify-content-between">
+    <Viewer::ActionButtons />
+  </div>
+
+    <Breadcrumb
     @node={{@model.document_version.document}}
     @extranode={{@extranode}}
     @hint="left" />
+
 
   <div class="d-flex">
     <Viewer::Thumbnails @pages={{@model.pages}} />
