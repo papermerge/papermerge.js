@@ -7,19 +7,25 @@ export default class SidebarComponent extends Component {
 
   get active() {
     /*
-    Returns "active" for "authenticated.nodes" route regardless
-    of current node ID.
+    Returns 'active' if current route name is one of following:
 
-    "active" is used as css class name in component's template.
+      * authenticated.nodes
+      * authenticated.document
+
+    'active' is used as css class name in component's template.
     */
-    let route_name;
+    let route_name, active_routes;
 
+    active_routes = [
+      'authenticated.nodes',
+      'authenticated.document',
+    ]
     route_name = this.router.currentRoute.name;
 
-    if (route_name === "authenticated.nodes") {
-      return "active";
+    if (active_routes.includes(route_name)) {
+      return 'active';
     }
 
-    return "";
+    return '';
   }
 }
