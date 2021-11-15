@@ -8,7 +8,8 @@ export default class NodesController extends Controller {
 
   @service currentUser;
   @tracked extranode_id = null;
-  queryParams = ['extranode_id']
+  @tracked extradoc_id = null;
+  queryParams = ['extranode_id', 'extradoc_id']
 
   @action
   onPanelToggle() {

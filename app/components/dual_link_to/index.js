@@ -18,28 +18,36 @@ export default class DualLinkToComponent extends Component {
 
         /nodes/<node_id> - opens commander single panel model, with <node_id>
           root folder/node
-        /documents/<node_id> - opens viewer in single panel mode, with <node_id>
-          as current document/node
+        /document/<doc_id> - opens viewer in single panel mode, with <doc_id>
+          as current document
 
       Dual panel models:
 
         /nodes/<node_id>?extranode_id=<extranode_id> - opens dual panel mode. On left side
           commander is opened with <node_id> as root folder/node. On right panel
-          there will be opened a commander or a viewer, depending on what node type is
-          <extranode_id>.
+          there will be opened a commander with <extranode_id> as root
 
-        /documents/<node_id>?extranode_id=<extranode_id> - opens dual panel mode. On left side
-          document viewer is opened with <node_id> as root document/node. On right panel
-          there will be opened a commander or a viewer, depending on what node type is
-          <extranode_id>.
+        /nodes/<node_id>?extradoc_id=<extradoc_id> - opens dual panel mode. On left side
+          commander is opened with <node_id> as root folder/node. On right panel
+          there will be opened a viewer with <extradoc_id> document opened
+
+        /document/<doc_id>?extranode_id=<extranode_id> - opens dual panel mode. On left side
+          document viewer is opened with <doc_id> as root document. On right panel
+          there will be opened a commander with <extranode_id> as root node
+
+        /document/<doc_id>?extradoc_id=<extradoc_id> - opens dual panel mode. On left side
+          document viewer is opened with <doc_id> as root document. On right panel
+          there will be opened a viewer with <doc_id> as documented.
   */
 
   get route() {
     let node,
+      extranode,
       hint;
 
     hint = this.args.hint;
     node = this.args.node;
+    extranode = this.args.extranode;
 
     if (hint == 'left') {
       if (node && node.get('nodeType') === 'document') {
@@ -51,15 +59,29 @@ export default class DualLinkToComponent extends Component {
       }
     }
 
+    // hint == 'right'
+    if (extranode && extranode.get('nodeType') === 'document') {
+      return 'authenticated.document';
+    }
+
     return 'authenticated.nodes';
   }
 
   get model() {
-    if (this.args.hint == 'left') {
-      return this.args.node;
+    let hint,
+      node,
+      extranode;
+
+    hint = this.args.hint;
+    node = this.args.node;
+    extranode = this.args.extranode;
+
+
+    if (hint === 'left') {
+      return node;
     }
 
-    return this.args.extranode;
+    return extranode;
   }
 
   get title() {
@@ -76,14 +98,26 @@ export default class DualLinkToComponent extends Component {
     hint = this.args.hint;
 
     if ((hint === 'left') && extranode) {
-      return {
-        'extranode_id': extranode.get('id')
-      };
+      if (extranode.get('nodeType') === 'document') {
+        return {
+          'extradoc_id': extranode.get('id')
+        };
+      } else if (extranode.get('nodeType') === 'folder') {
+        return {
+          'extranode_id': extranode.get('id')
+        };
+      }
     }
 
     if (hint === 'right' && node) {
-      return {
-        'extranode_id': node.get('id')
+      if (node.get('nodeType') === 'document') {
+        return {
+          'extradoc_id': node.get('id')
+        }
+      } else if (node.get('nodeType') === 'folder' ) {
+        return {
+          'extranode_id': node.get('id')
+        }
       }
     }
 

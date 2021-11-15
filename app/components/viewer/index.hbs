@@ -3,14 +3,13 @@
     <Viewer::ActionButtons />
   </div>
 
-    <Breadcrumb
-    @node={{@model.document_version.document}}
+  <Breadcrumb
+    @node={{@document_version.document}}
     @extranode={{@extranode}}
-    @hint="left" />
-
+    @hint={{@hint}} />
 
   <div class="d-flex">
-    <Viewer::Thumbnails @pages={{@model.pages}} />
-    <Viewer::Pages @pages={{@model.pages}} />
+    <Viewer::Thumbnails @pages={{@pages}} />
+    <Viewer::Pages @pages={{@pages}} />
   </div>
 </div>

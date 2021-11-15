@@ -1,17 +1,28 @@
 <div class="panels d-flex row">
   <Viewer
-    @model={{@model}}
+    @document_version={{@model.document_version}}
+    @pages={{@model.pages}}
     @extranode={{this.extranode}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left" />
 
   {{#if this.dualpanel_mode}}
-    <Commander
-      @node={{this.extranode}}
-      @extradoc={{@model}}
-      @onPanelToggle={{this.onPanelToggle}}
-      @dualPanelMode={{this.dualpanel_mode}}
-      @hint="right" />
+    {{#if this.extra_document_version}}
+      <Viewer
+        @document_version={{this.extra_document_version}}
+        @pages={{this.extra_pages}}
+        @extranode={{@model.document_version}}
+        @onPanelToggle={{this.onPanelToggle}}
+        @dualPanelMode={{this.dualpanel_mode}}
+        @hint="right" />
+    {{else}}
+      <Commander
+        @node={{this.extranode}}
+        @extradoc={{@model}}
+        @onPanelToggle={{this.onPanelToggle}}
+        @dualPanelMode={{this.dualpanel_mode}}
+        @hint="right" />
+    {{/if}}
   {{/if}}
 </div>

@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import RSVP from 'rsvp';
 
 
 export default class DocumentRoute extends Route {
@@ -8,6 +7,9 @@ export default class DocumentRoute extends Route {
 
   queryParams = {
     extranode_id: {
+      refreshModel: true
+    },
+    extradoc_id: {
       refreshModel: true
     }
   };
@@ -18,8 +20,11 @@ export default class DocumentRoute extends Route {
       node_adapter,
       extranode,
       document_version,
+      document_version2,
       pages,
-      pages_with_url;
+      pages2,
+      pages_with_url,
+      pages_with_url2;
 
     node_adapter = this.store.adapterFor('node');
     page_adapter = this.store.adapterFor('page');
@@ -28,6 +33,19 @@ export default class DocumentRoute extends Route {
     document_version  = await doc_adapter.getDocumentVersion(params.document_id);
     pages = await document_version.pages;
     pages_with_url = await page_adapter.loadBinaryImages(pages);
+
+    if (params.extradoc_id) {
+      document_version2  = await doc_adapter.getDocumentVersion(params.extradoc_id);
+      pages2 = await document_version2.pages;
+      pages_with_url2 = await page_adapter.loadBinaryImages(pages2);
+
+      return {
+        'document_version': document_version,
+        'pages': pages_with_url,
+        'extra_document_version': document_version2,
+        'extra_pages': pages_with_url2,
+      };
+    }
 
     if (params.extranode_id) {
 
@@ -58,6 +76,10 @@ export default class DocumentRoute extends Route {
       console.log("Document controller setting dualpanel_mode to true");
       _controller.set('dualpanel_mode', true);
       _controller.set('extranode', model.extranode);
+    } else if (model.extra_document_version) {
+      _controller.set('dualpanel_mode', true);
+      _controller.set('extra_document_version', model.extra_document_version);
+      _controller.set('extra_pages', model.pages);
     } else {
       _controller.set('dualpanel_mode', false);
       _controller.set('extranode', undefined);

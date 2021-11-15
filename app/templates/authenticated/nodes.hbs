@@ -7,11 +7,21 @@
     @hint="left" />
 
   {{#if this.dualpanel_mode}}
-    <Commander
-      @node={{this.extranode}}
-      @extranode={{this.mainnode}}
-      @onPanelToggle={{this.onPanelToggle}}
-      @dualPanelMode={{this.dualpanel_mode}}
-      @hint="right" />
+    {{#if this.document_version}}
+      <Viewer
+        @document_version={{this.document_version}}
+        @pages={{this.pages}}
+        @extranode={{this.extranode}}
+        @onPanelToggle={{this.onPanelToggle}}
+        @dualPanelMode={{this.dualpanel_mode}}
+        @hint="right" />
+    {{else}}
+      <Commander
+        @node={{this.extranode}}
+        @extranode={{this.mainnode}}
+        @onPanelToggle={{this.onPanelToggle}}
+        @dualPanelMode={{this.dualpanel_mode}}
+        @hint="right" />
+    {{/if}}
   {{/if}}
 </div>
