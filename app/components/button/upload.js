@@ -30,8 +30,6 @@ export default class UploadButtonComponent extends Component {
   @action
   onUploadChange(event) {
     let files;
-    console.log(this.args.node.id);
-    console.log(event.target.files);
 
     files = event.target.files;
 
@@ -41,22 +39,22 @@ export default class UploadButtonComponent extends Component {
     }
 
     Array.from(files, (file) => {
-      let new_doc;
-
       /* Upload of documents to the server side is two stage process:
         (1.) create document model on the server side
         (2.) upload file and associated it with model created in (1.)
        */
-      new_doc = this._createDocumentModel({
+      this._createDocumentModel({
         file: file,
         node: this.args.node,
         lang: "deu"
+      }).then((doc) => {
+        this._uploadFile({doc, file});
       });
-      this._uploadFile({doc: new_doc, file: file});
+
     });
   }
 
-  _createDocumentModel({file, node, lang}) {
+  async _createDocumentModel({file, node, lang}) {
     /*
       Creates document model on the server side.
 
@@ -78,9 +76,7 @@ export default class UploadButtonComponent extends Component {
     new_doc.parent = node;
     new_doc.lang = lang;
 
-    new_doc.save();
-
-    return new_doc;
+    return new_doc.save();
   }
 
   _uploadFile({file, doc}) {
@@ -89,6 +85,10 @@ export default class UploadButtonComponent extends Component {
 
       Document model ``doc`` should exist on the server side.
     */
+    let doc_adapter = this.store.adapterFor('document');
+
+
+    doc_adapter.uploadFile({file, doc});
   }
 
 }

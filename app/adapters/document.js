@@ -14,4 +14,20 @@ export default class NodeAdapter extends ApplicationAdapter {
       return ret;
     });
   }
+
+  uploadFile({doc, file}) {
+    let build_url, url, headers;
+
+    headers = this.headers;
+    headers['Content-Disposition'] = `attachment; filename=${file.name}`;
+
+    build_url = this.buildURL('documents', doc.id);
+    url = `${build_url}upload/${file.name}`;
+
+    return fetch(url, {
+      method: 'PUT',
+      body: file,
+      headers: headers
+    });
+  }
 }

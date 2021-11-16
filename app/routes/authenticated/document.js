@@ -61,7 +61,7 @@ export default class DocumentRoute extends Route {
     return {
       'document_version': document_version,
       'pages': pages_with_url
-    }
+    };
   }
 
   renderTemplate() {
