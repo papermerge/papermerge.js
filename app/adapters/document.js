@@ -3,7 +3,7 @@ import ApplicationAdapter from './application';
 
 export default class NodeAdapter extends ApplicationAdapter {
 
-  getDocumentVersion(document_id) {
+  async getDocumentVersion(document_id) {
     let url, ret;
 
     url = this.buildURL('documents', document_id);

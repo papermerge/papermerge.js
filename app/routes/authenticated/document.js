@@ -32,6 +32,7 @@ export default class DocumentRoute extends Route {
 
     document_version  = await doc_adapter.getDocumentVersion(params.document_id);
     pages = await document_version.pages;
+
     pages_with_url = await page_adapter.loadBinaryImages(pages);
 
     if (params.extradoc_id) {
