@@ -8,7 +8,7 @@ export default class NodeAdapter extends ApplicationAdapter {
 
     url = this.buildURL('nodes', node_id);
 
-    return this.ajax(url, 'GET').then((node) => {
+    return this.ajax(url, 'GET', {data: {include: 'children'}}).then((node) => {
       this.store.pushPayload('folder', node);
       ret = this.store.peekRecord('folder', node.data.id);
       return ret;
