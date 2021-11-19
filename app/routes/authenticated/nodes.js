@@ -20,12 +20,17 @@ export default class FolderRoute extends Route {
     let adapter,
       doc_adapter,
       page_adapter,
+      folder_adapter,
       pages,
+      current_node,
       pages_with_url,
-      document_version;
+      document_version,
+      children,
+      home_folder;
 
     adapter = this.store.adapterFor('node');
     page_adapter = this.store.adapterFor('page');
+    folder_adapter = this.store.adapterFor('folder');
     doc_adapter = this.store.adapterFor('document');
 
     await this.currentUser.loadCurrentUser();
@@ -51,13 +56,16 @@ export default class FolderRoute extends Route {
       });
     }
 
-    return RSVP.hash({
-      node: adapter.findNode(params.node_id),
-      home_folder: this.currentUser.user.home_folder
-    });
+    children = await adapter.getChildren(params.node_id);
+    home_folder = await this.currentUser.user.getHomeFolder();
+    current_node = await this.store.findRecord('folder', params.node_id);
+
+    return {current_node, home_folder, children};
+
   }
 
   setupController(controller, model) {
+
     let _controller = this.controllerFor('authenticated.nodes'),
       _auth_controller = this.controllerFor('authenticated');
 
@@ -73,8 +81,8 @@ export default class FolderRoute extends Route {
       _controller.set('dualpanel_mode', false);
       _controller.set('extranode', undefined);
     }
-
-    _controller.set('mainnode', model.node);
+    _controller.set('mainnode', model.current_node);
     _auth_controller.set('home_folder', model.home_folder);
+    _controller.set('children', model.children);
   }
 }

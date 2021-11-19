@@ -11,11 +11,9 @@ export default class IndexRoute extends Route {
     /* Redirects to user's home folder
     */
     let that = this;
-
     this.session.requireAuthentication(transition, 'login');
     await this.currentUser.loadCurrentUser();
-
-    this.currentUser.user.home_folder.then((home_folder) => {
+    this.currentUser.user.getHomeFolder().then((home_folder) => {
       that.replaceWith("authenticated.nodes", home_folder.id);
     });
   }

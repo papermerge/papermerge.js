@@ -7,8 +7,7 @@ export default class ApplicationRoute extends BaseRoute {
 
   async model() {
     if (this.currentUser.isAuthenticated) {
-      console.log("ApplicationRoute: current user is authenticated");
-      return this.currentUser.user.home_folder;
+      return this.currentUser.user.getHomeFolder();
     }
   }
 

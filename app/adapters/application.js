@@ -11,7 +11,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   buildURL(...args) {
     return `${super.buildURL(...args)}/`;
   }
-
+  /*
   pathForType(modelName) {
     let ret = super.pathForType(modelName);
 
@@ -26,6 +26,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
 
     return ret;
   }
+  */
 
   @computed('session.data.authenticated.token', 'session.isAuthenticated')
   get headers() {
