@@ -2,6 +2,7 @@ import Model, { attr, belongsTo } from '@ember-data/model';
 
 
 class UserModel extends Model {
+  @attr is_me;
   @attr username;
   @attr email;
   @attr first_name;
@@ -23,12 +24,12 @@ class UserModel extends Model {
   }
 
   async getHomeFolder() {
-    let home_id, folder_adapter;
+    let home_id, adapter;
 
+    adapter = this.store.adapterFor('node');
     home_id = this.home_folder.get('id');
-    folder_adapter = this.store.adapterFor('folder');
 
-    return folder_adapter.findFolder(home_id);
+    return adapter.getFolder(home_id);
   }
 }
 

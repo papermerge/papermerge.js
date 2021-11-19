@@ -20,7 +20,6 @@ export default class FolderRoute extends Route {
     let adapter,
       doc_adapter,
       page_adapter,
-      folder_adapter,
       pages,
       current_node,
       pages_with_url,
@@ -30,7 +29,6 @@ export default class FolderRoute extends Route {
 
     adapter = this.store.adapterFor('node');
     page_adapter = this.store.adapterFor('page');
-    folder_adapter = this.store.adapterFor('folder');
     doc_adapter = this.store.adapterFor('document');
 
     await this.currentUser.loadCurrentUser();
@@ -58,7 +56,7 @@ export default class FolderRoute extends Route {
 
     children = await adapter.getChildren(params.node_id);
     home_folder = await this.currentUser.user.getHomeFolder();
-    current_node = await this.store.findRecord('folder', params.node_id);
+    current_node = await adapter.getFolder(params.node_id);
 
     return {current_node, home_folder, children};
 

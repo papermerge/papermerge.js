@@ -9,11 +9,11 @@ export default class CurrentUserService extends Service {
   user = null;
 
   async loadCurrentUser() {
+    let adapter, user;
 
     if (this.session.isAuthenticated) {
-      let user = await this.store.queryRecord(
-        'user', { me: true }
-      );
+      adapter = this.store.adapterFor('user');
+      user = await adapter.getCurrentUser();
       this.user = user;
     }
   }

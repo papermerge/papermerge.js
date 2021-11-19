@@ -26,4 +26,15 @@ export default class NodeAdapter extends ApplicationAdapter {
 
     return folders.concat(docs);
   }
+
+  async getFolder(node_id) {
+    let record;
+
+    record = this.store.peekRecord('folder', node_id);
+    if (record) {
+      return record;
+    }
+
+    return this.store.findRecord('folder', node_id);
+  }
 }
