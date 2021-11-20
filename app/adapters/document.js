@@ -1,7 +1,7 @@
 import ApplicationAdapter from './application';
 
 
-export default class NodeAdapter extends ApplicationAdapter {
+export default class DocumentAdapter extends ApplicationAdapter {
 
   async getDocumentVersion(document_id) {
     let url, ret;
@@ -29,5 +29,10 @@ export default class NodeAdapter extends ApplicationAdapter {
       body: file,
       headers: headers
     });
+  }
+
+  urlForCreateRecord() {
+    let ret = this.buildURL('nodes');
+    return ret;
   }
 }

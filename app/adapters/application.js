@@ -9,7 +9,12 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   @service session;
 
   buildURL(...args) {
-    return `${super.buildURL(...args)}/`;
+    let ret = super.buildURL(...args);
+
+    if (ret.substr(-1) === '/') {
+      return ret;
+    }
+    return `${ret}/`;
   }
   /*
   pathForType(modelName) {
