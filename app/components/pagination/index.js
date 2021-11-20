@@ -5,13 +5,11 @@ export default class PaginationComponent extends Component {
 
   get pages() {
     let result = [],
-      page,
       pages;
 
-    page = this.args.page; // number of current page
-    pages = this.args.pages; // total number of pages
+    pages = this.args.object.pages; // total number of pages
 
-    if (pages == page) {
+    if (pages == 1) {
       return [];
     }
 
