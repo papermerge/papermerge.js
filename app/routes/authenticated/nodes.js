@@ -13,6 +13,9 @@ export default class FolderRoute extends Route {
     },
     extradoc_id: {
       refreshModel: true
+    },
+    page: {
+      refreshModel: true
     }
   };
 
@@ -24,7 +27,6 @@ export default class FolderRoute extends Route {
       current_node,
       pages_with_url,
       document_version,
-      children,
       home_folder;
 
     adapter = this.store.adapterFor('node');
@@ -54,11 +56,19 @@ export default class FolderRoute extends Route {
       });
     }
 
-    children = await adapter.getChildren(params.node_id);
+    const {children, pagination} = await adapter.getChildren({
+      node_id: params.node_id,
+      page: params.page
+    });
     home_folder = await this.currentUser.user.getHomeFolder();
     current_node = await adapter.getFolder(params.node_id);
 
-    return {current_node, home_folder, children};
+    return {
+      current_node,
+      home_folder,
+      children,
+      pagination
+    };
 
   }
 
@@ -82,5 +92,6 @@ export default class FolderRoute extends Route {
     _controller.set('mainnode', model.current_node);
     _auth_controller.set('home_folder', model.home_folder);
     _controller.set('children', model.children);
+    _controller.set('pagination', model.pagination);
   }
 }

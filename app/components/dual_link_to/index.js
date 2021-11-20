@@ -85,17 +85,22 @@ export default class DualLinkToComponent extends Component {
   }
 
   get title() {
-    return this.args.node.get('title');
+    return this.args.title || this.args.node.get('title');
   }
 
   get query() {
     let node,
       extranode,
-      hint;
+      hint,
+      result = {};
 
     node = this.args.node;
     extranode = this.args.extranode;
     hint = this.args.hint;
+
+    if (this.args.query) {
+      result = Object.assign(result, this.args.query);
+    }
 
     if ((hint === 'left') && extranode) {
       if (extranode.get('nodeType') === 'document') {
@@ -121,7 +126,7 @@ export default class DualLinkToComponent extends Component {
       }
     }
 
-    return {};
+    return result;
   } // end of query
 
 } // end of DualLinkToComponent
