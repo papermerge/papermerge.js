@@ -16,22 +16,6 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     }
     return `${ret}/`;
   }
-  /*
-  pathForType(modelName) {
-    let ret = super.pathForType(modelName);
-
-    // `nodes` is polymorphic endpoint
-    // with POST /api/nodes/ we can create a Folder
-    // or a Document
-    if (modelName == 'folder') {
-      return 'nodes';
-    } else if (modelName == 'document') {
-      return 'nodes';
-    }
-
-    return ret;
-  }
-  */
 
   @computed('session.data.authenticated.token', 'session.isAuthenticated')
   get headers() {

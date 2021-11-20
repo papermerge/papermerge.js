@@ -37,7 +37,7 @@
     @hint={{@hint}} />
 
   <div class="view-mode-{{this.view_mode}}">
-    {{#each @children as |node|}}
+    {{#each this.children as |node|}}
       {{#let (component node.nodeType) as |NodeType|}}
         {{! NodeType is either <Folder /> or <Document />}}
         <NodeType

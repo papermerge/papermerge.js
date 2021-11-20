@@ -27,9 +27,20 @@ export default class CommanderComponent extends Component {
 
   @tracked selected_nodes = A([]);
 
+  // new records created via New Folder or Upload Documents
+  @tracked new_records = A([]);
+  @tracked __new_record; // used as workaround for an ember bug
+
   @action
   openNewFolderModal() {
     this.show_new_folder_modal = true;
+  }
+
+  @action
+  closeNewFolderModal(new_record) {
+    this.new_records.push(new_record);
+    this.__new_record = new_record; // workaround of ember bug
+    this.show_new_folder_modal = false;
   }
 
   @action
@@ -55,11 +66,6 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  closeNewFolderModal() {
-    this.show_new_folder_modal = false;
-  }
-
-  @action
   onViewModeChange(new_view_mode) {
     this.view_mode = new_view_mode;
   }
@@ -81,5 +87,41 @@ export default class CommanderComponent extends Component {
     } else {
       this.selected_nodes.removeObject(node);
     }
+  }
+
+  get children() {
+    /**
+      Update children nodes (e.g. with newly added records) for better UX
+
+      In order to provide better user experiece, when user creates new folders,
+      uploads documents, deletes nodes (folder or documents) etc commander will
+      show immediate effect of the action: newly created folder must be seen on
+      same page as currenly user is in; even if we fetch again children, newly
+      folder might not be visible to the user, as according to
+      sorting/pagination creteria it(newly created folder) may not reside in
+      current page.
+
+      This is where current method comes handy - sticking with above example of
+      newly created folder - this method will add newly created folder to the
+      list of already existing children to make it visible to the user.
+     */
+    let children_copy = A(this.args.children);
+
+    if (this.new_records.length > 0) {
+      while(this.new_records.length > 0) {
+        children_copy.unshift(
+          this.new_records.pop()
+        );
+      }
+    }
+
+    if (this.__new_record) { // workaround ember bug
+      // Ember bug! Without this empty statement
+      // updates on tracked attributes ``this.new_records``
+      // will not trigger template updates i.e. ``this.children``
+      //
+      // pass
+    }
+    return children_copy;
   }
 }

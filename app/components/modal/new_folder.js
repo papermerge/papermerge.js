@@ -10,15 +10,15 @@ export default class NewFolderComponent extends Component {
   @service currentUser;
 
   @action
-  onSubmit() {
-    let new_folder;
+  async onSubmit() {
+    let new_folder, new_record;
 
     new_folder = this.store.createRecord('folder');
     new_folder.title = this.title;
     new_folder.parent = this.args.node;
-    new_folder.save();
+    new_record = await new_folder.save();
 
-    this.args.onClose();
+    this.args.onClose(new_record);
     this.title = '';
   }
 
