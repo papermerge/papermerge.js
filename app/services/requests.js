@@ -1,5 +1,6 @@
 import ENV from 'papermerge/config/environment';
 import Service from '@ember/service';
+// eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
@@ -23,7 +24,7 @@ export default class Requests extends Service {
     return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}/`;
   }
 
-  @computed('session.data.authenticated.token', 'session.isAuthenticated')
+  @computed('session.{data.authenticated.token,isAuthenticated}')
   get headers() {
     let _headers = {},
       token;
