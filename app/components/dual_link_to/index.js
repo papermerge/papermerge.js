@@ -88,8 +88,13 @@ export default class DualLinkToComponent extends Component {
     let ret;
 
     ret = this.args.title || this.args.node.get('title');
-    if (ret.length > 16) {
-      return `${ret.substring(0, 16)}...`;
+
+    if (!ret) {
+      return '';
+    }
+
+    if (ret.length > 24) {
+      return `${ret.substring(0, 24)}...`;
     }
 
     return ret;

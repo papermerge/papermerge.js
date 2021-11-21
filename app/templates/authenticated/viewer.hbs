@@ -2,7 +2,7 @@
   <Viewer
     @document_version={{@model.document_version}}
     @pages={{@model.pages}}
-    @extranode={{this.extranode}}
+    @extranode={{this.extranode.current_node}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left" />
@@ -18,7 +18,9 @@
         @hint="right" />
     {{else}}
       <Commander
-        @node={{this.extranode}}
+        @node={{this.extranode.current_node}}
+        @children={{this.extranode.children}}
+        @pagination={{this.extranode.pagination}}
         @extradoc={{@model}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}

@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
+import { getPanelInfo } from './utils';
+
 
 export default class DocumentRoute extends Route {
   @service store;
@@ -17,7 +19,6 @@ export default class DocumentRoute extends Route {
   async model(params) {
     let doc_adapter,
       page_adapter,
-      node_adapter,
       extranode,
       document_version,
       document_version2,
@@ -26,7 +27,6 @@ export default class DocumentRoute extends Route {
       pages_with_url,
       pages_with_url2;
 
-    node_adapter = this.store.adapterFor('node');
     page_adapter = this.store.adapterFor('page');
     doc_adapter = this.store.adapterFor('document');
 
@@ -50,7 +50,11 @@ export default class DocumentRoute extends Route {
 
     if (params.extranode_id) {
 
-      extranode = await node_adapter.findNode(params.extranode_id)
+      extranode = await getPanelInfo({
+        store: this.store,
+        node_id: params.extranode_id,
+        page: 1
+      });
 
       return {
         'document_version': document_version,

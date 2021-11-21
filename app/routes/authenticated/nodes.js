@@ -2,6 +2,8 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import RSVP from 'rsvp';
 
+import { getPanelInfo } from './utils';
+
 
 export default class FolderRoute extends Route {
   @service store;
@@ -24,16 +26,22 @@ export default class FolderRoute extends Route {
       doc_adapter,
       page_adapter,
       pages,
-      current_node,
       pages_with_url,
       document_version,
-      home_folder;
+      context = {};
 
     adapter = this.store.adapterFor('node');
     page_adapter = this.store.adapterFor('page');
     doc_adapter = this.store.adapterFor('document');
 
     await this.currentUser.loadCurrentUser();
+
+    context = await getPanelInfo({
+      store: this.store,
+      node_id: params.node_id,
+      page: params.page
+    });
+
 
     if (params.extradoc_id) {
       document_version  = await doc_adapter.getDocumentVersion(params.extradoc_id);
@@ -49,27 +57,16 @@ export default class FolderRoute extends Route {
     }
 
     if (params.extranode_id) {
-      return RSVP.hash({
-        node: adapter.findNode(params.node_id),
-        extranode: adapter.findNode(params.extranode_id),
-        home_folder: this.currentUser.user.home_folder
+      context['extranode'] = await getPanelInfo({
+        store: this.store,
+        node_id: params.extranode_id,
+        page: 1
       });
     }
 
-    const {children, pagination} = await adapter.getChildren({
-      node_id: params.node_id,
-      page: params.page
-    });
-    home_folder = await this.currentUser.user.getHomeFolder();
-    current_node = await adapter.getFolder(params.node_id);
+    context['home_folder'] = await this.currentUser.user.getHomeFolder();
 
-    return {
-      current_node,
-      home_folder,
-      children,
-      pagination
-    };
-
+    return context;
   }
 
   setupController(controller, model) {
@@ -94,4 +91,5 @@ export default class FolderRoute extends Route {
     _controller.set('children', model.children);
     _controller.set('pagination', model.pagination);
   }
+
 }

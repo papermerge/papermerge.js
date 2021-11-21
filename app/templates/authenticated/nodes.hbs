@@ -1,7 +1,7 @@
 <div class="panels d-flex row">
   <Commander
     @node={{this.mainnode}}
-    @extranode={{this.extranode}}
+    @extranode={{this.extranode.current_node}}
     @children={{this.children}}
     @pagination={{this.pagination}}
     @onPanelToggle={{this.onPanelToggle}}
@@ -19,8 +19,10 @@
         @hint="right" />
     {{else}}
       <Commander
-        @node={{this.extranode}}
+        @node={{this.extranode.current_node}}
         @extranode={{this.mainnode}}
+        @children={{this.extranode.children}}
+        @pagination={{this.extranode.pagination}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />
