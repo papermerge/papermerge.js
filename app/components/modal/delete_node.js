@@ -1,5 +1,6 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
 
 import BaseComponent from "./base";
 
@@ -14,11 +15,13 @@ export default class DeleteNodeComponent extends BaseComponent {
 
   @action
   onSubmit() {
+    let nodes_copy = A(this.nodes);
+
     this.nodes.forEach((node) => {
       node.destroyRecord();
     });
 
-    this.args.onClose();
+    this.args.onClose(nodes_copy);
   }
 
   get titles_to_be_deleted() {

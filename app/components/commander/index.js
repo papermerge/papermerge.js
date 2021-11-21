@@ -31,6 +31,9 @@ export default class CommanderComponent extends Component {
   @tracked new_records = A([]);
   @tracked __new_record; // used as workaround for an ember bug
 
+  @tracked deleted_records = A([]);
+  @tracked __deleted_records; // used as workaround for an ember bug
+
   @action
   openNewFolderModal() {
     this.show_new_folder_modal = true;
@@ -60,9 +63,11 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  closeConfirmDeletionModal() {
+  closeConfirmDeletionModal(deleted_records) {
     this.show_confirm_deletion_modal = false;
     this.selected_nodes = A([]);
+    this.deleted_records = this.deleted_records.concat(deleted_records);
+    this.__deleted_records = deleted_records;
   }
 
   @action
@@ -115,12 +120,23 @@ export default class CommanderComponent extends Component {
       }
     }
 
+    if (this.deleted_records.length > 0) {
+      children_copy = children_copy.filter(
+        item => !this.deleted_records.includes(item)
+      );
+    }
+
     if (this.__new_record) { // workaround ember bug
       // Ember bug! Without this empty statement
       // updates on tracked attributes ``this.new_records``
       // will not trigger template updates i.e. ``this.children``
       //
       // pass
+    }
+
+    if (this.__deleted_records) {
+      // similar to ``this.__new_record`` - it is used
+      // here to help ember with tracking of ``this.deleted_records`` array
     }
     return children_copy;
   }
