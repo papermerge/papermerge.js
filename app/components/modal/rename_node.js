@@ -34,14 +34,10 @@ export default class RenameNodeComponent extends BaseComponent {
 
   @action
   onSubmit() {
-
-    this.store.findRecord('node', this.node.id).then(
-      (node) => {
-        node.title = this.title;
-        node.save();
-        this.args.onClose();
-        this.title = '';
-    });
+    this.node.title = this.title;
+    this.node.save();
+    this.args.onClose();
+    this.title = '';
   }
 
   @action
