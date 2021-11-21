@@ -37,7 +37,8 @@
   {{else}}
     {{! No nodes are currently selected }}
     <Button::Upload
-      @node={{@node}} />
+      @node={{@node}}
+      @onCreateDocumentModel={{@onCreateDocumentModel}} />
 
     <button
       class="btn btn-success"

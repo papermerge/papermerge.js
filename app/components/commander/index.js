@@ -71,6 +71,18 @@ export default class CommanderComponent extends Component {
   }
 
   @action
+  onCreateDocumentModel(new_record) {
+    /*
+    Invoked by Upload component when new document model was created.
+
+    Note that at this point in time, document's model is created
+    on serverside, however file was not (or have not been?) uploaded yet.
+    */
+    this.new_records.push(new_record);
+    this.__new_record = new_record; // workaround of ember bug
+  }
+
+  @action
   onViewModeChange(new_view_mode) {
     this.view_mode = new_view_mode;
   }

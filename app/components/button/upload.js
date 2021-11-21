@@ -48,6 +48,10 @@ export default class UploadButtonComponent extends Component {
         node: this.args.node,
         lang: "deu"
       }).then((doc) => {
+        // notify commander component so that it
+        // can already show new document model to the user
+        this.args.onCreateDocumentModel(doc);
+        // continue with actual file upload
         this._uploadFile({doc, file});
       });
 
