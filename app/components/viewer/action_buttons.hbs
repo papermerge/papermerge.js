@@ -1,8 +1,15 @@
 <div>
   <button
-    class="btn btn-success"
+    class="btn btn-light"
     type="button">
       <i class="fa fa-upload mr-1"></i>
     Upload
+  </button>
+  <button
+    class="btn btn-light"
+    type="button"
+    {{on "click" @onRunOCR}}>
+      <i class="fa fa-redo mr-1"></i>
+    Run OCR
   </button>
 </div>

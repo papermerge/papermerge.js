@@ -35,4 +35,5 @@ export default class DocumentAdapter extends ApplicationAdapter {
     let ret = this.buildURL('nodes');
     return ret;
   }
+
 }

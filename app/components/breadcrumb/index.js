@@ -10,7 +10,6 @@ export default class BreadcrumbComponent extends Component {
     current = this.args.node;
 
     while (current && current.get('id')) {
-      console.log(`pushing current node id = ${current.get('id')}`);
       _nodes.push(current);
       current = current.get('parent');
     }

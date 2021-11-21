@@ -1,6 +1,7 @@
 <div class="panel viewer col m-2 p-2">
   <div class="d-flex justify-content-between">
-    <Viewer::ActionButtons />
+    <Viewer::ActionButtons
+      @onRunOCR={{this.onRunOCR}} />
   </div>
 
   <Breadcrumb

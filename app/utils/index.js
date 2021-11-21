@@ -1,3 +1,5 @@
+
+
 function group_perms_by_model(permissions) {
   /*
     Groups an array of permissions objects by model.
@@ -59,5 +61,6 @@ function are_sets_equal(set1, set2) {
 
   return same_size(set1, set2) && same_values(set1, set2);
 }
+
 
 export { group_perms_by_model, are_sets_equal };
