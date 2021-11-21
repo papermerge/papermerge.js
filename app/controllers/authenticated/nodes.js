@@ -12,13 +12,14 @@ export default class NodesController extends Controller {
   queryParams = ['extranode_id', 'extradoc_id']
 
   @action
-  onPanelToggle() {
+  async onPanelToggle() {
+    let home_folder;
 
     if (this.extranode_id) {
       this.extranode_id = null;
     } else {
-      // TODO: get home folder ID from this.currentUser;
-      this.extranode_id = 75;
+      home_folder = await this.currentUser.user.home_folder;
+      this.extranode_id = home_folder.get('id');
     }
   }
 }
