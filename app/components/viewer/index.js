@@ -9,6 +9,9 @@ export default class ViewComponent extends Component {
 
   @action
   onRunOCR() {
-    this.requests.runOCR(this.args.document_version.id);
+    this.requests.runOCR({
+      doc_id: this.args.document_version.document.get('id'),
+      lang: 'deu'
+    });
   }
 }

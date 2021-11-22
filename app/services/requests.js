@@ -8,15 +8,22 @@ import { inject as service } from '@ember/service';
 export default class Requests extends Service {
   @service session;
 
-  async runOCR(document_version_id) {
-    let url;
+  async runOCR({doc_id, lang}) {
+    /*
+      Request sent with ContentType: application/json
+    */
+    let url, headers_copy = {};
 
     url = `${this.base_url}ocr/`;
 
+    Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
+    headers_copy['Content-Type'] = 'application/json';
+    headers_copy['Accept'] = 'application/json';
+
     return fetch(url, {
       method: 'POST',
-      headers: this.headers,
-      body: JSON.stringify({document_version_id})
+      headers: headers_copy,
+      body: JSON.stringify({doc_id, lang})
     });
   }
 
