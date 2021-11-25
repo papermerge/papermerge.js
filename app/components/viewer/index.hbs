@@ -1,11 +1,12 @@
 <div class="panel viewer col m-2 p-2">
   <div class="d-flex justify-content-between">
     <Viewer::ActionButtons
+      @document_versions={{@document_versions}}
       @onRunOCR={{this.onRunOCR}} />
   </div>
 
   <Breadcrumb
-    @node={{@document_version.document}}
+    @node={{@doc}}
     @extranode={{@extranode}}
     @hint={{@hint}} />
 

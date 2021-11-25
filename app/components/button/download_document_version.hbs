@@ -1,0 +1,21 @@
+<div class="btn-group">
+  <button
+    class="btn btn-success dropdown-toggle"
+    data-bs-toggle="dropdown"
+    type="button">
+      <i class="fa fa-download"></i>
+    Download
+  </button>
+  <ul class="dropdown-menu">
+    {{#each @document_versions as |document_version|}}
+      <li>
+        <LinkTo
+          @route="authenticated.document-version-download"
+          @model={{document_version.id}}
+          class="dropdown-item">
+            version {{document_version.number}} {{document_version.short_description}}
+        </LinkTo>
+      </li>
+    {{/each}}
+  </ul>
+</div>

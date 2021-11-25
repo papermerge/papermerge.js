@@ -1,6 +1,8 @@
 <div class="panels d-flex row">
   <Viewer
-    @document_version={{@model.document_version}}
+    @last_document_version={{@model.last_document_version}}
+    @document_versions={{@model.document_versions}}
+    @doc={{@model.doc}}
     @pages={{@model.pages}}
     @extranode={{this.extranode.current_node}}
     @onPanelToggle={{this.onPanelToggle}}

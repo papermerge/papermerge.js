@@ -11,6 +11,10 @@ Router.map(function () {
     this.route('documents');
     this.route('inbox');
     this.route('document', { path: '/document/:document_id' });
+    this.route(
+      'document-version-download',
+      { path: '/document-versions/:document_version_id/download/' }
+    );
 
     this.route('nodes', { path: '/nodes/:node_id' });
 
