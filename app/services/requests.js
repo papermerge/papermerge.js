@@ -27,6 +27,46 @@ export default class Requests extends Service {
     });
   }
 
+  async downloadDocumentVersion(document_version) {
+    /*
+      `document_version` contains following attributes:
+        id
+        number
+        file_name
+        lang
+        pages
+        size
+        page_count
+        short_description
+
+      attributes which correspond to server side (or client side) DocumentVersion model
+    */
+    let url, headers_copy = {};
+
+    url = `${this.base_url}document-versions/${document_version.id}/download/`;
+    Object.assign(headers_copy, this.headers);
+     //headers_copy['Access-Control-Allow-Origin'] = ENV.APP.HOST;
+
+    return fetch(url, {
+      method: 'GET',
+      headers: headers_copy
+    }).then(
+      response => response.blob()
+    ).then((blob) => {
+      let url = window.URL.createObjectURL(blob);
+      let a = document.createElement('a');
+
+      a.href = url;
+      a.download = document_version.file_name;
+      // we need to append the element to the dom -> otherwise it will not
+      // work in firefox
+      document.body.appendChild(a);
+      a.click();
+      //afterwards we remove the element again
+      a.remove();
+    });
+  }
+
   get base_url() {
     return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}/`;
   }

@@ -9,12 +9,10 @@
   <ul class="dropdown-menu">
     {{#each @document_versions as |document_version|}}
       <li>
-        <LinkTo
-          @route="authenticated.document-version-download"
-          @model={{document_version.id}}
-          class="dropdown-item">
+        <a class="dropdown-item" href="#"
+          {{on "click" (fn this.download document_version)}}>
             version {{document_version.number}} {{document_version.short_description}}
-        </LinkTo>
+        </a>
       </li>
     {{/each}}
   </ul>
