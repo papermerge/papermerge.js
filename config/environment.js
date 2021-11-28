@@ -18,7 +18,8 @@ module.exports = function (environment) {
     },
 
     APP: {
-      NAMESPACE: 'api'
+      NAMESPACE: 'api',
+      WS_NAMESPACE: 'ws/document'  // websockets namespace
       // Here you can pass flags/options to your application instance
       // when it is created
     },
@@ -26,6 +27,7 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV.APP.HOST = 'http://127.0.0.1:8000'
+    ENV.APP.WS_HOST = 'ws://127.0.0.1:8000'  //websockets
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
