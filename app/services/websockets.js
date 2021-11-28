@@ -21,7 +21,7 @@ export default class Websockets extends Service {
           json_data = JSON.parse(event.data);
           item.handler.apply(item.context, [json_data, event]);
         } catch (err) {
-          console.log(`Error while parsing incoming data: ${event.data}`);
+          console.log(`Error ${err} while parsing incoming data: ${event.data}`);
         }
       });
     }

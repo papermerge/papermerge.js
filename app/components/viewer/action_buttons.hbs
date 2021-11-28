@@ -1,11 +1,22 @@
 <div>
   <Button::DownloadDocumentVersion
     @document_versions={{@document_versions}} />
-  <button
-    class="btn btn-light"
-    type="button"
-    {{on "click" @onRunOCR}}>
-      <i class="fa fa-redo mr-1"></i>
-    Run OCR
-  </button>
+    {{#if @isLocked}}
+      <button
+        class="btn btn-light"
+        type="button"
+        disabled
+        {{on "click" @onRunOCR}}>
+          <i class="fa fa-redo mr-1"></i>
+        Run OCR
+      </button>
+    {{else}}
+      <button
+        class="btn btn-light"
+        type="button"
+        {{on "click" @onRunOCR}}>
+          <i class="fa fa-redo mr-1"></i>
+        Run OCR
+      </button>
+    {{/if}}
 </div>

@@ -2,7 +2,8 @@
   <div class="d-flex justify-content-between">
     <Viewer::ActionButtons
       @document_versions={{@document_versions}}
-      @onRunOCR={{this.onRunOCR}} />
+      @isLocked={{@isLocked}}
+      @onRunOCR={{@onRunOCR}} />
   </div>
 
   <Breadcrumb
