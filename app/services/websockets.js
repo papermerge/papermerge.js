@@ -10,7 +10,7 @@ export default class Websockets extends Service {
 
     let that = this;
 
-    this._socket = new WebSocket(this.base_url);
+    this._socket = new WebSocket(`${this.base_url}document/`);
     this._handlers = [];
 
     this._socket.onmessage = function(event) {
@@ -28,7 +28,7 @@ export default class Websockets extends Service {
   }
 
   get base_url() {
-    return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}`;
+    return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}/`;
   }
 
   addHandler(handler, context) {

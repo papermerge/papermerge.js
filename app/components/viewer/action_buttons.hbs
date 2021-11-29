@@ -7,7 +7,7 @@
         type="button"
         disabled
         {{on "click" @onRunOCR}}>
-          <i class="fa fa-redo mr-1"></i>
+          <OcrStatus @status={{@ocrStatus}} />
         Run OCR
       </button>
     {{else}}
@@ -15,7 +15,7 @@
         class="btn btn-light"
         type="button"
         {{on "click" @onRunOCR}}>
-          <i class="fa fa-redo mr-1"></i>
+          <OcrStatus @status={{@ocrStatus}} />
         Run OCR
       </button>
     {{/if}}
