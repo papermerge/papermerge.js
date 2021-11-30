@@ -36,7 +36,7 @@ export default class DocumentRoute extends Route {
 
     last_version = doc.last_version;
 
-    pages_with_url = await page_adapter.loadBinaryImages(last_version.pages);
+    pages_with_url = await page_adapter.loadImages(last_version.pages);
 
     if (params.extradoc_id) {
       doc  = await this.store.findRecord(
@@ -45,7 +45,7 @@ export default class DocumentRoute extends Route {
         { reload: true }
       );
       last_version2 = doc.last_version
-      pages_with_url2 = await page_adapter.loadBinaryImages(last_version2.pages);
+      pages_with_url2 = await page_adapter.loadImages(last_version2.pages);
 
       return {
         'document_version': last_version,

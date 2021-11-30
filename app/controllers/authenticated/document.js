@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from "@glimmer/tracking";
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
 
 
 export default class ViewerController extends Controller {
@@ -15,6 +16,12 @@ export default class ViewerController extends Controller {
   @tracked is_locked = false;
   @tracked ocr_status = null;
 
+  @tracked _document_versions = A([]);
+  @tracked __document_versions__;
+
+  @tracked _pages = A([]);
+  @tracked __pages__;
+
   queryParams = ['extranode_id', 'extradoc_id']
 
 
@@ -24,15 +31,32 @@ export default class ViewerController extends Controller {
     this.websockets.addHandler(this.messageHandler, this);
   }
 
-  @action
-  onPanelToggle() {
+  update_document() {
+    /*
+     Pulls latest document version + document version's pages
+     from server side.
+     */
+    let last_version,
+      page_adapter,
+      that = this;
 
-    if (this.extranode_id) {
-      this.extranode_id = null;
-    } else {
-      // TODO: get home folder ID from this.currentUser;
-      this.extranode_id = 75;
-    }
+    page_adapter = this.store.adapterFor('page');
+
+    this.store.findRecord(
+      'document',
+      this.model.doc.id,
+      { reload: true }
+    ).then((doc) => {
+      last_version = doc.last_version;
+      that._document_versions.push(last_version);
+      that.__document_versions__ = last_version;
+
+      page_adapter.loadImages(last_version.pages, 'image/svg+xml').then(
+        (pages) => {
+          that._pages = pages;
+          that.__pages__ = pages;
+      });
+    });
   }
 
   messageHandler(message) {
@@ -54,14 +78,24 @@ export default class ViewerController extends Controller {
       case 'ocrdocumenttask.tasksucceeded':
         this.ocr_status = 'succeeded';
         this.is_locked = false;
-        //to do: retrieve again
-        // 1. document versions
-        // 2. document pages
+        this.update_document();
         break;
       case 'ocrdocumenttask.taskfailed':
         this.ocr_status = 'failed';
         break;
       }  // end of switch
+  }
+
+  @action
+  async onPanelToggle() {
+    let home_folder;
+
+    if (this.extranode_id) {
+      this.extranode_id = null;
+    } else {
+      home_folder = await this.currentUser.user.home_folder;
+      this.extranode_id = home_folder.get('id');
+    }
   }
 
   @action
@@ -71,6 +105,44 @@ export default class ViewerController extends Controller {
       doc_id: this.model.doc.id,
       lang: 'deu'
     });
+  }
+
+  get document_versions() {
+    /**
+    Returns document versions received via this.model.document_versions + additional
+    versions created via OCRing.
+
+    The point here is to update versions dropdown with newly
+    created versions (when user clicks run OCR).
+    */
+    if (this.__document_versions__) {
+      // workaround for tracking changes in array
+    }
+
+    if (this._document_versions.length > 0) {
+      // include newly OCRed versions as well
+      return this.model.document_versions.concat(
+        this._document_versions
+      );
+    }
+
+    return this.model.document_versions;
+  }
+
+  get pages() {
+
+    if (this.__pages__) {
+      // workaround for tracking changes in array
+    }
+
+    if (this._pages.length > 0) {
+      // If newer version of the pages is available
+      // (e.g. document was OCRed) then just use it
+      return this._pages;
+    }
+
+    // Initial version of the pages
+    return this.model.pages;
   }
 
   get isLocked() {
@@ -95,4 +167,5 @@ export default class ViewerController extends Controller {
     */
     return this.ocr_status || this.model.doc.ocr_status;
   }
+
 }
