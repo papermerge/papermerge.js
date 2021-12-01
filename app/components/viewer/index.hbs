@@ -1,10 +1,10 @@
 <div class="panel viewer col m-2 p-2">
   <div class="d-flex justify-content-between">
     <Viewer::ActionButtons
-      @document_versions={{@document_versions}}
-      @isLocked={{@isLocked}}
-      @ocrStatus={{@ocrStatus}}
-      @onRunOCR={{@onRunOCR}} />
+      @document_versions={{this.document_versions}}
+      @isLocked={{this.isLocked}}
+      @ocrStatus={{this.ocrStatus}}
+      @onRunOCR={{this.onRunOCR}} />
   </div>
 
   <Breadcrumb
@@ -13,7 +13,7 @@
     @hint={{@hint}} />
 
   <div class="d-flex">
-    <Viewer::Thumbnails @pages={{@pages}} />
-    <Viewer::Pages @pages={{@pages}} />
+    <Viewer::Thumbnails @pages={{this.pages}} />
+    <Viewer::Pages @pages={{this.pages}} />
   </div>
 </div>

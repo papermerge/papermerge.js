@@ -1,23 +1,18 @@
 <div class="panels d-flex row">
   <Viewer
-    @last_document_version={{@model.last_document_version}}
-    @document_versions={{this.document_versions}}
     @doc={{@model.doc}}
-    @pages={{this.pages}}
+    @pages={{@model.pages}}
     @extranode={{this.extranode.current_node}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
-    @onRunOCR={{this.onRunOCR}}
-    @isLocked={{this.isLocked}}
-    @ocrStatus={{this.ocrStatus}}
     @hint="left" />
 
-  {{#if this.dualpanel_mode}}
-    {{#if this.extra_document_version}}
+  {{#if @model.extra}}
+    {{#if @model.extra.doc}}
       <Viewer
-        @document_version={{this.extra_document_version}}
-        @pages={{this.extra_pages}}
-        @extranode={{@model.document_version}}
+        @doc={{@model.extra.doc}}
+        @pages={{@model.extra.pages}}
+        @extranode={{this.extranode.current_node}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />

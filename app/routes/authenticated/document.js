@@ -21,10 +21,11 @@ export default class DocumentRoute extends Route {
       page_adapter,
       extranode,
       doc,
+      extra_doc,
       last_version,
-      last_version2,
+      extra_last_version,
       pages_with_url,
-      pages_with_url2;
+      extra_pages_with_url;
 
     page_adapter = this.store.adapterFor('page');
 
@@ -36,22 +37,30 @@ export default class DocumentRoute extends Route {
 
     last_version = doc.last_version;
 
-    pages_with_url = await page_adapter.loadImages(last_version.pages);
+    pages_with_url = await page_adapter.loadImages(last_version.pages, 'image/svg+xml');
 
     if (params.extradoc_id) {
-      doc  = await this.store.findRecord(
+      extra_doc  = await this.store.findRecord(
         'document',
         params.extradoc_id,
         { reload: true }
       );
-      last_version2 = doc.last_version
-      pages_with_url2 = await page_adapter.loadImages(last_version2.pages);
+      extra_last_version = extra_doc.last_version
+      extra_pages_with_url = await page_adapter.loadImages(
+        extra_last_version.pages
+      );
 
       return {
-        'document_version': last_version,
+        'doc': doc,
+        'document_versions': doc.versions,
+        'last_document_version': last_version,
         'pages': pages_with_url,
-        'extra_document_version': last_version2,
-        'extra_pages': pages_with_url2,
+        'extra': {
+          'doc': extra_doc,
+          'document_versions': extra_doc.versions,
+          'last_document_version': extra_last_version,
+          'pages': extra_pages_with_url,
+        }
       };
     }
 

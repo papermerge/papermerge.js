@@ -26,17 +26,26 @@ export default class PageAdapter extends ApplicationAdapter {
 
   async loadImage(page, accept='image/jpeg') {
     /*
-    * Requests binary image/jpeg from backend and sets `page.url` attribute
-    * to the `URL` pointing to newly retrieved binary image.
+    * Requests page's image from backend
+
+      It can request image/jpeg or image/svg+xml. In case it asks
+      for image/svg+xml media type and svg image is not available,
+      server will return jpeg instead.
+      Server will return 404 only in case neither svg nor jpeg images
+      are available.
     */
     let response,
       image_blob,
       image_object_url;
 
     response = await this.getImage(page.id, accept);
-    image_blob = await response.blob();
-    image_object_url = URL.createObjectURL(image_blob);
-    page.url = image_object_url;
+    if (response.headers.get('content-type') == 'image/svg+xml') {
+      page.svg_image = await response.text();
+    } else {
+      image_blob = await response.blob();
+      image_object_url = URL.createObjectURL(image_blob);
+      page.url = image_object_url;
+    }
 
     return page;
   }
