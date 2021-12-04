@@ -1,7 +1,7 @@
 <div class="d-flex">
   <div class="panel-mode">
     <button type="button" class="btn btn-light mx-1"
-      {{on "click" (fn @onPanelToggle "document")}}>
+      {{on "click" (fn @onPanelToggle @hint)}}>
       {{#if @dualPanelMode}}
         <i class="bi-x"></i>
       {{else}}

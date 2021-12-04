@@ -10,10 +10,10 @@ export default class FolderRoute extends Route {
   @service currentUser;
 
   queryParams = {
-    extranode_id: {
+    extra_id: {
       refreshModel: true
     },
-    extradoc_id: {
+    extra_type: {
       refreshModel: true
     },
     page: {
@@ -43,8 +43,8 @@ export default class FolderRoute extends Route {
     });
 
 
-    if (params.extradoc_id) {
-      document_version  = await doc_adapter.getDocumentVersion(params.extradoc_id);
+    if (params.extra_id && params.extra_type === 'doc') {
+      document_version  = await doc_adapter.getDocumentVersion(params.extra_id);
       pages = await document_version.pages;
       pages_with_url = await page_adapter.loadBinaryImages(pages);
       this.dualpanel_mode = true;
@@ -57,10 +57,10 @@ export default class FolderRoute extends Route {
       });
     }
 
-    if (params.extranode_id) {
+    if (params.extra_id && params.extra_type === 'folder') {
       context['extranode'] = await getPanelInfo({
         store: this.store,
-        node_id: params.extranode_id,
+        node_id: params.extra_id,
         page: 1
       });
       this.dualpanel_mode = true;

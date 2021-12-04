@@ -8,10 +8,10 @@ export default class DocumentRoute extends Route {
   @service store;
 
   queryParams = {
-    extranode_id: {
+    extra_id: {
       refreshModel: true
     },
-    extradoc_id: {
+    extra_type: {
       refreshModel: true
     }
   };
@@ -39,10 +39,10 @@ export default class DocumentRoute extends Route {
 
     pages_with_url = await page_adapter.loadImages(last_version.pages, 'image/svg+xml');
 
-    if (params.extradoc_id) {
+    if (params.extra_id && params.extra_type === 'doc') {
       extra_doc  = await this.store.findRecord(
         'document',
-        params.extradoc_id,
+        params.extra_id,
         { reload: true }
       );
       extra_last_version = extra_doc.last_version
@@ -64,11 +64,11 @@ export default class DocumentRoute extends Route {
       };
     }
 
-    if (params.extranode_id) {
+    if (params.extra_id && params.extra_type === 'folder') {
 
       extranode = await getPanelInfo({
         store: this.store,
-        node_id: params.extranode_id,
+        node_id: params.extra_id,
         page: 1
       });
 

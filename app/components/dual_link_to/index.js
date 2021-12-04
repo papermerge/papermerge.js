@@ -129,11 +129,13 @@ export default class DualLinkToComponent extends Component {
     if ((hint === 'left') && extranode) {
       if (extranode.get('nodeType') === 'document') {
         return {
-          'extradoc_id': extranode.get('id')
+          'extra_id': extranode.get('id'),
+          'extra_type': 'doc'
         };
       } else if (extranode.get('nodeType') === 'folder') {
         return {
-          'extranode_id': extranode.get('id')
+          'extra_id': extranode.get('id'),
+          'extra_type': 'folder'
         };
       }
     }
@@ -141,11 +143,13 @@ export default class DualLinkToComponent extends Component {
     if (hint === 'right' && node) {
       if (node.get('nodeType') === 'document') {
         return {
-          'extradoc_id': node.get('id')
+          'extra_id': node.get('id'),
+          'extra_type': 'doc'
         }
       } else if (node.get('nodeType') === 'folder' ) {
         return {
-          'extranode_id': node.get('id')
+          'extra_id': node.get('id'),
+          'extra_type': 'folder'
         }
       }
     }
