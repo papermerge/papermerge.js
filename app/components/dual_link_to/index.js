@@ -7,11 +7,13 @@ export default class DualLinkToComponent extends Component {
 
     Arguments:
 
-      @node - main node, which is visually located on left panel
-      @extranode - extra node, visually on right panel
-      @extradoc - extra document on the right
-      @hint = can be either "left" "right". Indicates in which panel
-      is current <DualLinkTo /> located at this very moment.
+      @node = can be a folder or a document
+      @hint = can be either "left" or "right". It indicates where @node is
+       positioned i.e. in which panel is current <DualLinkTo /> located at
+       this very moment.
+      @extranode - extra node, visually on opposite panel
+      @extradoc - extra document on the opposite panel
+
 
       URL has one of following forms:
 
@@ -24,21 +26,25 @@ export default class DualLinkToComponent extends Component {
 
       Dual panel models:
 
-        /nodes/<node_id>?extranode_id=<extranode_id> - opens dual panel mode. On left side
-          commander is opened with <node_id> as root folder/node. On right panel
-          there will be opened a commander with <extranode_id> as root
+        /nodes/<node_id>?extra_id=<extra_id>&extra_type=folder - opens dual
+         panel mode. On left side commander is opened with <node_id> as root
+         folder/node. On right panel there will be opened a commander with
+         <extra_id> as root folder.
 
-        /nodes/<node_id>?extradoc_id=<extradoc_id> - opens dual panel mode. On left side
-          commander is opened with <node_id> as root folder/node. On right panel
-          there will be opened a viewer with <extradoc_id> document opened
+        /nodes/<node_id>?extra_id=<extradoc_id>&extra_type=doc - opens dual
+         panel mode. On left side commander is opened with <node_id> as root
+         folder. On right panel there will be opened a viewer with
+         <extradoc_id> document opened.
 
-        /document/<doc_id>?extranode_id=<extranode_id> - opens dual panel mode. On left side
-          document viewer is opened with <doc_id> as root document. On right panel
-          there will be opened a commander with <extranode_id> as root node
+        /document/<doc_id>?extra_id=<extranode_id>&extra_type=folder - opens dual
+         panel mode. On left side document viewer is opened with <doc_id> as
+         root document. On right panel there will be opened a commander with
+         <extranode_id> as root folder.
 
-        /document/<doc_id>?extradoc_id=<extradoc_id> - opens dual panel mode. On left side
-          document viewer is opened with <doc_id> as root document. On right panel
-          there will be opened a viewer with <doc_id> as documented.
+        /document/<doc_id>?extra_id=<extradoc_id>&extra_type=doc - opens dual
+         panel mode. On left side document viewer is opened with <doc_id> as
+         root document. On right panel there will be opened a viewer with
+         <extradoc_id> as document.
   */
 
   get route() {
@@ -63,8 +69,8 @@ export default class DualLinkToComponent extends Component {
     }
 
     // hint == 'right'
-    if (extranode && extranode.get('nodeType') === 'document') {
-      return 'authenticated.document';
+    if (extranode) {
+      return 'authenticated.nodes';
     }
 
     if (extradoc) {
