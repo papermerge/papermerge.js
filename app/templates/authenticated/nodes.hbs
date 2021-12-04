@@ -1,28 +1,28 @@
 <div class="panels d-flex row">
   <Commander
-    @node={{this.mainnode}}
-    @extranode={{this.extranode.current_node}}
-    @children={{this.children}}
-    @pagination={{this.pagination}}
+    @node={{@model.current_node}}
+    @extranode={{@model.extra.current_node}}
+    @children={{@model.children}}
+    @pagination={{@model.pagination}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left" />
 
-  {{#if this.dualpanel_mode}}
-    {{#if this.document_version}}
+  {{#if @model.extra}}
+    {{#if @model.extra.doc}}
       <Viewer
-        @document_version={{this.document_version}}
-        @pages={{this.pages}}
+        @doc={{@model.extra.doc}}
+        @pages={{@model.extra.pages}}
         @extranode={{this.extranode}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />
     {{else}}
       <Commander
-        @node={{this.extranode.current_node}}
-        @extranode={{this.mainnode}}
-        @children={{this.extranode.children}}
-        @pagination={{this.extranode.pagination}}
+        @node={{@model.extra.current_node}}
+        @extranode={{@model.current_node}}
+        @children={{@model.extra.children}}
+        @pagination={{@model.extra.pagination}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />
