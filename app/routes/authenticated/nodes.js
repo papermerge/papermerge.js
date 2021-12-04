@@ -47,6 +47,7 @@ export default class FolderRoute extends Route {
       document_version  = await doc_adapter.getDocumentVersion(params.extradoc_id);
       pages = await document_version.pages;
       pages_with_url = await page_adapter.loadBinaryImages(pages);
+      this.dualpanel_mode = true;
 
       return RSVP.hash({
         node: adapter.findNode(params.node_id),
@@ -62,6 +63,7 @@ export default class FolderRoute extends Route {
         node_id: params.extranode_id,
         page: 1
       });
+      this.dualpanel_mode = true;
     }
 
     context['home_folder'] = await this.currentUser.user.getHomeFolder();
@@ -75,15 +77,12 @@ export default class FolderRoute extends Route {
       _auth_controller = this.controllerFor('authenticated');
 
     if (model.extranode) {
-      _controller.set('dualpanel_mode', true);
       _controller.set('extranode', model.extranode);
     } else if (model.document_version) {
-      _controller.set('dualpanel_mode', true);
       _controller.set('document_version', model.document_version);
       _controller.set('pages', model.pages);
       _controller.set('extranode', model.document_version.document);
     } else {
-      _controller.set('dualpanel_mode', false);
       _controller.set('extranode', undefined);
     }
     _controller.set('mainnode', model.current_node);

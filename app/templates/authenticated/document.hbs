@@ -18,10 +18,10 @@
         @hint="right" />
     {{else}}
       <Commander
-        @node={{this.extranode.current_node}}
-        @children={{this.extranode.children}}
-        @pagination={{this.extranode.pagination}}
-        @extradoc={{@model}}
+        @node={{@model.extra.current_node}}
+        @children={{@model.extra.children}}
+        @pagination={{@model.extra.pagination}}
+        @extradoc={{@model.doc}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />

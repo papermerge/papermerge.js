@@ -29,7 +29,7 @@ export default class DocumentRoute extends Route {
 
     page_adapter = this.store.adapterFor('page');
 
-    doc  = await this.store.findRecord(
+    doc = await this.store.findRecord(
       'document',
       params.document_id,
       { reload: true }
@@ -73,9 +73,15 @@ export default class DocumentRoute extends Route {
       });
 
       return {
-        'document_version': last_version,
+        'doc': doc,
+        'document_versions': doc.versions,
+        'last_document_version': last_version,
         'pages': pages_with_url,
-        'extranode': extranode
+        'extra': {
+          'current_node':extranode.current_node,
+          'children':extranode.children,
+          'pagination':extranode.pagination
+        }
       };
     }
 
@@ -85,9 +91,5 @@ export default class DocumentRoute extends Route {
       'last_document_version': last_version,
       'pages': pages_with_url
     };
-  }
-
-  renderTemplate() {
-    this.render('authenticated.viewer');
   }
 }

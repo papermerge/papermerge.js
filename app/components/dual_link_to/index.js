@@ -43,11 +43,13 @@ export default class DualLinkToComponent extends Component {
   get route() {
     let node,
       extranode,
+      extradoc,
       hint;
 
     hint = this.args.hint;
     node = this.args.node;
     extranode = this.args.extranode;
+    extradoc = this.args.extradoc;
 
     if (hint == 'left') {
       if (node && node.get('nodeType') === 'document') {
@@ -64,21 +66,31 @@ export default class DualLinkToComponent extends Component {
       return 'authenticated.document';
     }
 
+    if (extradoc) {
+      return 'authenticated.document';
+    }
+
     return 'authenticated.nodes';
   }
 
   get model() {
     let hint,
       node,
-      extranode;
+      extranode,
+      extradoc;
 
     hint = this.args.hint;
     node = this.args.node;
     extranode = this.args.extranode;
-
+    extradoc = this.args.extradoc;
 
     if (hint === 'left') {
       return node;
+    }
+
+    // hint right
+    if (extradoc) {
+      return extradoc;
     }
 
     return extranode;

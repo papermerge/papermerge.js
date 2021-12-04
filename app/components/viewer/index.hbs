@@ -5,6 +5,10 @@
       @isLocked={{this.isLocked}}
       @ocrStatus={{this.ocrStatus}}
       @onRunOCR={{this.onRunOCR}} />
+
+    <Viewer::ActionModes
+      @onPanelToggle={{@onPanelToggle}}
+      @dualPanelMode={{@dualPanelMode}} />
   </div>
 
   <Breadcrumb

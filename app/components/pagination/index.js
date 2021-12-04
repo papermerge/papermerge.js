@@ -2,6 +2,12 @@ import Component from '@glimmer/component';
 
 
 export default class PaginationComponent extends Component {
+  /*
+  Arguments:
+    @object
+    @node
+    @hint = { "left" | "right" }
+  */
 
   get pages() {
     let result = [],
