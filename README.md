@@ -13,6 +13,9 @@ your desk, office or drawers - you can quickly scan them and configure your
 scanner to directly upload to Papermerge DMS.
 
 
+![Papermerge](./screenshots/papermerge-dual-panel.png)
+
+
 ## What is a Digital Archive?
 
 Simply put a digital archive is a scanned document. In broader sense, digital
