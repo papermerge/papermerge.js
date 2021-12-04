@@ -36,10 +36,10 @@ export default class DualLinkToComponent extends Component {
          folder. On right panel there will be opened a viewer with
          <extradoc_id> document opened.
 
-        /document/<doc_id>?extra_id=<extranode_id>&extra_type=folder - opens dual
-         panel mode. On left side document viewer is opened with <doc_id> as
-         root document. On right panel there will be opened a commander with
-         <extranode_id> as root folder.
+        /document/<doc_id>?extra_id=<extranode_id>&extra_type=folder - opens
+         dual panel mode. On left side document viewer is opened with
+         <doc_id> as root document. On right panel there will be opened a
+         commander with <extranode_id> as root folder.
 
         /document/<doc_id>?extra_id=<extradoc_id>&extra_type=doc - opens dual
          panel mode. On left side document viewer is opened with <doc_id> as
