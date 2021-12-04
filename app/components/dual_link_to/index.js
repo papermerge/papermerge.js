@@ -1,5 +1,9 @@
 import Component from '@glimmer/component';
 
+import { route_name as _route_name } from "./utils";
+import { model_obj as _model_obj } from "./utils";
+import { query_dict as _query_dict } from "./utils";
+
 
 export default class DualLinkToComponent extends Component {
   /*
@@ -58,26 +62,9 @@ export default class DualLinkToComponent extends Component {
     extranode = this.args.extranode;
     extradoc = this.args.extradoc;
 
-    if (hint == 'left') {
-      if (node && node.get('nodeType') === 'document') {
-        return 'authenticated.document';
-      }
-
-      if (node && node.get('nodeType') === 'folder') {
-        return 'authenticated.nodes';
-      }
-    }
-
-    // hint == 'right'
-    if (extranode) {
-      return 'authenticated.nodes';
-    }
-
-    if (extradoc) {
-      return 'authenticated.document';
-    }
-
-    return 'authenticated.nodes';
+    return _route_name({
+      node, hint, extranode, extradoc
+    });
   }
 
   get model() {
@@ -91,16 +78,9 @@ export default class DualLinkToComponent extends Component {
     extranode = this.args.extranode;
     extradoc = this.args.extradoc;
 
-    if (hint === 'left') {
-      return node;
-    }
-
-    // hint right
-    if (extradoc) {
-      return extradoc;
-    }
-
-    return extranode;
+    return _model_obj({
+      node, hint, extranode, extradoc
+    });
   }
 
   get title() {
@@ -124,46 +104,21 @@ export default class DualLinkToComponent extends Component {
       extranode,
       extradoc,
       hint,
-      result = {};
+      q;
 
     node = this.args.node;
     extranode = this.args.extranode;
     extradoc = this.args.extradoc;
     hint = this.args.hint;
+    q = this.args.query
 
-    if (this.args.query) {
-      result = Object.assign(result, this.args.query);
-    }
-
-    if ((hint === 'left') && extranode) {
-      return {
-        'extra_id': extranode.get('id'),
-        'extra_type': 'folder'
-      };
-    }
-
-    if ((hint === 'left') && extradoc) {
-      return {
-        'extra_id': extradoc.get('id'),
-        'extra_type': 'doc'
-      };
-    }
-
-    if (hint === 'right' && node) {
-      if (node.get('nodeType') === 'document') {
-        return {
-          'extra_id': node.get('id'),
-          'extra_type': 'doc'
-        }
-      } else if (node.get('nodeType') === 'folder' ) {
-        return {
-          'extra_id': node.get('id'),
-          'extra_type': 'folder'
-        }
-      }
-    }
-
-    return result;
+    return _query_dict({
+      node: node,
+      extranode: extranode,
+      extradoc: extradoc,
+      hint: hint,
+      query: q
+    });
   } // end of query
 
 } // end of DualLinkToComponent
