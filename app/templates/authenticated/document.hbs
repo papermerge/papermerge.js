@@ -2,7 +2,8 @@
   <Viewer
     @doc={{@model.doc}}
     @pages={{@model.pages}}
-    @extranode={{this.extranode.current_node}}
+    @extranode={{@model.extra.current_node}}
+    @extradoc={{@mode.extra.doc}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left" />
@@ -12,7 +13,8 @@
       <Viewer
         @doc={{@model.extra.doc}}
         @pages={{@model.extra.pages}}
-        @extranode={{this.extranode.current_node}}
+        @extranode={{@model.extra.current_node}}
+        @extradoc={{@model.doc}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right" />

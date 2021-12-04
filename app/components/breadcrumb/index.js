@@ -18,10 +18,15 @@ export default class BreadcrumbComponent extends Component {
   }
 
   get query() {
-
     if (this.args.extranode) {
       return {
-        extranode_id: this.args.extranode.id
+        extra_id: this.args.extranode.id,
+        extra_type: 'folder'
+      }
+    } else if (this.args.extradoc) {
+      return {
+        extra_id: this.args.extradoc.id,
+        extra_type: 'doc'
       }
     }
 
