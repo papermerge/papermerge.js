@@ -1,4 +1,4 @@
-![Tests](https://github.com/papermerge/papermerge.js/actions/workflows/tests.yml/badge.svg)
+[![Tests](https://github.com/papermerge/papermerge.js/actions/workflows/tests.yml/badge.svg)](https://github.com/papermerge/papermerge.js/actions/workflows/tests.yml)
 
 
 # PapermergeJS
