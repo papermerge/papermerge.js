@@ -1,3 +1,6 @@
+![Tests](https://github.com/papermerge/papermerge.js/actions/workflows/tests.yml/badge.svg)
+
+
 # PapermergeJS
 
 PapermergeJS is frontend part i.e. web-based user interface of Papermerge
