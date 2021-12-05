@@ -1,15 +1,17 @@
 import { module, test } from 'qunit';
 import { are_sets_equal, group_perms_by_model } from 'papermerge/utils';
 
+
 class FakeContentType {
   constructor(name) {
     this.name = name;
   }
 
-  get(whatever) {
+  get() {
     return this.name;
   }
 }
+
 
 module('Unit | Utility', function () {
   test('are_sets_qual', function (assert) {
@@ -37,8 +39,7 @@ module('Unit | Utility', function () {
       permissions,
       expected_result,
       models,
-      expected_models,
-      areSetsEqual;
+      expected_models;
 
     permissions = [
       {
