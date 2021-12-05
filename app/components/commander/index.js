@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 
 export default class CommanderComponent extends Component {
@@ -14,6 +15,10 @@ export default class CommanderComponent extends Component {
     is current panel displayed. @hint is "left" indicates that
     commander is displayed in left panel.
   */
+
+  @service websockets;
+  @service store;
+
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
 
@@ -33,6 +38,37 @@ export default class CommanderComponent extends Component {
 
   @tracked deleted_records = A([]);
   @tracked __deleted_records; // used as workaround for an ember bug
+
+  constructor(owner, args) {
+    super(owner, args);
+
+    this.websockets.addHandler(this.messageHandler, this);
+  }
+
+  messageHandler(message) {
+    let doc;
+
+    doc = this.store.peekRecord('document', message.document_id);
+    if (!doc) {
+      console.warn(`Document ID=${message.document_id} not found.`);
+      return;
+    }
+
+    switch (message.type) {
+      case 'ocrdocumenttask.taskreceived':
+        doc.ocr_status = 'received';
+        break;
+      case 'ocrdocumenttask.taskstarted':
+        doc.ocr_status = 'started';
+        break;
+      case 'ocrdocumenttask.tasksucceeded':
+        doc.ocr_status = 'succeeded';
+        break;
+      case 'ocrdocumenttask.taskfailed':
+        doc.ocr_status = 'failed';
+        break;
+      }  // end of switch
+  }
 
   @action
   openNewFolderModal() {

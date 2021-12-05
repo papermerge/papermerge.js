@@ -1,11 +1,17 @@
 <div class="node document {{if this.is_selected "checked"}}">
-
   <Input
     @type="checkbox"
     @checked={{this.is_selected}}
     {{on "change" this.onCheckboxChange}} />
   <div class="icon document"></div>
-  <div class="title">
-    {{yield}}
+
+  <div class="title d-flex flex-row align-items-center">
+    {{#if @model.ocr}}
+      <OcrStatus
+        @status={{@model.ocr_status}} />
+    {{/if}}
+    <div class="mx-2">
+      {{yield}}
+    </div>
   </div>
 </div>

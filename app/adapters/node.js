@@ -34,8 +34,16 @@ export default class NodeAdapter extends ApplicationAdapter {
     }
 
     node_ids = nodes.data.map(node => {
-      let normalized_node = this.store.normalize('node', node);
+      let normalized_node;
+
+      if (node.type === "folders") {
+        normalized_node = this.store.normalize('folder', node);
+      } else if (node.type === "Document") {
+        normalized_node = this.store.normalize('document', node);
+      }
+
       this.store.push(normalized_node);
+
       return node.id;
     });
 
