@@ -142,6 +142,24 @@ export default class CommanderComponent extends Component {
     }
   }
 
+  @action
+  onDrop(node_model) {
+    console.log(`onDrop: ${node_model}`);
+    console.log(`model type = ${node_model.nodeType}`);
+    console.log(`model id = ${node_model.id}`);
+  }
+
+  @action
+  onDragendCancel(node_model) {
+    console.log(`onDragendCancel: ${node_model}`);
+  }
+
+  @action
+  onDragendSuccess(node_model) {
+    console.log(`onDragendSuccess: ${node_model}`);
+  }
+
+
   get children() {
     /**
       Update children nodes (e.g. with newly added records) for better UX

@@ -39,14 +39,19 @@
     @extradoc={{@extradoc}}
     @hint={{@hint}} />
 
-  <div class="view-mode-{{this.view_mode}}">
+  <Commander::Panel
+    class="view-mode-{{this.view_mode}}"
+    {{droppable onDrop=this.onDrop onDragOver=this.onDragOver }}>
+
     {{#each this.children as |node|}}
       {{#let (component node.nodeType) as |NodeType|}}
         {{! NodeType is either <Folder /> or <Document />}}
         <NodeType
           @model={{node}}
           @selectedNodes={{this.selected_nodes}}
-          @onCheckboxChange={{this.onCheckboxChange}} >
+          @onCheckboxChange={{this.onCheckboxChange}}
+          @onDragendSuccess={{this.onDragendSuccess}}
+          @onDragendCancel={{this.onDragendCancel}}>
             <DualLinkTo
               @node={{node}}
               @extranode={{@extranode}}
@@ -55,7 +60,8 @@
         </NodeType>
       {{/let}}
     {{/each}}
-  </div>
+
+  </Commander::Panel>
 
   {{#if @pagination }}
     <Pagination

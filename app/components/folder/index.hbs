@@ -1,4 +1,6 @@
-<div class="node folder {{if this.is_selected "checked"}}">
+<div class="node folder
+  {{if this.is_selected "checked"}}"
+  {{draggable @model onDragendSuccess=@onDragendSuccess onDragendCancel=@onDragendCancel}}>
   <Input
     @type="checkbox"
     @checked={{this.is_selected}}
