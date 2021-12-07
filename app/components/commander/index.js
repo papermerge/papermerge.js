@@ -143,20 +143,50 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  onDrop(node_model) {
-    console.log(`onDrop: ${node_model}`);
-    console.log(`model type = ${node_model.nodeType}`);
-    console.log(`model id = ${node_model.id}`);
+  onDrop(json_node_model) {
+    /**
+      Action invoked when a node (folder/document) was
+      successfully dropped from one panel into another.
+
+      `json_node_model` is dictionary with following keys:
+        - id
+        - model_name
+    */
+    let found_obj;
+
+    found_obj = this.store.peekRecord(
+      json_node_model.model_name,
+      json_node_model.id
+    );
+
+    if (found_obj) {
+      console.log(`onDrop on ${this.args.hint}: ${found_obj}`);
+      console.log(`model type = ${found_obj.nodeType}`);
+      console.log(`model id = ${found_obj.id}`);
+    }
   }
 
   @action
-  onDragendCancel(node_model) {
-    console.log(`onDragendCancel: ${node_model}`);
+  onDragendCancel(model) {
+    /**
+      Action invoked when drag operation for a node (folder/document)
+      was canceled. It is invoked on the SOURCE panel.
+
+      `model` is instance of `model.document` or `model.folder`
+    */
+    console.log(`onDragendCancel on ${this.args.hint}: id=${model.id} type=${model.nodeType}`);
+
   }
 
   @action
-  onDragendSuccess(node_model) {
-    console.log(`onDragendSuccess: ${node_model}`);
+  onDragendSuccess(model) {
+    /**
+      Action invoked when drag operation for a node (folder/document)
+      succeeded. It is invoked on the SOURCE panel.
+
+      `model` is instance of `model.document` or `model.folder`
+    */
+    console.log(`onDragendSuccess on ${this.args.hint}: id=${model.id} type=${model.nodeType}`);
   }
 
 

@@ -1,4 +1,7 @@
-<div class="panel commander col m-2 p-2">
+<div class="panel commander col m-2 p-2"
+  {{droppable
+    onDrop=this.onDrop
+    onDragOver=this.onDragOver }}>
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}
@@ -39,9 +42,7 @@
     @extradoc={{@extradoc}}
     @hint={{@hint}} />
 
-  <Commander::Panel
-    class="view-mode-{{this.view_mode}}"
-    {{droppable onDrop=this.onDrop onDragOver=this.onDragOver }}>
+  <div class="view-mode-{{this.view_mode}}">
 
     {{#each this.children as |node|}}
       {{#let (component node.nodeType) as |NodeType|}}
@@ -61,7 +62,7 @@
       {{/let}}
     {{/each}}
 
-  </Commander::Panel>
+  </div>
 
   {{#if @pagination }}
     <Pagination
