@@ -17,7 +17,9 @@ export default class CommanderComponent extends Component {
   */
 
   @service websockets;
+  @service ws_nodes_move;
   @service store;
+  @service requests;
 
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
@@ -43,6 +45,10 @@ export default class CommanderComponent extends Component {
     super(owner, args);
 
     this.websockets.addHandler(this.messageHandler, this);
+    this.ws_nodes_move.addHandler(this.wsNodesMoveHandler, this);
+  }
+
+  wsNodesMoveHandler() {
   }
 
   messageHandler(message) {
@@ -143,27 +149,19 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  onDrop(json_node_model) {
-    /**
-      Action invoked when a node (folder/document) was
-      successfully dropped from one panel into another.
+  onDrop(source_data) {
+    let nodes_move_data;
 
-      `json_node_model` is dictionary with following keys:
-        - id
-        - model_name
-    */
-    let found_obj;
-
-    found_obj = this.store.peekRecord(
-      json_node_model.model_name,
-      json_node_model.id
-    );
-
-    if (found_obj) {
-      console.log(`onDrop on ${this.args.hint}: ${found_obj}`);
-      console.log(`model type = ${found_obj.nodeType}`);
-      console.log(`model id = ${found_obj.id}`);
+    nodes_move_data = {
+      'nodes': [{ 'id': source_data.node.id }],
+      'source_parent': {
+        'id': source_data.source_parent.id
+      },
+      'target_parent': {
+        'id': this.args.node.id
+      }
     }
+    this.requests.nodesMove(nodes_move_data);
   }
 
   @action

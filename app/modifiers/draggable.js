@@ -63,8 +63,12 @@ export default class DraggableModifier extends Modifier {
     this.model = this.args.positional[0];
 
     data = {
-      id: this.model.id,
-      model_name: this.model._internalModel.modelName
+      node: {
+        id: this.model.id
+      },
+      source_parent: {
+        id: this.model.parent.get('id')
+      }
     }
 
     event.dataTransfer.setData(
