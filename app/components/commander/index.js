@@ -48,7 +48,14 @@ export default class CommanderComponent extends Component {
     this.ws_nodes_move.addHandler(this.wsNodesMoveHandler, this);
   }
 
-  wsNodesMoveHandler() {
+  wsNodesMoveHandler(message) {
+    if (message.type === 'nodesmove.tasksucceeded') {
+      if (this.args.node.id == message.source_parent['id']) {
+        this._substract_nodes(message.nodes.map(node => node.id));
+      } else if (this.args.node.id == message.target_parent['id']) {
+        this._add_nodes(message.nodes.map(node => node.id));
+      }
+    }
   }
 
   messageHandler(message) {
@@ -74,6 +81,50 @@ export default class CommanderComponent extends Component {
         doc.ocr_status = 'failed';
         break;
       }  // end of switch
+  }
+
+  _substract_nodes(node_ids) {
+    let that = this, doc;
+
+    node_ids.forEach(node_id => {
+      // maybe document ?
+      doc = that.store.peekRecord('document', node_id);
+      if (doc) {
+        that._substract_node(doc);
+      }
+      // maybe folder ?
+      doc = that.store.peekRecord('folder', node_id);
+      if (doc) {
+        that._substract_node(doc);
+      }
+    });
+  }
+
+  _substract_node(doc) {
+    this.deleted_records.push(doc);
+    this.__deleted_record = doc;
+  }
+
+  _add_nodes(node_ids) {
+    let that = this, doc;
+
+    node_ids.forEach(node_id => {
+      // maybe document ?
+      doc = that.store.peekRecord('document', node_id);
+      if (doc) {
+        that._add_node(doc);
+      }
+      // maybe folder ?
+      doc = that.store.peekRecord('folder', node_id);
+      if (doc) {
+        that._add_node(doc);
+      }
+    });
+  }
+
+  _add_node(doc) {
+    this.new_records.push(doc);
+    this.__new_record = doc;
   }
 
   @action
