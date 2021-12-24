@@ -1,3 +1,4 @@
+import ENV from 'papermerge/config/environment';
 import Base from 'ember-simple-auth/authenticators/base';
 
 
@@ -26,7 +27,7 @@ export default class AuthToken extends Base {
   async authenticate(username, password) {
     let response, error;
 
-    response = await fetch('http://localhost:8000/api/auth-token/', {
+    response = await fetch(`${this.base_url}/auth-token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,5 +41,9 @@ export default class AuthToken extends Base {
       error = await response.json();
       throw new Error(error.non_field_errors[0]);
     }
+  }
+
+  get base_url() {
+    return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}/`;
   }
 }

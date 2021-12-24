@@ -18,7 +18,7 @@ module.exports = function (environment) {
     },
 
     APP: {
-      NAMESPACE: 'api',
+      NAMESPACE: '',
       WS_NAMESPACE: 'ws'  // websockets namespace
       // Here you can pass flags/options to your application instance
       // when it is created
