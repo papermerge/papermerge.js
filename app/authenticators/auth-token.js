@@ -44,6 +44,10 @@ export default class AuthToken extends Base {
   }
 
   get base_url() {
-    return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}/`;
+    if (!ENV.APP.HOST) {
+      return `${window.location.origin}/${ENV.APP.NAMESPACE}`;
+    }
+
+    return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}`;
   }
 }
