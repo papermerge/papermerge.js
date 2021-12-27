@@ -52,6 +52,8 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.APP.HOST = 'http://papermerge.local';
+    ENV.APP.WS_HOST = 'ws://papermerge.local'
   }
 
   return ENV;
