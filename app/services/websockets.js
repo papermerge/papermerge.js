@@ -1,5 +1,5 @@
-import ENV from 'papermerge/config/environment';
 import Service from '@ember/service';
+import { ws_base_url } from 'papermerge/utils';
 
 
 export default class Websockets extends Service {
@@ -10,7 +10,7 @@ export default class Websockets extends Service {
 
     let that = this;
 
-    this._socket = new WebSocket(`${this.base_url}document/`);
+    this._socket = new WebSocket(`${ws_base_url()}/document/`);
     this._handlers = [];
 
     this._socket.onmessage = function(event) {
@@ -25,10 +25,6 @@ export default class Websockets extends Service {
         }
       });
     }
-  }
-
-  get base_url() {
-    return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}/`;
   }
 
   addHandler(handler, context) {

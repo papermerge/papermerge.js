@@ -1,4 +1,4 @@
-import ENV from 'papermerge/config/environment';
+import { ws_base_url } from 'papermerge/utils';
 import Service from '@ember/service';
 
 
@@ -10,7 +10,7 @@ export default class WSNodesMove extends Service {
 
     let that = this;
 
-    this._socket = new WebSocket(`${this.base_url}nodes/move`);
+    this._socket = new WebSocket(`${ws_base_url()}/nodes/move`);
     this._handlers = [];
 
     this._socket.onmessage = function(event) {
@@ -25,10 +25,6 @@ export default class WSNodesMove extends Service {
         }
       });
     }
-  }
-
-  get base_url() {
-    return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}/`;
   }
 
   addHandler(handler, context) {

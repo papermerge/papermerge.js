@@ -1,8 +1,8 @@
-import ENV from 'papermerge/config/environment';
 import Service from '@ember/service';
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { base_url } from 'papermerge/utils';
 
 
 export default class Requests extends Service {
@@ -14,7 +14,7 @@ export default class Requests extends Service {
     */
     let url, headers_copy = {};
 
-    url = `${this.base_url}ocr/`;
+    url = `${base_url()}ocr/`;
 
     Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
     headers_copy['Content-Type'] = 'application/json';
@@ -43,7 +43,7 @@ export default class Requests extends Service {
     */
     let url, headers_copy = {};
 
-    url = `${this.base_url}document-versions/${document_version.id}/download/`;
+    url = `${base_url()}document-versions/${document_version.id}/download/`;
     Object.assign(headers_copy, this.headers);
      //headers_copy['Access-Control-Allow-Origin'] = ENV.APP.HOST;
 
@@ -70,7 +70,7 @@ export default class Requests extends Service {
   async nodesMove(data) {
     let url, headers_copy = {};
 
-    url = `${this.base_url}nodes/move/`;
+    url = `${base_url()}nodes/move/`;
 
     Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
     headers_copy['Content-Type'] = 'application/json';
@@ -80,10 +80,6 @@ export default class Requests extends Service {
       headers: headers_copy,
       body: JSON.stringify(data)
     });
-  }
-
-  get base_url() {
-    return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}/`;
   }
 
   @computed('session.{data.authenticated.token,isAuthenticated}')
