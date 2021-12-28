@@ -43,7 +43,7 @@ export default class Requests extends Service {
     */
     let url, headers_copy = {};
 
-    url = `${base_url()}document-versions/${document_version.id}/download/`;
+    url = `${base_url()}/document-versions/${document_version.id}/download/`;
     Object.assign(headers_copy, this.headers);
      //headers_copy['Access-Control-Allow-Origin'] = ENV.APP.HOST;
 
