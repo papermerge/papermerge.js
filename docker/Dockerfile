@@ -18,3 +18,6 @@ RUN ember build --environment production
 FROM nginx:1.21.1-alpine
 
 COPY --from=build /src/dist/ /usr/share/nginx/html
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
