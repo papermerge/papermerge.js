@@ -12,7 +12,7 @@ export default class SearchComponent extends Component {
   @tracked autocomplete_items = A([]);
 
   @action
-  async doSearch() {
+  async onKeyup() {
     let response = await this.requests.search(this.query);
     let data = await response.json();
 

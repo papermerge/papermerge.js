@@ -6,7 +6,7 @@
       </button>
       <Input
         @value={{this.query}}
-        {{on "input" this.doSearch}}
+        {{on "keyup" this.onKeyup}}
         class="form-control" />
         {{#if this.autocomplete_items}}
           <button
