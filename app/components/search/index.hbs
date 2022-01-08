@@ -1,6 +1,9 @@
 <form class="d-flex flex-column autocomplete-search">
   <div class="d-flex">
     <div class="input-group">
+      <button class="btn btn-light border-0" type="button">
+         <i class="fa fa-search text-muted"></i>
+      </button>
       <Input
         @value={{this.query}}
         {{on "input" this.doSearch}}
@@ -12,17 +15,13 @@
               <i class="fa fa-times text-muted"></i>
           </button>
         {{/if}}
-         <button class="btn btn-light border-0" type="button">
-            <i class="fa fa-search text-muted"></i>
-         </button>
     </div>
   </div>
   <ul class="autocomplete-items">
     {{#each this.autocomplete_items as |item|}}
       <Search::AutocompleteItem
-        @title={{item.title}}
-        @path={{item.path}}
-        @type={{item.type}} />
+        @item={{item}}
+        @onOpen={{this.openItem}} />
     {{/each}}
   </ul>
 </form>
