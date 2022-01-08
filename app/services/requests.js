@@ -85,7 +85,7 @@ export default class Requests extends Service {
   async search(query) {
     let url;
 
-    url = `${base_url()}/search?q=${query}`;
+    url = `${base_url()}/search/?q=${query}`;
 
     return fetch(url, {
       method: 'GET',

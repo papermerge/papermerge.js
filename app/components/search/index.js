@@ -8,7 +8,7 @@ import { A } from '@ember/array';
 export default class SearchComponent extends Component {
   @service requests;
   @tracked query;
-  autocomplete_items = A([]);
+  @tracked autocomplete_items = A([]);
   /*
   @tracked autocomplete_items = A([
     {
@@ -35,27 +35,16 @@ export default class SearchComponent extends Component {
   */
 
   @action
-  doSearch() {
-    let that = this;
+  async doSearch() {
+    let response = await this.requests.search(this.query);
+    let data = await response.json();
 
-    this.requests.search(this.query).then(
-      resp => resp.json()
-    ).then(data => {
-
-      data.forEach(item => {
-        console.log(`pushing item ${item.title}`);
-        that.autocomplete_items.push(
-          {
-            'title': item.title,
-            'type': 'document',
-            'path': item.breadcrumb,
-          }
-        )
-      });
+    this.autocomplete_items = data.map(item => {
+      return {
+        'title': item.title,
+        'type': 'document',
+        'path': item.breadcrumb,
+      }
     });
-
-    if (this.autocomplete_items) {
-      //pass
-    }
   }
 }
