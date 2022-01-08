@@ -47,4 +47,10 @@ export default class SearchComponent extends Component {
       }
     });
   }
+
+  @action
+  clearSearch() {
+    this.query = '';
+    this.autocomplete_items = [];
+  }
 }

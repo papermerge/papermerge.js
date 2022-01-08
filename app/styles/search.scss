@@ -4,12 +4,19 @@
   z-index: 10000;
   backround-color: #fff;
 
+  ul.autocomplete-items li:first-child {
+      border-top: 1px solid #d4d4d4;
+  }
+
+  ul.autocomplete-items li:last-child {
+      border-bottom: 1px solid #d4d4d4;
+  }
+
   ul.autocomplete-items {
     position: absolute;
     width: 100%;
     top: 3rem;
     background-color: white;
-    border: 1px solid #d4d4d4;
     margin: 0;
     padding: 0;
 
@@ -20,13 +27,16 @@
     }
 
     li {
-      background-color: #fff;
-      border-left: 1px solid #d4d4d4;
-      z-index: 1000;
-      margin-top: 0.5rem;
       list-style: none;
+
+      background-color: #fff;
+      border-right: 1px solid #d4d4d4;
+      border-left: 1px solid #d4d4d4;
+
+      margin-top: 0.5rem;
       display: flex;
       align-items: center;
+
       margin: 0;
       padding: 0.75rem 1rem;
 

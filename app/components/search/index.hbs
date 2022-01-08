@@ -1,9 +1,21 @@
 <form class="d-flex flex-column autocomplete-search">
   <div class="d-flex">
-    <Input
-      @value={{this.query}}
-      {{on "input" this.doSearch}} />
-    <button class="btn btn-outline-success" type="submit">Search</button>
+    <div class="input-group">
+      <Input
+        @value={{this.query}}
+        {{on "input" this.doSearch}}
+        class="form-control" />
+        {{#if this.autocomplete_items}}
+          <button
+            {{on "click" this.clearSearch}}
+            class="btn btn-light border-0" type="button">
+              <i class="fa fa-times text-muted"></i>
+          </button>
+        {{/if}}
+         <button class="btn btn-light border-0" type="button">
+            <i class="fa fa-search text-muted"></i>
+         </button>
+    </div>
   </div>
   <ul class="autocomplete-items">
     {{#each this.autocomplete_items as |item|}}
