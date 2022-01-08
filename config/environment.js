@@ -26,7 +26,8 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
-    ENV.APP.HOST = 'http://127.0.0.1:8000'
+    ENV.APP.HOST = 'http://127.0.0.1:8000';
+    ENV.APP.WS_HOST = 'ws://127.0.0.1:8000';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -53,7 +54,7 @@ module.exports = function (environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
     ENV.APP.HOST = 'http://papermerge.local';
-    ENV.APP.WS_HOST = 'ws://papermerge.local'
+    ENV.APP.WS_HOST = 'ws://papermerge.local';
   }
 
   return ENV;

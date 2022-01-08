@@ -1,0 +1,16 @@
+<form class="d-flex flex-column autocomplete-search">
+  <div class="d-flex">
+    <Input
+      @value={{this.query}}
+      {{on "input" this.doSearch}} />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </div>
+  <ul class="autocomplete-items">
+    {{#each this.autocomplete_items as |item|}}
+      <Search::AutocompleteItem
+        @title={{item.title}}
+        @path={{item.path}}
+        @type={{item.type}} />
+    {{/each}}
+  </ul>
+</form>

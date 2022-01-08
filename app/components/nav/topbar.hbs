@@ -4,10 +4,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search for documents, tags..." aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <Search />
         {{#if this.session.isAuthenticated}}
           <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

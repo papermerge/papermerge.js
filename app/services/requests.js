@@ -82,6 +82,17 @@ export default class Requests extends Service {
     });
   }
 
+  async search(query) {
+    let url;
+
+    url = `${base_url()}/search?q=${query}`;
+
+    return fetch(url, {
+      method: 'GET',
+      headers: this.headers
+    })
+  }
+
   @computed('session.{data.authenticated.token,isAuthenticated}')
   get headers() {
     let _headers = {},
