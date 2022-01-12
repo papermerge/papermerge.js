@@ -5,6 +5,6 @@ import { action } from '@ember/object';
 export default class AutocompleteItemComponent extends Component {
   @action
   onClick() {
-    this.args.onOpen(this.args.item);    
+    this.args.onOpen(this.args.item);
   }
 }

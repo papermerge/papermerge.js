@@ -17,11 +17,18 @@ export default class SearchComponent extends Component {
     let data = await response.json();
 
     this.autocomplete_items = data.map(item => {
+      let highlight = '';
+
+      if (item.highlight) {
+        highlight = item.highlight.join(' ');
+      }
+
       return {
-        'document_id': item.document_id,
+        'id': item.id,
         'title': item.title,
-        'type': 'document',
-        'path': item.breadcrumb,
+        'type': item.node_type,
+        'highlight': highlight,
+        'path': item.breadcrumb.join(' / '),
       }
     });
   }
@@ -34,7 +41,10 @@ export default class SearchComponent extends Component {
   @action
   openItem(item) {
     if (item.type == 'document') {
-      this.router.transitionTo('authenticated.document', item.document_id);
+      this.router.transitionTo('authenticated.document', item.id);
+      this._reset();
+    } else if (item.type == 'folder') {
+      this.router.transitionTo('authenticated.nodes', item.id);
       this._reset();
     }
   }
