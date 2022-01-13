@@ -5,6 +5,7 @@
   @onClose={{@onClose}}
   @onSubmit={{this.onSubmit}}
   @onCancel={{this.onCancel}}
+  {{on-key 'Enter' this.onSubmit}}
   ...attributes
 >
   <label for="folder-title" class="form-label">Folder title:</label>

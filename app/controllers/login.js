@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
@@ -7,6 +7,7 @@ import { tracked } from '@glimmer/tracking';
 export default class LoginController extends Controller {
   @tracked errorMessage;
   @service session;
+  @service router;
 
   @action
   async authenticate(username, password) {
@@ -22,7 +23,7 @@ export default class LoginController extends Controller {
 
     if (this.session.isAuthenticated) {
       // What to do with all this success?
-      this.transitionToRoute('authenticated.index');
+      this.router.transitionTo('authenticated.index');
     }
   }
 }

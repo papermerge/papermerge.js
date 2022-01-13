@@ -1,10 +1,11 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 
 export default class IndexRoute extends Route {
   @service store;
   @service session;
+  @service router;
   @service currentUser;
 
   async beforeModel(transition) {
@@ -14,7 +15,7 @@ export default class IndexRoute extends Route {
     this.session.requireAuthentication(transition, 'login');
     await this.currentUser.loadCurrentUser();
     this.currentUser.user.getHomeFolder().then((home_folder) => {
-      that.replaceWith("authenticated.nodes", home_folder.id);
+      that.router.replaceWith("authenticated.nodes", home_folder.id);
     });
   }
 

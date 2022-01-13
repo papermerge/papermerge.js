@@ -97,25 +97,19 @@ function ws_base_url() {
     base = `wss://${window.location.host}`;
   }
 
-  console.log(`base=${base}`);
-
   if (!ENV.APP.WS_HOST) {
 
     if (!ENV.APP.WS_NAMESPACE) {
-      console.log(`ws_base_url() = ${base}`);
       return base;
     }
 
-    console.log(`ws_base_url() = ${base}/${ENV.APP.WS_NAMESPACE}`);
     return `${base}/${ENV.APP.WS_NAMESPACE}`;
   }
 
   if (!ENV.APP.WS_NAMESPACE) {
-    console.log(`ws_base_url() = ${ENV.APP.WS_HOST}`);
     return `${ENV.APP.WS_HOST}`;
   }
 
-  console.log(`ws_base_url() = ${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}`);
   return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}`;
 }
 
