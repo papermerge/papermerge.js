@@ -73,3 +73,15 @@ Technically speaking, PapermergeJS is written using [EmberJS](https://emberjs.co
 * `ember build` (development)
 * `ember build --environment production` (production)
 
+
+### Docker Image
+
+Build production mode docker image:
+
+    docker build -t papermerge/papermerge.js:2.1.0-alpha1 -f docker/Dockerfile .
+
+Run docker image:
+
+    docker run -p 8080:80 papermerge/papermerge.js:2.1.0-alpha1
+
+
