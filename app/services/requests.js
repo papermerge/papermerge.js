@@ -90,7 +90,22 @@ export default class Requests extends Service {
     return fetch(url, {
       method: 'GET',
       headers: this.headers
-    })
+    });
+  }
+
+  async preferences({section_name}={}) {
+    let url;
+
+    if (section_name) {
+      url = `${base_url()}/preferences/?section=${section_name}`
+    } else {
+      url = `${base_url()}/preferences/`;
+    }
+
+    return fetch(url, {
+      method: 'GET',
+      headers: this.headers
+    });
   }
 
   @computed('session.{data.authenticated.token,isAuthenticated}')

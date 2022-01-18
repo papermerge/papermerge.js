@@ -1,0 +1,16 @@
+<div class="preferences container">
+  <h5>
+    <LinkTo
+      @route="authenticated.preferences"
+      class="text-decoration-none">
+        Preferences
+    </LinkTo>
+  </h5>
+
+  <div class="d-inline-flex">
+    {{#each @model as |section_name|}}
+      <Preferences::Section
+        @name={{section_name}} />
+    {{/each}}
+  </div>
+</div>

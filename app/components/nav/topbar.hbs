@@ -12,6 +12,15 @@
             </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
             <li class="dropdown-item">
+              <i class="fa fa-cogs mx-2"></i>
+              <LinkTo
+                @route='authenticated.preferences'
+                class="text-decoration-none">
+                  Preferences
+              </LinkTo>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="dropdown-item">
               <i class="fa fa-book-open mx-2"></i>
               <a
                 href="https://docs.papermerge.io"

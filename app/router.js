@@ -38,6 +38,11 @@ Router.map(function () {
     this.route('groups', function () {
       this.route('index', { path: '/' });
     });
+
+    this.route('preferences', function() {
+      this.route('index', { path: '/' });
+      this.route('section', { path: '/:section_name' });
+    });
   });
 
   this.route('login');
