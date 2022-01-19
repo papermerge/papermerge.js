@@ -108,6 +108,21 @@ export default class Requests extends Service {
     });
   }
 
+  async preferencesUpdate(data) {
+    let url, headers_copy = {};
+
+    url = `${base_url()}/preferences/bulk/`;
+
+    Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
+    headers_copy['Content-Type'] = 'application/json';
+
+    return fetch(url, {
+      method: 'POST',
+      headers: headers_copy,
+      body: JSON.stringify(data)
+    });
+  }
+
   @computed('session.{data.authenticated.token,isAuthenticated}')
   get headers() {
     let _headers = {},

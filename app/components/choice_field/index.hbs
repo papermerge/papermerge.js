@@ -1,0 +1,8 @@
+<div class="mb-3">
+  <label for={{this.name}} class="form-label">{{capitalize this.name}}</label>:
+  <select class="form-select" {{on 'change' this.onChange}}>
+    {{#each this.choices as |choice|}}
+      <option value="{{get choice 0}}">{{get choice 1}}</option>
+    {{/each}}
+  </select>
+</div>

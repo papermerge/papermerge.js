@@ -5,13 +5,24 @@
       class="text-decoration-none">
         Preferences
     </LinkTo>
-    / Section
+    / {{capitalize @model.section_name}}
   </h5>
 
-  <div>
-    {{#each @model as |preference|}}
-      <Preferences::Preference
-        @model={{preference}} />
+  <form>
+    {{#each @model.sections as |preference|}}
+      {{#let (component preference.field.class) as |PrefType|}}
+        {{! PrefType is one of "ChoiceField", "BooleanField" or "CharField" }}
+        <PrefType
+          @model={{preference}}
+          @onChange={{this.onChange}} />
+      {{/let}}
     {{/each}}
-  </div>
+    <div class="mb-3">
+      <Button::Submit
+        @onClick={{this.onSubmit}}
+        @disabled={{this.disabled}} />
+      <Button::Cancel
+        @onClick={{this.onCancel}} />
+    </div>
+  </form>
 </div>

@@ -7,15 +7,22 @@ export default class SectionRoute extends Route {
 
   async model(params) {
     /**
-     * Returns preferences for section ``params.section_name``
+     * Returns preferences filtered by section ``params.section_name``
     **/
-    const prefs = await this.requests.preferences({section_name: params.section_name});
+    const prefs = await this.requests.preferences({
+      section_name: params.section_name
+    });
     const json_prefs = await prefs.json();
-    let sections = [];
+    let sections = [], ret;
 
     sections = json_prefs.data.map(item => item.attributes);
 
-    return sections;
+    ret = {
+      section_name: params.section_name,
+      sections: sections
+    };
+
+    return ret;
   }
 
 }
