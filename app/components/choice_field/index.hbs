@@ -2,7 +2,13 @@
   <label for={{this.name}} class="form-label">{{capitalize this.name}}</label>:
   <select class="form-select" {{on 'change' this.onChange}}>
     {{#each this.choices as |choice|}}
-      <option value="{{get choice 0}}">{{get choice 1}}</option>
+      {{#let (get choice 0) (get choice 1) as |choice_key choice_value|}}
+        {{#if (is_equal choice_key this.value)}}
+          <option selected value="{{choice_key}}">{{choice_value}}</option>
+        {{else}}
+          <option value="{{choice_key}}">{{choice_value}}</option>
+        {{/if}}
+      {{/let}}
     {{/each}}
   </select>
 </div>

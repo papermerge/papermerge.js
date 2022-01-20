@@ -20,6 +20,8 @@ export default class CommanderComponent extends Component {
   @service ws_nodes_move;
   @service store;
   @service requests;
+  @service preferences;
+  @service uploader;
 
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
@@ -200,19 +202,64 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  onDrop(source_data) {
-    let nodes_move_data;
+  onDrop(data) {
+    /**
+     * data is a dictionary of following format:
+     * {
+     *    'application/x.node': source_data
+     *    'application/x.desktop': source_data
+     * }
+     *
+     * (1) 'application/x.node' - when incoming data is a node
+     * being dropped from another commander panel
+     * (2) 'application/x.desktop' - when incoming data is being
+     * drop from desktop's file manager
+     *
+     * In (1) case, source_data is {
+     *  node: <node being droppped>
+     *  source_parent: <parent of the node being droppped>
+     * }
+     *
+     * In (2) case, source_data is an array of File instances
+     * */
+    let nodes_move_data,
+      source_data;
 
-    nodes_move_data = {
-      'nodes': [{ 'id': source_data.node.id }],
-      'source_parent': {
-        'id': source_data.source_parent.id
-      },
-      'target_parent': {
-        'id': this.args.node.id
+    /*
+      Data can be droppped from:
+        - another panel i.e. as x.node
+        - from desktop file manager i.e. as x.desktop
+    */
+
+    if (data['application/x.node']) {
+
+      // dropping items from another panel
+      source_data = data['application/x.node'];
+      nodes_move_data = {
+        'nodes': [{ 'id': source_data.node.id }],
+        'source_parent': {
+          'id': source_data.source_parent.id
+        },
+        'target_parent': {
+          'id': this.args.node.id
+        }
       }
+      this.requests.nodesMove(nodes_move_data);
+
+    } else if (data['application/x.desktop']) {
+
+      // dropping items from the Desktop file manager
+      this.uploader.upload({
+        files: data['application/x.desktop'],
+        parent_id: this.args.node.id,
+        lang: this.preferences.get_value({
+          key: 'ocr__lang',
+          default_value: 'deu'
+        })
+      });
+
     }
-    this.requests.nodesMove(nodes_move_data);
+
   }
 
   @action

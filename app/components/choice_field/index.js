@@ -41,6 +41,10 @@ export default class PreferenceChoiceFieldComponent extends Component {
     return this.args.model.identifier;
   }
 
+  get value() {
+    return this.args.model.value;
+  }
+
   @action
   onChange(event) {
     const new_value = event.target.value;
