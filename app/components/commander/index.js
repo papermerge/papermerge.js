@@ -48,6 +48,7 @@ export default class CommanderComponent extends Component {
 
     this.websockets.addHandler(this.messageHandler, this);
     this.ws_nodes_move.addHandler(this.wsNodesMoveHandler, this);
+    this.preferences.load();
   }
 
   wsNodesMoveHandler(message) {
@@ -202,7 +203,7 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  onDrop(data) {
+  async onDrop(data) {
     /**
      * data is a dictionary of following format:
      * {
@@ -247,15 +248,12 @@ export default class CommanderComponent extends Component {
       this.requests.nodesMove(nodes_move_data);
 
     } else if (data['application/x.desktop']) {
-
       // dropping items from the Desktop file manager
       this.uploader.upload({
         files: data['application/x.desktop'],
-        parent_id: this.args.node.id,
-        lang: this.preferences.get_value({
-          key: 'ocr__lang',
-          default_value: 'deu'
-        })
+        node: this.args.node,
+        lang: this.lang,
+        on_create_doc_callback: this.onCreateDocumentModel
       });
 
     }
@@ -285,6 +283,14 @@ export default class CommanderComponent extends Component {
     console.log(`onDragendSuccess on ${this.args.hint}: id=${model.id} type=${model.nodeType}`);
   }
 
+  get lang() {
+    let _lang = this.preferences.get_value({
+      key: 'ocr__language',
+      default_value: 'deu'
+    });
+
+    return _lang;
+  }
 
   get children() {
     /**

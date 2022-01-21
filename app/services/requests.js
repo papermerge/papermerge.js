@@ -7,6 +7,7 @@ import { base_url } from 'papermerge/utils';
 
 export default class Requests extends Service {
   @service session;
+  @service store;
 
   async runOCR({doc_id, lang}) {
     /*
@@ -109,17 +110,36 @@ export default class Requests extends Service {
   }
 
   async preferencesUpdate(data) {
-    let url, headers_copy = {};
+    let url,
+      headers_copy = {},
+      response,
+      that = this;
 
     url = `${base_url()}/preferences/bulk/`;
 
     Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
     headers_copy['Content-Type'] = 'application/json';
 
-    return fetch(url, {
+    response = fetch(url, {
       method: 'POST',
       headers: headers_copy,
       body: JSON.stringify(data)
+    });
+
+    response.then(response => response.json()).then(
+      list_of_attrs => {
+        list_of_attrs.data.map(item => {
+          that.store.push({data: {
+            id: item.id,
+            type: "preferences",
+            attributes: {
+              name: item.name,
+              value: item.value,
+              section: item.section,
+              identifier: item.identifier
+            }
+          }});
+        });
     });
   }
 
