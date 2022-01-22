@@ -20,12 +20,6 @@
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/papermerge.js"></script>
-    <script>
-      navigator.serviceWorker.register('{{rootURL}}assets/service-worker.js')
-      .then(reg => console.log('Service worker registered', reg))
-      .catch(err => console.log('There was an error while registering service worker', err));
-    </script>
-
     {{content-for "body-footer"}}
   </body>
 </html>
