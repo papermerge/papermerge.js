@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Papermerge</title>
+    <title>Papermerge DMS</title>
     <meta name="description" content="Papermerge - document management system for digital archives">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,6 +20,11 @@
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/papermerge.js"></script>
+    <script>
+      navigator.serviceWorker.register('{{rootURL}}assets/service-worker.js')
+      .then(reg => console.log('Service worker registered', reg))
+      .catch(err => console.log('There was an error while registering service worker', err));
+    </script>
 
     {{content-for "body-footer"}}
   </body>
