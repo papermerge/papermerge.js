@@ -1,0 +1,14 @@
+{{#if @disabled}}
+  <button
+    class="btn btn-block btn-primary btn-lg w-100"
+    disabled
+    type="submit">Sign In</button>
+{{else}}
+  <button
+    class="btn btn-block btn-primary btn-lg w-100"
+    type="submit"
+    {{on "click" @onSubmit}}>
+      <Spinner @inProgress={{@inProgress}} />
+      Sign In
+  </button>
+{{/if}}

@@ -11,7 +11,9 @@
           Please sign in to start your session
         </p>
 
-        <Login @onSubmit={{this.authenticate}}>
+        <Login
+          @onSubmit={{this.authenticate}}
+          @inProgress={{this.inProgress}}>
           {{#if this.errorMessage}}
             <p class="text-danger">{{this.errorMessage}}</p>
           {{/if}}

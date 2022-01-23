@@ -7,12 +7,14 @@ import { base_url } from 'papermerge/utils';
 
 export default class LoginController extends Controller {
   @tracked errorMessage;
+  @tracked in_progress = false;
   @service session;
   @service router;
 
   @action
   async authenticate(username, password) {
     try {
+      this.in_progress = true;
       await this.session.authenticate(
         'authenticator:auth-token',
         username,
@@ -27,11 +29,17 @@ export default class LoginController extends Controller {
       } else {
         this.errorMessage = error;
       }
+    } finally {
+      this.in_progress = false;
     }
 
     if (this.session.isAuthenticated) {
       // What to do with all this success?
       this.router.transitionTo('authenticated.index');
     }
+  }
+
+  get inProgress() {
+    return this.in_progress;
   }
 }
