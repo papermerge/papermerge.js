@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 
 export default class ActionButtonsComponent extends Component {
@@ -11,6 +12,9 @@ export default class ActionButtonsComponent extends Component {
       folder whose content is currenlty being displayed
     `selectedNodes` - array of selected nodes
   */
+  @tracked download_in_progress = false;
+
+
   get one_node_selected() {
     return this.args.selectedNodes.length === 1;
   }
@@ -27,9 +31,12 @@ export default class ActionButtonsComponent extends Component {
   }
 
   @action
-  onDownloadNodes() {
-    this.args.onDownloadNodes(
+  async onDownloadNodes() {
+    this.download_in_progress = true;
+    await this.args.onDownloadNodes(
       this.args.selectedNodes
     );
+    this.download_in_progress = false;
   }
+
 }

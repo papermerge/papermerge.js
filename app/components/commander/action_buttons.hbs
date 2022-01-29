@@ -7,13 +7,9 @@
         <i class="fa fa-edit"></i>
       Rename
     </button>
-    <button
-      class="btn btn-success"
-      {{on "click" this.onDownloadNodes}}
-      type="button">
-        <i class="fa fa-download"></i>
-      Download
-    </button>
+    <Button::Download
+      @inProgress={{this.download_in_progress}}
+      @onDownloadNodes={{this.onDownloadNodes}} />
     <button
       class="btn btn-danger mx-5"
       type="button"
@@ -22,13 +18,9 @@
       Delete
     </button>
   {{else if this.multiple_nodes_selected}}
-    <button
-      class="btn btn-success"
-      {{on "click" this.onDownloadNodes}}
-      type="button">
-        <i class="fa fa-download"></i>
-      Download
-    </button>
+    <Button::Download
+      @inProgress={{this.download_in_progress}}
+      @onDownloadNodes={{this.onDownloadNodes}} />
     <button
       class="btn btn-danger mx-5"
       type="button"

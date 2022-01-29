@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 
 export default class CommanderComponent extends Component {
@@ -180,7 +180,7 @@ export default class CommanderComponent extends Component {
 
   @action
   onDownloadNodes(selected_nodes) {
-    this.requests.downloadNodes(selected_nodes);
+    return this.requests.downloadNodes(selected_nodes);
   }
 
   @action

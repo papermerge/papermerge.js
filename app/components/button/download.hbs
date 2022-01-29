@@ -1,0 +1,11 @@
+<button
+  class="btn btn-success"
+  {{on "click" @onDownloadNodes}}
+  type="button">
+    {{#if @inProgress }}
+      <Spinner @inProgress={{@inProgress}} />
+    {{else}}
+       <i class="fa fa-download"></i>
+    {{/if}}
+  Download
+</button>
