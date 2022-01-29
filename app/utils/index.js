@@ -113,9 +113,52 @@ function ws_base_url() {
   return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}`;
 }
 
+/**
+ * Extracts file name from a response with accessible Content-Disposition header
+ */
+function extract_file_name(response, fallback) {
+  let file_name = fallback,
+    content_disp,
+    match;
+
+  content_disp = response.headers.get('content-disposition');
+
+  if (content_disp) {
+    match = content_disp.match('filename=(.*)$');
+    if (match) {
+      file_name = match[1];
+    }
+  } else {
+    console.warn('Could not read content disposition header');
+    console.warn('Returning default file name');
+  }
+
+  return file_name;
+}
+
+/**
+ * Insert a blob data into DOM and prompt use to download it
+ */
+function insert_blob(file_name, blob) {
+  let url, a;
+
+  url = window.URL.createObjectURL(blob);
+  a = document.createElement('a');
+  a.href = url;
+  a.download = file_name;
+  // we need to append the element to the dom -> otherwise it will not
+  // work in firefox
+  document.body.appendChild(a);
+  a.click();
+  //afterwards we remove the element again
+  a.remove();
+}
+
 export {
   group_perms_by_model,
   are_sets_equal,
   base_url,
-  ws_base_url
+  ws_base_url,
+  insert_blob,
+  extract_file_name
 };

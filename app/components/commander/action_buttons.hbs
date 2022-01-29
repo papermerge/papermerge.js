@@ -9,6 +9,7 @@
     </button>
     <button
       class="btn btn-success"
+      {{on "click" this.onDownloadNodes}}
       type="button">
         <i class="fa fa-download"></i>
       Download
@@ -23,6 +24,7 @@
   {{else if this.multiple_nodes_selected}}
     <button
       class="btn btn-success"
+      {{on "click" this.onDownloadNodes}}
       type="button">
         <i class="fa fa-download"></i>
       Download

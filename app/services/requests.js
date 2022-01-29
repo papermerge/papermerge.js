@@ -2,7 +2,11 @@ import Service from '@ember/service';
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed } from '@ember/object';
 import { service } from '@ember/service';
-import { base_url } from 'papermerge/utils';
+import {
+  base_url,
+  insert_blob,
+  extract_file_name
+} from 'papermerge/utils';
 
 
 export default class Requests extends Service {
@@ -28,44 +32,47 @@ export default class Requests extends Service {
     });
   }
 
+  /**
+  *  `document_version` contains following attributes:
+  *    id
+  *    number
+  *    file_name
+  *    lang
+  *    pages
+  *    size
+  *    page_count
+  *    short_description
+  *
+  *  attributes which correspond to server side (or client side) DocumentVersion model
+  */
   async downloadDocumentVersion(document_version) {
-    /*
-      `document_version` contains following attributes:
-        id
-        number
-        file_name
-        lang
-        pages
-        size
-        page_count
-        short_description
+    let response, blob;
 
-      attributes which correspond to server side (or client side) DocumentVersion model
-    */
-    let url, headers_copy = {};
+    response = await this._get(`/document-versions/${document_version.id}/download/`);
 
-    url = `${base_url()}/document-versions/${document_version.id}/download/`;
-    Object.assign(headers_copy, this.headers);
-     //headers_copy['Access-Control-Allow-Origin'] = ENV.APP.HOST;
+    blob = await response.blob();
+    insert_blob(
+      document_version.file_name,
+      blob
+    );
+  }
 
-    return fetch(url, {
-      method: 'GET',
-      headers: headers_copy
-    }).then(
-      response => response.blob()
-    ).then((blob) => {
-      let url = window.URL.createObjectURL(blob);
-      let a = document.createElement('a');
+  async downloadNodes(selected_nodes) {
+    let params_arr,
+      params_str,
+      response,
+      blob,
+      file_name;
 
-      a.href = url;
-      a.download = document_version.file_name;
-      // we need to append the element to the dom -> otherwise it will not
-      // work in firefox
-      document.body.appendChild(a);
-      a.click();
-      //afterwards we remove the element again
-      a.remove();
-    });
+    params_arr = selected_nodes.map(node => `node_ids=${node.id}`);
+    params_str = params_arr.join('&');
+
+    response = await this._get('/nodes/download/', params_str);
+
+    file_name = extract_file_name(response, 'fallback.zip');
+    blob = await response.blob();
+
+    insert_blob(file_name, blob);
   }
 
   async nodesMove(data) {
@@ -84,29 +91,20 @@ export default class Requests extends Service {
   }
 
   async search(query) {
-    let url;
-
-    url = `${base_url()}/search/?q=${query}`;
-
-    return fetch(url, {
-      method: 'GET',
-      headers: this.headers
-    });
+    return this._get('/search/', `q=${query}`);
   }
 
   async preferences({section_name}={}) {
-    let url;
+    let params = {};
 
     if (section_name) {
-      url = `${base_url()}/preferences/?section=${section_name}`
-    } else {
-      url = `${base_url()}/preferences/`;
+      params = {'section': section_name};
     }
 
-    return fetch(url, {
-      method: 'GET',
-      headers: this.headers
-    });
+    return this._get(
+      '/preferences/',
+      new URLSearchParams(params).toString()
+    );
   }
 
   async preferencesUpdate(data) {
@@ -140,6 +138,23 @@ export default class Requests extends Service {
             }
           }});
         });
+    });
+  }
+
+  async _get(url, params_str) {
+    let url_with_base,
+      headers_copy = {};
+
+    if (params_str) {
+     url_with_base = `${base_url()}${url}?${params_str}`;
+    } else {
+      url_with_base = `${base_url()}${url}`;
+    }
+    Object.assign(headers_copy, this.headers);
+
+    return fetch(url_with_base, {
+      method: 'GET',
+      headers: headers_copy,
     });
   }
 

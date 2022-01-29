@@ -179,6 +179,11 @@ export default class CommanderComponent extends Component {
   }
 
   @action
+  onDownloadNodes(selected_nodes) {
+    this.requests.downloadNodes(selected_nodes);
+  }
+
+  @action
   onViewModeChange(new_view_mode) {
     this.view_mode = new_view_mode;
   }

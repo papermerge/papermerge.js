@@ -25,4 +25,11 @@ export default class ActionButtonsComponent extends Component {
       this.args.selectedNodes[0]
     );
   }
+
+  @action
+  onDownloadNodes() {
+    this.args.onDownloadNodes(
+      this.args.selectedNodes
+    );
+  }
 }
