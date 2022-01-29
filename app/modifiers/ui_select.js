@@ -42,13 +42,42 @@ class UISelect {
   }
 
   update(x, y) {
-    console.log(`Updating ui selection ${x} ${y}`);
+    let height, width, top, left;
+
+    this.current_x = x;
+    this.current_y = y;
+
+    width = Math.abs(this.current_x - this.start_x);
+    height = Math.abs(this.current_y - this.start_y);
+
+    if (this.select_div) {
+
+      if (this.current_y <  this.start_y) {
+        this.select_div.top = `${this.current_y + 7}px`;
+        top = this.current_y + 7;
+      } else {
+        this.select_div.top = `${this.start_y}px`;
+        top = this.start_y;
+      }
+      if (this.current_x <  this.start_x) {
+        this.select_div.left = `${this.current_x + 7}px`;
+        left = this.current_x + 7;
+      } else {
+        this.select_div.left = `${this.start_x}px`;
+        left = this.start_x;
+      }
+      this.select_div.width = `${width}px`;
+      this.select_div.height = `${height}px`;
+      console.log(`select_div.width = ${width}`);
+      console.log(`select_div.height = ${height}`);
+    }
   }
 
   _create_selection_div(x, y) {
 
     let div = document.createElement('div');
 
+    div.setAttribute('id',  'ui-select');
     div.style.position = 'absolute';
     div.style.top = `${y}px`;
     div.style.left = `${x}px`;
