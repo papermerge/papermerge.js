@@ -1,7 +1,10 @@
 <div class="panel commander col m-2 p-2"
   {{droppable
     onDrop=this.onDrop
-    onDragOver=this.onDragOver }}>
+    onDragOver=this.onDragOver }}
+
+  {{uiSelect}}>
+
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}
