@@ -53,23 +53,21 @@ class UISelect {
     if (this.select_div) {
 
       if (this.current_y <  this.start_y) {
-        this.select_div.top = `${this.current_y + 7}px`;
+        this.select_div.style.top = `${this.current_y + 7}px`;
         top = this.current_y + 7;
       } else {
-        this.select_div.top = `${this.start_y}px`;
+        this.select_div.style.top = `${this.start_y}px`;
         top = this.start_y;
       }
       if (this.current_x <  this.start_x) {
-        this.select_div.left = `${this.current_x + 7}px`;
+        this.select_div.style.left = `${this.current_x + 7}px`;
         left = this.current_x + 7;
       } else {
-        this.select_div.left = `${this.start_x}px`;
+        this.select_div.style.left = `${this.start_x}px`;
         left = this.start_x;
       }
-      this.select_div.width = `${width}px`;
-      this.select_div.height = `${height}px`;
-      console.log(`select_div.width = ${width}`);
-      console.log(`select_div.height = ${height}`);
+      this.select_div.style.width = `${width}px`;
+      this.select_div.style.height = `${height}px`;
     }
   }
 
@@ -126,8 +124,10 @@ export default class UISelectModifier extends Modifier {
 
   @action
   onMouseUp() {
-    this.ui_select.remove_div();
-    this.ui_select = undefined;
+    if (this.ui_select) {
+      this.ui_select.remove_div();
+      this.ui_select = undefined;
+    }
   }
 
   @action
