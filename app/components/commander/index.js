@@ -132,6 +132,7 @@ export default class CommanderComponent extends Component {
 
   @action
   openNewFolderModal() {
+    console.log('on new folder');
     this.show_new_folder_modal = true;
   }
 

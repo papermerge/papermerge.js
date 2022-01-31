@@ -117,22 +117,22 @@ export default class UISelectModifier extends Modifier {
 
   @action
   onMouseMove(event) {
-    if (this.ui_select) {
+    if (!event.buttons) {
+      this.remove_div();
+    } else if (this.ui_select) {
       this.ui_select.update(event.clientX, event.clientY);
     }
   }
 
   @action
   onMouseUp() {
-    if (this.ui_select) {
-      this.ui_select.remove_div();
-      this.ui_select = undefined;
-    }
+    console.log('mouse up');
+    this.remove_div();
   }
 
   @action
   onMouseDown(event) {
-
+    console.log('mouse down');
     this.ui_select = new UISelect(
       this.element,
       event.clientX,
@@ -140,5 +140,12 @@ export default class UISelectModifier extends Modifier {
     );
 
     this.ui_select.create_div();
+  }
+
+  remove_div() {
+    if (this.ui_select) {
+      this.ui_select.remove_div();
+      this.ui_select = undefined;
+    }
   }
 }
