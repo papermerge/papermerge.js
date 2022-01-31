@@ -22,23 +22,17 @@ class UISelect {
     this.height = 0;
     this.width = 0;
     this.parent = parent_selector;
-    this.select_div = undefined;
+    this.select_div = document.getElementById('ui-select');
   }
 
-  create_div() {
-    if (!this.select_div) {
-      this.select_div = this._create_selection_div(
-        this.start_x,
-        this.start_y
-      );
-    }
+  show(x, y) {
+    this.select_div.style.visibility = 'visible';
+    this.select_div.style.top = `${x}px`;
+    this.select_div.style.left  = `${y}px`;
   }
 
-  remove_div() {
-    if (this.select_div) {
-      this.select_div.remove();
-      this.select_div = undefined;
-    }
+  hide() {
+    this.select_div.style.visibility = 'hidden';
   }
 
   update(x, y) {
@@ -71,21 +65,6 @@ class UISelect {
     }
   }
 
-  _create_selection_div(x, y) {
-
-    let div = document.createElement('div');
-
-    div.setAttribute('id',  'ui-select');
-    div.style.position = 'absolute';
-    div.style.top = `${y}px`;
-    div.style.left = `${x}px`;
-    div.style.width = '0px';
-    div.style.height = '0px';
-
-    this.parent.appendChild(div);
-
-    return div;
-  }
 }
 
 
@@ -118,7 +97,7 @@ export default class UISelectModifier extends Modifier {
   @action
   onMouseMove(event) {
     if (!event.buttons) {
-      this.remove_div();
+      this.hide();
     } else if (this.ui_select) {
       this.ui_select.update(event.clientX, event.clientY);
     }
@@ -126,26 +105,23 @@ export default class UISelectModifier extends Modifier {
 
   @action
   onMouseUp() {
-    console.log('mouse up');
-    this.remove_div();
+    this.hide();
   }
 
   @action
   onMouseDown(event) {
-    console.log('mouse down');
     this.ui_select = new UISelect(
       this.element,
       event.clientX,
       event.clientY
     );
 
-    this.ui_select.create_div();
+    this.ui_select.show(event.clientX, event.clientY);
   }
 
-  remove_div() {
+  hide() {
     if (this.ui_select) {
-      this.ui_select.remove_div();
-      this.ui_select = undefined;
+      this.ui_select.hide();
     }
   }
 }
