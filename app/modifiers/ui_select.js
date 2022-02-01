@@ -7,7 +7,7 @@ class UISelect {
     Desktop like select
   **/
 
-  constructor(parent_selector, x, y) {
+  constructor(parent_selector) {
     /***
       x, y coordinates where selection started.
       parent - dom parent element. Selection DOM element
@@ -15,29 +15,34 @@ class UISelect {
       will be relative to the parent DOM.
     **/
     // x,y where selection started
-    this.start_x = x;
-    this.start_y = y;
-    this.current_x = y;
-    this.current_y = y;
-    this.height = 0;
-    this.width = 0;
+    this.start_x = 0;
+    this.start_y = 0;
+    this.current_x = 0;
+    this.current_y = 0;
     this.parent = parent_selector;
     this.select_div = document.getElementById('ui-select');
   }
 
+  init(x, y) {
+    this.start_x = x;
+    this.start_y = y;
+  }
+
   show(x, y) {
-    this.select_div.style.visibility = 'visible';
-    this.select_div.style.top = `${x}px`;
-    this.select_div.style.left  = `${y}px`;
+    this.visibility = 'visible';
+    this.top = `${x}px`;
+    this.left  = `${y}px`;
   }
 
   hide() {
-    this.select_div.style.visibility = 'hidden';
+    this.visibility = 'hidden';
   }
 
   update(x, y) {
-    let height, width, top, left;
+    let height, width;
 
+
+    this.show(x, y);
     this.current_x = x;
     this.current_y = y;
 
@@ -47,22 +52,53 @@ class UISelect {
     if (this.select_div) {
 
       if (this.current_y <  this.start_y) {
-        this.select_div.style.top = `${this.current_y + 7}px`;
-        top = this.current_y + 7;
+        this.top = `${this.current_y + 7}px`;
       } else {
-        this.select_div.style.top = `${this.start_y}px`;
-        top = this.start_y;
+        this.top = `${this.start_y}px`;
       }
       if (this.current_x <  this.start_x) {
-        this.select_div.style.left = `${this.current_x + 7}px`;
-        left = this.current_x + 7;
+        this.left = `${this.current_x + 7}px`;
       } else {
-        this.select_div.style.left = `${this.start_x}px`;
-        left = this.start_x;
+        this.left = `${this.start_x}px`;
       }
-      this.select_div.style.width = `${width}px`;
-      this.select_div.style.height = `${height}px`;
+      this.width = `${width}px`;
+      this.height = `${height}px`;
     }
+  }
+
+  set width(value) {
+    if (!this.select_div) {
+      return;
+    }
+    this.select_div.style.width = value;
+  }
+
+  set height(value) {
+    if (!this.select_div) {
+      return;
+    }
+    this.select_div.style.height = value;
+  }
+
+  set top(value) {
+    if (!this.select_div) {
+      return;
+    }
+    this.select_div.style.top = value;
+  }
+
+  set left(value) {
+    if (!this.select_div) {
+      return;
+    }
+    this.select_div.style.left = value;
+  }
+
+  set visibility(value) {
+    if (!this.select_div) {
+      return;
+    }
+    this.select_div.style.visibility = value;
   }
 
 }
@@ -88,6 +124,8 @@ export default class UISelectModifier extends Modifier {
   didReceiveArguments() {
     this.removeEventListener();
     this.addEventListener();
+
+    this.ui_select = new UISelect(this.element);
   }
 
   willDestroy() {
@@ -110,13 +148,7 @@ export default class UISelectModifier extends Modifier {
 
   @action
   onMouseDown(event) {
-    this.ui_select = new UISelect(
-      this.element,
-      event.clientX,
-      event.clientY
-    );
-
-    this.ui_select.show(event.clientX, event.clientY);
+    this.ui_select.init(event.clientX, event.clientY);
   }
 
   hide() {
