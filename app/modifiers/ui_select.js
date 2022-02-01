@@ -42,7 +42,6 @@ class Rectangle {
     let x_is_within = false, y_is_within = false;
 
 
-
     if (this.x <= x && x <= this.x + this.width) {
       x_is_within = true;
     }
@@ -96,7 +95,7 @@ class UISelect {
   }
 
   update(x, y) {
-    let height, width, top, left, at_least_one_selected = false;
+    let height, width, top, left;
 
 
     this.show(x, y);
