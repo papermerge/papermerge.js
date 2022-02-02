@@ -6,7 +6,7 @@ export default class Point {
     this.y = y;
   }
 
-  isEqual(x, y) {
-    return x === this.x && y === this.y;
+  isEqual(point) {
+    return point.x === this.x && point.y === this.y;
   }
 }
