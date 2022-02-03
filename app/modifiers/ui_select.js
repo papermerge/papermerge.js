@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Modifier from 'ember-modifier';
-import { Rectangle } from 'papermerge/utils/rectangle';
+import Rectangle from 'papermerge/utils/rectangle';
 
 
 

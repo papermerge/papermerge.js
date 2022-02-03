@@ -1,6 +1,24 @@
 import Point from 'papermerge/utils/point';
 
 
+function intersect(rectA, rectB) {
+  let rectA_X1 = rectA.p1.x,
+      rectA_Y1 = rectA.p1.y,
+      rectA_X2 = rectA.p3.x,
+      rectA_Y2 = rectA.p3.y,
+      rectB_X1 = rectB.p1.x,
+      rectB_Y1 = rectB.p1.y,
+      rectB_X2 = rectB.p3.x,
+      rectB_Y2 = rectB.p3.y;
+
+    if ((rectA_X1 <= rectB_X2) && (rectA_X2 >= rectB_X1) && (rectA_Y1 <= rectB_Y2) && (rectA_Y2 >= rectB_Y1)) {
+      return true;
+    }
+
+    return false;
+}
+
+
 export default class Rectangle {
 
   constructor(x, y, width, height) {
@@ -16,63 +34,7 @@ export default class Rectangle {
   }
 
   intersect(rect) {
-    /*
-    Returns true if this rectangle intersects with rect
-    (or other way around).
-    Two rectangle intersect if one of them has a point inside other.
-    */
-    if (this.contains_point(rect.p1)) {
-      return true;
-    }
-
-    if (this.contains_point(rect.p2)) {
-      return true;
-    }
-
-    if (this.contains_point(rect.p3)) {
-      return true;
-    }
-
-    if (this.contains_point(rect.p4)) {
-      return true;
-    }
-
-    // or other way around
-    if (rect.contains_point(this.p1)) {
-      return true;
-    }
-
-    if (rect.contains_point(this.p2)) {
-      return true;
-    }
-
-    if (rect.contains_point(this.p3)) {
-      return true;
-    }
-
-    if (rect.contains_point(this.p4)) {
-      return true;
-    }
-
-    return false;
-  }
-
-  contains_point(point) {
-    /*
-      Is point (x, y) inside this rectangle ?
-    */
-    let x_is_within = false, y_is_within = false;
-
-
-    if (this.x <= point.x && point.x <= this.x + this.width) {
-      x_is_within = true;
-    }
-
-    if (this.y <= point.y && point.y <= this.y + this.height) {
-      y_is_within = true;
-    }
-
-    return x_is_within && y_is_within;
+    return intersect(rect, this) || intersect(this, rect);
   }
 
   toString() {

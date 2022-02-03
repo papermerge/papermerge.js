@@ -10,28 +10,6 @@ module('Unit | Rectangle', function () {
     assert.ok(rect);
   });
 
-  test('contains_point positive', function(assert) {
-    let rect, point;
-
-    rect = new Rectangle(100, 100, 10, 10);
-    point  = new Point(105, 105);
-
-    assert.true(
-      rect.contains_point(point)
-    )
-  });
-
-  test('contains_point negative', function(assert) {
-    let rect, point;
-
-    rect = new Rectangle(100, 100, 10, 10);
-    point  = new Point(50, 50);
-
-    assert.false(
-      rect.contains_point(point)
-    )
-  });
-
   test('p1, p2, p3, p4', function(assert) {
     let rect;
 
@@ -54,11 +32,26 @@ module('Unit | Rectangle', function () {
     );
   });
 
-  test('instersect positive', function(assert) {
+  test('instersect positive 1', function(assert) {
     let rect1, rect2;
 
     rect1 = new Rectangle(100, 100, 20, 20);
     rect2 = new Rectangle(110, 90, 5, 25);
+
+    assert.true(
+      rect1.intersect(rect2)
+    );
+
+    assert.true(
+      rect2.intersect(rect1)
+    );
+  });
+
+  test('instersect positive 2', function(assert) {
+    let rect1, rect2;
+
+    rect1 = new Rectangle(100, 100, 20, 20);
+    rect2 = new Rectangle(110, 90, 5, 300);
 
     assert.true(
       rect1.intersect(rect2)
