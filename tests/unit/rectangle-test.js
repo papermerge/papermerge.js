@@ -53,5 +53,35 @@ module('Unit | Rectangle', function () {
       rect.p4.isEqual(new Point(100, 205))
     );
   });
+
+  test('instersect positive', function(assert) {
+    let rect1, rect2;
+
+    rect1 = new Rectangle(100, 100, 20, 20);
+    rect2 = new Rectangle(110, 90, 5, 25);
+
+    assert.true(
+      rect1.intersect(rect2)
+    );
+
+    assert.true(
+      rect2.intersect(rect1)
+    );
+  });
+
+  test('instersect negative', function(assert) {
+    let rect1, rect2;
+
+    rect1 = new Rectangle(100, 100, 20, 20);
+    rect2 = new Rectangle(10, 10, 15, 15);
+
+    assert.false(
+      rect1.intersect(rect2)
+    );
+
+    assert.false(
+      rect2.intersect(rect1)
+    );
+  });
 });
 

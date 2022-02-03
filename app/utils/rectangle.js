@@ -17,7 +17,8 @@ export default class Rectangle {
 
   intersect(rect) {
     /*
-    Returns true if this rectangle intersects with rect.
+    Returns true if this rectangle intersects with rect
+    (or other way around).
     Two rectangle intersect if one of them has a point inside other.
     */
     if (this.contains_point(rect.p1)) {
@@ -33,6 +34,23 @@ export default class Rectangle {
     }
 
     if (this.contains_point(rect.p4)) {
+      return true;
+    }
+
+    // or other way around
+    if (rect.contains_point(this.p1)) {
+      return true;
+    }
+
+    if (rect.contains_point(this.p2)) {
+      return true;
+    }
+
+    if (rect.contains_point(this.p3)) {
+      return true;
+    }
+
+    if (rect.contains_point(this.p4)) {
       return true;
     }
 
