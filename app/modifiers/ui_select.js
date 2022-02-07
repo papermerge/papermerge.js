@@ -126,7 +126,6 @@ class UISelect {
     });
   }
 
-
   deselect_all_nodes() {
     let input_el;
 

@@ -1,0 +1,24 @@
+#context-menu {
+  position: absolute;
+  display: hidden;
+}
+
+#context-menu {
+  .dropdown-menu-left {
+      left: 100%;
+      top: 10%;
+  }
+  .dropdown-submenu {
+      position: relative;
+      z-index: 5000;
+  }
+
+  .dropdown-submenu:hover .dropdown-menu, .dropdown-submenu:focus .dropdown-menu{
+      display: flex;
+      flex-direction: column;
+      position: absolute !important;
+  }
+
+}
+
+

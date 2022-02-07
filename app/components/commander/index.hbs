@@ -3,9 +3,18 @@
     onDrop=this.onDrop
     onDragOver=this.onDragOver }}
 
-  {{uiSelect}}>
+  {{uiSelect}}
+  {{contextMenu}}>
 
   <UiSelect />
+
+  <ContextMenu
+    @openNewFolderModal={{this.openNewFolderModal}}
+    @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @selectedNodes={{this.selected_nodes}}
+    @onDownloadNodes={{this.onDownloadNodes}}
+    @openRenameModal={{this.openRenameModal}} />
+
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}

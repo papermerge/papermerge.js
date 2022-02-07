@@ -1,0 +1,52 @@
+<ul id="context-menu" class="dropdown-menu">
+  <li>
+    <a class="dropdown-item" {{on "click" @openNewFolderModal }}>
+      <i class="fa fa-plus mx-2"></i>New Folder
+    </a>
+  </li>
+  <li class="dropdown dropdown-submenu dropend">
+    <div class="dropdown">
+      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-expand mx-2"></i>
+        Selection
+      </a>
+      <ul class="dropdown-menu dropdown-menu-left">
+        <li class="dropdown-item"
+          {{on "click" this.onSelectAll}}>All</li>
+        <li class="dropdown-item"
+          {{on "click" this.onSelectFolders}}>Folders</li>
+        <li class="dropdown-item"
+          {{on "click" this.onSelectDocuments}}>Documents</li>
+        <li class="dropdown-item"
+          {{on "click" this.onSelectNone}}>None</li>
+        <li class="dropdown-item"
+        {{on "click" this.onInvertSelection}}>Invert Selection</li>
+      </ul>
+    </div>
+  </li>
+  {{#if this.one_node_selected}}
+    <li>
+      <a class="dropdown-item" {{on "click" this.onRename }}>
+        <i class="fa fa-edit mx-2"></i>Rename
+      </a>
+    </li>
+  {{/if}}
+  {{#if this.one_or_multiple_nodes_selected}}
+    <li>
+      <a class="dropdown-item" {{on "click" this.onDownloadNodes}}>
+        {{#if this.download_in_progress}}
+          <Spinner @inProgress={{this.download_in_progress}} />
+        {{else}}
+          <i class="fa fa-download mx-2"></i>
+        {{/if}}
+        Download
+      </a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <a class="dropdown-item" {{on "click" @openConfirmDeletionModal}}>
+        <i class="fa fa-times mx-2"></i>Delete
+      </a>
+    </li>
+  {{/if}}
+</ul>
