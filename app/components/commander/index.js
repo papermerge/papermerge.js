@@ -41,7 +41,7 @@ export default class CommanderComponent extends Component {
   @tracked __new_record; // used as workaround for an ember bug
 
   @tracked deleted_records = A([]);
-  @tracked __deleted_records; // used as workaround for an ember bug
+  @tracked __deleted_record; // used as workaround for an ember bug
 
   constructor(owner, args) {
     super(owner, args);
@@ -88,7 +88,7 @@ export default class CommanderComponent extends Component {
 
   _substract_nodes(node_ids) {
     let that = this, doc;
-
+    console.log(`substract_nodes ${node_ids}`);
     node_ids.forEach(node_id => {
       // maybe document ?
       doc = that.store.peekRecord('document', node_id);
@@ -103,9 +103,10 @@ export default class CommanderComponent extends Component {
     });
   }
 
-  _substract_node(doc) {
-    this.deleted_records.push(doc);
-    this.__deleted_record = doc;
+  _substract_node(node) {
+    this.deleted_records.push(node);
+    this.__deleted_record = node;
+    this.selected_nodes = [];
   }
 
   _add_nodes(node_ids) {
@@ -187,6 +188,11 @@ export default class CommanderComponent extends Component {
   @action
   onViewModeChange(new_view_mode) {
     this.view_mode = new_view_mode;
+  }
+
+  @action
+  onSelectionChanged(selected_nodes) {
+    this.selected_nodes = selected_nodes;
   }
 
   @action
@@ -323,7 +329,6 @@ export default class CommanderComponent extends Component {
         );
       }
     }
-
     if (this.deleted_records.length > 0) {
       children_copy = children_copy.filter(
         item => !this.deleted_records.includes(item)
@@ -338,7 +343,7 @@ export default class CommanderComponent extends Component {
       // pass
     }
 
-    if (this.__deleted_records) {
+    if (this.__deleted_record) {
       // similar to ``this.__new_record`` - it is used
       // here to help ember with tracking of ``this.deleted_records`` array
     }

@@ -12,6 +12,14 @@
             </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
             <li class="dropdown-item">
+              <i class="fa fa-user-secret mx-2"></i>
+              <LinkTo
+                @route='authenticated.tokens'
+                class="text-decoration-none">
+                  API Tokens
+              </LinkTo>
+            </li>
+            <li class="dropdown-item">
               <i class="fa fa-cogs mx-2"></i>
               <LinkTo
                 @route='authenticated.preferences'

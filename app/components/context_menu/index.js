@@ -29,43 +29,47 @@ export default class ContextMenuComponent extends Component {
 
   @action
   onSelectAll() {
-    let nodes_arr = Array.from(
-      document.getElementsByClassName('node')
-    );
+    let new_selection = Array.from(this.args.nodes);
 
-    this.select_nodes(nodes_arr);
+    this.args.onSelectionChanged(new_selection);
   }
 
   @action
   onSelectFolders() {
-    let nodes_arr = Array.from(
-      document.querySelectorAll('.node.folder')
-    );
+    let new_selection;
 
-    this.select_nodes(nodes_arr);
+    new_selection = this.args.nodes.filter(
+      node => node.nodeType == 'folder'
+    );
+    this.args.onSelectionChanged(new_selection);
   }
 
   @action
   onSelectDocuments() {
-    let nodes_arr = Array.from(
-      document.querySelectorAll('.node.document')
-    );
+    let new_selection;
 
-    this.select_nodes(nodes_arr);
+    new_selection = this.args.nodes.filter(
+      node => node.nodeType == 'document'
+    );
+    this.args.onSelectionChanged(new_selection);
   }
 
   @action
   onInvertSelection() {
-    console.log('Invert Selection');
+    let new_selection, current_sel;
+
+    current_sel = this.args.selectedNodes;
+
+    new_selection = this.args.nodes.filter(node => {
+      return !current_sel.includes(node);
+    });
+
+    this.args.onSelectionChanged(new_selection);
   }
 
   @action
   onSelectNone() {
-    let nodes_arr = Array.from(
-      document.getElementsByClassName('node')
-    );
-
-    this.deselect_all_nodes(nodes_arr);
+    this.args.onSelectionChanged([]);
   }
 
   @action

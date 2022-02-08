@@ -41,9 +41,9 @@ export default class DrappableModifier extends Modifier {
       // drop incoming from another panel
       data = event.dataTransfer.getData('application/x.node');
       if (data) {
-        callback(JSON.parse({
-          'application/x.node': data
-        }));
+        callback({
+          'application/x.node': JSON.parse(data)
+        });
       }
     } else if (this._is_desktop_drop(event)) {
       files_list = this._get_desktop_files(event);

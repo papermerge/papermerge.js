@@ -43,6 +43,11 @@ Router.map(function () {
       this.route('index', { path: '/' });
       this.route('section', { path: '/:section_name' });
     });
+
+    this.route('tokens', function() {
+      this.route('add');
+      this.route('index', { path: '/' });
+    });
   });
 
   this.route('login');

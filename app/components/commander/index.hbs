@@ -11,6 +11,8 @@
   <ContextMenu
     @openNewFolderModal={{this.openNewFolderModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @onSelectionChanged={{this.onSelectionChanged}}
+    @nodes={{this.children}}
     @selectedNodes={{this.selected_nodes}}
     @onDownloadNodes={{this.onDownloadNodes}}
     @openRenameModal={{this.openRenameModal}} />
