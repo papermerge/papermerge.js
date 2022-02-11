@@ -27,7 +27,7 @@ export default class AuthToken extends Base {
   async authenticate(username, password) {
     let response, error;
 
-    response = await fetch(`${base_url()}/auth-token/`, {
+    response = await fetch(`${base_url()}/auth/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

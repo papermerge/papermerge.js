@@ -1,0 +1,7 @@
+<Token::New />
+
+<Table @titles={{array 'Digest' 'Expiry' 'Created' 'Action' }}>
+  {{#each @model as |token|}}
+    <Token::TableRow @token={{token}} />
+  {{/each}}
+</Table>

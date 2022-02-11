@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    {{truncatechars @token.digest}}
+  </td>
+  <td>
+    {{@token.expiry}}
+  </td>
+  <td>{{@token.created}}</td>
+  <td>
+    <button class="btn btn-link" type="button" {{on "click" (fn this.onRemove @token)}}>
+    Remove
+    </button>
+  </td>
+</tr>

@@ -1,0 +1,47 @@
+{{#if this.message_with_token}}
+  <Alert::Success @message={{this.message_with_token}} />
+{{/if}}
+
+<Button::New @onClick={{this.onToggleNew}} class="add-token" />
+
+{{#if this.form_visible}}
+  <form>
+    <div class="row mb-2">
+      <div class="col-md-3">
+        <label for="name" class="form-label">Expiry</label>
+        <div class="input-group mb-3">
+          <input type="number"
+            min="1"
+            max="365"
+            class="form-control"
+            value="{{this.new_expiry}}"
+            {{on 'change' this.onNumericChange}} >
+          <select class="form-select" {{on 'change' this.onScaleChange}} >
+            <option selected value="1">hour(s)</option>
+            <option value="24">day(s)</option>
+            <option value="744">month(s)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="action" class="form-label">Action</label>
+        <div>
+          <button
+            type="button"
+            {{on "click" this.onCancel}}
+            class="btn btn-secondary">
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            {{on "click" this.onCreate}}
+            class="btn btn-success">
+            Create Token
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+{{/if}}

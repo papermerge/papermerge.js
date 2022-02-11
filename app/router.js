@@ -16,6 +16,8 @@ Router.map(function () {
 
     this.route('tags');
 
+    this.route('tokens');
+
     this.route('automates', function () {
       this.route('add');
       this.route('edit', { path: '/:automate_id/edit' });
@@ -44,10 +46,7 @@ Router.map(function () {
       this.route('section', { path: '/:section_name' });
     });
 
-    this.route('tokens', function() {
-      this.route('add');
-      this.route('index', { path: '/' });
-    });
+
   });
 
   this.route('login');

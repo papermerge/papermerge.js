@@ -14,8 +14,10 @@
 
 body {
     background-color: #e9ecef;
-    // make node title text unselectable
-    user-select: none;
+}
+
+.user-select-none {
+  user-select: none;
 }
 
 main {
