@@ -4,6 +4,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"
+              role="button"
+              {{on "click" this.onSidebarToggle}}><i class="fas fa-bars"></i></a>
+          </li>
+        </ul>
         <Search />
         {{#if this.session.isAuthenticated}}
           <div class="dropdown">

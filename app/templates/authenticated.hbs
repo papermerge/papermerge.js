@@ -1,7 +1,11 @@
 <main>
-  <Nav::Sidebar @home_folder={{this.home_folder}} />
+  <Nav::Sidebar
+    @home_folder={{this.home_folder}}
+    @expanded={{this.expanded}}
+  />
   <div class="w-100 central-bar">
-    <Nav::Topbar />
+    <Nav::Topbar
+      @onSidebarToggle={{this.onSidebarToggle}} />
     <div class="container-fluid mx-2 my-1">
       {{outlet}}
     </div>

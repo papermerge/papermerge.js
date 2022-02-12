@@ -1,54 +1,129 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-open" >
+{{#if @expanded}}
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-open" >
+      <LinkTo
+          @route="authenticated.nodes"
+          @model="{{@home_folder.id}}"
+          class="d-flex brand text-white text-decoration-none">
+            <img
+              src="/assets/images/logo_bbg.svg"
+              alt="Papermerge DMS"
+              class="brand-image mx-2" />
+            <h4 class="brand-text">Papermerge</h4>
+      </LinkTo>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <LinkTo
+            @route="authenticated.nodes"
+            @model="{{@home_folder.id}}"
+            class="nav-link text-white {{this.active}}" aria-current="page">
+            <i class="fa fa-home me-2"></i>Home
+          </LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="authenticated.inbox" class="nav-link text-white">
+            <i class="bi-inbox me-2"></i>Inbox
+          </LinkTo>
+        </li>
+
+        <li>
+          <LinkTo @route="authenticated.automates" class="nav-link text-white">
+            <i class="fas fa-robot me-2"></i>Automates
+          </LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="authenticated.tags" class="nav-link text-white">
+            <i class="bi-tag me-2"></i>Tags
+          </LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="authenticated.groups" class="nav-link text-white">
+            <i class="fas fa-users me-2"></i>Groups
+          </LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="authenticated.users" class="nav-link text-white">
+            <i class="fas fa-user-friends me-2"></i>Users
+          </LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="authenticated.roles" class="nav-link text-white">
+            <i class="fas fa-user me-2"></i>Roles
+          </LinkTo>
+        </li>
+      </ul>
+  </div>
+{{else}}
+<div class="d-flex flex-column flex-shrink-1 text-white bg-dark" >
     <LinkTo
         @route="authenticated.nodes"
         @model="{{@home_folder.id}}"
-        class="d-flex brand text-white text-decoration-none">
+        class="d-flex brand text-white text-decoration-none px-3 pb-0  pt-2">
           <img
             src="/assets/images/logo_bbg.svg"
             alt="Papermerge DMS"
-            class="brand-image mx-2" />
-          <h4 class="brand-text">Papermerge</h4>
+            class="brand-image" />
     </LinkTo>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-auto text-center">
       <li class="nav-item">
         <LinkTo
           @route="authenticated.nodes"
           @model="{{@home_folder.id}}"
+          {{tooltip title="Home"}}
           class="nav-link text-white {{this.active}}" aria-current="page">
-          <i class="fa fa-home me-2"></i>Home
+          <i class="fa fa-home me-2"></i>
         </LinkTo>
       </li>
       <li>
-        <LinkTo @route="authenticated.inbox" class="nav-link text-white">
-          <i class="bi-inbox me-2"></i>Inbox
+        <LinkTo
+          @route="authenticated.inbox"
+          {{tooltip title="Inbox"}}
+          class="nav-link text-white" >
+          <i class="bi-inbox me-2"></i>
         </LinkTo>
       </li>
 
       <li>
-        <LinkTo @route="authenticated.automates" class="nav-link text-white">
-          <i class="fas fa-robot me-2"></i>Automates
+        <LinkTo
+          @route="authenticated.automates"
+          {{tooltip title="Automates"}}
+          class="nav-link text-white">
+          <i class="fas fa-robot me-2"></i>
         </LinkTo>
       </li>
       <li>
-        <LinkTo @route="authenticated.tags" class="nav-link text-white">
-          <i class="bi-tag me-2"></i>Tags
+        <LinkTo
+          @route="authenticated.tags"
+          {{tooltip title="Tags"}}
+          class="nav-link text-white">
+          <i class="bi-tag me-2"></i>
         </LinkTo>
       </li>
       <li>
-        <LinkTo @route="authenticated.groups" class="nav-link text-white">
-          <i class="fas fa-users me-2"></i>Groups
+        <LinkTo
+          @route="authenticated.groups"
+          {{tooltip title="Groups"}}
+          class="nav-link text-white">
+          <i class="fas fa-users me-2"></i>
         </LinkTo>
       </li>
       <li>
-        <LinkTo @route="authenticated.users" class="nav-link text-white">
-          <i class="fas fa-user-friends me-2"></i>Users
+        <LinkTo
+          @route="authenticated.users"
+          {{tooltip title="Users"}}
+          class="nav-link text-white">
+          <i class="fas fa-user-friends me-2"></i>
         </LinkTo>
       </li>
       <li>
-        <LinkTo @route="authenticated.roles" class="nav-link text-white">
-          <i class="fas fa-user me-2"></i>Roles
+        <LinkTo
+          @route="authenticated.roles"
+          {{tooltip title="Roles"}}
+          class="nav-link text-white">
+          <i class="fas fa-user me-2"></i>
         </LinkTo>
       </li>
     </ul>
 </div>
+{{/if}}
