@@ -1,5 +1,5 @@
 import Base from 'ember-simple-auth/authenticators/base';
-import { base_url } from 'papermerge/utils';
+import { base_url } from 'papermerge/utils/host';
 
 
 export default class AuthToken extends Base {

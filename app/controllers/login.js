@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { base_url } from 'papermerge/utils';
+import { base_url } from 'papermerge/utils/host';
 
 
 export default class LoginController extends Controller {

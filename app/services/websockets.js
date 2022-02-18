@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import { ws_base_url } from 'papermerge/utils';
+import { ws_base_url } from 'papermerge/utils/host';
 
 
 export default class Websockets extends Service {

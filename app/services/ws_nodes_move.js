@@ -1,4 +1,4 @@
-import { ws_base_url } from 'papermerge/utils';
+import { ws_base_url } from 'papermerge/utils/host';
 import Service from '@ember/service';
 
 

@@ -63,56 +63,6 @@ function are_sets_equal(set1, set2) {
   return same_size(set1, set2) && same_values(set1, set2);
 }
 
-function base_url() {
-  /*
-  Returns backend's REST API base url
-
-  Notice there is no `/` at the end of returned string.
-  */
-  let base = `${window.location.protocol}:/${window.location.host}`;
-
-  if (!ENV.APP.HOST) {
-
-    if (!ENV.APP.NAMESPACE) {
-      return base;
-    }
-
-    return `${base}/${ENV.APP.NAMESPACE}`;
-  }
-
-  if (!ENV.APP.NAMESPACE) {
-    return `${ENV.APP.HOST}`;
-  }
-
-  return `${ENV.APP.HOST}/${ENV.APP.NAMESPACE}`;
-}
-
-function ws_base_url() {
-  /*
-  websockets base url
-  */
-  let base = `ws://${window.location.host}`;
-
-  if (window.location.protocol == "https:") {
-    base = `wss://${window.location.host}`;
-  }
-
-  if (!ENV.APP.WS_HOST) {
-
-    if (!ENV.APP.WS_NAMESPACE) {
-      return base;
-    }
-
-    return `${base}/${ENV.APP.WS_NAMESPACE}`;
-  }
-
-  if (!ENV.APP.WS_NAMESPACE) {
-    return `${ENV.APP.WS_HOST}`;
-  }
-
-  return `${ENV.APP.WS_HOST}/${ENV.APP.WS_NAMESPACE}`;
-}
-
 /**
  * Extracts file name from a response with accessible Content-Disposition header
  */
@@ -158,8 +108,6 @@ function insert_blob(file_name, blob) {
 export {
   group_perms_by_model,
   are_sets_equal,
-  base_url,
-  ws_base_url,
   insert_blob,
   extract_file_name
 };

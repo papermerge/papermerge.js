@@ -3,10 +3,11 @@ import Service from '@ember/service';
 import { computed } from '@ember/object';
 import { service } from '@ember/service';
 import {
-  base_url,
   insert_blob,
   extract_file_name
 } from 'papermerge/utils';
+
+import { base_url } from 'papermerge/utils/host';
 
 
 export default class Requests extends Service {
