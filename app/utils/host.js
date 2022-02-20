@@ -37,7 +37,7 @@ function ws_base_url() {
     // user can override BACKEND HOST by providing
     // ENV.APP.HOST value
     // e.g. ENV.APP.HOST = 'ws://127.0.0.1:8000';
-    base = ENV.WS_APP.HOST;
+    base = ENV.APP.WS_HOST;
   }
 
   if (!ENV.APP.WS_NAMESPACE) {

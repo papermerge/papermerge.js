@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { base_url } from 'papermerge/utils/host';
 
 
 export default class TopbarComponent extends Component {
@@ -15,5 +16,9 @@ export default class TopbarComponent extends Component {
   @action
   onSidebarToggle() {
     this.args.onSidebarToggle();
+  }
+
+  get browsable_api_url() {
+    return base_url();
   }
 }

@@ -42,4 +42,8 @@ export default class LoginController extends Controller {
   get inProgress() {
     return this.in_progress;
   }
+
+  get browsable_api_url() {
+    return base_url();
+  }
 }
