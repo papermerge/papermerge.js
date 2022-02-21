@@ -1,6 +1,7 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import RSVP from 'rsvp';
-import BaseRoute from 'papermerge/base/routing';
+import BaseRoute from 'papermerge/routes/base';
+
 
 class AddUserRoute extends BaseRoute {
   @service store;
