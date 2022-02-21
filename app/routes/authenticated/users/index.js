@@ -1,5 +1,6 @@
 import { inject as service } from '@ember/service';
-import BaseRoute from 'papermerge/base/routing';
+import BaseRoute from 'papermerge/routes/base';
+
 
 export default class UsersRoute extends BaseRoute {
   @service store;

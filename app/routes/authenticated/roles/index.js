@@ -1,4 +1,4 @@
-import BaseRoute from 'papermerge/base/routing';
+import BaseRoute from 'papermerge/routes/base';
 import { inject as service } from '@ember/service';
 
 
