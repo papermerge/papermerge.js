@@ -3,5 +3,9 @@
   @model={{this.model.id}}
   @query={{this.query}}
   ...attributes >
-    {{this.title}}
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{this.title}}
+    {{/if}}
 </LinkTo>

@@ -9,6 +9,5 @@ export default class AuthenticatedController extends Controller {
   @action
   onSidebarToggle() {
     this.expanded = !this.expanded;
-    console.log(`this.expanded=${this.expanded}`);
   }
 }

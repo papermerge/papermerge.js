@@ -8,8 +8,8 @@ export default class BaseRoute extends Route {
   @service currentUser;
 
   async beforeModel(transition) {
-
     this.session.requireAuthentication(transition, 'login');
+
     await this.currentUser.loadCurrentUser();
 
     if (this.currentUser.user) {
@@ -17,14 +17,16 @@ export default class BaseRoute extends Route {
     }
   }
 
-  setupController() {
+  async setupController() {
     super.setupController(...arguments);
+    let app_controller = this.controllerFor('authenticated'),
+      home_folder,
+      inbox_folder;
 
-    let app_controller = this.controllerFor('authenticated');
+    home_folder = await this.currentUser.user.getHomeFolder();
+    inbox_folder = await this.currentUser.user.getInboxFolder();
 
-    this.currentUser.user.getHomeFolder().then((home_folder) => {
-      app_controller.set('home_folder', home_folder);
-    });
-
+    app_controller.set('home_folder', home_folder);
+    app_controller.set('inbox_folder', inbox_folder);
   }
 }

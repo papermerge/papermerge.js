@@ -12,20 +12,22 @@
       </LinkTo>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
+        <li>
           <LinkTo
             @route="authenticated.nodes"
             @model="{{@home_folder.id}}"
-            class="nav-link text-white {{this.active}}" aria-current="page">
+            class="nav-link text-white" aria-current="page">
             <i class="fa fa-home me-2"></i>Home
           </LinkTo>
         </li>
         <li>
-          <LinkTo @route="authenticated.inbox" class="nav-link text-white">
+          <LinkTo
+            @route="authenticated.nodes"
+            @model="{{@inbox_folder.id}}"
+            class="nav-link text-white" aria-current="page">
             <i class="bi-inbox me-2"></i>Inbox
           </LinkTo>
         </li>
-
         <li>
           <LinkTo @route="authenticated.automates" class="nav-link text-white">
             <i class="fas fa-robot me-2"></i>Automates
@@ -71,13 +73,14 @@
           @route="authenticated.nodes"
           @model="{{@home_folder.id}}"
           {{tooltip title="Home"}}
-          class="nav-link text-white {{this.active}}" aria-current="page">
+          class="nav-link text-white">
           <i class="fa fa-home me-2"></i>
         </LinkTo>
       </li>
       <li>
         <LinkTo
-          @route="authenticated.inbox"
+          @route="authenticated.nodes"
+          @model="{{@inbox_folder.id}}"
           {{tooltip title="Inbox"}}
           class="nav-link text-white" >
           <i class="bi-inbox me-2"></i>

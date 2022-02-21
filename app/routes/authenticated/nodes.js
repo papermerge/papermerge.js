@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { getPanelInfo } from './utils';
 
 
-export default class FolderRoute extends Route {
+export default class NodesRoute extends Route {
   @service store;
   @service currentUser;
 
@@ -53,6 +53,8 @@ export default class FolderRoute extends Route {
         'pages': extra_pages_with_url,
       }
       context['home_folder'] = this.currentUser.user.home_folder;
+      context['inbox_folder'] = this.currentUser.user.inbox_folder;
+
       return context;
     }
 
@@ -66,6 +68,7 @@ export default class FolderRoute extends Route {
     }
 
     context['home_folder'] = await this.currentUser.user.getHomeFolder();
+    context['inbox_folder'] = await this.currentUser.user.getInboxFolder();
 
     return context;
   }
@@ -75,6 +78,7 @@ export default class FolderRoute extends Route {
     let _auth_controller = this.controllerFor('authenticated');
 
     _auth_controller.set('home_folder', model.home_folder);
+    _auth_controller.set('inbox_folder', model.inbox_folder);
   }
 
 }

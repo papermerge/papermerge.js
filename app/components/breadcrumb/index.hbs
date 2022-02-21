@@ -6,7 +6,15 @@
           @node={{node}}
           @extranode={{@extranode}}
           @extradoc={{@extradoc}}
-          @hint={{@hint}} />
+          @hint={{@hint}}>
+            {{#if (is_equal node.title ".inbox")}}
+              <i class="bi-inbox-fill me-2"></i>Inbox
+            {{else if (is_equal node.title ".home")}}
+               <i class="fa fa-home me-2"></i>Home
+            {{else}}
+              {{node.title}}
+            {{/if}}
+        </DualLinkTo>
       </li>
     {{/each}}
   </ol>
