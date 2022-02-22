@@ -57,6 +57,7 @@
     @node={{@node}}
     @extranode={{@extranode}}
     @extradoc={{@extradoc}}
+    @onNodeClicked={{this.onNodeClicked}}
     @hint={{@hint}} />
 
   <div class="view-mode-{{this.view_mode}}">
@@ -74,7 +75,8 @@
               @node={{node}}
               @extranode={{@extranode}}
               @extradoc={{@extradoc}}
-              @hint={{@hint}} />
+              @hint={{@hint}}
+              {{on "click" this.onNodeClicked}} />
         </NodeType>
       {{/let}}
     {{/each}}
@@ -87,6 +89,4 @@
       @node={{@node}}
       @hint={{@hint}} />
   {{/if}}
-
-
 </div>

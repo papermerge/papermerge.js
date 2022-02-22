@@ -132,8 +132,18 @@ export default class CommanderComponent extends Component {
   }
 
   @action
+  onNodeClicked() {
+    /**
+     * Whenever a folder is clicked reset selected node list
+     *
+     * Otherwise user will see (newly opened) folder with no
+     * selected nodes - but with visible action buttons (delete, download...)!
+     * */
+    this.selected_nodes = A([]);
+  }
+
+  @action
   openNewFolderModal() {
-    console.log('on new folder');
     this.show_new_folder_modal = true;
   }
 

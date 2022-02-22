@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Controller from '@ember/controller';
-import { tracked } from '@glimmer/tracking'
+import { tracked } from '@glimmer/tracking';
 
 
 export default class AuthenticatedController extends Controller {

@@ -12,7 +12,7 @@ export default class Preferences extends Service {
 
     prefs = this.store.peekAll('preferences');
 
-    found_item = prefs.filterBy('identifier',key);
+    found_item = prefs.filterBy('identifier', key);
 
     if (found_item && found_item.length == 1) {
       return found_item[0]['value'];

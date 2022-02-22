@@ -6,7 +6,8 @@
           @node={{node}}
           @extranode={{@extranode}}
           @extradoc={{@extradoc}}
-          @hint={{@hint}}>
+          @hint={{@hint}}
+          {{on "click" @onNodeClicked}} >
             {{#if (is_equal node.title ".inbox")}}
               <i class="bi-inbox-fill me-2"></i>Inbox
             {{else if (is_equal node.title ".home")}}
