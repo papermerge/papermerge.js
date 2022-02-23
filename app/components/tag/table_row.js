@@ -9,6 +9,7 @@ export default class TableRowComponent extends Component {
   // being edited i.e. in edit mode
   @tracked edit_mode_id = 0;
   @service store;
+  @service router;
 
   @action
   async onRemove(tag) {
@@ -40,7 +41,10 @@ export default class TableRowComponent extends Component {
       this.store.findRecord('tag', tag.id).then((found_tag) => {
         found_tag.name = tag.name;
         found_tag.description = tag.description;
-        found_tag.save();
+        found_tag.save().then(() => {
+          // refresh pinned tags on the sidebar
+          that.router.refresh();
+        });
       });
     } else {
       console.warn(`onSaveChanges received tag=${tag} object without tag ID`);
