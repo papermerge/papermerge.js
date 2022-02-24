@@ -10,7 +10,6 @@ export default class SessionService extends BaseSessionService {
     super.handleAuthentication("authenticated.index");
     try {
       await this.currentUser.loadCurrentUser();
-      await this.preferences.load();
     } catch (err) {
       await this.invalidate();
     }

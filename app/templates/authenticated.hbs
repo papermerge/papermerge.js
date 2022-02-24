@@ -1,8 +1,8 @@
 <main>
   <Nav::Sidebar
-    @home_folder={{this.home_folder}}
-    @inbox_folder={{this.inbox_folder}}
-    @pinned_tags={{@model}}
+    @home_folder_id={{@model.home_folder_id}}
+    @inbox_folder_id={{@model.inbox_folder_id}}
+    @pinned_tags={{@model.pinned_tags}}
     @expanded={{this.expanded}} />
   <div class="w-100 central-bar">
     <Nav::Topbar

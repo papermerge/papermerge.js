@@ -10,6 +10,7 @@ export default class LoginController extends Controller {
   @tracked in_progress = false;
   @service session;
   @service router;
+  @service currentUser;
 
   @action
   async authenticate(username, password) {
@@ -35,7 +36,11 @@ export default class LoginController extends Controller {
 
     if (this.session.isAuthenticated) {
       // What to do with all this success?
-      this.router.transitionTo('authenticated.index');
+      await this.currentUser.loadCurrentUser();
+      this.router.transitionTo(
+        'authenticated.nodes',
+        this.currentUser.user.home_folder.get('id')
+      );
     }
   }
 

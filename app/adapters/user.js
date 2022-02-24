@@ -38,7 +38,6 @@ export default class UserAdapter extends ApplicationAdapter {
     let record, me_id;
 
     me_id = window.localStorage.getItem('me');
-
     if (me_id) {
       record = this.store.peekRecord('user', me_id);
 
@@ -46,7 +45,6 @@ export default class UserAdapter extends ApplicationAdapter {
         return record;
       }
     }
-
     record = await this.store.queryRecord(
         'user', { me: true }
     );

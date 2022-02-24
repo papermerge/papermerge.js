@@ -34,5 +34,4 @@ export default class NodesController extends DualPanelBaseController {
       this.extra_type = 'folder';
     }
   }
-
 }

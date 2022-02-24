@@ -2,7 +2,7 @@
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-open" >
       <LinkTo
           @route="authenticated.nodes"
-          @model="{{@home_folder.id}}"
+          @model="{{@home_folder_id}}"
           class="d-flex brand text-white text-decoration-none">
             <img
               src="/assets/images/logo_bbg.svg"
@@ -15,7 +15,7 @@
         <li>
           <LinkTo
             @route="authenticated.nodes"
-            @model="{{@home_folder.id}}"
+            @model="{{@home_folder_id}}"
             class="nav-link text-white" aria-current="page">
             <i class="fa fa-home me-2"></i>Home
           </LinkTo>
@@ -40,7 +40,7 @@
         <li>
           <LinkTo
             @route="authenticated.nodes"
-            @model="{{@inbox_folder.id}}"
+            @model="{{@inbox_folder_id}}"
             class="nav-link text-white" aria-current="page">
             <i class="bi-inbox me-2"></i>Inbox
           </LinkTo>
@@ -76,7 +76,7 @@
 <div class="d-flex flex-column flex-shrink-1 text-white bg-dark" >
     <LinkTo
         @route="authenticated.nodes"
-        @model="{{@home_folder.id}}"
+        @model="{{@home_folder_id}}"
         class="d-flex brand text-white text-decoration-none px-3 pb-0  pt-2">
           <img
             src="/assets/images/logo_bbg.svg"
@@ -88,7 +88,7 @@
       <li class="nav-item">
         <LinkTo
           @route="authenticated.nodes"
-          @model="{{@home_folder.id}}"
+          @model="{{@home_folder_id}}"
           {{tooltip title="Home"}}
           class="nav-link text-white">
           <i class="fa fa-home me-2"></i>
@@ -97,7 +97,7 @@
       <li>
         <LinkTo
           @route="authenticated.nodes"
-          @model="{{@inbox_folder.id}}"
+          @model="{{@inbox_folder_id}}"
           {{tooltip title="Inbox"}}
           class="nav-link text-white" >
           <i class="bi-inbox me-2"></i>

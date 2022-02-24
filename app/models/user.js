@@ -23,23 +23,6 @@ class UserModel extends Model {
     return adapter.changePassword(this, new_password);
   }
 
-  async getHomeFolder() {
-    let home_id, adapter;
-
-    adapter = this.store.adapterFor('node');
-    home_id = this.home_folder.get('id');
-
-    return adapter.getFolder(home_id);
-  }
-
-  async getInboxFolder() {
-    let inbox_id, adapter;
-
-    adapter = this.store.adapterFor('node');
-    inbox_id = this.inbox_folder.get('id');
-
-    return adapter.getFolder(inbox_id);
-  }
 }
 
 export default UserModel;
