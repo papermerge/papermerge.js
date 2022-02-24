@@ -53,6 +53,25 @@ export default function() {
     }
   });
 
+  this.get('/api/folders/1/', () => {
+    return {
+      "data": {
+        "type": "folders",
+        "id":"1",
+        "attributes": {
+          "title": ".inbox",
+          "created_at": "2021-11-24T20:54:38.833485+01:00",
+          "updated_at":"2021-11-24T20:54:38.833509+01:00"
+        },
+        "relationships": {
+          "parent": {
+            "data":null
+          }
+        }
+      }
+    }
+  });
+
   this.get('/api/tags/', () => {
     return {
       "data": [
