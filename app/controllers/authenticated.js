@@ -4,6 +4,8 @@ import { tracked } from '@glimmer/tracking';
 
 
 export default class AuthenticatedController extends Controller {
+
+  // sidebar expanded ?
   @tracked expanded = true;
 
   @action

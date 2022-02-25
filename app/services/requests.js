@@ -142,6 +142,14 @@ export default class Requests extends Service {
     });
   }
 
+  async getInboxCount() {
+    return this._get('/nodes/inboxcount/').then(
+      response => response.json()
+    ).then( data => {
+      return data.data.count;
+    });
+  }
+
   async _get(url, params_str) {
     let url_with_base,
       headers_copy = {};

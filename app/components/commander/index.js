@@ -88,7 +88,7 @@ export default class CommanderComponent extends Component {
 
   _substract_nodes(node_ids) {
     let that = this, doc;
-    console.log(`substract_nodes ${node_ids}`);
+
     node_ids.forEach(node_id => {
       // maybe document ?
       doc = that.store.peekRecord('document', node_id);
