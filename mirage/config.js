@@ -1,4 +1,11 @@
 export default function() {
+  this.get('/api/nodes/inboxcount/', () => {
+    return {
+      "data": {
+        "count": 1
+      }
+    }
+  });
 
   this.get('/api/users/me/', () => {
     return {
@@ -95,4 +102,5 @@ export default function() {
       "data": []
     }
   });
+
 }
