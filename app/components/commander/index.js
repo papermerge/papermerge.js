@@ -22,6 +22,8 @@ export default class CommanderComponent extends Component {
   @service requests;
   @service preferences;
   @service uploader;
+  @service router;
+  @service currentUser;
 
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
@@ -272,6 +274,13 @@ export default class CommanderComponent extends Component {
         return;
       }
       this.requests.nodesMove(nodes_move_data);
+      if (nodes_move_data.source_parent.id == this.currentUser.user.inbox_folder.get('id')) {
+        this.router.refresh();
+      }
+
+      if (nodes_move_data.target_parent.id == this.currentUser.user.inbox_folder.get('id')) {
+        this.router.refresh();
+      }
 
     } else if (data['application/x.desktop']) {
       // dropping items from the Desktop file manager
