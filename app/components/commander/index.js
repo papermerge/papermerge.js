@@ -267,6 +267,10 @@ export default class CommanderComponent extends Component {
           'id': this.args.node.id
         }
       }
+      if (nodes_move_data.source_parent.id == nodes_move_data.target_parent.id) {
+        console.log('Source same as target. Nothing to do.');
+        return;
+      }
       this.requests.nodesMove(nodes_move_data);
 
     } else if (data['application/x.desktop']) {
