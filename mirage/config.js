@@ -103,4 +103,106 @@ export default function() {
     }
   });
 
+  this.get('/api/nodes/1/', () => {
+    return {
+      "data": [
+        {
+          "type": "folders",
+          "id":"4",
+          "attributes": {
+            "title": "Folder 1",
+            "created_at": "2021-11-24T20:54:38.833485+01:00",
+            "updated_at":"2021-11-24T20:54:38.833509+01:00"
+          },
+          "relationships": {
+            "parent": {
+              "data":null
+            }
+          }
+        },
+        {
+          "type": "folders",
+          "id":"5",
+          "attributes": {
+            "title": "Folder 2",
+            "created_at": "2021-11-24T20:54:38.833485+01:00",
+            "updated_at":"2021-11-24T20:54:38.833509+01:00"
+          },
+          "relationships": {
+            "parent": {
+              "data":null
+            }
+          }
+        }
+      ],
+      "meta": {
+        "pagination": {
+          "page": 1,
+          "pages": 1,
+          "count": 2
+        }
+      },
+      "links": {
+        "first": "",
+        "last": "",
+        "next": "",
+        "prev": ""
+      }
+    }
+  });
+
+  this.get('/api/nodes/2/', () => {
+    return {
+      "data": [
+        {
+          "type": "folders",
+          "id":"4",
+          "attributes": {
+            "title": "Folder 1",
+            "created_at": "2021-11-24T20:54:38.833485+01:00",
+            "updated_at":"2021-11-24T20:54:38.833509+01:00"
+          },
+          "relationships": {
+            "parent": {
+              "data":null
+            }
+          }
+        },
+        {
+          "type": "folders",
+          "id":"5",
+          "attributes": {
+            "title": "Folder 2",
+            "created_at": "2021-11-24T20:54:38.833485+01:00",
+            "updated_at":"2021-11-24T20:54:38.833509+01:00"
+          },
+          "relationships": {
+            "parent": {
+              "data":null
+            }
+          }
+        }
+      ],
+      "meta": {
+        "pagination": {
+          "page": 1,
+          "pages": 1,
+          "count": 2
+        }
+      },
+      "links": {
+        "first": "",
+        "last": "",
+        "next": "",
+        "prev": ""
+      }
+    }
+  });
+
+  this.get('/api/preferences/', () => {
+    return {
+      "data": []
+    }
+  });
+
 }

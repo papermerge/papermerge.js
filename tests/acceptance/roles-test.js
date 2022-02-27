@@ -20,7 +20,7 @@ module('Acceptance | roles', function (hooks) {
   test('visiting /roles', async function (assert) {
     await visit('/roles');
 
-    assert.equal(currentURL(), '/roles');
+    assert.strictEqual(currentURL(), '/roles');
     assert.dom('.roles-add').hasText('New', 'The user can add new role');
   });
 });

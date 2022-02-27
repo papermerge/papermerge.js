@@ -20,7 +20,7 @@ module('Acceptance | tags', function (hooks) {
   test('visiting /tags', async function (assert) {
     await visit('/tags');
 
-    assert.equal(currentURL(), '/tags');
+    assert.strictEqual(currentURL(), '/tags');
     assert.dom('.add-tag').hasText('New', 'The user can add new tag');
   });
 });
