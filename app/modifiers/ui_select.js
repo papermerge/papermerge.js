@@ -9,6 +9,16 @@ class UISelect {
     Desktop like select
   **/
 
+  get DRAG_THRESHOLD() {
+    /*
+      Some mouse clicks are acompanied by slight mouse movements, which
+      makes 'clicks' look like mouse drag events. In order the avoid
+      this confusion, DRAG_THRESHOLD is introduced. Any rectangle with
+      height or width < DRAG_THRESHOLD will be discarded.
+    */
+    return 5;
+  }
+
   constructor(parent_selector) {
     /***
       x, y coordinates where selection started.
@@ -76,6 +86,11 @@ class UISelect {
       const { selected_nodes, unselected_nodes } = this.get_nodes_selection(
         new Rectangle(left, top, width, height)
       );
+
+      if (width < this.DRAG_THRESHOLD && height < this.DRAG_THRESHOLD) {
+        console.log('Not passing DRAG_THRESHOLD. Ignored.');
+        return;
+      }
 
       this.select_nodes(selected_nodes);
       this.unselect_nodes(unselected_nodes);
