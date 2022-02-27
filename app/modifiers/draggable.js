@@ -58,14 +58,26 @@ export default class DraggableModifier extends Modifier {
 
   @action
   onDragStart(event) {
-    let data;
+    let data, selected_nodes, nodes, source_nodes;
 
     this.model = this.args.positional[0];
+    selected_nodes = this.args.named['selectedNodes'];
+    nodes = [{
+      id: this.model.id
+    }];
+
+    if (selected_nodes && selected_nodes.length > 0) {
+      source_nodes = nodes.concat(
+        selected_nodes.map(item => {
+          return {'id': item.get('id')};
+        })
+      );
+    } else {
+      source_nodes = nodes;
+    }
 
     data = {
-      node: {
-        id: this.model.id
-      },
+      nodes: source_nodes,
       source_parent: {
         id: this.model.parent.get('id')
       }

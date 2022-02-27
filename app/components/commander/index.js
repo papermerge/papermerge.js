@@ -261,7 +261,7 @@ export default class CommanderComponent extends Component {
       // dropping items from another panel
       source_data = data['application/x.node'];
       nodes_move_data = {
-        'nodes': [{ 'id': source_data.node.id }],
+        'nodes': source_data.nodes,
         'source_parent': {
           'id': source_data.source_parent.id
         },
@@ -273,6 +273,7 @@ export default class CommanderComponent extends Component {
         console.log('Source same as target. Nothing to do.');
         return;
       }
+
       this.requests.nodesMove(nodes_move_data);
       if (nodes_move_data.source_parent.id == this.currentUser.user.inbox_folder.get('id')) {
         this.router.refresh();
