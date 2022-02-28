@@ -47,20 +47,8 @@ export default class CommanderComponent extends Component {
 
   constructor(owner, args) {
     super(owner, args);
-
     this.websockets.addHandler(this.messageHandler, this);
-    this.ws_nodes_move.addHandler(this.wsNodesMoveHandler, this);
     this.preferences.load();
-  }
-
-  wsNodesMoveHandler(message) {
-    if (message.type === 'nodesmove.tasksucceeded') {
-      if (this.args.node.id == message.source_parent['id']) {
-        this._substract_nodes(message.nodes.map(node => node.id));
-      } else if (this.args.node.id == message.target_parent['id']) {
-        this._add_nodes(message.nodes.map(node => node.id));
-      }
-    }
   }
 
   messageHandler(message) {
@@ -86,51 +74,6 @@ export default class CommanderComponent extends Component {
         doc.ocr_status = 'failed';
         break;
       }  // end of switch
-  }
-
-  _substract_nodes(node_ids) {
-    let that = this, doc;
-
-    node_ids.forEach(node_id => {
-      // maybe document ?
-      doc = that.store.peekRecord('document', node_id);
-      if (doc) {
-        that._substract_node(doc);
-      }
-      // maybe folder ?
-      doc = that.store.peekRecord('folder', node_id);
-      if (doc) {
-        that._substract_node(doc);
-      }
-    });
-  }
-
-  _substract_node(node) {
-    this.deleted_records.push(node);
-    this.__deleted_record = node;
-    this.selected_nodes = [];
-  }
-
-  _add_nodes(node_ids) {
-    let that = this, doc;
-
-    node_ids.forEach(node_id => {
-      // maybe document ?
-      doc = that.store.peekRecord('document', node_id);
-      if (doc) {
-        that._add_node(doc);
-      }
-      // maybe folder ?
-      doc = that.store.peekRecord('folder', node_id);
-      if (doc) {
-        that._add_node(doc);
-      }
-    });
-  }
-
-  _add_node(doc) {
-    this.new_records.push(doc);
-    this.__new_record = doc;
   }
 
   @action
@@ -309,14 +252,17 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  onDragendSuccess(model) {
+  onDragendSuccess(model, sel_nodes) {
     /**
-      Action invoked when drag operation for a node (folder/document)
+      Action invoked when drag operation for one or multiple nodes
       succeeded. It is invoked on the SOURCE panel.
-
       `model` is instance of `model.document` or `model.folder`
     */
-    console.log(`onDragendSuccess on ${this.args.hint}: id=${model.id} type=${model.nodeType}`);
+    console.log(
+      `onDragendSuccess on ${this.args.hint}: id=${model.id} type=${model.nodeType}`
+    );
+    console.log(`onDragendSuccess selected_nodes=${sel_nodes}`);
+    this.selected_nodes = []; // reset currect selected nodes list
   }
 
   get lang() {

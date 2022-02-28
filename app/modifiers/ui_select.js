@@ -16,7 +16,7 @@ class UISelect {
       this confusion, DRAG_THRESHOLD is introduced. Any rectangle with
       height or width < DRAG_THRESHOLD will be discarded.
     */
-    return 5;
+    return 4;
   }
 
   constructor(parent_selector) {
@@ -33,9 +33,6 @@ class UISelect {
     this.current_y = 0;
     this.parent = parent_selector;
     this.select_div = document.getElementById('ui-select');
-    this.nodes_arr = Array.from(
-      document.getElementsByClassName('node')
-    );
   }
 
   init(x, y) {
@@ -99,11 +96,16 @@ class UISelect {
 
   get_nodes_selection(selection_rect) {
     /**
-      selection_rect is instance of utils.MgRect
+      selection_rect is instance of utils.Rectangle
     **/
-    let selected_nodes = [], unselected_nodes = [];
+    let selected_nodes = [], unselected_nodes = [], nodes_arr;
 
-    this.nodes_arr.forEach(element => {
+    nodes_arr = Array.from(
+      document.getElementsByClassName('node')
+    );
+
+
+    nodes_arr.forEach(element => {
       let _r, rect;
 
       _r = element.getBoundingClientRect();
@@ -142,14 +144,49 @@ class UISelect {
   }
 
   deselect_all_nodes() {
-    let input_el;
+    let input_el, nodes_arr;
 
-    this.nodes_arr.forEach(element => {
+    nodes_arr = Array.from(
+      document.getElementsByClassName('node')
+    );
+
+    nodes_arr.forEach(element => {
       input_el = element.querySelector('input');
       if (input_el && input_el.checked) {
         input_el.click();
       }
     });
+  }
+
+  get is_dragging() {
+    /*
+      Is this a dragging ?
+
+      Selection can only start OUTSIDE nodes (in that space
+      between nodes, available grid mode).
+      If starting point is INSIDE any node, this is dragging operation.
+      Again:
+        starting poing INSIDE ANY NODE -> this is dragging
+        starting point OUTSIDE ALL NODES -> this is selection
+    */
+
+    let nodes_arr, that = this, result = false;
+
+    nodes_arr = Array.from(
+      document.getElementsByClassName('node')
+    );
+
+    nodes_arr.forEach(element => {
+      let _r, rect;
+
+      _r = element.getBoundingClientRect();
+      rect = new Rectangle(_r.x, _r.y, _r.width, _r.height);
+      if (rect.contains_point(that.start_x, that.start_y)) {
+        result = true;
+      }
+    });
+
+    return result;
   }
 
   set width(value) {
@@ -191,55 +228,87 @@ class UISelect {
 
 
 export default class UISelectModifier extends Modifier {
+  /*
+  * Desktop like select is enabled ONLY when (commander is) in grid mode
+  i.e. when items to select are showed like a grid.
+
+  When displayed like a grid there is a some space between items which enables
+  user to create a selection rectangle. On other hand, when in list mode, there is not
+  much space between items and selection interferes with drag and drop features i.e.
+  user tries to select an items, but it looks like user tries to drag it.
+  */
 
   ui_select = undefined;
 
   addEventListener() {
-    this.element.addEventListener('mousedown', this.onMouseDown);
-    this.element.addEventListener('mouseup', this.onMouseUp);
-    this.element.addEventListener('mousemove', this.onMouseMove);
+    if (this.is_enabled) {
+      this.element.addEventListener('mousedown', this.onMouseDown);
+      this.element.addEventListener('mouseup', this.onMouseUp);
+      this.element.addEventListener('mousemove', this.onMouseMove);
+    }
   }
 
   removeEventListener() {
-    this.element.removeEventListener('mousedown', this.onMouseDown);
-    this.element.removeEventListener('mouseup', this.onMouseUp);
-    this.element.removeEventListener('mousemove', this.onMouseMove);
+    if (this.is_enabled) {
+      this.element.removeEventListener('mousedown', this.onMouseDown);
+      this.element.removeEventListener('mouseup', this.onMouseUp);
+      this.element.removeEventListener('mousemove', this.onMouseMove);
+    }
   }
 
   // lifecycle hooks
   didReceiveArguments() {
-    this.removeEventListener();
-    this.addEventListener();
+    if (this.is_enabled) {
+      this.removeEventListener();
+      this.addEventListener();
 
-    this.ui_select = new UISelect(this.element);
+      this.ui_select = new UISelect(this.element);
+    }
   }
 
   willDestroy() {
-    this.removeEventListener();
+    if (this.is_enabled) {
+      this.removeEventListener();
+    }
   }
 
   @action
   onMouseMove(event) {
-    if (!event.buttons) {
-      this.hide();
-    } else if (this.ui_select) {
-      this.ui_select.update(event.clientX, event.clientY);
+    if (this.is_enabled) {
+      if (!event.buttons) {
+        this.hide();
+      } else if (this.ui_select) {
+        this.ui_select.update(event.clientX, event.clientY);
+      }
     }
   }
 
   @action
   onMouseUp() {
-    this.hide();
+    if (this.is_enabled) {
+      this.hide();
+    }
   }
 
   @action
   onMouseDown(event) {
-    this.ui_select.init(event.clientX, event.clientY);
+    if (this.is_enabled) {
+      this.ui_select.init(event.clientX, event.clientY);
+    }
   }
 
   hide() {
-    if (this.ui_select) {
-      this.ui_select.hide();
+    if (this.is_enabled) {
+      if (this.ui_select) {
+        this.ui_select.hide();
+      }
     }
+  }
+
+  get is_enabled() {
+    let view_mode = this.args.named['view_mode'],
+      enabled_on = this.args.named['enabled_on'];
+
+    return view_mode === enabled_on;
   }
 }

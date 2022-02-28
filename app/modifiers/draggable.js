@@ -1,5 +1,6 @@
 import { action } from '@ember/object';
 import Modifier from 'ember-modifier';
+import { merge_nodes } from 'papermerge/utils/array';
 
 
 export default class DraggableModifier extends Modifier {
@@ -58,26 +59,19 @@ export default class DraggableModifier extends Modifier {
 
   @action
   onDragStart(event) {
-    let data, selected_nodes, nodes, source_nodes;
+    let data, nodes;
 
     this.model = this.args.positional[0];
-    selected_nodes = this.args.named['selectedNodes'];
-    nodes = [{
-      id: this.model.id
-    }];
+    this.selected_nodes = this.args.named['selectedNodes'];
 
-    if (selected_nodes && selected_nodes.length > 0) {
-      source_nodes = nodes.concat(
-        selected_nodes.map(item => {
-          return {'id': item.get('id')};
-        })
-      );
-    } else {
-      source_nodes = nodes;
-    }
+    // Merge model from which user started dragging
+    // with rest of selected nodes (in case there are some)
+    // into one single list of {id: <node_id>} objects.
+    // Resulted list won't have any duplicates.
+    nodes = merge_nodes(this.model.id, this.selected_nodes);
 
     data = {
-      nodes: source_nodes,
+      nodes: nodes,
       source_parent: {
         id: this.model.parent.get('id')
       }
@@ -95,9 +89,9 @@ export default class DraggableModifier extends Modifier {
     const ondragend_cancel = this.args.named['onDragendCancel'];
 
     if (event.dataTransfer.dropEffect === "move") {
-      ondragend_success(this.model);
+      ondragend_success(this.model, this.selected_nodes);
     } else {
-      ondragend_cancel(this.model);
+      ondragend_cancel(this.model, this.selected_nodes);
     }
   }
 }

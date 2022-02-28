@@ -1,4 +1,3 @@
-import ENV from 'papermerge/config/environment';
 
 
 function group_perms_by_model(permissions) {

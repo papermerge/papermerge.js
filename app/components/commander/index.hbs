@@ -3,10 +3,13 @@
     onDrop=this.onDrop
     onDragOver=this.onDragOver }}
 
-  {{uiSelect}}
+  {{uiSelect view_mode=this.view_mode enabled_on='grid'}}
   {{contextMenu}}>
 
-  <UiSelect />
+  {{#if (is_equal this.view_mode 'grid')}}
+    <!-- ui select is enabled only in grid mode -->
+    <UiSelect />
+  {{/if}}
 
   <ContextMenu
     @openNewFolderModal={{this.openNewFolderModal}}

@@ -11,11 +11,11 @@ function intersect(rectA, rectB) {
       rectB_X2 = rectB.p3.x,
       rectB_Y2 = rectB.p3.y;
 
-    if ((rectA_X1 <= rectB_X2) && (rectA_X2 >= rectB_X1) && (rectA_Y1 <= rectB_Y2) && (rectA_Y2 >= rectB_Y1)) {
-      return true;
-    }
+  if ((rectA_X1 <= rectB_X2) && (rectA_X2 >= rectB_X1) && (rectA_Y1 <= rectB_Y2) && (rectA_Y2 >= rectB_Y1)) {
+    return true;
+  }
 
-    return false;
+  return false;
 }
 
 
@@ -35,6 +35,10 @@ export default class Rectangle {
 
   intersect(rect) {
     return intersect(rect, this) || intersect(this, rect);
+  }
+
+  contains_point(x, y) {
+    
   }
 
   toString() {
