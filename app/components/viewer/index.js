@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
 
@@ -98,6 +98,11 @@ export default class ViewerComponent extends Component {
       doc_id: this.args.doc.id,
       lang: 'deu'
     });
+  }
+
+  @action
+  onNodeClicked() {
+    console.log('node clicked');
   }
 
   get versions() {

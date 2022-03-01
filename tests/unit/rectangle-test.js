@@ -76,5 +76,19 @@ module('Unit | Rectangle', function () {
       rect2.intersect(rect1)
     );
   });
+
+  test('contains_point', function(assert) {
+    let rect;
+
+    rect = new Rectangle(100, 100, 20, 20);
+
+    assert.true(
+      rect.contains_point(115, 110)
+    );
+
+    assert.false(
+      rect.contains_point(5, 5)
+    );
+  });
 });
 

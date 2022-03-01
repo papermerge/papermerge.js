@@ -16,10 +16,11 @@
     @node={{@doc}}
     @extranode={{@extranode}}
     @extradoc={{@extradoc}}
+    @onNodeClicked={{this.onNodeClicked}}
     @hint={{@hint}} />
 
-  <div class="d-flex">
-    <Viewer::Thumbnails @pages={{this.pages}} />
-    <Viewer::Pages @pages={{this.pages}} />
-  </div>
+
+  <Viewer::Document
+    @pages={{this.pages}} />
+
 </div>

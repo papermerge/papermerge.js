@@ -258,10 +258,6 @@ export default class CommanderComponent extends Component {
       succeeded. It is invoked on the SOURCE panel.
       `model` is instance of `model.document` or `model.folder`
     */
-    console.log(
-      `onDragendSuccess on ${this.args.hint}: id=${model.id} type=${model.nodeType}`
-    );
-    console.log(`onDragendSuccess selected_nodes=${sel_nodes}`);
     this.selected_nodes = []; // reset currect selected nodes list
   }
 

@@ -38,7 +38,13 @@ export default class Rectangle {
   }
 
   contains_point(x, y) {
-    
+    /*
+      returns true if coord (x, y) is within boundries of the rectangle
+    */
+    let is_within_x = this.x <= x && x <= this.x + this.width,
+        is_within_y = this.y <= y && y <= this.y + this.height;
+
+      return is_within_x && is_within_y;
   }
 
   toString() {

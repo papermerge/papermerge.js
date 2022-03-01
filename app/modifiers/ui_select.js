@@ -53,6 +53,10 @@ class UISelect {
   update(x, y) {
     let height, width, top, left;
 
+    if (this.is_dragging) {
+      console.log('This is draggin operation. Abort selection.');
+      return;
+    }
 
     this.show(x, y);
     this.current_x = x;

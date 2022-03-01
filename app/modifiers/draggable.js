@@ -59,7 +59,7 @@ export default class DraggableModifier extends Modifier {
 
   @action
   onDragStart(event) {
-    let data, nodes;
+    let data, nodes, canvas;
 
     this.model = this.args.positional[0];
     this.selected_nodes = this.args.named['selectedNodes'];
@@ -77,10 +77,31 @@ export default class DraggableModifier extends Modifier {
       }
     }
 
+    canvas = this.get_drag_canvas(nodes.length);
+
     event.dataTransfer.setData(
       "application/x.node",
       JSON.stringify(data)
     );
+
+    event.dataTransfer.setDragImage(canvas, 0, -15);
+  }
+
+  get_drag_canvas(count) {
+    /*
+      Returns a canvas with `Move ${count} item(s)` text on it.
+    */
+    let canvas = document.createElement("canvas"),
+      ctx;
+
+    canvas.width = 280;
+    canvas.height = 120;
+    ctx = canvas.getContext("2d");
+    ctx.font = "18px Arial";
+
+    ctx.fillText(`Move ${count} item(s)`, 10, 20);
+
+    return canvas;
   }
 
   @action

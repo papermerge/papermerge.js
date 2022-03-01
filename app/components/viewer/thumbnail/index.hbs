@@ -1,4 +1,6 @@
-<div class="thumbnail d-flex flex-column align-items-center">
+<div
+  class="thumbnail d-flex flex-column align-items-center"
+  {{on "dblclick" this.onDblClick}} >
   {{#if @page.svg_image}}
     {{{@page.svg_image}}}
   {{else}}

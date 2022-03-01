@@ -1,5 +1,7 @@
 <div class="d-flex flex-column thumbnails">
   {{#each @pages as |page|}}
-    <Viewer::Thumbnail @page={{page}} />
+    <Viewer::Thumbnail
+      @page={{page}}
+      @onDblClick={{@onDblClick}} />
   {{/each}}
 </div>
