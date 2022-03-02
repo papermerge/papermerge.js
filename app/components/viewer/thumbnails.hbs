@@ -1,4 +1,6 @@
-<div class="d-flex flex-column thumbnails">
+<div
+  class="d-flex flex-column thumbnails"
+  {{adjust_element_height}}>
   {{#each @pages as |page|}}
     <Viewer::Thumbnail
       @page={{page}}

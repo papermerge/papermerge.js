@@ -1,6 +1,8 @@
 
 .thumbnails {
-  max-width: 8rem;
+  max-width: 10rem;
+  width: 10rem;
+  overflow: scroll;
 
   .thumbnail {
     margin: 1rem;
@@ -12,8 +14,7 @@
 
 .pages {
   overflow: scroll;
-  height: 100vh;
-
+  width: 100%;
   .page {
     img {
       width: 100%;

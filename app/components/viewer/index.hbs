@@ -1,5 +1,5 @@
 <div class="panel viewer col m-2 p-2">
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between action-buttons">
     <Viewer::ActionButtons
       @document_versions={{this.document_versions}}
       @isLocked={{this.isLocked}}
@@ -18,7 +18,6 @@
     @extradoc={{@extradoc}}
     @onNodeClicked={{this.onNodeClicked}}
     @hint={{@hint}} />
-
 
   <Viewer::Document
     @pages={{this.pages}} />
