@@ -55,15 +55,6 @@ export default class AdjustElementHeightModifier extends Modifier {
     height += parseInt(styles.marginTop);
     height += parseInt(styles.marginBottom);
 
-    if (element_id) {
-      console.log(`ID=${element_id}: height=${styles.height}`);
-      console.log(`ID=${element_id}: marginTop=${styles.marginTop}`);
-      console.log(`ID=${element_id}: marginBottom=${styles.marginBottom}`);
-    } else {
-      console.log(`element_class=${element_class}: height=${styles.height}`);
-      console.log(`element_class=${element_class}: marginTop=${styles.marginTop}`);
-      console.log(`element_class=${element_class}: marginBottom=${styles.marginBottom}`);
-    }
     return height;
   }
 

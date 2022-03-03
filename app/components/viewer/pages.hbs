@@ -1,9 +1,13 @@
-<div
-  class="d-flex flex-column pages"
+<div class="d-flex flex-column pages"
   {{adjust_element_height}}>
-  {{#each @pages as |page|}}
-    <Viewer::Page
-      @page={{page}}
-      @scroll_to_page={{@scroll_to_page}} />
-  {{/each}}
+    {{#each @pages as |page|}}
+      <Viewer::Page
+        @page={{page}}
+        @scroll_to_page={{@scroll_to_page}}
+        @zoom_factor={{@zoom_factor}} />
+    {{/each}}
+    <Viewer::Zoom
+      @onZoomIn={{@onZoomIn}}
+      @onZoomOut={{@onZoomOut}}
+      @onZoomFit={{@onZoomFit}} />
 </div>

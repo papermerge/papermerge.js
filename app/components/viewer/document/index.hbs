@@ -1,8 +1,17 @@
 <div class="d-flex">
-  <Viewer::Thumbnails
-    @pages={{@pages}}
-    @onDblClick={{this.onThumbnailDblClick}} />
+  {{#if this.thumbnails_visible}}
+    <Viewer::Thumbnails
+      @pages={{@pages}}
+      @onDblClick={{this.onThumbnailDblClick}} />
+  {{/if}}
+  <Viewer::ThumbnailsSwitch
+    @onThumbnailsToggle={{this.onThumbnailsToggle}}
+    @thumbnails_visible={{this.thumbnails_visible}} />
   <Viewer::Pages
     @pages={{@pages}}
-    @scroll_to_page={{this.scroll_to_page}} />
+    @scroll_to_page={{this.scroll_to_page}}
+    @onZoomIn={{this.onZoomIn}}
+    @onZoomOut={{this.onZoomOut}}
+    @onZoomFit={{this.onZoomFit}}
+    @zoom_factor={{this.zoom_factor}} />
 </div>

@@ -12,10 +12,20 @@
   }
 }
 
+.thumbnails-switch {
+  background-color: #666;
+  color: white;
+}
+
 .pages {
   overflow: scroll;
+  position: relative;
   width: 100%;
+  background-color: #666;
+
   .page {
+    margin: auto;
+    color: white;
     img {
       width: 100%;
     }
