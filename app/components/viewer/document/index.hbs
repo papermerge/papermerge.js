@@ -2,7 +2,9 @@
   {{#if this.thumbnails_visible}}
     <Viewer::Thumbnails
       @pages={{@pages}}
-      @onDblClick={{this.onThumbnailDblClick}} />
+      @selectedPages={{@selectedPages}}
+      @onDblClick={{this.onThumbnailDblClick}}
+      @onCheckboxChange={{@onCheckboxChange}} />
   {{/if}}
   <Viewer::ThumbnailsSwitch
     @onThumbnailsToggle={{this.onThumbnailsToggle}}

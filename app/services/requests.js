@@ -33,6 +33,10 @@ export default class Requests extends Service {
     });
   }
 
+  async deletePages(page_ids) {
+    return this._delete('/pages/', {'pages': page_ids});
+  }
+
   /**
   *  `document_version` contains following attributes:
   *    id
@@ -147,6 +151,27 @@ export default class Requests extends Service {
       response => response.json()
     ).then( data => {
       return data.data.count;
+    });
+  }
+
+  async _delete(url, data) {
+    let url_with_base,
+      body_data = '',
+      headers_copy = {};
+
+    url_with_base = `${base_url()}${url}`;
+
+    Object.assign(headers_copy, this.headers);
+    headers_copy['Content-Type'] = 'application/json';
+
+    if (data) {
+      body_data = JSON.stringify(data);
+    }
+
+    return fetch(url_with_base, {
+      method: 'DELETE',
+      headers: headers_copy,
+      body: body_data,
     });
   }
 

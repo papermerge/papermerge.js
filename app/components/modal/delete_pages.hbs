@@ -1,0 +1,16 @@
+<Modal::Base
+  @title="Confirm Deletion"
+  @actionTitle="Delete"
+  @onClose={{@onClose}}
+  @onSubmit={{this.onSubmit}}
+  @submitButtonClass="btn-danger"
+  @onCancel={{this.onCancel}}
+  ...attributes>
+  <p>
+    You selected {{this.count}} page(s).
+    If you click DELETE button selected page(s) will be deleted.
+  </p>
+  <p>
+    Do you really want to do that?
+  </p>
+</Modal::Base>

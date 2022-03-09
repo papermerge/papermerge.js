@@ -4,6 +4,8 @@
   {{#each @pages as |page|}}
     <Viewer::Thumbnail
       @page={{page}}
-      @onDblClick={{@onDblClick}} />
+      @selectedPages={{@selectedPages}}
+      @onDblClick={{@onDblClick}}
+      @onCheckboxChange={{@onCheckboxChange}} />
   {{/each}}
 </div>

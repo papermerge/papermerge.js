@@ -19,6 +19,7 @@ export default class ViewerComponent extends Component {
   @service websockets;
   @service store;
   @service requests;
+  @service router;
 
   @tracked ocr_status = null;
   @tracked is_locked = false;
@@ -28,6 +29,9 @@ export default class ViewerComponent extends Component {
 
   @tracked _pages = A([]);
   @tracked __pages__;
+
+  @tracked selected_pages = A([]);
+  @tracked show_confirm_pages_deletion_modal = false;
 
   constructor(owner, args) {
     super(owner, args);
@@ -102,7 +106,32 @@ export default class ViewerComponent extends Component {
 
   @action
   onNodeClicked() {
-    console.log('node clicked');
+  }
+
+  @action
+  onThumbnailCheckboxChange({page, is_selected}) {
+    if (is_selected) {
+      this.selected_pages.pushObject(page);
+    } else {
+      this.selected_pages.removeObject(page);
+    }
+  }
+
+  @action
+  openConfirmDeletionModal() {
+    this.show_confirm_pages_deletion_modal = true;
+  }
+
+  @action
+  async closeConfirmDeletionModal() {
+    let page_ids = [];
+
+    page_ids = this.selected_pages.map(page => page.id);
+    await this.requests.deletePages(page_ids);
+
+    this.show_confirm_pages_deletion_modal = false;
+    this.selected_pages = A([]);
+    this.router.refresh();
   }
 
   get versions() {

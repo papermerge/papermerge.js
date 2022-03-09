@@ -4,6 +4,8 @@
       @document_versions={{this.document_versions}}
       @isLocked={{this.isLocked}}
       @ocrStatus={{this.ocrStatus}}
+      @selectedPages={{this.selected_pages}}
+      @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
       @onRunOCR={{this.onRunOCR}} />
 
     <Viewer::ActionModes
@@ -11,6 +13,12 @@
       @dualPanelMode={{@dualPanelMode}}
       @hint={{@hint}} />
   </div>
+
+  <Modal::DeletePages
+    id="delete-pages"
+    @selectedPages={{this.selected_pages}}
+    @onClose={{this.closeConfirmDeletionModal}}
+    {{show-when this.show_confirm_pages_deletion_modal}} />
 
   <Breadcrumb
     @node={{@doc}}
@@ -21,7 +29,7 @@
 
   <Viewer::Document
     @pages={{this.pages}}
+    @selectedPages={{this.selected_pages}}
     @thumbnails_visible={{this.thumbnails_visible}}
-    @onThumbnailsToggle={{this.onThumbnailsToggle}} />
-
+    @onCheckboxChange={{this.onThumbnailCheckboxChange}} />
 </div>
