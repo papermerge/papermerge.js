@@ -37,4 +37,8 @@ export default class ViewerThumbnailComponent extends Component {
 
     return false;
   }
+
+  set is_selected(value) {
+
+  }
 }

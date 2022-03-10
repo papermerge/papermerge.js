@@ -21,6 +21,20 @@
     {{/if}}
   {{#if this.is_any_page_selected }}
     <button
+      class="btn btn-light"
+      type="button"
+      {{on "click" @onRotateClockwise}} >
+      <i class="bi bi-arrow-clockwise"></i>
+      Rotate
+    </button>
+    <button
+      class="btn btn-light"
+      type="button"
+      {{on "click" @onRotateCounterclockwise}} >
+      <i class="bi bi-arrow-counterclockwise"></i>
+      Rotate
+    </button>
+    <button
       class="btn btn-danger mx-5"
       type="button"
       {{on "click" @openConfirmDeletionModal}} >

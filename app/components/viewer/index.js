@@ -105,6 +105,32 @@ export default class ViewerComponent extends Component {
   }
 
   @action
+  async onRotateClockwise() {
+    let page_ids = [];
+
+    page_ids = this.selected_pages.map(page => page.id);
+    await this.requests.rotatePages({
+      page_ids: page_ids,
+      angle: 90
+    });
+    this.selected_pages = A([]);
+    this.router.refresh();
+  }
+
+  @action
+  async onRotateCounterclockwise() {
+    let page_ids = [];
+
+    page_ids = this.selected_pages.map(page => page.id);
+    await this.requests.rotatePages({
+      page_ids: page_ids,
+      angle: 270
+    });
+    this.selected_pages = A([]);
+    this.router.refresh();
+  }
+
+  @action
   onNodeClicked() {
   }
 

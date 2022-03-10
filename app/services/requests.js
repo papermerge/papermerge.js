@@ -37,6 +37,15 @@ export default class Requests extends Service {
     return this._delete('/pages/', {'pages': page_ids});
   }
 
+  async rotatePages({page_ids, angle}) {
+    let pages = [];
+
+    pages = page_ids.map(page_id => {
+      return {id: page_id, angle: angle};
+    });
+    return this._post('/pages/rotate/', {'pages': pages});
+  }
+
   /**
   *  `document_version` contains following attributes:
   *    id
@@ -154,7 +163,25 @@ export default class Requests extends Service {
     });
   }
 
+  async _post(url, data) {
+    return this._generic({
+      method: 'POST',
+      url: url,
+      data: data,
+      content_type: 'application/json'
+    });
+  }
+
   async _delete(url, data) {
+    return this._generic({
+      method: 'DELETE',
+      url: url,
+      data: data,
+      content_type: 'application/json'
+    });
+  }
+
+  async _generic({method, url, data, content_type}) {
     let url_with_base,
       body_data = '',
       headers_copy = {};
@@ -162,14 +189,14 @@ export default class Requests extends Service {
     url_with_base = `${base_url()}${url}`;
 
     Object.assign(headers_copy, this.headers);
-    headers_copy['Content-Type'] = 'application/json';
+    headers_copy['Content-Type'] = content_type;
 
     if (data) {
       body_data = JSON.stringify(data);
     }
 
     return fetch(url_with_base, {
-      method: 'DELETE',
+      method: method,
       headers: headers_copy,
       body: body_data,
     });
