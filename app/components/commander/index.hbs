@@ -1,7 +1,9 @@
 <div class="panel commander col m-2 p-2 user-select-none"
   {{droppable
     onDrop=this.onDrop
-    onDragOver=this.onDragOver }}
+    onDragOver=this.onDragOver
+    onDragEnter=this.onDragEnter
+    onDragLeave=this.onDragLeave }}
 
   {{uiSelect view_mode=this.view_mode enabled_on='grid'}}
   {{contextMenu}}>

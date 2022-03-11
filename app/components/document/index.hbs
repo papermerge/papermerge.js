@@ -1,7 +1,7 @@
 <div class="node document {{if this.is_selected "checked"}}"
   {{draggable @model
-    selectedNodes=@selectedNodes
-    sourceParent=@sourceParen
+    selectedItems=@selectedNodes
+    onDragStart=this.onDragStart
     onDragendSuccess=@onDragendSuccess
     onDragendCancel=@onDragendCancel}}>
   <Input

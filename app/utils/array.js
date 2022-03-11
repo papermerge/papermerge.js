@@ -1,32 +1,41 @@
-function merge_nodes(node_id, nodes) {
+
+function get_id(item) {
+  if (item.id) {
+    return item.id;
+  }
+
+  return item.get('id');
+}
+
+function merge_items(item_id, items) {
   /*
-  Returns a list of {id: <node.id>} objects with no duplicates.
-  List contains as node_id given as first parameter as well as all nodes
+  Returns a list of {id: <item.id>} objects with no duplicates.
+  List contains as item_id given as first parameter as well as all items
   given as second parameter.
   */
-  let source_nodes;
+  let result_items;
 
-  if (!nodes) {
-    return [{id: node_id}];
+  if (!items) {
+    return [{id: item_id}];
   }
 
-  if (!nodes.length) {
-    return [{id: node_id}];
+  if (!items.length) {
+    return [{id: item_id}];
   }
 
-  source_nodes = nodes.map(item => {
-    return {'id': item.get('id')};
+  result_items = items.map(item => {
+    return {'id': get_id(item)};
   });
 
-  // if by concatinating nodes with node_id there
+  // if by concatinating items with item_id there
   // will be no duplicates:
-  if (!source_nodes.find(item => item.id == node_id)) {
-    return [{id: node_id}].concat(source_nodes)
+  if (!result_items.find(item => item.id == item_id)) {
+    return [{id: item_id}].concat(result_items)
   }
 
-  return source_nodes;
+  return result_items;
 }
 
 export {
-  merge_nodes
+  merge_items
 }

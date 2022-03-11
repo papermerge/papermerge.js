@@ -30,28 +30,10 @@ export default class DrappableModifier extends Modifier {
 
   @action
   onDrop(event) {
-    let data, files_list;
-    const isNodeDrop = event.dataTransfer.types.includes("application/x.node");
-    const callback = this.args.named['onDrop'];
+    let _onDrop = this.args.named['onDrop'], element;
 
-    event.preventDefault();
-    this.element.classList.remove('droparea');
-
-    if (isNodeDrop && callback) {
-      // drop incoming from another panel
-      data = event.dataTransfer.getData('application/x.node');
-      if (data) {
-        callback({
-          'application/x.node': JSON.parse(data)
-        });
-      }
-    } else if (this._is_desktop_drop(event)) {
-      files_list = this._get_desktop_files(event);
-      callback({
-        'application/x.desktop': files_list
-      });
-    }
-
+    element = this.element;
+    _onDrop({event, element});
   }
 
   @action
@@ -66,47 +48,19 @@ export default class DrappableModifier extends Modifier {
 
   @action
   onDragEnter(event) {
-    event.preventDefault();
-    this.element.classList.add('droparea');
+    let _onDragEnter = this.args.named['onDragEnter'],
+      element;
+
+    element = this.element;
+    _onDragEnter({event, element});
   }
 
   @action
   onDragLeave(event) {
-    event.preventDefault();
-    this.element.classList.remove('droparea');
-  }
+    let _onDragLeave = this.args.named['onDragLeave'],
+      element;
 
-  _is_desktop_drop(event) {
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
-    let items = event.dataTransfer.items;
-    let files = event.dataTransfer.files;
-
-    if (items && items.length > 0) {
-      return true;
-    }
-
-    return files && files.length > 0;
-  }
-
-  _get_desktop_files(event) {
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
-    let result = [], i;
-
-    if (event.dataTransfer.items) {
-      // Use DataTransferItemList interface to access the file(s)
-      for (i = 0; i < event.dataTransfer.items.length; i++) {
-        // If dropped items aren't files, reject them
-        if (event.dataTransfer.items[i].kind === 'file') {
-          result.push(event.dataTransfer.items[i].getAsFile());
-        }
-      }
-    } else {
-      // Use DataTransfer interface to access the file(s)
-      for (i = 0; i < event.dataTransfer.files.length; i++) {
-        result.push(event.dataTransfer.files[i]);
-      }
-    }
-
-    return result;
+    element = this.element;
+    _onDragLeave({event, element});
   }
 }

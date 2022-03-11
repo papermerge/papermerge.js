@@ -1,5 +1,10 @@
 <div
   class="thumbnail d-flex flex-column align-items-center px-2 {{if this.is_selected 'checked'}}"
+  {{draggable @page
+    selectedItems=@selectedPages
+    onDragStart=this.onDragStart
+    onDragendSuccess=@onDragendSuccess
+    onDragendCancel=@onDragendCancel}}
   {{on "dblclick" this.onDblClick}} >
   <Input
     class="align-self-start m-1"

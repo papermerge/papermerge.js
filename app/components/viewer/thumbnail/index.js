@@ -19,6 +19,24 @@ export default class ViewerThumbnailComponent extends Component {
     });
   }
 
+  @action
+  onDragStart({event, model, items, canvas, element}) {
+    let data;
+
+    data = {
+      pages: items,
+      page: model
+    };
+
+    event.dataTransfer.setData(
+      'application/x.page',
+      JSON.stringify(data)
+    );
+
+    event.dataTransfer.setDragImage(canvas, 0, -15);
+    console.log(`Thumbnails onDragStart elment=${element}`);
+  }
+
   get is_selected() {
     let page = this.args.page,
       selected_page_ids;

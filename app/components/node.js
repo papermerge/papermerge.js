@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 
+
 export default class NodeComponent extends Component {
   /**
    * Receives arguments:
@@ -36,5 +37,24 @@ export default class NodeComponent extends Component {
       node: this.args.model,
       is_selected: is_checked
     });
+  }
+
+  @action
+  onDragStart({event, model, items, canvas}) {
+    let data;
+
+    data = {
+      nodes: items,
+      source_parent: {
+        id: model.parent.get('id')
+      }
+    }
+
+    event.dataTransfer.setData(
+      "application/x.node",
+      JSON.stringify(data)
+    );
+
+    event.dataTransfer.setDragImage(canvas, 0, -15);
   }
 }

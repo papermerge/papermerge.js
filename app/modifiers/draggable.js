@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Modifier from 'ember-modifier';
-import { merge_nodes } from 'papermerge/utils/array';
+import { merge_items } from 'papermerge/utils/array';
 
 
 export default class DraggableModifier extends Modifier {
@@ -15,6 +15,7 @@ export default class DraggableModifier extends Modifier {
     Usage:
 
     {{draggable @model
+      onDragStart=this.onDragStart
       onDragendSuccess=@onDragendSuccess
       onDragendCancel=@onDragendCancel}}
 
@@ -59,32 +60,33 @@ export default class DraggableModifier extends Modifier {
 
   @action
   onDragStart(event) {
-    let data, nodes, canvas;
+    let model,
+      selected_items,
+      _onDragStart,
+      canvas,
+      items,
+      element;
 
-    this.model = this.args.positional[0];
-    this.selected_nodes = this.args.named['selectedNodes'];
+    model = this.model = this.args.positional[0];
+    selected_items = this.selected_items = this.args.named['selectedItems'];
+    _onDragStart = this.args.named['onDragStart'];
 
     // Merge model from which user started dragging
-    // with rest of selected nodes (in case there are some)
-    // into one single list of {id: <node_id>} objects.
+    // with rest of selected items (in case there are some)
+    // into one single list of {id: <item_id>} objects.
     // Resulted list won't have any duplicates.
-    nodes = merge_nodes(this.model.id, this.selected_nodes);
+    items = merge_items(model.id, selected_items);
 
-    data = {
-      nodes: nodes,
-      source_parent: {
-        id: this.model.parent.get('id')
-      }
-    }
+    element = this.element;
+    canvas = this.get_drag_canvas(items.length);
 
-    canvas = this.get_drag_canvas(nodes.length);
-
-    event.dataTransfer.setData(
-      "application/x.node",
-      JSON.stringify(data)
-    );
-
-    event.dataTransfer.setDragImage(canvas, 0, -15);
+    _onDragStart({
+      event,
+      element,
+      model,
+      items,
+      canvas
+    });
   }
 
   get_drag_canvas(count) {
@@ -110,9 +112,9 @@ export default class DraggableModifier extends Modifier {
     const ondragend_cancel = this.args.named['onDragendCancel'];
 
     if (event.dataTransfer.dropEffect === "move") {
-      ondragend_success(this.model, this.selected_nodes);
+      ondragend_success(this.model, this.selected_items);
     } else {
-      ondragend_cancel(this.model, this.selected_nodes);
+      ondragend_cancel(this.model, this.selected_items);
     }
   }
 }

@@ -1,11 +1,19 @@
 <div
   class="d-flex flex-column thumbnails"
+  {{droppable
+    onDrop=this.onDrop
+    onDragOver=this.onDragOver
+    onDragEnter=this.onDragEnter
+    onDragLeave=this.onDragLeave }}
+
   {{adjust_element_height}}>
   {{#each @pages as |page|}}
     <Viewer::Thumbnail
       @page={{page}}
       @selectedPages={{@selectedPages}}
       @onDblClick={{@onDblClick}}
+      @onDragendSuccess={{this.onDragendSuccess}}
+      @onDragendCancel={{this.onDragendCancel}}
       @onCheckboxChange={{@onCheckboxChange}} />
   {{/each}}
 </div>
