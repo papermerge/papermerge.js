@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
+import { reposition_items } from 'papermerge/utils/array';
 
 
 export default class ViewerComponent extends Component {
@@ -145,9 +146,15 @@ export default class ViewerComponent extends Component {
 
   @action
   onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
+    let all_pages;
+
     console.log(`onThumbnailsPositionChanged`);
     console.log(`original_pos=${original_pos}, drop_pos=${drop_pos}, page_ids=${page_ids}`);
-    this._pages = [];
+    this._pages = reposition_items({
+      items: all_pages,
+      selected_ids: page_ids,
+      drop_pos: drop_pos
+    });
   }
 
   @action

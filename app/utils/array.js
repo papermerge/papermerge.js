@@ -7,6 +7,7 @@ function get_id(item) {
   return item.get('id');
 }
 
+
 function merge_items(item_id, items) {
   /*
   Returns a list of {id: <item.id>} objects with no duplicates.
@@ -36,6 +37,36 @@ function merge_items(item_id, items) {
   return result_items;
 }
 
+function reposition_items({items, selected_ids, drop_pos}) {
+  let selected_items = [],
+    remaining_items = Array.from(items),
+    result = [],
+    i, j;
+
+  selected_ids.forEach(item_id => {
+    let idx, extracted_item;
+
+    idx = remaining_items.findIndex(p => get_id(p) == item_id);
+
+    extracted_item = remaining_items.slice(idx, 1);
+    selected_items.push(extracted_item);
+  });
+
+  for (i=0, j=0; i < items.length; j++) {
+    if (i == drop_pos) {
+      result.push(selected_items);
+      i += selected_items.length + 1;
+    } else { // i < drop_pos || i > drop_pos
+      result.push(remaining_items[j]);
+      i++;
+    }
+  }
+
+  return result;
+}
+
 export {
-  merge_items
+  get_id,
+  merge_items,
+  reposition_items,
 }
