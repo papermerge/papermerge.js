@@ -1,19 +1,16 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
 import Point from 'papermerge/utils/point';
 import { get_cursor_pos_within_element } from 'papermerge/utils/dom';
 
 
 export default class ViewerThumbnailsComponent extends Component {
-  @action
+
   onDragendCancel() {
   }
 
-  @action
   onDragendSuccess() {
   }
 
-  @action
   onDrop({event, element}) {
     let data, json_data, page_ids, original_pos, drop_pos;
 
@@ -33,15 +30,12 @@ export default class ViewerThumbnailsComponent extends Component {
     console.log(`drop position=${drop_pos}`);
   }
 
-  @action
   onDragOver() {
   }
 
-  @action
   onDragEnter() {
   }
 
-  @action
   onDragLeave() {
   }
 }

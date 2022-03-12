@@ -21,7 +21,6 @@ export default class ViewerThumbnailComponent extends Component {
     });
   }
 
-  @action
   onDragStart({event, model, items, canvas, element}) {
     let data, original_pos;
 
