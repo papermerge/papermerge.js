@@ -65,7 +65,7 @@ function get_cursor_pos_within_element(element, cursor_coord) {
     }
   });
 
-  pos = children.length - cursor_before_child
+  pos = children.length - cursor_before_child;
 
   return pos;
 }

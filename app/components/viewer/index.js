@@ -144,6 +144,13 @@ export default class ViewerComponent extends Component {
   }
 
   @action
+  onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
+    console.log(`onThumbnailsPositionChanged`);
+    console.log(`original_pos=${original_pos}, drop_pos=${drop_pos}, page_ids=${page_ids}`);
+    this._pages = [];
+  }
+
+  @action
   openConfirmDeletionModal() {
     this.show_confirm_pages_deletion_modal = true;
   }
@@ -189,6 +196,8 @@ export default class ViewerComponent extends Component {
 
   get pages() {
 
+    console.log('get pages');
+
     if (this.__pages__) {
       // workaround for tracking changes in array
     }
@@ -196,10 +205,12 @@ export default class ViewerComponent extends Component {
     if (this._pages.length > 0) {
       // If newer version of the pages is available
       // (e.g. document was OCRed) then just use it
+      console.log(`rendering this._pages`);
       return this._pages;
     }
 
     // Initial version of the pages
+    console.log(`rendering this.args.pages`);
     return this.args.pages;
   }
 
