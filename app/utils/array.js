@@ -112,9 +112,39 @@ function reposition_items({items, selected_ids, drop_pos}) {
   return result;
 }
 
+function detect_order_changes(arr1, arr2) {
+  let change = false;
+
+  if (!arr1 || !arr2) {
+    return false;
+  }
+
+  if (arr1.length == 0 || arr2.length == 0) {
+    return false;
+  }
+
+  if (arr1.length != arr2.length) {
+    throw 'Invalid input. Both arrays need to be of same length';
+  }
+
+  arr1.forEach((item, index) => {
+    let id1, id2;
+
+    id1 = get_id(arr2[index]);
+    id2 = get_id(item);
+
+    if (id1 != id2) {
+      change = true;
+    }
+  });
+
+  return change;
+}
+
 export {
   get_id,
   merge_items,
   extract_selected_ids,
   reposition_items,
+  detect_order_changes
 }

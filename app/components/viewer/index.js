@@ -3,7 +3,11 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
-import { reposition_items } from 'papermerge/utils/array';
+import {
+  reposition_items,
+  get_id,
+  detect_order_changes
+} from 'papermerge/utils/array';
 
 
 export default class ViewerComponent extends Component {
@@ -33,6 +37,9 @@ export default class ViewerComponent extends Component {
 
   @tracked selected_pages = A([]);
   @tracked show_confirm_pages_deletion_modal = false;
+  @tracked page_order_changed = false;
+
+  initial_pages_memo = A([]);
 
   constructor(owner, args) {
     super(owner, args);
@@ -150,7 +157,7 @@ export default class ViewerComponent extends Component {
 
     console.log(`onThumbnailsPositionChanged`);
     console.log(`original_pos=${original_pos}, drop_pos=${drop_pos}, page_ids=${page_ids}`);
-    this._pages = reposition_items({
+    this.pages = reposition_items({
       items: all_pages,
       selected_ids: page_ids,
       drop_pos: drop_pos
@@ -172,6 +179,20 @@ export default class ViewerComponent extends Component {
     this.show_confirm_pages_deletion_modal = false;
     this.selected_pages = A([]);
     this.router.refresh();
+  }
+
+  @action
+  async onPageOrderApply() {
+    await this.requests.reorderPagesApply({
+      old_items: this.initial_pages_memo,
+      new_items: this.pages
+    });
+    this.router.refresh();
+  }
+
+  @action
+  onPageOrderDiscard() {
+    this._pages = this.initial_pages_memo;
   }
 
   get versions() {
@@ -202,9 +223,6 @@ export default class ViewerComponent extends Component {
   }
 
   get pages() {
-
-    console.log('get pages');
-
     if (this.__pages__) {
       // workaround for tracking changes in array
     }
@@ -212,15 +230,27 @@ export default class ViewerComponent extends Component {
     if (this._pages.length > 0) {
       // If newer version of the pages is available
       // (e.g. document was OCRed) then just use it
-      console.log(`rendering this._pages`);
       return this._pages;
     }
 
     // Initial version of the pages
-    console.log(`rendering this.args.pages`);
     return this.args.pages;
   }
 
+  set pages(new_arr) {
+    // remember initial page order
+    if (this.initial_pages_memo.length == 0) {
+      this.initial_pages_memo = this.pages;
+    }
+
+    this.page_order_changed = detect_order_changes(
+      this.pages,
+      new_arr
+    );
+
+    // assign new page order
+    this._pages = new_arr;
+  }
 
   get ocrStatus() {
     /*
@@ -243,5 +273,9 @@ export default class ViewerComponent extends Component {
 
   get isLocked() {
     return this.is_locked;
+  }
+
+  get has_page_order_changes() {
+    return this.ordered_pages_change.has_changes;
   }
 }

@@ -6,6 +6,7 @@ import {
   insert_blob,
   extract_file_name
 } from 'papermerge/utils';
+import { get_id } from 'papermerge/utils/array';
 
 import { base_url } from 'papermerge/utils/host';
 
@@ -44,6 +45,23 @@ export default class Requests extends Service {
       return {id: page_id, angle: angle};
     });
     return this._post('/pages/rotate/', {'pages': pages});
+  }
+
+  async reorderPagesApply({old_items, new_items}) {
+    let order_data = [];
+
+    old_items.forEach((item, old_index) => {
+      let new_index;
+
+      new_index = new_items.findIndex(it => get_id(it) == get_id(item));
+      order_data.push({
+        id: get_id(item),
+        old_number: old_index + 1,
+        new_number: new_index + 1
+      })
+    });
+
+    return this._post('/pages/reorder/', order_data);
   }
 
   /**

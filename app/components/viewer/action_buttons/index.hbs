@@ -19,7 +19,21 @@
         Run OCR
       </button>
     {{/if}}
-  {{#if this.is_any_page_selected }}
+  {{#if @page_order_changed }}
+    Page order changed.
+    <button
+      class="btn btn-success"
+      type="button"
+      {{on "click" @onPageOrderApply}}>
+      Apply Changes
+    </button>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      {{on "click" @onPageOrderDiscard}}>
+      Discard
+    </button>
+  {{else if this.is_any_page_selected }}
     <button
       class="btn btn-light"
       type="button"
