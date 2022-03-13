@@ -62,7 +62,86 @@ module('Unit | Utils | Array', function () {
     expected_result.forEach((page, index) => {
       assert.strictEqual(page.id, actual_result[index].id);
     });
-
   });
-});
 
+
+  test('reposition_items 2', function(assert) {
+    let items,
+      selected_ids = ['2', '3'],
+      drop_pos = 0,
+      actual_result,
+      expected_result;
+
+    items = [
+      new Page('1'), new Page('2'), new Page('3'), new Page('4')
+    ];
+
+    expected_result = [
+      new Page('2'), new Page('3'), new Page('1'), new Page('4')
+    ]
+
+    actual_result = reposition_items({
+      items, selected_ids, drop_pos
+    });
+
+    assert.expect( expected_result.length );
+
+    expected_result.forEach((page, index) => {
+      assert.strictEqual(page.id, actual_result[index].id);
+    });
+  });
+
+
+  test('reposition_items 3', function(assert) {
+    let items,
+      selected_ids = ['1'],
+      drop_pos = 3,
+      actual_result,
+      expected_result;
+
+    items = [
+      new Page('1'), new Page('2'), new Page('3'), new Page('4')
+    ];
+
+    expected_result = [
+      new Page('2'), new Page('3'), new Page('4'), new Page('1')
+    ]
+
+    actual_result = reposition_items({
+      items, selected_ids, drop_pos
+    });
+
+    assert.expect( expected_result.length );
+
+    expected_result.forEach((page, index) => {
+      assert.strictEqual(page.id, actual_result[index].id);
+    });
+  });
+
+  test('reposition_items 4', function(assert) {
+    let items,
+      selected_ids = ['2', '3'],
+      drop_pos = 3,
+      actual_result,
+      expected_result;
+
+    items = [
+      new Page('1'), new Page('2'), new Page('3'), new Page('4')
+    ];
+
+    expected_result = [
+      new Page('1'), new Page('4'), new Page('2'), new Page('3')
+    ]
+
+    actual_result = reposition_items({
+      items, selected_ids, drop_pos
+    });
+
+    assert.expect( expected_result.length );
+
+    expected_result.forEach((page, index) => {
+      assert.strictEqual(page.id, actual_result[index].id);
+    });
+  });
+
+});

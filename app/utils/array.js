@@ -37,6 +37,7 @@ function merge_items(item_id, items) {
   return result_items;
 }
 
+
 function reposition_items({items, selected_ids, drop_pos}) {
   let selected_items = [],
     remaining_items = Array.from(items),
@@ -48,16 +49,20 @@ function reposition_items({items, selected_ids, drop_pos}) {
 
     idx = remaining_items.findIndex(p => get_id(p) == item_id);
 
-    extracted_item = remaining_items.slice(idx, 1);
-    selected_items.push(extracted_item);
+    extracted_item = remaining_items.slice(idx, idx + 1);
+    remaining_items.splice(idx, 1);
+    selected_items.push(...extracted_item);
   });
 
-  for (i=0, j=0; i < items.length; j++) {
+  for (i=0, j=0; i < items.length;) {
     if (i == drop_pos) {
-      result.push(selected_items);
-      i += selected_items.length + 1;
+      result.push(...selected_items);
+      i += selected_items.length;
     } else { // i < drop_pos || i > drop_pos
-      result.push(remaining_items[j]);
+      if ( j < remaining_items.length ) {
+        result.push(remaining_items[j]);
+        j++;
+      }
       i++;
     }
   }
