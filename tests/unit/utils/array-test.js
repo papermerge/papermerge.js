@@ -64,17 +64,8 @@ module('Unit | Utils | Array', function () {
       items, selected_ids
     });
 
-    assert.expect(
-      expected_selected_items.length + expected_remaining_items.length
-    );
-
-    expected_selected_items.forEach((page, index) => {
-      assert.strictEqual(page.id, selected_items[index].id);
-    });
-
-    expected_remaining_items.forEach((page, index) => {
-      assert.strictEqual(page.id, remaining_items[index].id);
-    });
+    assert.deepEqual(expected_selected_items, selected_items);
+    assert.deepEqual(expected_remaining_items, remaining_items);
   });
 
   test('reposition_items 1', function(assert) {
@@ -96,11 +87,7 @@ module('Unit | Utils | Array', function () {
       items, selected_ids, drop_pos
     });
 
-    assert.expect( expected_result.length );
-
-    expected_result.forEach((page, index) => {
-      assert.strictEqual(page.id, actual_result[index].id);
-    });
+    assert.deepEqual(expected_result, actual_result);
   });
 
   test('reposition_items 2', function(assert) {
@@ -122,11 +109,7 @@ module('Unit | Utils | Array', function () {
       items, selected_ids, drop_pos
     });
 
-    assert.expect( expected_result.length );
-
-    expected_result.forEach((page, index) => {
-      assert.strictEqual(page.id, actual_result[index].id);
-    });
+    assert.deepEqual(expected_result, actual_result);
   });
 
   test('reposition_items 3', function(assert) {
@@ -148,11 +131,7 @@ module('Unit | Utils | Array', function () {
       items, selected_ids, drop_pos
     });
 
-    assert.expect( expected_result.length );
-
-    expected_result.forEach((page, index) => {
-      assert.strictEqual(page.id, actual_result[index].id);
-    });
+    assert.deepEqual( expected_result, actual_result);
   });
 
   test('reposition_items 4', function(assert) {
@@ -174,11 +153,7 @@ module('Unit | Utils | Array', function () {
       items, selected_ids, drop_pos
     });
 
-    assert.expect( expected_result.length );
-
-    expected_result.forEach((page, index) => {
-      assert.strictEqual(page.id, actual_result[index].id);
-    });
+    assert.deepEqual(expected_result, actual_result);
   });
 
 });

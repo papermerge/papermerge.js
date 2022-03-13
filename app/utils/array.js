@@ -42,6 +42,23 @@ function extract_selected_ids({items, selected_ids}) {
   /**
    * Extracts from ``items`` all objects whose ID attribute
    * is in ``selected_id`` array.
+   *
+   * Example:
+   *
+   * items = [
+   *  Page(id=1), Page(id=2), Page(id=3), Page(id=4), Page(id=5)
+   * ]
+   *
+   * selected_ids = [2, 3]
+   *
+   * let {selected_items, remaining_items} = extract_selected_ids({
+   *   items, selected_ids
+   * });
+   *
+   * Now following equalities are true:
+   *
+   *  selected_items == [Page(id=2), Page(id=3)]
+   *  remaining_items == [Page(id=1), Page(id=4), Page(id=5)]
   */
   let selected_items = [],
     remaining_items = Array.from(items);
