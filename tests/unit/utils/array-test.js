@@ -20,8 +20,8 @@ class Page {
   }
 }
 
-module('Unit | Utils | Array', function () {
 
+module('Unit | Utils | Array', function () {
   test('get_id 1', function (assert) {
     let item;
 
@@ -155,5 +155,4 @@ module('Unit | Utils | Array', function () {
 
     assert.deepEqual(expected_result, actual_result);
   });
-
-});
+}); // 'Unit | Utils | Array'
