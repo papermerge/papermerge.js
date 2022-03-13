@@ -38,11 +38,14 @@ function merge_items(item_id, items) {
 }
 
 
-function reposition_items({items, selected_ids, drop_pos}) {
+function extract_selected_ids({items, selected_ids}) {
+  /**
+   * Extracts from ``items`` all objects whose ID attribute
+   * is in ``selected_id`` array.
+  */
   let selected_items = [],
-    remaining_items = Array.from(items),
-    result = [],
-    i, j;
+    remaining_items = Array.from(items);
+
 
   selected_ids.forEach(item_id => {
     let idx, extracted_item;
@@ -52,6 +55,28 @@ function reposition_items({items, selected_ids, drop_pos}) {
     extracted_item = remaining_items.slice(idx, idx + 1);
     remaining_items.splice(idx, 1);
     selected_items.push(...extracted_item);
+  });
+
+  return {selected_items, remaining_items};
+}
+
+
+function reposition_items({items, selected_ids, drop_pos}) {
+  /**
+   * Returns reordered copy of ``items`` with selected items positioned
+   * starting with ``drop_pos``.
+   *
+   * ``items`` is an array of objects which have an ID attribute.
+   * ``selected_ids`` is an array of IDs (i.e. an array of strings) of the
+   * items which will be moved to different position.
+   * ``drop_pos`` is an integer. It is the target position where selected
+   * items will move.
+  */
+  let result = [],
+    i, j;
+
+  let { selected_items, remaining_items } = extract_selected_ids({
+    items, selected_ids
   });
 
   for (i=0, j=0; i < items.length;) {
@@ -73,5 +98,6 @@ function reposition_items({items, selected_ids, drop_pos}) {
 export {
   get_id,
   merge_items,
+  extract_selected_ids,
   reposition_items,
 }

@@ -146,7 +146,7 @@ export default class ViewerComponent extends Component {
 
   @action
   onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
-    let all_pages;
+    let all_pages = this.pages;
 
     console.log(`onThumbnailsPositionChanged`);
     console.log(`original_pos=${original_pos}, drop_pos=${drop_pos}, page_ids=${page_ids}`);
