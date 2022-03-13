@@ -61,7 +61,7 @@ export default class Requests extends Service {
       })
     });
 
-    return this._post('/pages/reorder/', order_data);
+    return this._post('/pages/reorder/', {'pages': order_data});
   }
 
   /**
