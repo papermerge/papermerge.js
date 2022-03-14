@@ -21,16 +21,17 @@ export default class ViewerThumbnailComponent extends Component {
     });
   }
 
+  @action
   onDragStart({event, model, items, canvas, element}) {
     let data, original_pos;
 
     original_pos = get_pos_within_siblings(element);
 
-    console.log(`OnDragStart: original_pos = ${original_pos}`);
     data = {
       pages: items,
       page: model,
-      original_pos: original_pos
+      original_pos: original_pos,
+      source_doc_id: this.args.doc.id
     };
 
     event.dataTransfer.setData(

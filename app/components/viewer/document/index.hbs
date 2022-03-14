@@ -1,11 +1,13 @@
 <div class="d-flex">
   {{#if this.thumbnails_visible}}
     <Viewer::Thumbnails
+      @doc={{@doc}}
       @pages={{@pages}}
       @selectedPages={{@selectedPages}}
       @onDblClick={{this.onThumbnailDblClick}}
       @onCheckboxChange={{@onCheckboxChange}}
-      @onThumbnailsPositionChanged={{@onThumbnailsPositionChanged}}/>
+      @onThumbnailsPositionChanged={{@onThumbnailsPositionChanged}}
+      @onIncomingPages={{@onIncomingPages}} />
   {{/if}}
   <Viewer::ThumbnailsSwitch
     @onThumbnailsToggle={{this.onThumbnailsToggle}}

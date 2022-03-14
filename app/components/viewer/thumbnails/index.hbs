@@ -9,6 +9,7 @@
   {{adjust_element_height}}>
   {{#each @pages as |page|}}
     <Viewer::Thumbnail
+      @doc={{@doc}}
       @page={{page}}
       @selectedPages={{@selectedPages}}
       @onDblClick={{@onDblClick}}

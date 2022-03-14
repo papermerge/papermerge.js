@@ -64,6 +64,10 @@ export default class Requests extends Service {
     return this._post('/pages/reorder/', {'pages': order_data});
   }
 
+  async moveToDocument({dst, pages, position}) {
+    return this._post('/pages/move-to-document/', {dst, pages, position});
+  }
+
   /**
   *  `document_version` contains following attributes:
   *    id

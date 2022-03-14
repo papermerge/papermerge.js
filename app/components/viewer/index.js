@@ -155,13 +155,22 @@ export default class ViewerComponent extends Component {
   onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
     let all_pages = this.pages;
 
-    console.log(`onThumbnailsPositionChanged`);
-    console.log(`original_pos=${original_pos}, drop_pos=${drop_pos}, page_ids=${page_ids}`);
     this.pages = reposition_items({
       items: all_pages,
       selected_ids: page_ids,
       drop_pos: drop_pos
     });
+  }
+
+  @action
+  async onIncomingPages({page_ids, drop_pos}) {
+    await this.requests.moveToDocument({
+      dst: this.args.doc.id,
+      pages: page_ids,
+      position: drop_pos
+    });
+
+    this.router.refresh();
   }
 
   @action

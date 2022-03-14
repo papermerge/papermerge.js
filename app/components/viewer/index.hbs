@@ -33,9 +33,11 @@
     @hint={{@hint}} />
 
   <Viewer::Document
+    @doc={{@doc}}
     @pages={{this.pages}}
     @selectedPages={{this.selected_pages}}
     @thumbnails_visible={{this.thumbnails_visible}}
     @onCheckboxChange={{this.onThumbnailCheckboxChange}}
-    @onThumbnailsPositionChanged={{this.onThumbnailsPositionChanged}} />
+    @onThumbnailsPositionChanged={{this.onThumbnailsPositionChanged}}
+    @onIncomingPages={{this.onIncomingPages}} />
 </div>

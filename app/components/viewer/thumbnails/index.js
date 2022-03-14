@@ -16,23 +16,41 @@ export default class ViewerThumbnailsComponent extends Component {
 
   @action
   onDrop({event, element}) {
-    let data, json_data, page_ids, original_pos, drop_pos;
+    let data,
+      json_data,
+      page_ids,
+      original_pos,
+      drop_pos,
+      source_doc_id;
 
-    console.log(`posX=${event.clientX} posY=${event.clientY}`);
     event.preventDefault();
     data = event.dataTransfer.getData('application/x.page');
+    if (!data) {
+      console.warn('Accepts only application/x.page data');
+      return;
+    }
     json_data = JSON.parse(data);
+
     original_pos = json_data['original_pos']
     page_ids = json_data['pages'].map(page => page.id);
+    source_doc_id = json_data['source_doc_id'];
 
     drop_pos = get_cursor_pos_within_element(
       element,
       new Point(event.clientX, event.clientY)
     );
 
-    this.args.onThumbnailsPositionChanged({
-      original_pos, drop_pos, page_ids
-    });
+    if (source_doc_id == this.args.doc.id) {
+      // pages moved within same document
+      this.args.onThumbnailsPositionChanged({
+        original_pos, drop_pos, page_ids
+      });
+    } else {
+      // pages moved to another document
+      this.args.onIncomingPages({
+        page_ids, drop_pos
+      });
+    }
   }
 
   @action
