@@ -45,6 +45,11 @@ export default class CommanderComponent extends Component {
   @tracked deleted_records = A([]);
   @tracked __deleted_record; // used as workaround for an ember bug
 
+  // data passed to `confirm_move_pages_modal` dialog.
+  @tracked move_pages_modal_page_ids = A([]);
+  @tracked move_pages_modal_dst_folder = undefined;
+  @tracked show_confirm_move_pages_modal = false;
+
   constructor(owner, args) {
     super(owner, args);
     this.websockets.addHandler(this.messageHandler, this);
@@ -172,7 +177,8 @@ export default class CommanderComponent extends Component {
   @action
   onDrop({event, element}) {
     let data, files_list;
-    const isNodeDrop = event.dataTransfer.types.includes("application/x.node");
+    const isNodeDrop = event.dataTransfer.types.includes('application/x.node');
+    const isPageDrop = event.dataTransfer.types.includes('application/x.page');
 
     event.preventDefault();
     element.classList.remove('droparea');
@@ -185,6 +191,9 @@ export default class CommanderComponent extends Component {
           'application/x.node': JSON.parse(data)
         });
       }
+    } else if (isPageDrop) {
+      data = event.dataTransfer.getData('application/x.page');
+      this.page_drop_callback(JSON.parse(data));
     } else if (this._is_desktop_drop(event)) {
       files_list = this._get_desktop_files(event);
       this.drop_callback({
@@ -293,7 +302,24 @@ export default class CommanderComponent extends Component {
       });
 
     }
+  }
 
+  page_drop_callback(json_page_data) {
+    let dst_folder;
+
+    dst_folder = this.args.node;
+    this.move_pages_modal_page_ids = json_page_data['pages'].map(
+      page => page.id
+    );
+    this.move_pages_modal_dst_folder = dst_folder;
+    this.show_confirm_move_pages_modal = true;
+  }
+
+  @action
+  async onSubmitMovePages({dst, page_ids, single_page}) {
+    await this.requests.moveToFolder({dst, page_ids, single_page});
+    this.show_confirm_move_pages_modal = false;
+    this.router.refresh();
   }
 
   @action
@@ -317,7 +343,6 @@ export default class CommanderComponent extends Component {
       `model` is instance of `model.document` or `model.folder`
     */
     console.log(`onDragendCancel on ${this.args.hint}: id=${model.id} type=${model.nodeType}`);
-
   }
 
   @action

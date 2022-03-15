@@ -68,6 +68,14 @@ export default class Requests extends Service {
     return this._post('/pages/move-to-document/', {dst, pages, position});
   }
 
+  async moveToFolder({dst, page_ids, single_page}) {
+    return this._post('/pages/move-to-folder/', {
+      dst: dst.id,
+      pages: page_ids,
+      single_page: single_page
+    });
+  }
+
   /**
   *  `document_version` contains following attributes:
   *    id

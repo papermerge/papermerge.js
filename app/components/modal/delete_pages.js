@@ -16,7 +16,6 @@ export default class DeletePagesComponent extends BaseComponent {
   @action
   onSubmit() {
     let pages_copy = A(this.pages);
-  
     this.args.onClose(pages_copy);
   }
 
