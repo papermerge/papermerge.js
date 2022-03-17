@@ -69,7 +69,7 @@ export default class ContextMenuModifier extends Modifier {
 
   // lifecycle hooks
   didReceiveArguments() {
-    let dom_el = document.getElementById('context-menu');
+    let dom_el = this.element.querySelector('.context-menu');
 
     if (dom_el) {
       this.removeEventListener();
@@ -77,7 +77,7 @@ export default class ContextMenuModifier extends Modifier {
 
       this.context_menu = new ContextMenu(dom_el);
     } else {
-      console.error(`#context-menu element not found`);
+      console.error(`.context-menu element not found`);
     }
   }
 

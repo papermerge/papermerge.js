@@ -37,6 +37,7 @@ export default class ViewerComponent extends Component {
 
   @tracked selected_pages = A([]);
   @tracked show_confirm_pages_deletion_modal = false;
+  @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
 
   initial_pages_memo = A([]);
@@ -179,7 +180,21 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  async closeConfirmDeletionModal() {
+  openRenameDocumentModal() {
+    this.show_rename_node_modal = true;
+  }
+
+  @action
+  onCloseRenameModal() {
+    this.show_rename_node_modal = false;
+  }
+
+  @action
+  onExtractPages() {
+  }
+
+  @action
+  async submitConfirmDeletionModal() {
     let page_ids = [];
 
     page_ids = this.selected_pages.map(page => page.id);

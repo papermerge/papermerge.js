@@ -16,16 +16,14 @@ export default class DeletePagesComponent extends BaseComponent {
   @action
   onSubmit() {
     let pages_copy = A(this.pages);
-    this.args.onClose(pages_copy);
+    this.args.onSubmit(pages_copy);
+  }
+
+  @action
+  onCancel() {
   }
 
   get count() {
     return this.pages.length;
   }
-
-  @action
-  onCancel() {
-    this.args.onClose();
-  }
-
 }

@@ -1,6 +1,14 @@
 <div>
   <Button::DownloadDocumentVersion
     @document_versions={{@document_versions}} />
+
+    <button
+    class="btn btn-light"
+    type="button"
+    {{on "click" @openRenameDocumentModal}}>
+      <i class="fa fa-edit"></i>
+      Rename
+    </button>
     {{#if @isLocked}}
       <button
         class="btn btn-light"

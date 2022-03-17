@@ -1,0 +1,20 @@
+<ul class="dropdown-menu context-menu">
+  <li>
+    <a class="dropdown-item" {{on "click" @openRenameDocumentModal}}>
+      <i class="fa fa-edit mx-2"></i>Rename
+    </a>
+  </li>
+    {{#if this.one_or_multiple_pages_selected}}
+    <li>
+      <a class="dropdown-item" {{on "click" @onExtractPages}}>
+        <i class="fa fa-cut mx-2"></i>Extract Pages
+      </a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <a class="dropdown-item" {{on "click" @openConfirmDeletionModal}}>
+        <i class="fa fa-times mx-2"></i>Delete Pages
+      </a>
+    </li>
+  {{/if}}
+</ul>

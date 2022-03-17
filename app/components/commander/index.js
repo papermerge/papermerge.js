@@ -110,7 +110,7 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  closeRenameModal() {
+  onCloseRenameModal() {
     this.show_rename_node_modal = false;
     this.selected_nodes = A([]);
   }
@@ -362,6 +362,14 @@ export default class CommanderComponent extends Component {
     });
 
     return _lang;
+  }
+
+  get first_selected_node() {
+    if (this.selected_nodes && this.selected_nodes[0]) {
+      return this.selected_nodes[0];
+    }
+
+    return undefined;
   }
 
   get children() {

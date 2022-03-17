@@ -1,4 +1,4 @@
-<div class="panel viewer col m-2 p-2">
+<div class="panel viewer col m-2 p-2" {{contextMenu}}>
   <div class="d-flex justify-content-between action-buttons">
     <Viewer::ActionButtons
       @document_versions={{this.document_versions}}
@@ -9,6 +9,7 @@
       @onPageOrderApply={{this.onPageOrderApply}}
       @onPageOrderDiscard={{this.onPageOrderDiscard}}
       @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+      @openRenameDocumentModal={{this.openRenameDocumentModal}}
       @onRotateClockwise={{this.onRotateClockwise}}
       @onRotateCounterclockwise={{this.onRotateCounterclockwise}}
       @onRunOCR={{this.onRunOCR}} />
@@ -19,11 +20,22 @@
       @hint={{@hint}} />
   </div>
 
+  <Viewer::ContextMenu
+    @selectedPages={{this.selected_pages}}
+    @openRenameDocumentModal={{this.openRenameDocumentModal}}
+    @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @onExtractPages={{this.onExtractPages}} />
+
   <Modal::DeletePages
     id="delete-pages"
     @selectedPages={{this.selected_pages}}
-    @onClose={{this.closeConfirmDeletionModal}}
+    @onSubmit={{this.submitConfirmDeletionModal}}
     {{show-when this.show_confirm_pages_deletion_modal}} />
+
+  <Modal::RenameNode
+    @node={{@doc}}
+    @onClose={{this.onCloseRenameModal}}
+    {{show-when this.show_rename_node_modal}} />
 
   <Breadcrumb
     @node={{@doc}}

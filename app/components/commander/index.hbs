@@ -13,7 +13,7 @@
     <UiSelect />
   {{/if}}
 
-  <ContextMenu
+  <Commander::ContextMenu
     @openNewFolderModal={{this.openNewFolderModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
     @onSelectionChanged={{this.onSelectionChanged}}
@@ -47,9 +47,8 @@
     {{show-when this.show_new_folder_modal}} />
 
   <Modal::RenameNode
-    id="rename-node"
-    @selectedNodes={{this.selected_nodes}}
-    @onClose={{this.closeRenameModal}}
+    @node={{this.first_selected_node}}
+    @onClose={{this.onCloseRenameModal}}
     {{show-when this.show_rename_node_modal}} />
 
   <Modal::DeleteNode

@@ -10,15 +10,13 @@ export default class RenameNodeComponent extends BaseComponent {
 
 
   get new_title() {
-    let selected_nodes;
 
     if (this.title) {
       return this.title;
     }
 
-    selected_nodes = this.args.selectedNodes;
-    if (selected_nodes && selected_nodes[0]) {
-      return selected_nodes[0].title;
+    if (this.node) {
+      return this.node.title
     }
 
     return '';
@@ -29,7 +27,7 @@ export default class RenameNodeComponent extends BaseComponent {
   }
 
   get node() {
-    return this.args.selectedNodes[0];
+    return this.args.node;
   }
 
   @action
