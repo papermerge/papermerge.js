@@ -40,32 +40,29 @@ export default class NodesController extends DualPanelBaseController {
 
   @action
   onSwapPanels() {
-    let node_id;
+    let node_id,
+      query_params;
+
+    node_id = this.router.currentRoute.params['node_id'];
+    query_params = {
+      'queryParams': {
+        'extra_id': node_id,
+        'extra_type': 'folder'
+      }
+    }
 
     if (this.extra_id && this.extra_type == 'folder') {
-      node_id = this.router.currentRoute.params['node_id'];
       this.router.transitionTo(
         'authenticated.nodes',
         this.extra_id,
-        {
-          'queryParams': {
-            'extra_id': node_id,
-            'extra_type': 'folder',
-          }
-        }
+        query_params
       );
     } else if (this.extra_id && this.extra_type == 'doc') {
-      node_id = this.router.currentRoute.params['node_id'];
       this.router.transitionTo(
         'authenticated.document',
         this.extra_id,
-        {
-          'queryParams': {
-            'extra_id': node_id,
-            'extra_type': 'folder'
-          }
-        }
-      )
+        query_params
+      );
     }
   }
 

@@ -1,8 +1,11 @@
 import { action } from '@ember/object';
 import DualPanelBaseController from "./dualpanel_base";
+import { service } from '@ember/service';
 
 
 export default class DocumentController extends DualPanelBaseController {
+
+  @service router;
 
   @action
   async onPanelToggle(hint) {
@@ -38,17 +41,34 @@ export default class DocumentController extends DualPanelBaseController {
 
   @action
   onSwapPanels() {
-    console.log(`onSwapPanels`);
+    let document_id = this.router.currentRoute.params['document_id'],
+      query_params;
+
+    query_params = {
+      'queryParams': {
+        'extra_id': document_id,
+        'extra_type': 'doc'
+      }
+    };
+
+    if (this.extra_id && this.extra_type == 'folder') {
+      this.router.transitionTo(
+        'authenticated.nodes',
+        this.extra_id,
+        query_params
+      );
+    } else if (this.extra_id && this.extra_type == 'doc') {
+      this.router.transitionTo(
+        'authenticated.document',
+        this.extra_id,
+        query_params
+      )
+    }
   }
 
   @action
-  onLeftDuplicate() {
-    console.log(`onLeftDuplicate`);
-  }
-
-  @action
-  onRightDuplicate() {
-    console.log(`onRightDuplicate`);
+  onDuplicatePanel() {
+    console.log(`onDuplicatePanel`);
   }
 
 }
