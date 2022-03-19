@@ -1,6 +1,12 @@
 <div class="d-flex">
+
   <Commander::ViewMode
     @onViewModeChange={{@onViewModeChange}} />
+
+  <PanelModes
+    @dualPanelMode={{@dualPanelMode}}
+    @hint={{@hint}} />
+
   <div class="panel-mode">
     <button type="button" class="btn btn-light mx-1"
       {{on "click" (fn @onPanelToggle @hint) }}>
@@ -11,4 +17,5 @@
       {{/if}}
     </button>
   </div>
+
 </div>

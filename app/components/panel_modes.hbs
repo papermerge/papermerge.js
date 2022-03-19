@@ -1,0 +1,18 @@
+{{#if @dualPanelMode}}
+  {{#if (is_equal @hint "left")}}
+    <button type="button"
+      class="btn btn-light mx-1">
+        <i class="bi-arrow-bar-right"></i>
+    </button>
+  {{else}}
+    <button type="button"
+      class="btn btn-light mx-1">
+        <i class="bi-arrow-bar-left"></i>
+    </button>
+  {{/if}}
+
+  <button type="button"
+    class="btn btn-light mx-1">
+      <i class="bi-arrow-left-right"></i>
+  </button>
+{{/if}}

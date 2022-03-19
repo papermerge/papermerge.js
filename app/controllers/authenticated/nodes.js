@@ -34,4 +34,19 @@ export default class NodesController extends DualPanelBaseController {
       this.extra_type = 'folder';
     }
   }
+
+  @action
+  onSwapPanels() {
+    console.log(`onSwapPanels`);
+  }
+
+  @action
+  onLeftDuplicate() {
+    console.log(`onLeftDuplicate`);
+  }
+
+  @action
+  onRightDuplicate() {
+    console.log(`onRightDuplicate`);
+  }
 }

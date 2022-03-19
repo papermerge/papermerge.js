@@ -36,4 +36,19 @@ export default class DocumentController extends DualPanelBaseController {
     }
   }
 
+  @action
+  onSwapPanels() {
+    console.log(`onSwapPanels`);
+  }
+
+  @action
+  onLeftDuplicate() {
+    console.log(`onLeftDuplicate`);
+  }
+
+  @action
+  onRightDuplicate() {
+    console.log(`onRightDuplicate`);
+  }
+
 }
