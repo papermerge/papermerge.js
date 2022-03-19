@@ -1,8 +1,11 @@
 import { action } from '@ember/object';
 import DualPanelBaseController from "./dualpanel_base";
+import { service } from '@ember/service';
 
 
 export default class NodesController extends DualPanelBaseController {
+
+  @service router;
 
   @action
   async onPanelToggle(hint) {
@@ -16,9 +19,9 @@ export default class NodesController extends DualPanelBaseController {
       if (hint === "left") {
         // user decided to close left panel
         if (this.extra_type === 'folder') {
-          this.replaceRoute('authenticated.nodes', this.extra_id);
+          this.router.replaceWith('authenticated.nodes', this.extra_id);
         } else {
-          this.replaceRoute('authenticated.document', this.extra_id);
+          this.router.replaceWith('authenticated.document', this.extra_id);
         }
         this.extra_id = null;
         this.extra_type = null;
@@ -37,16 +40,37 @@ export default class NodesController extends DualPanelBaseController {
 
   @action
   onSwapPanels() {
-    console.log(`onSwapPanels`);
+    let node_id;
+
+    if (this.extra_id && this.extra_type == 'folder') {
+      node_id = this.router.currentRoute.params['node_id'];
+      this.router.transitionTo(
+        'authenticated.nodes',
+        this.extra_id,
+        {
+          'queryParams': {
+            'extra_id': node_id,
+            'extra_type': 'folder',
+          }
+        }
+      );
+    } else if (this.extra_id && this.extra_type == 'doc') {
+      node_id = this.router.currentRoute.params['node_id'];
+      this.router.transitionTo(
+        'authenticated.document',
+        this.extra_id,
+        {
+          'queryParams': {
+            'extra_id': node_id,
+            'extra_type': 'folder'
+          }
+        }
+      )
+    }
   }
 
   @action
-  onLeftDuplicate() {
-    console.log(`onLeftDuplicate`);
-  }
-
-  @action
-  onRightDuplicate() {
-    console.log(`onRightDuplicate`);
+  onDuplicatePanel() {
+    console.log(`onDuplicatePanel`);
   }
 }

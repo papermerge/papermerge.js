@@ -8,7 +8,9 @@
     @extradoc={{@model.extra.doc}}
     @onPanelToggle={{this.onPanelToggle}}
     @dualPanelMode={{this.dualpanel_mode}}
-    @hint="left" />
+    @hint="left"
+    @onSwapPanels={{this.onSwapPanels}}
+    @onDuplicatePanel={{this.onDuplicatePanel}} />
 
   {{#if @model.extra}}
     {{#if @model.extra.doc}}
@@ -18,7 +20,9 @@
         @extranode={{@model.current_node}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
-        @hint="right" />
+        @hint="right"
+        @onSwapPanels={{this.onSwapPanels}}
+        @onDuplicatePanel={{this.onDuplicatePanel}} />
     {{else}}
       <Commander
         @node={{@model.extra.current_node}}
@@ -27,7 +31,9 @@
         @extranode={{@model.current_node}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
-        @hint="right" />
+        @hint="right"
+        @onSwapPanels={{this.onSwapPanels}}
+        @onDuplicatePanel={{this.onDuplicatePanel}} />
     {{/if}}
   {{/if}}
 </div>
