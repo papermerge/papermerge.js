@@ -68,6 +68,22 @@ export default class NodesController extends DualPanelBaseController {
 
   @action
   onDuplicatePanel() {
-    console.log(`onDuplicatePanel`);
+    let node_id = this.router.currentRoute.params['node_id'],
+      query_params;
+
+    query_params = {
+      'queryParams': {
+        'extra_id': node_id,
+        'extra_type': 'folder'
+      }
+    }
+
+    if (this.extra_id) {
+        this.router.transitionTo(
+          'authenticated.nodes',
+          node_id,
+          query_params
+        );
+    }
   }
 }

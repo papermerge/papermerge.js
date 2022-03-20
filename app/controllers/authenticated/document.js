@@ -68,7 +68,22 @@ export default class DocumentController extends DualPanelBaseController {
 
   @action
   onDuplicatePanel() {
-    console.log(`onDuplicatePanel`);
-  }
+    let document_id = this.router.currentRoute.params['document_id'],
+      query_params;
 
+    query_params = {
+      'queryParams': {
+        'extra_id': document_id,
+        'extra_type': 'doc'
+      }
+    }
+
+    if (this.extra_id) {
+      this.router.transitionTo(
+        'authenticated.document',
+        document_id,
+        query_params
+      );
+    }
+  }
 }
