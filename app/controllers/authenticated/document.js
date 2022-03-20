@@ -77,7 +77,6 @@ export default class DocumentController extends DualPanelBaseController {
         'extra_type': 'doc'
       }
     }
-
     if (this.extra_id) {
       this.router.transitionTo(
         'authenticated.document',
