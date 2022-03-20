@@ -10,4 +10,14 @@ export default class SidebarComponent extends Component {
       return tags.filter(tag => tag.pinned);
     });
   }
+
+  get show_pinned_tags() {
+    if (this.args.pinned_tags) {
+      if (this.args.pinned_tags.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

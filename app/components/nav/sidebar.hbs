@@ -21,23 +21,25 @@
             <i class="fa fa-home me-2"></i>Home
           </LinkTo>
         </li>
-        <li>
-          <button class="btn btn-toggle rounded align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-            Pinned tags
-          </button>
-          <div id="home-collapse" class="collapse">
-            <ul class="list-unstyled px-3 mx-3 my-1">
-            {{#each @pinned_tags as |pinned_tag|}}
-              <li class="mb-2 pb-1">
-                  <Tag::Item
-                      @name={{pinned_tag.name}}
-                      @fg_color={{pinned_tag.fg_color}}
-                      @bg_color={{pinned_tag.bg_color}} />
-              </li>
-            {{/each}}
-            </ul>
-          </div>
-        </li>
+        {{#if this.show_pinned_tags}}
+          <li>
+            <button class="btn btn-toggle rounded align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+              Pinned Tags
+            </button>
+            <div id="home-collapse" class="collapse">
+              <ul class="list-unstyled px-3 mx-3 my-1">
+              {{#each @pinned_tags as |pinned_tag|}}
+                <li class="mb-2 pb-1">
+                    <Tag::Item
+                        @name={{pinned_tag.name}}
+                        @fg_color={{pinned_tag.fg_color}}
+                        @bg_color={{pinned_tag.bg_color}} />
+                </li>
+              {{/each}}
+              </ul>
+            </div>
+          </li>
+        {{/if}}
         <li>
           <LinkTo
             @route="authenticated.nodes"
