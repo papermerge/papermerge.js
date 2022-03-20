@@ -1,7 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
+
 
 const COLORS = [
   '#ff0000',
@@ -34,6 +35,7 @@ export default class NewTagComponent extends Component {
   */
 
   @service store;
+  @service router;
 
   // initially only 'new' button is visible
   @tracked form_visible = false;
@@ -59,6 +61,7 @@ export default class NewTagComponent extends Component {
     }).save();
 
     this._empty_form();
+    this.router.refresh();
   }
 
   @action
