@@ -13,20 +13,40 @@ export default class DocumentController extends DualPanelBaseController {
       hint is either "left" or "right" depending where
       the onPanelToggle originated from.
     */
-    let home_folder;
+    let home_folder,
+      route,
+      empty_query_params,
+      extra_id,
+      extra_type,
+      doc_id;
 
-    if (this.extra_id) {
+    route = this.router.currentRoute;
+    empty_query_params = {
+      'queryParams': {}
+    };
+    doc_id = route.params.document_id;
+
+    if (route.queryParams.extra_id) {
+      extra_id = route.queryParams.extra_id;
+      extra_type = route.queryParams.extra_type;
       if (hint === "left") {
         // user decided to close left panel
-        if (this.extra_type === 'folder') {
-          this.replaceRoute('authenticated.nodes', this.extra_id);
+        if (extra_type === 'folder') {
+          this.router.transitionTo(
+            'authenticated.nodes',
+            extra_id,
+            empty_query_params
+          );
         } else {
-          this.replaceRoute('authenticated.document', this.extra_id);
+          this.router.transitionTo(
+            'authenticated.document',
+            doc_id,
+            empty_query_params
+          );
+          this.extra_id = null;
+          this.extra_type = null;
         }
-        this.extra_id = null;
-        this.extra_type = null;
       } else if (hint === "right") {
-        console.log('Closing right panel');
         this.extra_id = null;
         this.extra_type = null;
       } else {

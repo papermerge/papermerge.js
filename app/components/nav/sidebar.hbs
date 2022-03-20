@@ -16,6 +16,7 @@
           <LinkTo
             @route="authenticated.nodes"
             @model="{{@home_folder_id}}"
+            @query={{hash extra_id=null extra_type=null}}
             class="nav-link text-white" aria-current="page">
             <i class="fa fa-home me-2"></i>Home
           </LinkTo>
@@ -41,6 +42,7 @@
           <LinkTo
             @route="authenticated.nodes"
             @model="{{@inbox_folder_id}}"
+            @query={{hash extra_id=null extra_type=null}}
             class="nav-link text-white" aria-current="page">
             <i class="bi-inbox me-2"></i>Inbox ({{@inbox_count}})
           </LinkTo>
