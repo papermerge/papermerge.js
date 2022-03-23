@@ -49,6 +49,11 @@ export default class SearchComponent extends Component {
     }
   }
 
+  @action
+  onClickOutside() {
+    this._reset();
+  }
+
   _reset() {
     this.query = '';
     this.autocomplete_items = [];
