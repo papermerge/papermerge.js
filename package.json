@@ -78,6 +78,7 @@
     "edition": "octane"
   },
   "devDependencies": {
+    "tracked-built-ins": "^2.0.1",
     "webpack": "^5.65.0"
   }
 }

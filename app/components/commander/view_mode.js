@@ -4,6 +4,7 @@ import { A } from '@ember/array';
 import { action } from '@ember/object';
 
 
+
 export default class ViewModeComponent extends Component {
 
   @tracked items = A([
@@ -19,12 +20,12 @@ export default class ViewModeComponent extends Component {
     },
   ]);
 
-  @tracked current_item = 'list';
-
-
-  @action onItemClick(item) {
-    this.current_item = item.value;
-    this.args.onViewModeChange(item.value);
+  get view_mode() {
+    return this.args.viewMode || 'list';
   }
 
+  @action
+  onItemClick(item) {
+    this.args.onViewModeChange(item.value);
+  }
 }

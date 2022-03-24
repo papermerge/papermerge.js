@@ -1,13 +1,12 @@
 import { action } from '@ember/object';
 import Controller from '@ember/controller';
-import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import localStorage from 'papermerge/utils/localstorage';
 
 
 export default class AuthenticatedController extends Controller {
 
-  // sidebar expanded ?
-  @tracked expanded = true;
+  @localStorage expanded_sidebar = false;
   @service ws_inbox_refresh;
   @service ws_nodes_move;
   @service router;
@@ -30,6 +29,6 @@ export default class AuthenticatedController extends Controller {
 
   @action
   onSidebarToggle() {
-    this.expanded = !this.expanded;
+    this.expanded_sidebar = !this.expanded_sidebar;
   }
 }

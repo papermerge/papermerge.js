@@ -15,7 +15,7 @@
         class="btn btn-link text-decoration-none"
         {{on "click" (fn this.onItemClick item)}}>
         <span class="px-2">{{ item.title }}</span>
-        {{#if (is_equal this.current_item item.value) }}
+        {{#if (is_equal this.view_mode item.value) }}
             <i class="bi-check-lg text-success"></i>
         {{/if}}
       </button>

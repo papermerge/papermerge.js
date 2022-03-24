@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import localStorage from 'papermerge/utils/localstorage';
 
 
 export default class CommanderComponent extends Component {
@@ -33,8 +34,9 @@ export default class CommanderComponent extends Component {
 
   @tracked show_confirm_deletion_modal = false;
 
-  // nodes are displayed as list or as grid?
-  @tracked view_mode = 'list';
+  // localStorage is tracked
+  @localStorage left_view_mode = 'list';
+  @localStorage right_view_mode = 'list';
 
   @tracked selected_nodes = A([]);
 
@@ -147,7 +149,11 @@ export default class CommanderComponent extends Component {
 
   @action
   onViewModeChange(new_view_mode) {
-    this.view_mode = new_view_mode;
+    if (this.args.hint == 'left') {
+      this.left_view_mode = new_view_mode;
+    } else {
+      this.right_view_mode = new_view_mode;
+    }
   }
 
   @action
@@ -353,6 +359,14 @@ export default class CommanderComponent extends Component {
       `model` is instance of `model.document` or `model.folder`
     */
     this.selected_nodes = []; // reset currect selected nodes list
+  }
+
+  get view_mode() {
+    if (this.args.hint == 'left') {
+      return this.left_view_mode;
+    }
+
+    return this.right_view_mode;
   }
 
   get lang() {
