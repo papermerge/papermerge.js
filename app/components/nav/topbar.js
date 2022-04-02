@@ -18,7 +18,7 @@ export default class TopbarComponent extends Component {
     this.args.onSidebarToggle();
   }
 
-  get browsable_api_url() {
+  get rest_api_url() {
     return base_url();
   }
 }
