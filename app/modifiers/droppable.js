@@ -38,11 +38,17 @@ export default class DrappableModifier extends Modifier {
 
   @action
   onDragOver(event) {
-    const isNode = event.dataTransfer.types.includes("application/x.node");
+    //const isNode = event.dataTransfer.types.includes("application/x.node");
 
-    event.preventDefault();
-    if (isNode) {
+    //event.preventDefault();
+    //if (isNode) {
       //console.log(`dragging over a node`);
+    //}
+    let _onDragOver = this.args.named['onDragOver'], element;
+
+    element = this.element;
+    if (_onDragOver) {
+      _onDragOver({event, element});
     }
   }
 

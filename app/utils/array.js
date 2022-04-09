@@ -124,7 +124,7 @@ function detect_order_changes(arr1, arr2) {
   }
 
   if (arr1.length != arr2.length) {
-    throw 'Invalid input. Both arrays need to be of same length';
+    return false;
   }
 
   arr1.forEach((item, index) => {

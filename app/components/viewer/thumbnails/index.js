@@ -54,7 +54,57 @@ export default class ViewerThumbnailsComponent extends Component {
   }
 
   @action
-  onDragOver() {
+  onDragOver({event, element}) {
+    /*
+    Creates DOM placeholder suggesting to user that here he/she can drop the page.
+
+    Only one placeholder DOM element is allowed.
+    */
+    let thumbnail_dom_items,
+      cursor_coord,
+      pos,
+      rect,
+      cursor_before_child = 0,
+      outside_all_thumbnails = true,
+      svg_element;
+
+    if (!element) {
+      return;
+    }
+
+    cursor_coord = new Point(event.clientX, event.clientY);
+    thumbnail_dom_items = Array.from(element.children);
+
+    thumbnail_dom_items.forEach(thumbnail_dom_item => {
+      // page_item is DOM element which may be real thumbnail of the page or
+      // it may be a paceholder used as suggestion that it is OK to drop page here.
+      // Real page thumbnail DOM element contains DOM element for image/svg
+      // and DOM element denoting page number
+      svg_element = thumbnail_dom_item.querySelector('svg');
+      if (svg_element) { // in case of thumbnail placeholder, there won't be SVG element
+        rect = svg_element.getBoundingClientRect();
+
+        if (cursor_coord.y <= rect.y) {
+          cursor_before_child += 1;
+        }
+        // Check if cursor position is outside of any thumbnail i.e.
+        // position to drop will be suggested only in case cursor coordinate
+        // is BETWEEN thumbnails images/svg
+        if ((cursor_coord.y < rect.bottom) && (cursor_coord.y > rect.top)) {
+          outside_all_thumbnails = false;
+        }
+      }
+    });
+
+    // position where to suggest page drop
+    pos = thumbnail_dom_items.length - cursor_before_child;
+
+    if (outside_all_thumbnails) {
+      // suggest position to drop ONLY of cursor is outside of all thumbnails
+      this.args.onAddThumbnailPlaceholderAt(pos);
+    } else {
+      this.args.onRemoveThumbnailPlaceholder();
+    }
   }
 
   @action

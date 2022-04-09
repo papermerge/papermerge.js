@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 import { A } from '@ember/array';
 import {
   reposition_items,
-  get_id,
   detect_order_changes
 } from 'papermerge/utils/array';
 
@@ -161,6 +160,34 @@ export default class ViewerComponent extends Component {
       selected_ids: page_ids,
       drop_pos: drop_pos
     });
+  }
+
+  @action
+  onAddThumbnailPlaceholderAt(pos) {
+    let new_pages,
+      placeholder;
+
+    new_pages = Array.from(this.pages);
+    placeholder = {'is_placeholder': true};
+    if (!new_pages.find(item => item.is_placeholder)) {
+      // Only one placeholder is allowed
+      new_pages.splice(pos, 0, placeholder);
+      this.pages = new_pages;
+    }
+  }
+
+  @action
+  onRemoveThumbnailPlaceholder() {
+    let new_pages,
+      placeholder_pos;
+
+    new_pages = Array.from(this.pages);
+    placeholder_pos = new_pages.findIndex(item => item.is_placeholder);
+    if (placeholder_pos >= 0) {
+      console.log(`placeholder found at pos ${placeholder_pos}`)
+      new_pages.splice(placeholder_pos, 1);
+      this.pages = new_pages;
+    }
   }
 
   @action
