@@ -74,28 +74,32 @@
     @onNodeClicked={{this.onNodeClicked}}
     @hint={{@hint}} />
 
-  <div class="view-mode-{{this.view_mode}}">
-
-    {{#each this.children as |node|}}
-      {{#let (component node.nodeType) as |NodeType|}}
-        {{! NodeType is either <Folder /> or <Document />}}
-        <NodeType
-          @model={{node}}
-          @selectedNodes={{this.selected_nodes}}
-          @onCheckboxChange={{this.onCheckboxChange}}
-          @onDragendSuccess={{this.onDragendSuccess}}
-          @onDragendCancel={{this.onDragendCancel}}>
-            <DualLinkTo
-              @node={{node}}
-              @extranode={{@extranode}}
-              @extradoc={{@extradoc}}
-              @hint={{@hint}}
-              {{on "click" this.onNodeClicked}} />
-        </NodeType>
-      {{/let}}
-    {{/each}}
-
-  </div>
+  {{#if this.is_empty_folder }}
+    <div class="view-mode-list">
+      <Commander::EmptyFolder />
+    </div>
+  {{else}}
+    <div class="view-mode-{{this.view_mode}}">
+      {{#each this.children as |node|}}
+        {{#let (component node.nodeType) as |NodeType|}}
+          {{! NodeType is either <Folder /> or <Document />}}
+          <NodeType
+            @model={{node}}
+            @selectedNodes={{this.selected_nodes}}
+            @onCheckboxChange={{this.onCheckboxChange}}
+            @onDragendSuccess={{this.onDragendSuccess}}
+            @onDragendCancel={{this.onDragendCancel}}>
+              <DualLinkTo
+                @node={{node}}
+                @extranode={{@extranode}}
+                @extradoc={{@extradoc}}
+                @hint={{@hint}}
+                {{on "click" this.onNodeClicked}} />
+          </NodeType>
+        {{/let}}
+      {{/each}}
+    </div>
+  {{/if}}
 
   <!--
   {{#if @pagination }}

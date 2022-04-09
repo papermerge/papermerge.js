@@ -5,15 +5,23 @@ import bootstrap from 'bootstrap';
 export default class TooltipModifier extends Modifier {
 
   didReceiveArguments() {
-    let { title } = this.args.named;
+    let { title, placement } = this.args.named;
 
-    return new bootstrap.Tooltip(
+    if (!placement) {
+      placement = 'right';
+    }
+
+    this.tooltip = new bootstrap.Tooltip(
       this.element,
       {
         'title': title,
-        'placement': 'right',
+        'placement': placement,
         'trigger': 'hover'
       }
     );
+  }
+
+  willDestroy() {
+    this.tooltip.hide();
   }
 }

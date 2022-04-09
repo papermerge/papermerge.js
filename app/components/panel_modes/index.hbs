@@ -3,7 +3,8 @@
     <button
       type="button"
       class="btn btn-light mx-1"
-      {{on 'click' @onDuplicatePanel}}>
+      {{tooltip title='Duplicate panel' placement='bottom'}}
+      {{on 'click' (fn @onDuplicatePanel @hint)}}>
         {{#if (is_equal @hint "left")}}
           <i class="bi-arrow-bar-right"></i>
         {{else}}
@@ -13,6 +14,7 @@
 
     <button type="button"
       class="btn btn-light mx-1"
+      {{tooltip title='Swap panels' placement='bottom'}}
       {{on 'click' @onSwapPanels}}>
         <i class="bi-arrow-left-right"></i>
     </button>

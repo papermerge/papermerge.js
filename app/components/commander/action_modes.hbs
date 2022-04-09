@@ -11,14 +11,18 @@
     @onDuplicatePanel={{@onDuplicatePanel}} />
 
   <div class="panel-mode">
-    <button type="button" class="btn btn-light mx-1"
-      {{on "click" (fn @onPanelToggle @hint) }}>
-      {{#if @dualPanelMode}}
-        <i class="bi-x"></i>
-      {{else}}
+    {{#if @dualPanelMode}}
+      <button type="button" class="btn btn-light mx-1"
+        {{tooltip title='Close panel' placement='bottom'}}
+        {{on "click" (fn @onPanelToggle @hint) }}>
+          <i class="bi-x"></i>
+      </button>
+    {{else}}
+      <button type="button" class="btn btn-light mx-1"
+        {{tooltip title='Split panel' placement='bottom'}}
+        {{on "click" (fn @onPanelToggle @hint) }}>
         <i class="bi-layout-split"></i>
-      {{/if}}
-    </button>
+      </button>
+    {{/if}}
   </div>
-
 </div>

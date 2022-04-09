@@ -87,22 +87,45 @@ export default class DocumentController extends DualPanelBaseController {
   }
 
   @action
-  onDuplicatePanel() {
+  onDuplicatePanel(hint) {
     let document_id = this.router.currentRoute.params['document_id'],
       query_params;
 
-    query_params = {
-      'queryParams': {
-        'extra_id': document_id,
-        'extra_type': 'doc'
+    if (hint === 'left') {
+      query_params = {
+        'queryParams': {
+          'extra_id': document_id,
+          'extra_type': 'doc'
+        }
       }
-    }
-    if (this.extra_id) {
-      this.router.transitionTo(
-        'authenticated.document',
-        document_id,
-        query_params
-      );
+      if (this.extra_id) {
+        this.router.transitionTo(
+          'authenticated.document',
+          document_id,
+          query_params
+        );
+      }
+    } else { // hint == 'right'
+      query_params = {
+        'queryParams': {
+          'extra_id': this.extra_id,
+          'extra_type': this.extra_type
+        }
+      }
+
+      if (this.extra_type == 'folder') {
+        this.router.transitionTo(
+          'authenticated.nodes',
+          this.extra_id,
+          query_params
+        );
+      } else {
+        this.router.transitionTo(
+          'authenticated.document',
+          this.extra_id,
+          query_params
+        );
+      } // this.extra_type
     }
   }
 }

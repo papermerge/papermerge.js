@@ -6,6 +6,11 @@
 
   .thumbnail {
     margin: 0.25rem;
+
+    svg {
+      border: 1px solid #ccc;
+    }
+
     img {
       width: 6rem;
     }

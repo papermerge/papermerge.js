@@ -431,4 +431,8 @@ export default class CommanderComponent extends Component {
     }
     return children_copy;
   }
+
+  get is_empty_folder() {
+    return this.children.length === 0;
+  }
 }
