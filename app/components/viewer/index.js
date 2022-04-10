@@ -152,19 +152,19 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
+  onThumbnailsPositionChanged({original_pos, page_ids}) {
     let all_pages, drop_placeholder_pos;
 
     drop_placeholder_pos = this.pages.findIndex(item => item.is_drop_placeholder);
 
-    console.log(`Drop placeholder ${drop_placeholder_pos}`);
-    all_pages = this.pages;
-
-    this.pages = reposition_items({
-      items: all_pages,
-      selected_ids: page_ids,
-      drop_pos: drop_pos
-    });
+    console.log(`onThumbnailsPositionChanged  drop_placeholder_pos=${drop_placeholder_pos} original_pos=${original_pos} page_ids=${page_ids}`);
+    //all_pages = this.pages;
+    //
+    //this.pages = reposition_items({
+    //  items: all_pages,
+    //  selected_ids: page_ids,
+    //  drop_pos: drop_placeholder_pos
+    //});
   }
 
   @action

@@ -37,18 +37,10 @@ export default class ViewerThumbnailsComponent extends Component {
     page_ids = json_data['pages'].map(page => page.id);
     source_doc_id = json_data['source_doc_id'];
 
-    document.querySelector('.is-being-dragged').forEach(
-      item => item.classList.remove('is-being-dragged')
-    );
-    drop_pos = get_cursor_pos_within_element(
-      element,
-      new Point(event.clientX, event.clientY)
-    );
-
     if (source_doc_id == this.args.doc.id) {
       // pages moved within same document
       this.args.onThumbnailsPositionChanged({
-        original_pos, drop_pos, page_ids
+        original_pos, page_ids
       });
     } else {
       // pages moved to another document
