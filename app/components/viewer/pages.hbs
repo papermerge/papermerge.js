@@ -1,7 +1,7 @@
 <div class="d-flex flex-column pages"
   {{adjust_element_height}}>
     {{#each @pages as |page|}}
-      {{#if page.is_placeholder}}
+      {{#if page.is_drop_placeholder}}
         <!-- no op -->
       {{else}}
         <Viewer::Page

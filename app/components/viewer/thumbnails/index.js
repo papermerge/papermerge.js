@@ -25,8 +25,8 @@ export default class ViewerThumbnailsComponent extends Component {
       drop_pos,
       source_doc_id;
 
-    event.preventDefault();
     data = event.dataTransfer.getData('application/x.page');
+
     if (!data) {
       console.warn('Accepts only application/x.page data');
       return;
@@ -124,6 +124,8 @@ export default class ViewerThumbnailsComponent extends Component {
       // suggest position to drop ONLY if cursor is outside of all thumbnails
       console.log(`suggested_pos=${suggested_pos}; original_pos=${original_pos}`);
       if (Math.abs(original_pos - suggested_pos) >= 1 && suggested_pos != original_pos + 1) {
+        // prevent default to allow drop
+        event.preventDefault();
         this.args.onAddThumbnailPlaceholderAt(suggested_pos);
       }
     } else {

@@ -153,7 +153,12 @@ export default class ViewerComponent extends Component {
 
   @action
   onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
-    let all_pages = this.pages;
+    let all_pages, drop_placeholder_pos;
+
+    drop_placeholder_pos = this.pages.findIndex(item => item.is_drop_placeholder);
+
+    console.log(`Drop placeholder ${drop_placeholder_pos}`);
+    all_pages = this.pages;
 
     this.pages = reposition_items({
       items: all_pages,
@@ -165,14 +170,14 @@ export default class ViewerComponent extends Component {
   @action
   onAddThumbnailPlaceholderAt(pos) {
     let new_pages,
-      placeholder;
+      drop_placeholder;
 
     new_pages = Array.from(this.pages);
-    placeholder = {'is_placeholder': true};
+    drop_placeholder = {'is_drop_placeholder': true};
 
-    if (!new_pages.find(item => item.is_placeholder)) {
-      // Only one placeholder is allowed
-      new_pages.splice(pos, 0, placeholder);
+    if (!new_pages.find(item => item.is_drop_placeholder)) {
+      // Only one drop placeholder is allowed
+      new_pages.splice(pos, 0, drop_placeholder);
       this.pages = new_pages;
     }
   }
@@ -180,13 +185,13 @@ export default class ViewerComponent extends Component {
   @action
   onRemoveThumbnailPlaceholder() {
     let new_pages,
-      placeholder_pos;
+      drop_placeholder_pos;
 
     new_pages = Array.from(this.pages);
-    placeholder_pos = new_pages.findIndex(item => item.is_placeholder);
+    drop_placeholder_pos = new_pages.findIndex(item => item.is_drop_placeholder);
 
-    if (placeholder_pos >= 0) {
-      new_pages.splice(placeholder_pos, 1);
+    if (drop_placeholder_pos >= 0) {
+      new_pages.splice(drop_placeholder_pos, 1);
       this.pages = new_pages;
     }
   }

@@ -8,7 +8,7 @@
 
   {{adjust_element_height}}>
   {{#each @pages as |page|}}
-    {{#if page.is_placeholder}}
+    {{#if page.is_drop_placeholder}}
       <Viewer::Thumbnail::DropPlaceholder />
     {{else}}
       <Viewer::Thumbnail
