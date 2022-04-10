@@ -169,6 +169,7 @@ export default class ViewerComponent extends Component {
 
     new_pages = Array.from(this.pages);
     placeholder = {'is_placeholder': true};
+
     if (!new_pages.find(item => item.is_placeholder)) {
       // Only one placeholder is allowed
       new_pages.splice(pos, 0, placeholder);
@@ -183,8 +184,8 @@ export default class ViewerComponent extends Component {
 
     new_pages = Array.from(this.pages);
     placeholder_pos = new_pages.findIndex(item => item.is_placeholder);
+
     if (placeholder_pos >= 0) {
-      console.log(`placeholder found at pos ${placeholder_pos}`)
       new_pages.splice(placeholder_pos, 1);
       this.pages = new_pages;
     }

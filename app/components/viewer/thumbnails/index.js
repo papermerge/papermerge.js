@@ -7,11 +7,13 @@ import { get_cursor_pos_within_element } from 'papermerge/utils/dom';
 export default class ViewerThumbnailsComponent extends Component {
 
   @action
-  onDragendCancel() {
+  onDragendCancel({event, element}) {
+    element.classList.remove('is-being-dragged');
   }
 
   @action
-  onDragendSuccess() {
+  onDragendSuccess({event, element}) {
+    element.classList.remove('is-being-dragged');
   }
 
   @action
@@ -35,6 +37,9 @@ export default class ViewerThumbnailsComponent extends Component {
     page_ids = json_data['pages'].map(page => page.id);
     source_doc_id = json_data['source_doc_id'];
 
+    document.querySelector('.is-being-dragged').forEach(
+      item => item.classList.remove('is-being-dragged')
+    );
     drop_pos = get_cursor_pos_within_element(
       element,
       new Point(event.clientX, event.clientY)
@@ -66,11 +71,23 @@ export default class ViewerThumbnailsComponent extends Component {
       rect,
       cursor_before_child = 0,
       outside_all_thumbnails = true,
-      svg_element;
+      svg_element,
+      data,
+      json_data,
+      original_pos;
 
     if (!element) {
       return;
     }
+
+    data = event.dataTransfer.getData('application/x.page');
+    if (!data) {
+      console.warn('Accepts only application/x.page data');
+      return;
+    }
+    json_data = JSON.parse(data);
+
+    original_pos = json_data['original_pos']
 
     cursor_coord = new Point(event.clientX, event.clientY);
     thumbnail_dom_items = Array.from(element.children);
@@ -84,9 +101,10 @@ export default class ViewerThumbnailsComponent extends Component {
       if (svg_element) { // in case of thumbnail placeholder, there won't be SVG element
         rect = svg_element.getBoundingClientRect();
 
-        if (cursor_coord.y <= rect.y) {
+        if (cursor_coord.y <= rect.bottom) {
           cursor_before_child += 1;
         }
+        console.log(`cursor_before_child=${cursor_before_child}`);
         // Check if cursor position is outside of any thumbnail i.e.
         // position to drop will be suggested only in case cursor coordinate
         // is BETWEEN thumbnails images/svg
@@ -97,11 +115,18 @@ export default class ViewerThumbnailsComponent extends Component {
     });
 
     // position where to suggest page drop
-    pos = thumbnail_dom_items.length - cursor_before_child;
+    if (element.querySelector('.drop-placeholder')) {
+      pos = thumbnail_dom_items.length - cursor_before_child - 1;
+    } else {
+      pos = thumbnail_dom_items.length - cursor_before_child;
+    }
 
     if (outside_all_thumbnails) {
-      // suggest position to drop ONLY of cursor is outside of all thumbnails
-      this.args.onAddThumbnailPlaceholderAt(pos);
+      // suggest position to drop ONLY if cursor is outside of all thumbnails
+      console.log(`pos=${pos}; original_pos=${original_pos}`);
+      if (original_pos != pos) {
+        this.args.onAddThumbnailPlaceholderAt(pos);
+      }
     } else {
       this.args.onRemoveThumbnailPlaceholder();
     }
