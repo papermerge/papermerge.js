@@ -112,9 +112,19 @@ export default class DraggableModifier extends Modifier {
     const ondragend_cancel = this.args.named['onDragendCancel'];
 
     if (event.dataTransfer.dropEffect === "move") {
-      ondragend_success(this.model, this.selected_items);
+      ondragend_success({
+        event: this.event,
+        element: this.element,
+        model: this.model,
+        selected_items: this.selected_items
+      });
     } else {
-      ondragend_cancel(this.model, this.selected_items);
+      ondragend_cancel({
+        event: this.event,
+        element: this.element,
+        model: this.model,
+        selected_items: this.selected_items
+      });
     }
   }
 }

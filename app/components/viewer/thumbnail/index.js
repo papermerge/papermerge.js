@@ -31,8 +31,11 @@ export default class ViewerThumbnailComponent extends Component {
       pages: items,
       page: model,
       original_pos: original_pos,
-      source_doc_id: this.args.doc.id
+      source_doc_id: this.args.doc.id,
+      element: element
     };
+
+    element.classList.add('is-being-dragged');
 
     event.dataTransfer.setData(
       'application/x.page',

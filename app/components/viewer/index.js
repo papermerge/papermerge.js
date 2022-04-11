@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 import { A } from '@ember/array';
 import {
   reposition_items,
-  get_id,
   detect_order_changes
 } from 'papermerge/utils/array';
 
@@ -153,14 +152,62 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  onThumbnailsPositionChanged({original_pos, drop_pos, page_ids}) {
-    let all_pages = this.pages;
+  onThumbnailsPositionChanged(page_ids) {
+    /*
+    ``page_ids`` will be moved to the new position
+    indicated by drop placeholder.
+    Page is drop placeholder if ``page.is_drop_placeholder`` is true.
+    */
+    let pages_without_placeholder,
+      drop_placeholder_pos;
 
+    // learn where user wants to move pages by
+    // findind drop placeholder position
+    drop_placeholder_pos = this.pages.findIndex(
+      item => item.is_drop_placeholder
+    );
+
+    // remove placeholder from pages array
+    this.pages.splice(drop_placeholder_pos, 1);
+    pages_without_placeholder = this.pages;
+
+    console.log(`repositioning items page_ids=${page_ids}`);
+    console.log(`repositioning items drop_pos=${drop_placeholder_pos}`);
+    // reposition pages
     this.pages = reposition_items({
-      items: all_pages,
+      items: pages_without_placeholder,
       selected_ids: page_ids,
-      drop_pos: drop_pos
+      drop_pos: drop_placeholder_pos
     });
+  }
+
+  @action
+  onAddThumbnailPlaceholderAt(pos) {
+    let new_pages,
+      drop_placeholder;
+
+    new_pages = Array.from(this.pages);
+    drop_placeholder = {'is_drop_placeholder': true};
+
+    if (!new_pages.find(item => item.is_drop_placeholder)) {
+      // Only one drop placeholder is allowed
+      new_pages.splice(pos, 0, drop_placeholder);
+      this.pages = new_pages;
+    }
+  }
+
+  @action
+  onRemoveThumbnailPlaceholder() {
+    let new_pages,
+      drop_placeholder_pos;
+
+    new_pages = Array.from(this.pages);
+    drop_placeholder_pos = new_pages.findIndex(item => item.is_drop_placeholder);
+
+    if (drop_placeholder_pos >= 0) {
+      new_pages.splice(drop_placeholder_pos, 1);
+      this.pages = new_pages;
+    }
   }
 
   @action
