@@ -152,19 +152,33 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  onThumbnailsPositionChanged({original_pos, page_ids}) {
-    let all_pages, drop_placeholder_pos;
+  onThumbnailsPositionChanged(page_ids) {
+    /*
+    ``page_ids`` will be moved to the new position
+    indicated by drop placeholder.
+    Page is drop placeholder if ``page.is_drop_placeholder`` is true.
+    */
+    let pages_without_placeholder,
+      drop_placeholder_pos;
 
-    drop_placeholder_pos = this.pages.findIndex(item => item.is_drop_placeholder);
+    // learn where user wants to move pages by
+    // findind drop placeholder position
+    drop_placeholder_pos = this.pages.findIndex(
+      item => item.is_drop_placeholder
+    );
 
-    console.log(`onThumbnailsPositionChanged  drop_placeholder_pos=${drop_placeholder_pos} original_pos=${original_pos} page_ids=${page_ids}`);
-    //all_pages = this.pages;
-    //
-    //this.pages = reposition_items({
-    //  items: all_pages,
-    //  selected_ids: page_ids,
-    //  drop_pos: drop_placeholder_pos
-    //});
+    // remove placeholder from pages array
+    this.pages.splice(drop_placeholder_pos, 1);
+    pages_without_placeholder = this.pages;
+
+    console.log(`repositioning items page_ids=${page_ids}`);
+    console.log(`repositioning items drop_pos=${drop_placeholder_pos}`);
+    // reposition pages
+    this.pages = reposition_items({
+      items: pages_without_placeholder,
+      selected_ids: page_ids,
+      drop_pos: drop_placeholder_pos
+    });
   }
 
   @action

@@ -21,7 +21,6 @@ export default class ViewerThumbnailsComponent extends Component {
     let data,
       json_data,
       page_ids,
-      original_pos,
       drop_pos,
       source_doc_id;
 
@@ -33,15 +32,12 @@ export default class ViewerThumbnailsComponent extends Component {
     }
     json_data = JSON.parse(data);
 
-    original_pos = json_data['original_pos']
     page_ids = json_data['pages'].map(page => page.id);
     source_doc_id = json_data['source_doc_id'];
 
     if (source_doc_id == this.args.doc.id) {
       // pages moved within same document
-      this.args.onThumbnailsPositionChanged({
-        original_pos, page_ids
-      });
+      this.args.onThumbnailsPositionChanged(page_ids);
     } else {
       // pages moved to another document
       this.args.onIncomingPages({
