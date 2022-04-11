@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import Point from 'papermerge/utils/point';
 import { action } from '@ember/object';
-import { get_cursor_pos_within_element } from 'papermerge/utils/dom';
 
 
 export default class ViewerThumbnailsComponent extends Component {
