@@ -23,6 +23,7 @@ export default class ViewerComponent extends Component {
   @service websockets;
   @service store;
   @service requests;
+  @service notify;
   @service router;
 
   @tracked ocr_status = null;
@@ -38,6 +39,7 @@ export default class ViewerComponent extends Component {
   @tracked show_confirm_pages_deletion_modal = false;
   @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
+  @tracked apply_page_order_changes_in_progress = false;
 
   initial_pages_memo = A([]);
 
@@ -254,11 +256,26 @@ export default class ViewerComponent extends Component {
 
   @action
   async onPageOrderApply() {
-    await this.requests.reorderPagesApply({
+    this.apply_page_order_changes_in_progress = true;
+    this.requests.reorderPagesApply({
       old_items: this.initial_pages_memo,
       new_items: this.pages
-    });
-    this.router.refresh();
+    }).then(
+      () => { // on success
+        this.apply_page_order_changes_in_progress = false;
+        this.notify.info(
+          'New page order successfully applied'
+        );
+        this.page_order_changed = false;
+      },
+      () => { // on failure
+        this.apply_page_order_changes_in_progress = false;
+        this.notify.error(
+          'There was a problem while saving new page order'
+        );
+        this.page_order_changed = false;
+      }
+    );
   }
 
   @action

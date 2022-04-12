@@ -1,0 +1,21 @@
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    {{#if (is_equal this.type 'info') }}
+      <strong class="me-auto text-primary">
+        <i class='bi bi-info-circle mx-2'></i>Info
+      </strong>
+    {{else if (is_equal this.type 'error')}}
+      <strong class="me-auto text-danger">
+        <i class='bi bi-info-circle mx-2'></i>Error
+      </strong>
+    {{else}}
+      <strong class="me-auto text-warning">
+        <i class='bi bi-info-circle mx-2'></i>Warning
+      </strong>
+    {{/if}}
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    {{this.message}}
+  </div>
+</div>

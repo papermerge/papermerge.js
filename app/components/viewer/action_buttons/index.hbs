@@ -31,10 +31,11 @@
   {{#if @page_order_changed }}
     Page order changed.
     <button
-      class="btn btn-success"
+      class="btn btn-success pe-4"
       type="button"
       {{on "click" @onPageOrderApply}}>
-      Apply Changes
+        <Spinner @inProgress={{@apply_page_order_changes_in_progress}} />
+        Apply Changes
     </button>
     <button
       class="btn btn-secondary"

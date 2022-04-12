@@ -3,7 +3,7 @@ import Resolver from 'ember-resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from 'papermerge/config/environment';
 import '@popperjs/core';
-import 'bootstrap';
+import bootstrap from 'bootstrap';
 
 
 export default class App extends Application {
@@ -27,6 +27,13 @@ export default class App extends Application {
     if (divs.length > 0) {
       divs[0].style.display = 'None';
     }
+
+    /*Initializer bootstrap toasts*/
+    let toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    toastElList.map(function (toastEl) {
+      return new bootstrap.Toast(toastEl)
+    })
+
   }
 }
 
