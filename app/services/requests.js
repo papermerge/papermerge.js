@@ -76,25 +76,27 @@ export default class Requests extends Service {
     });
   }
 
-  /**
-  *  `document_version` contains following attributes:
-  *    id
-  *    number
-  *    file_name
-  *    lang
-  *    pages
-  *    size
-  *    page_count
-  *    short_description
-  *
-  *  attributes which correspond to server side (or client side) DocumentVersion model
-  */
+
   async downloadDocumentVersion(document_version) {
+    /**
+    *  `document_version` contains following attributes:
+    *    id
+    *    number
+    *    file_name
+    *    lang
+    *    pages
+    *    size
+    *    page_count
+    *    short_description
+    *
+    *  attributes which correspond to server side (or client side) DocumentVersion model
+    */
     let response, blob;
 
     response = await this._get(`/document-versions/${document_version.id}/download/`);
 
     blob = await response.blob();
+
     insert_blob(
       document_version.file_name,
       blob

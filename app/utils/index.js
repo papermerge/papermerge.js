@@ -85,21 +85,23 @@ function extract_file_name(response, fallback) {
   return file_name;
 }
 
-/**
- * Insert a blob data into DOM and prompt use to download it
- */
+
 function insert_blob(file_name, blob) {
+  /**
+   * Insert a blob data into DOM and prompt use to download it
+   */
   let url, a;
 
   url = window.URL.createObjectURL(blob);
   a = document.createElement('a');
   a.href = url;
+
   a.download = file_name;
+  a.target = '_blank';
   // we need to append the element to the dom -> otherwise it will not
   // work in firefox
   document.body.appendChild(a);
   a.click();
-  //afterwards we remove the element again
   a.remove();
 }
 

@@ -267,6 +267,7 @@ export default class ViewerComponent extends Component {
           'New page order successfully applied'
         );
         this.page_order_changed = false;
+        this.router.refresh();
       },
       () => { // on failure
         this.apply_page_order_changes_in_progress = false;

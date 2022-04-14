@@ -31,20 +31,17 @@ export default class DrappableModifier extends Modifier {
   @action
   onDrop(event) {
     let _onDrop = this.args.named['onDrop'], element;
-
     element = this.element;
     _onDrop({event, element});
   }
 
   @action
   onDragOver(event) {
-    //const isNode = event.dataTransfer.types.includes("application/x.node");
-
-    //event.preventDefault();
-    //if (isNode) {
-      //console.log(`dragging over a node`);
-    //}
     let _onDragOver = this.args.named['onDragOver'], element;
+
+    // Important!
+    // When removed caused file drop feature to break!
+    event.preventDefault();
 
     element = this.element;
     if (_onDragOver) {

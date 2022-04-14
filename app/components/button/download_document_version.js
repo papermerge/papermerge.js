@@ -22,6 +22,7 @@ export default class ButtonDownloadComponent extends Component {
 
       attributes which correspond to server side (or client side) DocumentVersion model
     */
+
     this.requests.downloadDocumentVersion(
       document_version
     );

@@ -100,3 +100,8 @@ svg.failed {
     transform: rotate(360deg);
   }
 }
+
+ul.download-document-version {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
