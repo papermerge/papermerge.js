@@ -38,6 +38,7 @@ export default class PageAdapter extends ApplicationAdapter {
       image_blob,
       image_object_url;
 
+    console.log(`requesting image for page.id=${page.id}, accept=${accept}`);
     response = await this.getImage(page.id, accept);
     if (response.headers.get('content-type') == 'image/svg+xml') {
       page.svg_image = await response.text();

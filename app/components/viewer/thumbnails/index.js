@@ -20,7 +20,7 @@ export default class ViewerThumbnailsComponent extends Component {
     let data,
       json_data,
       page_ids,
-      drop_pos,
+      drop_placeholder_pos,
       source_doc_id;
 
     data = event.dataTransfer.getData('application/x.page');
@@ -39,8 +39,17 @@ export default class ViewerThumbnailsComponent extends Component {
       this.args.onThumbnailsPositionChanged(page_ids);
     } else {
       // pages moved to another document
+      drop_placeholder_pos = this.args.pages.findIndex(
+        item => item.is_drop_placeholder
+      );
+
+      if (drop_placeholder_pos < 0) {
+        drop_placeholder_pos = 0;
+      }
+
       this.args.onIncomingPages({
-        page_ids, drop_pos
+        page_ids: page_ids,
+        drop_pos: drop_placeholder_pos
       });
     }
   }

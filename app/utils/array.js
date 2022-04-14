@@ -88,6 +88,9 @@ function reposition_items({items, selected_ids, drop_pos}) {
    * items which will be moved to different position.
    * ``drop_pos`` is an integer. It is the target position where selected
    * items will move.
+   * Items are usually a list of page instances. The only relevant
+   * part of page object is its id attribute.
+   * Some 'page' objects, like drop placeholder, will not have id attribute.
   */
   let result = [],
     i, j;
@@ -96,7 +99,7 @@ function reposition_items({items, selected_ids, drop_pos}) {
     items, selected_ids
   });
 
-  for (i=0, j=0; i < items.length;) {
+  for (i=0, j=0; i <= items.length;) {
     if (i == drop_pos) {
       result.push(...selected_items);
       i += selected_items.length;
@@ -112,16 +115,34 @@ function reposition_items({items, selected_ids, drop_pos}) {
   return result;
 }
 
-function detect_order_changes(arr1, arr2) {
-  let change = false;
+function is_permuted(array1, array2) {
+  /*
+  Detects items order changes i.e. permutations.
+  Returns true if items (read pages) in array1 have different
+  order as items (pages) in array2.
 
-  if (!arr1 || !arr2) {
+  Items are page objects. Thus, saying 'items have permutations' is
+  same as 'page order has changed'.
+  Besides page objects any of the array can have a 'drop placeholder',
+  which is a 'special page' used as placeholder.
+  In order to correctly detect page order changes placeholder
+  is removed first.
+  */
+  let change = false,
+    arr1,
+    arr2;
+
+  if (!array1 || !array2) {
     return false;
   }
 
-  if (arr1.length == 0 || arr2.length == 0) {
+  if (array1.length == 0 || array2.length == 0) {
     return false;
   }
+
+  // remove drop placelholder from both arrays.
+  arr1 = array1.filter(item => !item.is_drop_placeholder);
+  arr2 = array2.filter(item => !item.is_drop_placeholder);
 
   if (arr1.length != arr2.length) {
     return false;
@@ -146,5 +167,5 @@ export {
   merge_items,
   extract_selected_ids,
   reposition_items,
-  detect_order_changes
+  is_permuted
 }

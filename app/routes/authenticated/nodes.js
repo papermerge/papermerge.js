@@ -44,7 +44,8 @@ export default class NodesRoute extends BaseRoute {
       );
       extra_last_version = extra_doc.last_version
       extra_pages_with_url = await page_adapter.loadImages(
-        extra_last_version.pages
+        extra_last_version.pages,
+        'image/svg+xml'
       );
       context['extra'] = {
         'doc': extra_doc,

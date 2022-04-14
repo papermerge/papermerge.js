@@ -5,7 +5,7 @@ import { action } from '@ember/object';
 import { A } from '@ember/array';
 import {
   reposition_items,
-  detect_order_changes
+  is_permuted
 } from 'papermerge/utils/array';
 
 
@@ -169,18 +169,19 @@ export default class ViewerComponent extends Component {
       item => item.is_drop_placeholder
     );
 
-    // remove placeholder from pages array
-    this.pages.splice(drop_placeholder_pos, 1);
-    pages_without_placeholder = this.pages;
+    // Remove placeholder from pages array
+    // but only if drop placeholder is there/was found
+    if (drop_placeholder_pos >= 0) {
+      this.pages.splice(drop_placeholder_pos, 1);
+      pages_without_placeholder = this.pages;
 
-    console.log(`repositioning items page_ids=${page_ids}`);
-    console.log(`repositioning items drop_pos=${drop_placeholder_pos}`);
-    // reposition pages
-    this.pages = reposition_items({
-      items: pages_without_placeholder,
-      selected_ids: page_ids,
-      drop_pos: drop_placeholder_pos
-    });
+      // reposition pages
+      this.pages = reposition_items({
+        items: pages_without_placeholder,
+        selected_ids: page_ids,
+        drop_pos: drop_placeholder_pos
+      });
+    }
   }
 
   @action
@@ -282,6 +283,7 @@ export default class ViewerComponent extends Component {
   @action
   onPageOrderDiscard() {
     this._pages = this.initial_pages_memo;
+    this.page_order_changed = false;
   }
 
   get versions() {
@@ -332,8 +334,8 @@ export default class ViewerComponent extends Component {
       this.initial_pages_memo = this.pages;
     }
 
-    this.page_order_changed = detect_order_changes(
-      this.pages,
+    this.page_order_changed = is_permuted(
+      this.initial_pages_memo,
       new_arr
     );
 
