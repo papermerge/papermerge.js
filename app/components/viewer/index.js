@@ -223,6 +223,7 @@ export default class ViewerComponent extends Component {
     }).then(() => {
       this._pages = [];
       this.router.refresh();
+      this.notify.info("Page(s) moved successfully");
     });
   }
 
@@ -250,11 +251,13 @@ export default class ViewerComponent extends Component {
     let page_ids = [];
 
     page_ids = this.selected_pages.map(page => page.id);
-    await this.requests.deletePages(page_ids);
+    this.requests.deletePages(page_ids).then(() => {
+      this.show_confirm_pages_deletion_modal = false;
+      this.selected_pages = A([]);
+      this.router.refresh();
+      this.notify.info('Page(s) deleted successfully');
+    });
 
-    this.show_confirm_pages_deletion_modal = false;
-    this.selected_pages = A([]);
-    this.router.refresh();
   }
 
   @action

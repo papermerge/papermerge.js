@@ -45,25 +45,38 @@
     </button>
   {{else if this.is_any_page_selected }}
     <button
-      class="btn btn-light"
       type="button"
-      {{on "click" @onRotateClockwise}} >
-      <i class="bi bi-arrow-clockwise"></i>
-      Rotate
+      data-bs-toggle="dropdown"
+      class="btn btn-light dropdown-toggle mx-1">
+      ...
     </button>
-    <button
-      class="btn btn-light"
-      type="button"
-      {{on "click" @onRotateCounterclockwise}} >
-      <i class="bi bi-arrow-counterclockwise"></i>
-      Rotate
-    </button>
-    <button
-      class="btn btn-danger mx-5"
-      type="button"
-      {{on "click" @openConfirmDeletionModal}} >
-      <i class="fa fa-times"></i>
-      Delete Pages
-    </button>
+    <ul class="dropdown-menu"
+      aria-expand="false"
+      aria-labelledby="display-mode">
+      <li class="dropdown-item">
+        <button
+          class="btn"
+          {{on "click" @onRotateClockwise}}>
+          <i class="bi bi-arrow-clockwise"></i>
+          Rotate 90 CW
+        </button>
+      </li>
+      <li class="dropdown-item">
+        <button
+          class="btn"
+          {{on "click" @onRotateCounterclockwise}}>
+          <i class="bi bi-arrow-counterclockwise"></i>
+          Rotate 90 CCW
+        </button>
+      </li>
+      <li class="dropdown-item">
+        <button
+          class="btn"
+          {{on "click" @openConfirmDeletionModal}}>
+          <i class="fa fa-times text-danger"></i>
+          Delete Pages
+        </button>
+      </li>
+    </ul>
   {{/if}}
 </div>
