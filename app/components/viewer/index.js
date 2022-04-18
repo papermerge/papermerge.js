@@ -215,13 +215,15 @@ export default class ViewerComponent extends Component {
 
   @action
   async onIncomingPages({page_ids, drop_pos}) {
-    await this.requests.moveToDocument({
+
+    this.requests.moveToDocument({
       dst: this.args.doc.id,
       pages: page_ids,
       position: drop_pos
+    }).then(() => {
+      this._pages = [];
+      this.router.refresh();
     });
-
-    this.router.refresh();
   }
 
   @action
@@ -330,6 +332,7 @@ export default class ViewerComponent extends Component {
 
   set pages(new_arr) {
     // remember initial page order
+
     if (this.initial_pages_memo.length == 0) {
       this.initial_pages_memo = this.pages;
     }
