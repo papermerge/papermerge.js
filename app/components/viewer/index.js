@@ -115,14 +115,11 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  async onRotateClockwise() {
+  async onRotateClockwise(angle) {
     let page_ids = [];
 
     page_ids = this.selected_pages.map(page => page.id);
-    await this.requests.rotatePages({
-      page_ids: page_ids,
-      angle: 90
-    });
+    await this.requests.rotatePages({page_ids, angle});
     this.selected_pages = A([]);
     this.router.refresh();
   }
