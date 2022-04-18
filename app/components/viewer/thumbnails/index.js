@@ -116,12 +116,17 @@ export default class ViewerThumbnailsComponent extends Component {
       suggested_pos = thumbnail_dom_items.length - cursor_before_child;
     }
 
+    // suggest position to drop ONLY if cursor is outside of all thumbnails
     if (outside_all_thumbnails) {
-      // suggest position to drop ONLY if cursor is outside of all thumbnails
-      console.log(`suggested_pos=${suggested_pos}; original_pos=${original_pos}`);
-      if (Math.abs(original_pos - suggested_pos) >= 1 && suggested_pos != original_pos + 1) {
-        // prevent default to allow drop
+      if (json_data['source_doc_id'] !== this.args.doc.id) {
+        // when dragging pages from source document target document (src != target)
+        // then suggested thumbail can be inserted at any position
         event.preventDefault();
+        this.args.onAddThumbnailPlaceholderAt(suggested_pos);
+      } else if (Math.abs(original_pos - suggested_pos) >= 1 && suggested_pos != original_pos + 1) {
+        // when dragging pages withing same document suggested position should not
+        // be immediately next to dragged page
+        event.preventDefault(); // prevent default to allow drop
         this.args.onAddThumbnailPlaceholderAt(suggested_pos);
       }
     } else {
