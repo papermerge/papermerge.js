@@ -119,9 +119,15 @@ export default class ViewerComponent extends Component {
     let page_ids = [];
 
     page_ids = this.selected_pages.map(page => page.id);
-    await this.requests.rotatePages({page_ids, angle});
-    this.selected_pages = A([]);
-    this.router.refresh();
+    this.requests.rotatePages({page_ids, angle}).then(
+      () => { // on success
+        this.selected_pages = A([]);
+        this.router.refresh();
+      },
+      (message) => { // on error
+        this.notify.error(message);
+      }
+    );
   }
 
   @action
