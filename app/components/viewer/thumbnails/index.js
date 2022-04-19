@@ -23,6 +23,7 @@ export default class ViewerThumbnailsComponent extends Component {
       drop_placeholder_pos,
       source_doc_id;
 
+    event.preventDefault();
     data = event.dataTransfer.getData('application/x.page');
 
     if (!data) {
@@ -67,7 +68,7 @@ export default class ViewerThumbnailsComponent extends Component {
       rect,
       cursor_before_child = 0,
       outside_all_thumbnails = true,
-      svg_element,
+      svg_or_img_element,
       data,
       json_data,
       original_pos;
@@ -93,9 +94,10 @@ export default class ViewerThumbnailsComponent extends Component {
       // it may be a paceholder used as suggestion that it is OK to drop page here.
       // Real page thumbnail DOM element contains DOM element for image/svg
       // and DOM element denoting page number
-      svg_element = thumbnail_dom_item.querySelector('svg');
-      if (svg_element) { // in case of thumbnail placeholder, there won't be SVG element
-        rect = svg_element.getBoundingClientRect();
+      svg_or_img_element = thumbnail_dom_item.querySelector('svg') ||
+        thumbnail_dom_item.querySelector('img');
+      if (svg_or_img_element) { // in case of thumbnail placeholder, there won't be SVG element
+        rect = svg_or_img_element.getBoundingClientRect();
 
         if (cursor_coord.y <= rect.bottom || cursor_coord.y <= rect.top) {
           cursor_before_child += 1;

@@ -1,19 +1,43 @@
 <ul class="dropdown-menu context-menu">
   <li>
-    <a class="dropdown-item" {{on "click" @openRenameDocumentModal}}>
+    <a class="dropdown-item" {{on "click" @openRenameDocumentModal}} role='button'>
       <i class="fa fa-edit mx-2"></i>Rename
     </a>
   </li>
     {{#if this.one_or_multiple_pages_selected}}
-    <li>
-      <a class="dropdown-item" {{on "click" @onExtractPages}}>
-        <i class="fa fa-cut mx-2"></i>Extract Pages
-      </a>
+    <li><hr class="dropdown-divider"></li>
+    <li class="dropdown dropdown-submenu dropend">
+      <div class="dropdown">
+        <a class="dropdown-item dropdown-toggle" role='button' data-toggle="dropdown">
+          <i class="bi bi-arrow-clockwise mx-2"></i>
+          Rotate
+        </a>
+          <ul class="dropdown-menu dropdown-menu-left">
+            <li>
+              <a class="dropdown-item" {{on "click" (fn @onRotateClockwise 270)}} role='button'>
+                <i class="bi bi-arrow-clockwise"></i>
+                90° CW
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" {{on "click" (fn @onRotateClockwise 180)}} role='button'>
+                <i class="bi bi-arrow-clockwise"></i>
+                180° CW
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" {{on "click" (fn @onRotateClockwise 90)}} role='button'>
+                <i class="bi bi-arrow-counterclockwise"></i>
+                90° CCW
+              </a>
+            </li>
+          </ul>
+      </div>
     </li>
     <li><hr class="dropdown-divider"></li>
     <li>
-      <a class="dropdown-item" {{on "click" @openConfirmDeletionModal}}>
-        <i class="fa fa-times mx-2"></i>Delete Pages
+      <a class="dropdown-item" {{on "click" @openConfirmDeletionModal}} role='button'>
+        <i class="bi bi-trash mx-2"></i>Delete Pages
       </a>
     </li>
   {{/if}}

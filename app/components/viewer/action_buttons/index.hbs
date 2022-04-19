@@ -53,38 +53,34 @@
     <ul class="dropdown-menu"
       aria-expand="false"
       aria-labelledby="display-mode">
-      <li class="dropdown-item">
-        <button
-          class="btn"
+      <li>
+        <a class="dropdown-item" role='button'
           {{on "click" (fn @onRotateClockwise 270)}}>
           <i class="bi bi-arrow-clockwise"></i>
           Rotate 90 CW
-        </button>
+        </a>
       </li>
-      <li class="dropdown-item">
-        <button
-          class="btn"
+      <li>
+        <a class="dropdown-item" role='button'
           {{on "click" (fn @onRotateClockwise 180)}}>
           <i class="bi bi-arrow-clockwise"></i>
           Rotate 180 CW
-        </button>
+        </a>
       </li>
-
-      <li class="dropdown-item">
-        <button
-          class="btn"
+      <li>
+        <a class="dropdown-item" role='button'
           {{on "click" (fn @onRotateClockwise 90)}}>
           <i class="bi bi-arrow-counterclockwise"></i>
           Rotate 90 CCW
-        </button>
+        </a>
       </li>
-      <li class="dropdown-item">
-        <button
-          class="btn"
+      <li><hr class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" role='button'
           {{on "click" @openConfirmDeletionModal}}>
-          <i class="fa fa-times text-danger"></i>
+          <i class="bi bi-trash mx-2"></i>
           Delete Pages
-        </button>
+        </a>
       </li>
     </ul>
   {{/if}}

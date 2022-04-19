@@ -24,9 +24,9 @@
 
   <Viewer::ContextMenu
     @selectedPages={{this.selected_pages}}
+    @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
-    @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
-    @onExtractPages={{this.onExtractPages}} />
+    @openConfirmDeletionModal={{this.openConfirmDeletionModal}} />
 
   <Modal::DeletePages
     id="delete-pages"

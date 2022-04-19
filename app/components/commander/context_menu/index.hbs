@@ -1,39 +1,45 @@
 <ul class="dropdown-menu context-menu">
   <li>
-    <a class="dropdown-item" {{on "click" @openNewFolderModal }}>
+    <a class="dropdown-item"
+      role='button'
+      {{on "click" @openNewFolderModal }}>
       <i class="fa fa-plus mx-2"></i>New Folder
     </a>
   </li>
   <li class="dropdown dropdown-submenu dropend">
     <div class="dropdown">
-      <a class="dropdown-item dropdown-toggle" data-toggle="dropdown">
+      <a class="dropdown-item dropdown-toggle" role='button' data-toggle="dropdown">
         <i class="fa fa-expand mx-2"></i>
         Selection
       </a>
       <ul class="dropdown-menu dropdown-menu-left">
-        <li class="dropdown-item"
+        <li class="dropdown-item" role='button'
           {{on "click" this.onSelectAll}}>All</li>
-        <li class="dropdown-item"
+        <li class="dropdown-item" role='button'
           {{on "click" this.onSelectFolders}}>Folders</li>
-        <li class="dropdown-item"
+        <li class="dropdown-item" role='button'
           {{on "click" this.onSelectDocuments}}>Documents</li>
-        <li class="dropdown-item"
+        <li class="dropdown-item" role='button'
           {{on "click" this.onSelectNone}}>None</li>
-        <li class="dropdown-item"
+        <li class="dropdown-item" role='button'
         {{on "click" this.onInvertSelection}}>Invert Selection</li>
       </ul>
     </div>
   </li>
   {{#if this.one_node_selected}}
     <li>
-      <a class="dropdown-item" {{on "click" this.onRename }}>
+      <a class="dropdown-item"
+        role='button'
+        {{on "click" this.onRename }}>
         <i class="fa fa-edit mx-2"></i>Rename
       </a>
     </li>
   {{/if}}
   {{#if this.one_or_multiple_nodes_selected}}
     <li>
-      <a class="dropdown-item" {{on "click" this.onDownloadNodes}}>
+      <a class="dropdown-item"
+        role='button'
+        {{on "click" this.onDownloadNodes}}>
         {{#if this.download_in_progress}}
           <Spinner @inProgress={{this.download_in_progress}} />
         {{else}}
@@ -44,8 +50,10 @@
     </li>
     <li><hr class="dropdown-divider"></li>
     <li>
-      <a class="dropdown-item" {{on "click" @openConfirmDeletionModal}}>
-        <i class="fa fa-times mx-2"></i>Delete
+      <a class="dropdown-item"
+        role='button'
+        {{on "click" @openConfirmDeletionModal}}>
+        <i class="bi bi-trash mx-2"></i>Delete
       </a>
     </li>
   {{/if}}

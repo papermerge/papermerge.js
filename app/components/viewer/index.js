@@ -233,10 +233,6 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  onExtractPages() {
-  }
-
-  @action
   async submitConfirmDeletionModal() {
     let page_ids = [];
 
