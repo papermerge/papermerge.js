@@ -33,6 +33,10 @@ function ws_base_url() {
   */
   let base = `ws://${window.location.host}`;
 
+  if (document.location.protocol == 'https:') {
+    base = `wss://${window.location.host}`;
+  }
+
   if (ENV.APP.WS_HOST) {
     // user can override BACKEND HOST by providing
     // ENV.APP.HOST value
