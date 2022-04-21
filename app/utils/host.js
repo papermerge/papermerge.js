@@ -32,7 +32,7 @@ function ws_base_url() {
   websockets base url
   */
   let wsType = window.location.protocol == "https:" ? "wss" : "ws";
-  let base = ${wsType}://${window.location.host}`;
+  let base = `${wsType}://${window.location.host}`;
 
   if (ENV.APP.WS_HOST) {
     // user can override BACKEND HOST by providing
