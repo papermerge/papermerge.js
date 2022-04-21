@@ -80,6 +80,13 @@ export default class ContextMenuComponent extends Component {
   }
 
   @action
+  onTags() {
+    this.args.openTagsModal(
+      this.args.selectedNodes
+    );
+  }
+
+  @action
   async onDownloadNodes() {
     this.download_in_progress = true;
     await this.args.onDownloadNodes(

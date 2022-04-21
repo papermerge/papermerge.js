@@ -1,33 +1,75 @@
 <div>
   {{#if this.one_node_selected}}
-    <button
-      class="btn btn-success"
-      type="button"
-      {{on "click" this.onRename}}>
-        <i class="fa fa-edit"></i>
-      Rename
-    </button>
     <Button::Download
       @inProgress={{this.download_in_progress}}
       @onDownloadNodes={{this.onDownloadNodes}} />
-    <button
-      class="btn btn-danger mx-5"
-      type="button"
-      {{on "click" @openConfirmDeletionModal}}>
-        <i class="fa fa-times"></i>
-      Delete
+
+    <button class="btn btn-light"
+      {{on "click" this.onRename}}
+      {{tooltip title='Rename' placement='bottom'}}>
+        <i class="fa fa-edit"></i>
     </button>
+
+    <button
+      type="button"
+      data-bs-toggle="dropdown"
+      class="btn btn-light dropdown-toggle mx-1"
+      {{tooltip title='More' placement='right'}}>
+      ...
+    </button>
+    <ul class="dropdown-menu"
+      aria-expand="false"
+      aria-labelledby="display-mode">
+      <li>
+        <a class="dropdown-item"
+            role='button'
+            {{on "click" @openTagsModal}}>
+          <i class="bi bi-tag"></i>
+          Tags
+        </a>
+      </li>
+      <li><hr class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item"
+            role='button'
+            {{on "click" @openConfirmDeletionModal}}>
+          <i class="bi bi-trash"></i>
+          Delete
+        </a>
+      </li>
+    </ul>
   {{else if this.multiple_nodes_selected}}
     <Button::Download
       @inProgress={{this.download_in_progress}}
       @onDownloadNodes={{this.onDownloadNodes}} />
+
     <button
-      class="btn btn-danger mx-5"
       type="button"
-       {{on "click" @openConfirmDeletionModal}}>
-        <i class="fa fa-times"></i>
-      Delete
+      data-bs-toggle="dropdown"
+      class="btn btn-light dropdown-toggle mx-1"
+      {{tooltip title='More ...' placement='right'}}>
+      ...
     </button>
+    <ul class="dropdown-menu"
+      aria-expand="false"
+      aria-labelledby="display-mode">
+      <li>
+        <a class="dropdown-item"
+            role='button'
+            {{on "click" @openTagsModal}}>
+          <i class="bi bi-tag"></i>
+          Tags
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item"
+            role='button'
+            {{on "click" @openConfirmDeletionModal}}>
+          <i class="bi bi-trash"></i>
+          Delete
+        </a>
+      </li>
+    </ul>
   {{else}}
     {{! No nodes are currently selected }}
     <Button::Upload

@@ -1,3 +1,4 @@
+
 <ul class="dropdown-menu context-menu">
   <li>
     <a class="dropdown-item"
@@ -36,6 +37,13 @@
     </li>
   {{/if}}
   {{#if this.one_or_multiple_nodes_selected}}
+    <li>
+      <a class="dropdown-item"
+        role='button'
+        {{on "click" this.onTags }}>
+        <i class="bi bi-tag mx-2"></i>Tags
+      </a>
+    </li>
     <li>
       <a class="dropdown-item"
         role='button'

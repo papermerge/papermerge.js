@@ -33,6 +33,7 @@ export default class CommanderComponent extends Component {
   @tracked show_rename_node_modal = false;
 
   @tracked show_confirm_deletion_modal = false;
+  @tracked show_tags_modal = false;
 
   // localStorage is tracked
   @localStorage left_view_mode = 'list';
@@ -128,6 +129,11 @@ export default class CommanderComponent extends Component {
     this.selected_nodes = A([]);
     this.deleted_records = this.deleted_records.concat(deleted_records);
     this.__deleted_records = deleted_records;
+  }
+
+  @action
+  openTagsModal() {
+    this.show_tags_modal = true;
   }
 
   @action
@@ -326,6 +332,16 @@ export default class CommanderComponent extends Component {
     await this.requests.moveToFolder({dst, page_ids, single_page});
     this.show_confirm_move_pages_modal = false;
     this.router.refresh();
+  }
+
+  @action
+  async onSubmitTagsModal(tags) {
+    this.show_tags_modal = false;
+  }
+
+  @action
+  onCancelTagsModal() {
+    this.show_tags_modal = false;
   }
 
   @action
