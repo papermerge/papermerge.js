@@ -1,0 +1,11 @@
+<Modal::Base
+  @title="Tags"
+  @actionTitle="Submit"
+  @onClose={{@onClose}}
+  @onSubmit={{this.onSubmit}}
+  @onCancel={{this.onCancel}}
+  ...attributes
+>
+  <label for="folder-title" class="form-label">Tags editor:</label>
+  <TagInput />
+</Modal::Base>

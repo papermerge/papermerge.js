@@ -16,6 +16,7 @@
   <Commander::ContextMenu
     @openNewFolderModal={{this.openNewFolderModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @openTagsModal={{this.openTagsModal}}
     @onSelectionChanged={{this.onSelectionChanged}}
     @nodes={{this.children}}
     @selectedNodes={{this.selected_nodes}}
@@ -27,6 +28,7 @@
       @openNewFolderModal={{this.openNewFolderModal}}
       @openRenameModal={{this.openRenameModal}}
       @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+      @openTagsModal={{this.openTagsModal}}
       @onCreateDocumentModel={{this.onCreateDocumentModel}}
       @onDownloadNodes={{this.onDownloadNodes}}
       @selectedNodes={{this.selected_nodes}}
@@ -66,6 +68,11 @@
     @dst_folder={{this.move_pages_modal_dst_folder}}
     @onSubmit={{this.onSubmitMovePages}}
     {{show-when this.show_confirm_move_pages_modal}} />
+
+  <Modal::Tags
+    @onSubmit={{this.onSubmitTagsModal}}
+    @onCancel={{this.onCancelTagsModal}}
+    {{show-when this.show_tags_modal}}/>
 
   <Breadcrumb
     @node={{@node}}
