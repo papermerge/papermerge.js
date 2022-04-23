@@ -9,11 +9,17 @@
     <div class="tag-input-new">
       <Input
         disabled={{this.readOnly}}
+        list='all-tags-choice'
         class={{concat 'tag-input-new-item' (if this.readOnly ' is-disabled')}}
         placeholder={{this.placeholder}}
         {{on-key "Space" this.onAddTag }}
         {{on-key "Comma" this.onAddTag }}
-        {{on-key "Enter" this.onAddTag }}
         @value={{this.new_tag_value}} />
+
+      <datalist id="all-tags-choice">
+        {{#each this.all_local_tags as |tag|}}
+          <option value={{tag.name}} />
+        {{/each}}
+      </datalist>
     </div>
 </div>
