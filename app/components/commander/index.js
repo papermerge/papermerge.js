@@ -25,6 +25,7 @@ export default class CommanderComponent extends Component {
   @service uploader;
   @service router;
   @service currentUser;
+  @service notify;
 
   // show create new folder modal dialog?
   @tracked show_new_folder_modal = false;
@@ -335,8 +336,32 @@ export default class CommanderComponent extends Component {
   }
 
   @action
-  async onSubmitTagsModal(tags) {
-    this.show_tags_modal = false;
+  async onSubmitTagsModal({tags, node}) {
+    /*
+    Update nodes tags.
+
+    ``tags`` is an array of strings (tag names).
+    ``node`` is node model.
+    */
+    let error_msg;
+
+    this.requests.updateTagsOnNode({tags, node}).then(
+      (response) => {
+        if (response.status != 200) {
+          error_msg = `Error url: ${response.url} `;
+          error_msg += `status code: ${response.status} `;
+          error_msg += `status text: ${response.statusText}`;
+          this.notify.error(error_msg);
+          this.show_tags_modal = false;
+        } else {
+          // success
+          this.show_tags_modal = false;
+        }
+      },
+      (message) => {
+        this.notify.error(message);
+      }
+    );
   }
 
   @action

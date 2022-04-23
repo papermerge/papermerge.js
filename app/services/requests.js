@@ -136,6 +136,13 @@ export default class Requests extends Service {
     });
   }
 
+  async updateTagsOnNode({tags, node}) {
+    return this._patch(
+      `/nodes/${node.id}/tags/`,
+      {tags: tags}
+    );
+  }
+
   async search(query) {
     return this._get('/search/', `q=${query}`);
   }
@@ -198,6 +205,15 @@ export default class Requests extends Service {
   async _post(url, data) {
     return this._generic({
       method: 'POST',
+      url: url,
+      data: data,
+      content_type: 'application/json'
+    });
+  }
+
+  async _patch(url, data) {
+    return this._generic({
+      method: 'PATCH',
       url: url,
       data: data,
       content_type: 'application/json'

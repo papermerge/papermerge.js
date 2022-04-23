@@ -2,12 +2,10 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
-import { TrackedArray } from 'tracked-built-ins';
 
 
 export default class TagInputComponent extends Component {
 
-  @tracked tags = new TrackedArray([]);
   @tracked new_tag_value = '';
   @service store;
 
@@ -44,6 +42,10 @@ export default class TagInputComponent extends Component {
   @action
   onRemoveTagItem(index) {
     this.tags.splice(index, 1);
+  }
+
+  get tags() {
+    return this.args.tags;
   }
 
   get all_local_tags() {

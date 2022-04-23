@@ -70,6 +70,7 @@
     {{show-when this.show_confirm_move_pages_modal}} />
 
   <Modal::Tags
+    @node={{this.first_selected_node}}
     @onSubmit={{this.onSubmitTagsModal}}
     @onCancel={{this.onCancelTagsModal}}
     {{show-when this.show_tags_modal}}/>

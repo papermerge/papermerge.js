@@ -4,8 +4,10 @@
   @onClose={{@onClose}}
   @onSubmit={{this.onSubmit}}
   @onCancel={{this.onCancel}}
-  ...attributes
->
+  @node={{@node}}
+  ...attributes>
+
   <label for="folder-title" class="form-label">Tags editor:</label>
-  <TagInput />
+  <TagInput @tags={{this.tags}} />
+
 </Modal::Base>
