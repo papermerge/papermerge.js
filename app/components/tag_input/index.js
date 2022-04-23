@@ -50,9 +50,7 @@ export default class TagInputComponent extends Component {
     /*
     Returns all local tags (tags available in local ember data)
     */
-    return this.store.peekAll('tag').map(
-      item => item
-    );
+    return this.store.peekAll('tag');
   }
 
   get placeholder() {
