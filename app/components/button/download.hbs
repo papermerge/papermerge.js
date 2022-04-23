@@ -1,11 +1,10 @@
-<button
-  class="btn btn-success"
+<button type="button"
+  class="btn btn-light"
   {{on "click" @onDownloadNodes}}
-  type="button">
+  {{tooltip title='Download' placement='bottom'}}>
     {{#if @inProgress }}
       <Spinner @inProgress={{@inProgress}} />
     {{else}}
-       <i class="fa fa-download"></i>
+       <i class="bi bi-download"></i>
     {{/if}}
-  Download
 </button>

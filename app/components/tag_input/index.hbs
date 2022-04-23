@@ -1,19 +1,19 @@
-<div class="tag-input d-flex  align-items-center">
-  {{#each this.tags as |tag index|}}
-    <TagInput::Item
-      @tag={{tag}}
-      @index={{index}}
-      @onRemoveTagItem={{this.onRemoveTagItem}} />
-  {{/each}}
+<div class="tag-input d-flex align-items-center">
+    {{#each this.tags as |tag index|}}
+      <TagInput::Item
+        @tag={{tag}}
+        @index={{index}}
+        @onRemoveTagItem={{this.onRemoveTagItem}} />
+    {{/each}}
 
-  <li class="tag-input-new">
-    <Input
-      disabled={{this.readOnly}}
-      class={{concat 'tag-input-new-item' (if this.readOnly ' is-disabled')}}
-      placeholder={{this.placeholder}}
-      {{on-key "Space" this.onAddTag }}
-      {{on-key "Comma" this.onAddTag }}
-      {{on-key "Enter" this.onAddTag }}
-      @value={{this.new_tag_value}} />
-  </li>
+    <div class="tag-input-new">
+      <Input
+        disabled={{this.readOnly}}
+        class={{concat 'tag-input-new-item' (if this.readOnly ' is-disabled')}}
+        placeholder={{this.placeholder}}
+        {{on-key "Space" this.onAddTag }}
+        {{on-key "Comma" this.onAddTag }}
+        {{on-key "Enter" this.onAddTag }}
+        @value={{this.new_tag_value}} />
+    </div>
 </div>

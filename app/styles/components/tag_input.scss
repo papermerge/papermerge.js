@@ -1,13 +1,22 @@
 .tag-input {
   border: 1px solid #888;
   padding: 0.5rem;
+  flex-wrap: wrap;
 
-  li.tag-input-new {
+  .tag {
+    border-radius: 0.25rem;
+    padding: 0 0.25rem 0 0.25rem;
+  }
+
+  .tag-input-new {
     list-style: none;
 
     input {
       border: none;
       outline: none;
+      width: 7rem;
+      min-width: 5rem;
     }
   }
+
 }

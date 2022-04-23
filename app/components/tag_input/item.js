@@ -1,8 +1,8 @@
-import Component from '@glimmer/component';
+import TagItemComponent from 'papermerge/components/tag/item';
 import { action } from '@ember/object';
 
 
-export default class TagInputItemComponent extends Component {
+export default class TagInputItemComponent extends TagItemComponent {
 
   @action
   onRemoveTagItem() {

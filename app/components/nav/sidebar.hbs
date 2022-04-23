@@ -30,10 +30,7 @@
               <ul class="list-unstyled px-3 mx-3 my-1">
               {{#each @pinned_tags as |pinned_tag|}}
                 <li class="mb-2 pb-1">
-                    <Tag::Item
-                        @name={{pinned_tag.name}}
-                        @fg_color={{pinned_tag.fg_color}}
-                        @bg_color={{pinned_tag.bg_color}} />
+                    <Tag::Item @tag={{pinned_tag}} />
                 </li>
               {{/each}}
               </ul>

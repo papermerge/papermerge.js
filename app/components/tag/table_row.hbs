@@ -3,10 +3,7 @@
   {{! inline edit }}
   <td>
       <p class="my-2">
-        <Tag::Item
-          @name={{@tag.name}}
-          @fg_color={{@tag.fg_color}}
-          @bg_color={{@tag.bg_color}} />
+        <Tag::Item @tag={{@tag}} />
       </p>
       <Input
         id="name"
@@ -43,10 +40,7 @@
   {{! END OF inline edit }}
 {{else}}
   <td>
-    <Tag::Item
-        @name={{@tag.name}}
-        @fg_color={{@tag.fg_color}}
-        @bg_color={{@tag.bg_color}} />
+    <Tag::Item @tag={{@tag}} />
   </td>
   <td>
     <Boolean @value={{@tag.pinned}} />

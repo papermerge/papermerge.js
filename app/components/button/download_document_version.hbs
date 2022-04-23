@@ -1,10 +1,9 @@
 <div class="btn-group">
-  <button
-    class="btn btn-success dropdown-toggle"
+  <button class="btn btn-light dropdown-toggle"
     data-bs-toggle="dropdown"
-    type="button">
-      <i class="fa fa-download"></i>
-    Download
+    type="button"
+    {{tooltip title='Download' placement='bottom'}}>
+      <i class="bi bi-download"></i>
   </button>
   <ul class="dropdown-menu download-document-version">
     {{#each @document_versions as |document_version|}}

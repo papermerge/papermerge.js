@@ -1,5 +1,5 @@
-<div class="tag">
-  <span>{{@tag.name}}</span>
+<div class="tag d-flex align-items-center m-1" style="{{this.inlineStyle}}">
+  <span>{{this.name}}</span>
   <i class="bi bi-x" role='button'
     {{on "click" this.onRemoveTagItem}}></i>
 </div>
