@@ -16,6 +16,7 @@ export default class TagsModalComponent extends Component {
       tags: this.tags.map(tag => tag.name),
       node: this.args.node
     });
+    this._reset();
   }
 
   @action
@@ -23,4 +24,9 @@ export default class TagsModalComponent extends Component {
     this.args.onCancel();
     this.title = '';
   }
+
+  _reset() {
+    this.tags = new TrackedArray([]);
+  }
+
 }

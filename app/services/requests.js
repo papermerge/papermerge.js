@@ -137,7 +137,7 @@ export default class Requests extends Service {
   }
 
   async updateTagsOnNode({tags, node}) {
-    return this._patch(
+    return this._post(
       `/nodes/${node.id}/tags/`,
       {tags: tags}
     );

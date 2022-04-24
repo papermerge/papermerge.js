@@ -10,6 +10,12 @@
     {{on "change" this.onCheckboxChange}} />
   <div class="icon document"></div>
 
+  <div class='tags'>
+    {{#each this.tags as |tag|}}
+      <Tag::Item @tag={{tag}} />
+    {{/each}}
+  </div>
+
   <div class="title d-flex flex-row align-items-center">
     {{#if @model.ocr}}
       <OcrStatus

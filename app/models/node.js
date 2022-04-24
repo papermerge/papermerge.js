@@ -2,6 +2,7 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class NodeModel extends Model {
   @attr title;
+  @attr tags;
   @attr model;
   @belongsTo('node', { inverse: 'children', polymorphic: true }) parent;
   @hasMany('node', { polymorphic: true, inverse: 'parent' }) children;

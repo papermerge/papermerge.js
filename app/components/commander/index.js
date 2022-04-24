@@ -347,7 +347,7 @@ export default class CommanderComponent extends Component {
 
     this.requests.updateTagsOnNode({tags, node}).then(
       (response) => {
-        if (response.status != 200) {
+        if (response.status != 201) {
           error_msg = `Error url: ${response.url} `;
           error_msg += `status code: ${response.status} `;
           error_msg += `status text: ${response.statusText}`;
@@ -356,6 +356,7 @@ export default class CommanderComponent extends Component {
         } else {
           // success
           this.show_tags_modal = false;
+          this.router.refresh();
         }
       },
       (message) => {

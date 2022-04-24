@@ -21,6 +21,10 @@ export default class NodeComponent extends Component {
     return false;
   }
 
+  get tags() {
+    return this.args.model.tags;
+  }
+
   set is_selected(value) {
     // if this node is selected or not is determened
     // by parent component via this.args.selectedNodes

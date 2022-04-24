@@ -5,11 +5,19 @@
     onDragStart=this.onDragStart
     onDragendSuccess=@onDragendSuccess
     onDragendCancel=@onDragendCancel}}>
+
   <Input
     @type="checkbox"
     @checked={{this.is_selected}}
     {{on "change" this.onCheckboxChange}} />
   <div class="icon folder"></div>
+
+  <div class='tags'>
+    {{#each this.tags as |tag|}}
+      <Tag::Item @tag={{tag}} />
+    {{/each}}
+  </div>
+
   <div class="title">
     {{yield}}
   </div>

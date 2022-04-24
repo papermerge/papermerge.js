@@ -16,5 +16,4 @@ export default class FolderComponent extends NodeComponent {
   get model() {
     return this.args.model;
   }
-
 }
