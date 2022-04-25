@@ -30,7 +30,7 @@ export default class TagItemComponent extends Component {
   get bg_color() {
     return this._ensure_safe_html_color(
       this.args.bg_color || this.args.tag.bg_color,
-      '#0000ff'
+      '#c41fff'
     );
   }
 

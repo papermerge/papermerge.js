@@ -14,6 +14,7 @@
         placeholder={{this.placeholder}}
         {{on-key "Space" this.onAddTag }}
         {{on-key "Comma" this.onAddTag }}
+        {{on-key "Backspace" this.onRemoveLastTagItem }}
         @value={{this.new_tag_value}} />
 
       <datalist id="all-tags-choice">

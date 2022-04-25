@@ -5,7 +5,20 @@ import { tracked } from 'tracked-built-ins';
 
 
 export default class TagInputComponent extends Component {
+  /*
+    Input element with tags.
 
+    Comma/Space keys are tag separators.
+    Backspace key removes last tag in the list.
+
+    Arguments:
+      @tags: tags to view/edit
+      @onTagAdd(tag): action to be triggered when tag is added
+      @onTagRemove(tag): action to be triggered when tag is removed
+
+      Tag passed as argument to @onTagAdd/@onTagRemove is an object
+      with at least one property ``name``.
+  */
   @tracked new_tag_value = '';
   @service store;
 
@@ -27,13 +40,11 @@ export default class TagInputComponent extends Component {
 
     if (found_tag) {
       // user chose to associate node one of existing tags
-      this.tags.push(found_tag);
+      this.args.onTagAdd(found_tag);
     } else {
       // user wishes to create a new tag
       // at this point tag will use default color.
-      this.tags.push({
-        name: new_value
-      });
+      this.args.onTagAdd({name: new_value});
     }
     // reset user input
     this.new_tag_value = '';
@@ -41,7 +52,19 @@ export default class TagInputComponent extends Component {
 
   @action
   onRemoveTagItem(index) {
-    this.tags.splice(index, 1);
+    this.args.onTagRemove(this.tags[index]);
+  }
+
+  @action
+  onRemoveLastTagItem() {
+    /*
+    Triggered on backspace key
+    */
+    let len = this.tags.length;
+
+    if (len > 0) {
+      this.args.onTagRemove(this.tags[len - 1]);
+    }
   }
 
   get tags() {

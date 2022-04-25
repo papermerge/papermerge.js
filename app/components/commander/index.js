@@ -356,6 +356,7 @@ export default class CommanderComponent extends Component {
         } else {
           // success
           this.show_tags_modal = false;
+          this.selected_nodes = A([]);
           this.router.refresh();
         }
       },

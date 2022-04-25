@@ -8,6 +8,9 @@
   ...attributes>
 
   <label for="folder-title" class="form-label">Tags editor:</label>
-  <TagInput @tags={{this.tags}} />
+  <TagInput
+    @tags={{this.new_tags}}
+    @onTagAdd={{this.onTagAdd}}
+    @onTagRemove={{this.onTagRemove}} />
 
 </Modal::Base>
