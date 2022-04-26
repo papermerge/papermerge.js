@@ -10,12 +10,6 @@
     {{on "change" this.onCheckboxChange}} />
   <div class="icon document"></div>
 
-  <div class='tags'>
-    {{#each this.tags as |tag|}}
-      <Tag::Item @tag={{tag}} />
-    {{/each}}
-  </div>
-
   <div class="title d-flex flex-row align-items-center">
     {{#if @model.ocr}}
       <OcrStatus
@@ -25,4 +19,9 @@
       {{yield}}
     </div>
   </div>
+
+  <Node::Tags
+    @tags={{this.tags}}
+    @more_than_max_visible_tags={{this.more_than_max_visible_tags}} />
+
 </div>

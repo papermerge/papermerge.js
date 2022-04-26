@@ -12,13 +12,11 @@
     {{on "change" this.onCheckboxChange}} />
   <div class="icon folder"></div>
 
-  <div class='tags'>
-    {{#each this.tags as |tag|}}
-      <Tag::Item @tag={{tag}} />
-    {{/each}}
-  </div>
-
   <div class="title">
     {{yield}}
   </div>
+
+  <Node::Tags
+    @tags={{this.tags}}
+    @more_than_max_visible_tags={{this.more_than_max_visible_tags}} />
 </div>

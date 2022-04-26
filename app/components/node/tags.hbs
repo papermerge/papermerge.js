@@ -1,0 +1,9 @@
+<div class='tags'>
+  {{#each @tags as |tag|}}
+    <Tag::Item @tag={{tag}} />
+  {{/each}}
+
+  {{#if @more_than_max_visible_tags}}
+      <i class="bi bi-three-dots me-2"></i>
+  {{/if}}
+</div>

@@ -9,6 +9,7 @@ export default class NodeComponent extends Component {
    * `selectedNodes` - an array of currently selected nodes
    * `model` - current node's model
   */
+  max_visible_tags = 3;
 
   get is_selected() {
     let model = this.args.model,
@@ -22,7 +23,20 @@ export default class NodeComponent extends Component {
   }
 
   get tags() {
-    return this.args.model.tags;
+    return this.args.model.tags.slice(
+      0,
+      this.max_visible_tags
+    );
+  }
+
+  get more_than_max_visible_tags() {
+    if (this.args.model.tags) {
+      if (this.args.model.tags.length > this.max_visible_tags) {
+        return true;
+      }
+    }
+
+    return 0;
   }
 
   set is_selected(value) {
