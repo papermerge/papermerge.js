@@ -1,0 +1,16 @@
+{{#if this.empty_results }}
+  <div class="view-mode-list">
+    <SearchResults::NoResults />
+  </div>
+{{else}}
+  <div class="view-mode-{{this.view_mode}}">
+    {{#each this.nodes as |node|}}
+      {{#let (component node.nodeType) as |NodeType|}}
+        {{! NodeType is either <Folder /> or <Document />}}
+        <NodeType @model={{node}}>
+          {{node.title}}
+        </NodeType>
+      {{/let}}
+    {{/each}}
+  </div>
+{{/if}}
