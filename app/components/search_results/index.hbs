@@ -1,16 +1,17 @@
-{{#if this.empty_results }}
-  <div class="view-mode-list">
-    <SearchResults::NoResults />
-  </div>
-{{else}}
-  <div class="view-mode-{{this.view_mode}}">
-    {{#each this.nodes as |node|}}
-      {{#let (component node.nodeType) as |NodeType|}}
-        {{! NodeType is either <Folder /> or <Document />}}
-        <NodeType @model={{node}}>
-          {{node.title}}
-        </NodeType>
-      {{/let}}
-    {{/each}}
-  </div>
-{{/if}}
+<div class="search-results">
+  {{#if this.empty_results }}
+      <SearchResults::NoResults />
+  {{else}}
+      <div>
+        {{#each this.search_results as |node|}}
+          <div>
+            {{#if (is_equal node.node_type "folder")}}
+              <SearchResults::Folder @result_node={{node}} />
+            {{else}}
+              <SearchResults::Document @result_node={{node}} />
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+  {{/if}}
+</div>

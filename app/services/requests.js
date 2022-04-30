@@ -143,8 +143,16 @@ export default class Requests extends Service {
     );
   }
 
-  async search(query) {
-    return this._get('/search/', `q=${query}`);
+  async search({text, tags}) {
+    if (text && tags) {
+      return this._get('/search/', `q=${text}&tags=${tags}`);
+    }
+
+    if (text) {
+      return this._get('/search/', `q=${text}`);
+    }
+
+    return this._get('/search/', `tags=${tags}`);
   }
 
   async preferences({section_name}={}) {

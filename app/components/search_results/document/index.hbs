@@ -1,0 +1,14 @@
+<div class="node document">
+  <div class="icon document"></div>
+  <div class="title">
+    <LinkTo
+      @route="authenticated.document" @model={{@result_node.id}}>
+      {{@result_node.title}}
+    </LinkTo>
+  </div>
+
+  <Node::Tags
+    @tags={{this.tags}}
+    @more_than_max_visible_tags={{this.more_than_max_visible_tags}} />
+
+</div>

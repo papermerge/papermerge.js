@@ -13,7 +13,9 @@ export default class SearchComponent extends Component {
 
   @action
   async onKeyup() {
-    let response = await this.requests.search(this.query);
+    let response = await this.requests.search({
+      text: this.query
+    });
     let data = await response.json();
 
     this.autocomplete_items = data.map(item => {

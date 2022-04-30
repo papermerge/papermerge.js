@@ -30,7 +30,12 @@
               <ul class="list-unstyled px-3 mx-3 my-1">
               {{#each @pinned_tags as |pinned_tag|}}
                 <li class="mb-2 pb-1">
-                    <Tag::Item @tag={{pinned_tag}} />
+                    <LinkTo
+                      class="text-decoration-none"
+                      @route="authenticated.search"
+                      @query={{hash tags=pinned_tag.name}}>
+                      <Tag::Item @tag={{pinned_tag}} />
+                    </LinkTo>
                 </li>
               {{/each}}
               </ul>

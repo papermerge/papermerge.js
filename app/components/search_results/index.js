@@ -4,17 +4,13 @@ import Component from '@glimmer/component';
 export default class SearchResultsComponent extends Component {
 
 
-  get nodes() {
-    return this.args.nodes;
+  get search_results() {
+    return this.args.model;
   }
 
-  get view_mode() {
-    return 'list';
-  }
-
-  get empty_results() {
-    if (this.nodes) {
-      return this.nodes.length >= 1;
+  get no_results() {
+    if (this.search_results) {
+      return this.search_results.length == 0;
     }
 
     return true;
