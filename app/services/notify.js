@@ -28,33 +28,40 @@ export default class Notify extends Service {
   @tracked notifications = new TrackedArray([]);
 
 
-  info(message) {
+  info(message, delay) {
     let type = 'info', id = this._random_id;
 
-    this.add({id, message, type});
+    this.add({id, message, type, delay});
   }
 
   warning(message) {
-    let type = 'warning', id = this._random_id;
+    let type = 'warning', id = this._random_id, delay;
 
-    this.add({id, message, type});
+    delay = 9999000;
+
+    this.add({id, message, type, delay});
   }
 
   error(message) {
-    let type = 'error', id = this._random_id;
+    let type = 'error', id = this._random_id, delay;
 
-    this.add({id, message, type});
+    delay = 9999000
+
+    this.add({id, message, type, delay});
   }
 
-  add({id, message, type}) {
+  add({id, message, type, delay}) {
     /*
       Adds notification message to the list.
 
       Notification message will be removed automatically
       from the list after ``this.NOTIFICATION_TIMEOUT`` milliseconds
     */
+    if (!delay) {
+      delay = this.NOTIFICATION_TIMEOUT;
+    }
     this.notifications.push({id, message, type});
-    this.delayed_remove_by({id: id, delay: this.NOTIFICATION_TIMEOUT});
+    this.delayed_remove_by({id: id, delay});
   }
 
   remove_by(id) {

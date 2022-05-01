@@ -81,6 +81,7 @@ export default class CommanderComponent extends Component {
         break;
       case 'ocrdocumenttask.taskfailed':
         doc.ocr_status = 'failed';
+        this.notify.error(`Task failed ${message.error}`);
         break;
       }  // end of switch
   }
