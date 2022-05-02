@@ -48,6 +48,7 @@ export default function() {
         "id":"2",
         "attributes": {
           "title": ".home",
+          "tags": [],
           "created_at": "2021-11-24T20:54:38.833485+01:00",
           "updated_at":"2021-11-24T20:54:38.833509+01:00"
         },
@@ -67,6 +68,7 @@ export default function() {
         "id":"1",
         "attributes": {
           "title": ".inbox",
+          "tags": [],
           "created_at": "2021-11-24T20:54:38.833485+01:00",
           "updated_at":"2021-11-24T20:54:38.833509+01:00"
         },
@@ -111,6 +113,7 @@ export default function() {
           "id":"4",
           "attributes": {
             "title": "Folder 1",
+            "tags": [],
             "created_at": "2021-11-24T20:54:38.833485+01:00",
             "updated_at":"2021-11-24T20:54:38.833509+01:00"
           },
@@ -125,6 +128,7 @@ export default function() {
           "id":"5",
           "attributes": {
             "title": "Folder 2",
+            "tags": [],
             "created_at": "2021-11-24T20:54:38.833485+01:00",
             "updated_at":"2021-11-24T20:54:38.833509+01:00"
           },
@@ -159,6 +163,7 @@ export default function() {
           "id":"4",
           "attributes": {
             "title": "Folder 1",
+            "tags": [],
             "created_at": "2021-11-24T20:54:38.833485+01:00",
             "updated_at":"2021-11-24T20:54:38.833509+01:00"
           },
@@ -173,6 +178,7 @@ export default function() {
           "id":"5",
           "attributes": {
             "title": "Folder 2",
+            "tags": [],
             "created_at": "2021-11-24T20:54:38.833485+01:00",
             "updated_at":"2021-11-24T20:54:38.833509+01:00"
           },
