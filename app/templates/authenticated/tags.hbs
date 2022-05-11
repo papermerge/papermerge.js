@@ -5,3 +5,18 @@
     <Tag::TableRow @tag={{tag}} />
   {{/each}}
 </Table>
+
+<nav class="m-2">
+  <ul class="pagination">
+    {{#each this.pages as |page|}}
+      <li class="page-item {{if page.active 'active'}}">
+        <LinkTo
+          @route="authenticated.tags"
+          @query={{hash page=page.number}}
+          class="page-link">
+            {{page.number}}
+        </LinkTo>
+      </li>
+    {{/each}}
+  </ul>
+</nav>

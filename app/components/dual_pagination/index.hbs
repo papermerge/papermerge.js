@@ -2,11 +2,13 @@
   <ul class="pagination">
     {{#each this.pages as |page|}}
       <li class="page-item {{if page.current 'active'}}">
-        <LinkTo
-          @model={{@model}}
+        <DualLinkTo
+          @node={{@node}}
           @title={{page.number}}
-          class="page-link">
-        </LinkTo>
+          @hint={{@hint}}
+          @query={{page.query}}
+           class="page-link">
+        </DualLinkTo>
       </li>
     {{/each}}
   </ul>
