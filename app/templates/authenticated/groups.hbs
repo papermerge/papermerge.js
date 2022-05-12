@@ -1,8 +1,16 @@
-<Group::New />
-
+<Group::New
+  @onCreate={{this.onCreate}} />
 
 <Table @titles={{array 'group name' 'action'}}>
   {{#each @model as |group|}}
-    <Group::TableRow @group={{group}} />
+    <Group::TableRow
+      @group={{group}}
+      @onDelete={{this.onDelete}}/>
   {{/each}}
 </Table>
+
+{{this.total_items_count}}
+
+<Pagination
+  @pages={{this.pages}}
+  @route="authenticated.groups" />

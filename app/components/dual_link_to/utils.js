@@ -29,10 +29,12 @@ export function model_obj({node, hint, extradoc, extranode}) {
     return node;
   }
 
+
   // hint right
   if (extradoc) {
     return extradoc;
   }
+
 
   return extranode;
 }

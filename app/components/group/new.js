@@ -21,6 +21,7 @@ export default class NewGroupComponent extends Component {
     }).save();
 
     this._empty_form();
+    this.args.onCreate();
   }
 
   @action

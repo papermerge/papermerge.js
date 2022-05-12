@@ -1,0 +1,14 @@
+<nav class="m-2">
+  <ul class="pagination">
+    {{#each @pages as |page|}}
+      <li class="page-item {{if page.active 'active'}}">
+        <LinkTo
+          @route={{@route}}
+          @query={{hash page=page.number}}
+          class="page-link">
+            {{page.number}}
+        </LinkTo>
+      </li>
+    {{/each}}
+  </ul>
+</nav>

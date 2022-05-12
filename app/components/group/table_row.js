@@ -12,6 +12,7 @@ class TableRowComponent extends Component {
   @action
   async onRemove(group) {
     await group.destroyRecord();
+    this.args.onDelete();
   }
 
   @action

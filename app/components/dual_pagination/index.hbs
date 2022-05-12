@@ -1,7 +1,7 @@
 <nav class="m-2">
   <ul class="pagination">
     {{#each this.pages as |page|}}
-      <li class="page-item {{if page.current 'active'}}">
+      <li class="page-item">
         <DualLinkTo
           @node={{@node}}
           @title={{page.number}}
