@@ -1,41 +1,29 @@
 import Component from '@glimmer/component';
+import { service } from '@ember/service';
 
 
-export default class PaginationComponent extends Component {
+export default class DualPaginationComponent extends Component {
   /*
-  Arguments:
-    @object
-    @node
-    @hint = { "left" | "right" }
+  Pagination for dual panel commander.
+
+  @pages - an array like [{'number': 1, 'active': false}, ...]
+  @hint - string - 'left' | 'right'
   */
 
-  get pages() {
-    let result = [],
-      pages;
+  @service router;
 
-    pages = this.args.object.pages; // total number of pages
-
-    if (pages == 1) {
-      return [];
-    }
-
-    for(let i=0; i < pages; i++) {
-
-      if (this.args.object.page === i + 1) {
-        result.push({
-          number: i + 1,
-          current: true,
-          query: { 'page': i + 1 }
-        });
-      } else {
-        result.push({
-          number: i + 1,
-          current: false,
-          query: {'page': i + 1}
-        });
-      }
-    }
-
-    return result;
+  get more_than_one_page() {
+    return this.args.pages && this.args.pages.length > 1;
   }
+
+  get model_id() {
+    let route = this.router.currentRoute;
+
+    if (this.args.hint == 'left') {
+      return route.params.node_id;
+    }
+
+    return route.queryParams.extra_id;
+  }
+
 }

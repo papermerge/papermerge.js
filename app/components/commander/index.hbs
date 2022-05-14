@@ -82,6 +82,11 @@
     @onNodeClicked={{this.onNodeClicked}}
     @hint={{@hint}} />
 
+  <DualPagination
+    @pages={{setup_pagination_pages @pagination.page @pagination.pages}}
+    @hint={{@hint}} />
+
+
   {{#if this.is_empty_folder }}
     <div class="view-mode-list">
       <Commander::EmptyFolder />

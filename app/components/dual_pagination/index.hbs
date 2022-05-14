@@ -1,15 +1,17 @@
-<nav class="m-2">
-  <ul class="pagination">
-    {{#each this.pages as |page|}}
-      <li class="page-item">
-        <DualLinkTo
-          @node={{@node}}
-          @title={{page.number}}
-          @hint={{@hint}}
-          @query={{page.query}}
-           class="page-link">
-        </DualLinkTo>
-      </li>
-    {{/each}}
-  </ul>
-</nav>
+{{#if this.more_than_one_page}}
+  <nav class="m-2">
+    <ul class="pagination">
+      {{#each @pages as |page|}}
+        <li class="page-item {{if page.active 'active'}}">
+          <LinkTo
+            @route="authenticated.nodes"
+            @model={{this.model_id}}
+            @query={{hash extra_page=page.number}}
+            class="page-link">
+              {{page.number}}
+          </LinkTo>
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+{{/if}}

@@ -17,6 +17,9 @@ export default class NodesRoute extends BaseRoute {
     },
     page: {
       refreshModel: true
+    },
+    extra_page: {
+      refreshModel: true
     }
   };
 
