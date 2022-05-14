@@ -1,12 +1,15 @@
 import { action } from '@ember/object';
 import Controller from '@ember/controller';
 import { tracked, TrackedArray } from 'tracked-built-ins';
+import { service } from '@ember/service';
 
 
 export default class PaginatedController extends Controller {
 
+  // pages attribute is updated in ``setupController`` of the ``route``
   @tracked pages = new TrackedArray([]);
-  @tracked total_items_count = 0;
+
+  @service router;
 
   queryParams = ['page', 'size'];
   page = 1;
@@ -14,15 +17,11 @@ export default class PaginatedController extends Controller {
 
   @action
   onDelete() {
-    if (this.total_items_count) {
-      this.total_items_count = this.total_items_count - 1;
-    }
+    this.router.refresh();
   }
 
   @action
   onCreate() {
-    if (this.total_items_count) {
-      this.total_items_count = this.total_items_count + 1;
-    }
+    this.router.refresh();
   }
 }

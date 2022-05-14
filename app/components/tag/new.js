@@ -36,6 +36,7 @@ export default class NewTagComponent extends Component {
 
   @service store;
   @service router;
+  @service notify;
 
   // initially only 'new' button is visible
   @tracked form_visible = false;
@@ -52,16 +53,23 @@ export default class NewTagComponent extends Component {
 
   @action
   onCreate() {
+    let that = this;
+
     this.store.createRecord('tag', {
       name: this.new_name,
       description: this.new_description,
       pinned: this.new_pinned,
       bg_color: this.new_bg_color,
       fg_color: this.new_fg_color,
-    }).save();
+    }).save().catch(function(data) {
+      let errors;
+
+      errors = data.errors.map(item => item.detail);
+      that.notify.error(errors);
+    });
 
     this._empty_form();
-    this.router.refresh();
+    this.args.onCreate();
   }
 
   @action

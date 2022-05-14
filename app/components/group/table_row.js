@@ -27,7 +27,6 @@ class TableRowComponent extends Component {
 
   @action
   async onSaveChanges(group) {
-    let that = this;
 
     if (!group) {
       console.warn('onSaveChanges received an undefined group object');

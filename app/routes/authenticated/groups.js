@@ -1,10 +1,11 @@
 import { service } from '@ember/service';
 import BaseRoute from 'papermerge/routes/base';
-import { TrackedArray } from 'tracked-built-ins';
+import { setup_pages } from './utils';
 
 
 export default class GroupsRoute extends BaseRoute {
   @service store;
+  @service router;
 
   queryParams = {
     page: {
@@ -16,45 +17,30 @@ export default class GroupsRoute extends BaseRoute {
   }
 
   async model(params) {
+    let that = this;
+
     return this.store.query('group', { page: {
         number: params.page,
         size: params.size
       }
+    }).catch(function(){
+      // in case we query server for a ``page``
+      // which does not exist - 404 will be returned.
+      // In such case, just redirect to first page.
+      that.transitionTo(
+        'authenticated.groups',
+        {
+           queryParams: {'page': 1}
+        }
+      );
     });
   }
 
   setupController(controller, model) {
-    let pages = new TrackedArray([]),
-      pagination,
-      number_of_pages,
-      number,
-      total_items_count = 0;
-
     super.setupController(controller, model);
 
-    if (model && model.meta) {
-      pagination = model.meta.pagination;
-      total_items_count = pagination.count;
-    }
-
-    if (pagination) {
-      number_of_pages = pagination.pages;
-
-      for (let i=0; i < number_of_pages; i++ ) {
-        number = i + 1;
-        if (number == pagination.page) {
-          pages.push({
-            'number': number,
-            'active': true
-          });
-        } else {
-          pages.push({'number': number});
-        }
-      }
-    }
-
-    controller.set('pages', pages);
-    controller.set('total_items_count', total_items_count);
-    console.log(`total_items_count=${total_items_count}`);
+    controller.set(
+      'pages', setup_pages(model)
+    );
   }
 }

@@ -14,7 +14,7 @@ export default class TableRowComponent extends Component {
   @action
   async onRemove(tag) {
     await tag.destroyRecord();
-    this.router.refresh();
+    this.args.onDelete();
   }
 
   @action

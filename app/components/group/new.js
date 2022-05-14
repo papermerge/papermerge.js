@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 
 export default class NewGroupComponent extends Component {
   @service store;
+  @service notify;
   @tracked form_visible = false;
   @tracked new_name = '';
 
@@ -16,9 +17,16 @@ export default class NewGroupComponent extends Component {
 
   @action
   onCreate() {
+    let that = this;
+
     this.store.createRecord('group', {
       name: this.new_name,
-    }).save();
+    }).save().catch(function(data) {
+      let errors;
+
+      errors = data.errors.map(item => item.detail);
+      that.notify.error(errors);
+    });
 
     this._empty_form();
     this.args.onCreate();

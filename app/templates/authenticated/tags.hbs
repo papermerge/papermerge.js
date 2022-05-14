@@ -1,13 +1,15 @@
-<Tag::New />
+<Tag::New
+  @onCreate={{this.onCreate}} />
 
 <Table @titles={{array 'Tag Name' 'Pinned?' 'Description' 'Action' }}>
   {{#each @model as |tag|}}
-    <Tag::TableRow @tag={{tag}} />
+    <Tag::TableRow
+      @tag={{tag}}
+      @onDelete={{this.onDelete}} />
   {{/each}}
 </Table>
 
-{{#if this.more_than_one_pages }}
-  <Pagination
-    @pages={{this.pages}}
-    @route="authenticated.tags" />
-{{/if}}
+
+<Pagination
+  @pages={{this.pages}}
+  @route="authenticated.tags" />
