@@ -1,11 +1,18 @@
 import { action } from '@ember/object';
 import DualPanelBaseController from "./dualpanel_base";
 import { service } from '@ember/service';
+import { tracked } from 'tracked-built-ins';
+import { TrackedObject } from 'tracked-built-ins';
 
 
 export default class NodesController extends DualPanelBaseController {
 
   @service router;
+  @service store;
+
+  @tracked extra_id = null;
+  @tracked extra_type = null; // can be either 'doc' or 'node'
+  @tracked extra = new TrackedObject({});
 
   @action
   async onPanelToggle(hint) {
@@ -16,25 +23,23 @@ export default class NodesController extends DualPanelBaseController {
     let home_folder;
 
     if (this.extra_id) {
-      if (hint === "left") {
+      this.extra = new TrackedObject({});
+      if (hint === "right") {
         // user decided to close left panel
-        if (this.extra_type === 'folder') {
-          this.router.replaceWith('authenticated.nodes', this.extra_id);
-        } else {
-          this.router.replaceWith('authenticated.document', this.extra_id);
-        }
-        this.extra_id = null;
-        this.extra_type = null;
-      } else if (hint === "right") {
-        this.extra_id = null;
-        this.extra_type = null;
-      } else {
-        throw `Unknown value for origin argument: ${origin}`;
+        this.router.replaceWith('authenticated.nodes', this.extra_id);
       }
+      this.extra_id = null;
+      this.extra_type = null;
     } else {
       home_folder = await this.currentUser.user.home_folder;
       this.extra_id = home_folder.get('id');
       this.extra_type = 'folder';
+      this.extra = await this.getPanelInfo({
+        store: this.store,
+        node_id: this.extra_id,
+        page: 1
+      });
+
     }
   }
 

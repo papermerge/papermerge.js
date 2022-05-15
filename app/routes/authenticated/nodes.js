@@ -9,12 +9,6 @@ export default class NodesRoute extends BaseRoute {
   @service currentUser;
 
   queryParams = {
-    extra_id: {
-      refreshModel: true
-    },
-    extra_type: {
-      refreshModel: true
-    },
     page: {
       refreshModel: true
     }
@@ -55,15 +49,6 @@ export default class NodesRoute extends BaseRoute {
       }
 
       return context;
-    }
-
-    if (params.extra_id && params.extra_type === 'folder') {
-      context['extra'] = await getPanelInfo({
-        store: this.store,
-        node_id: params.extra_id,
-        page: 1
-      });
-      this.dualpanel_mode = true;
     }
 
     return context;
