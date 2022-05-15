@@ -20,7 +20,7 @@ export default class NodesController extends DualPanelBaseController {
       hint is either "left" or "right" depending where
       the onPanelToggle originated from.
     */
-    let home_folder;
+    let home_folder, that = this;
 
     if (this.extra_id) {
       this.extra = new TrackedObject({});
@@ -34,12 +34,18 @@ export default class NodesController extends DualPanelBaseController {
       home_folder = await this.currentUser.user.home_folder;
       this.extra_id = home_folder.get('id');
       this.extra_type = 'folder';
-      this.extra = await this.getPanelInfo({
+
+      this.getPanelInfo({
         store: this.store,
         node_id: this.extra_id,
         page: 1
+      }).then(([{children, pagination}, node]) => {
+        that.extra = new TrackedObject({
+          current_node: node,
+          children: children,
+          pagination: pagination
+        });
       });
-
     }
   }
 

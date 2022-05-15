@@ -19,17 +19,11 @@ export default class DualPanelBaseController extends Controller {
       `page` is integer number of the page
       `store` is "@service store" thingy
     */
-    let node;
     const adapter = store.adapterFor('node');
-    const {children, pagination} = await adapter.getChildren({node_id, page});
 
-
-    node = await adapter.getFolder(node_id);
-
-    return {
-      current_node: node,
-      children: children,
-      pagination: pagination
-    };
+    return Promise.all([
+      adapter.getChildren({node_id, page}),
+      adapter.getFolder(node_id)
+    ]);
   }
 }

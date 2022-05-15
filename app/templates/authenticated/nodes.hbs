@@ -24,16 +24,16 @@
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />
     {{else if this.extra.children}}
-        <Commander
-          @node={{this.extra.current_node}}
-          @children={{this.extra.children}}
-          @pagination={{this.extra.pagination}}
-          @extranode={{@model.current_node}}
-          @onPanelToggle={{this.onPanelToggle}}
-          @dualPanelMode={{this.dualpanel_mode}}
-          @hint="right"
-          @onSwapPanels={{this.onSwapPanels}}
-          @onDuplicatePanel={{this.onDuplicatePanel}} />
+      <Commander
+        @node={{this.extra.current_node}}
+        @children={{this.extra.children}}
+        @pagination={{this.extra.pagination}}
+        @extranode={{@model.current_node}}
+        @onPanelToggle={{this.onPanelToggle}}
+        @dualPanelMode={{this.dualpanel_mode}}
+        @hint="right"
+        @onSwapPanels={{this.onSwapPanels}}
+        @onDuplicatePanel={{this.onDuplicatePanel}} />
     {{/if}}
   {{/if}}
 </div>
