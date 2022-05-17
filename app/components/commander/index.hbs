@@ -77,9 +77,8 @@
 
   <Breadcrumb
     @node={{@node}}
-    @extranode={{@extranode}}
-    @extradoc={{@extradoc}}
-    @onNodeClicked={{this.onNodeClicked}}
+    @onNodeClicked={{@onNodeClicked}}
+    @node_clicked_state={{@node_clicked_state}}
     @hint={{@hint}} />
 
   {{#if this.is_empty_folder }}
@@ -97,12 +96,20 @@
             @onCheckboxChange={{this.onCheckboxChange}}
             @onDragendSuccess={{this.onDragendSuccess}}
             @onDragendCancel={{this.onDragendCancel}}>
-              <DualLinkTo
-                @node={{node}}
-                @extranode={{@extranode}}
-                @extradoc={{@extradoc}}
-                @hint={{@hint}}
-                {{on "click" this.onNodeClicked}} />
+              <button
+                class="btn btn-link"
+                {{on "click" (perform @onNodeClicked node @hint)}}>
+                  {{node.title}}
+                  {{#if @onNodeClicked.isRunning}}
+                    {{#if (is_equal @node_clicked_state.node_id node.id)}}
+                      {{#if (is_equal @node_clicked_state.hint @hint)}}
+                        <Spinner @inProgress={{true}} />
+                      {{/if}}
+                    {{/if}}
+                  {{else}}
+                    <Spinner @inProgress={{false}} />
+                  {{/if}}
+              </button>
           </NodeType>
         {{/let}}
       {{/each}}

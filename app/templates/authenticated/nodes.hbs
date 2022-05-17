@@ -4,9 +4,9 @@
     @children={{@model.children}}
     @pagination={{@model.pagination}}
     {{! extranode/extradoc are passed to breadcrumb and local dual links }}
-    @extranode={{@model.extra.current_node}}
-    @extradoc={{@model.extra.doc}}
     @onPanelToggle={{this.onPanelToggle}}
+    @onNodeClicked={{this.onNodeClicked}}
+    @node_clicked_state={{this.node_clicked_state}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left"
     @onSwapPanels={{this.onSwapPanels}}
@@ -23,12 +23,15 @@
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />
-    {{else if this.extra.children}}
+    {{else if this.onPanelToggle.isRunning }}
+      <Commander::Placeholder />
+    {{else}}
       <Commander
         @node={{this.extra.current_node}}
         @children={{this.extra.children}}
         @pagination={{this.extra.pagination}}
-        @extranode={{@model.current_node}}
+        @onNodeClicked={{this.onNodeClicked}}
+        @node_clicked_state={{this.node_clicked_state}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
         @hint="right"

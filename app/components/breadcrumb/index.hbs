@@ -1,22 +1,11 @@
 <nav aria-label="breadcrumb" class="m-2 nav-breadcrumb">
    <ol class="breadcrumb">
     {{#each this.nodes as |node|}}
-      <li class="breadcrumb-item">
-        <DualLinkTo
-          @node={{node}}
-          @extranode={{@extranode}}
-          @extradoc={{@extradoc}}
-          @hint={{@hint}}
-          {{on "click" @onNodeClicked}} >
-            {{#if (is_equal node.title ".inbox")}}
-              <i class="bi-inbox-fill me-2"></i>Inbox
-            {{else if (is_equal node.title ".home")}}
-               <i class="fa fa-home me-2"></i>Home
-            {{else}}
-              {{node.title}}
-            {{/if}}
-        </DualLinkTo>
-      </li>
+      <Breadcrumb::Item
+        @onNodeClicked={{@onNodeClicked}}
+        @node_clicked_state={{@node_clicked_state}}
+        @node={{node}}
+        @hint={{@hint}} />
     {{/each}}
   </ol>
 </nav>

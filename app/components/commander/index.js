@@ -7,24 +7,6 @@ import localStorage from 'papermerge/utils/localstorage';
 
 
 export default class CommanderComponent extends Component {
-  /*
-    Arguments:
-
-    @node = current node/folder
-
-    @primary - boolean - Primary commander (i.e. @primary=true)
-    component uses <LinkTo /> for navigation/root node change.
-    There can be only one primary commander.
-    If @primary=false - the commander is secondary. There can be as
-    many as you wish secondary commandors (e.g. for choosing some folder).
-    Secondary commandors do use <ButtonLink /> for nagivation/root
-    node change.
-
-    @hint = "left" | "right" indicates which of two sides
-    is current panel displayed. @hint is "left" indicates that
-    commander is displayed in left panel.
-  */
-
   @service websockets;
   @service ws_nodes_move;
   @service store;
@@ -92,17 +74,6 @@ export default class CommanderComponent extends Component {
         this.notify.error(`Task failed ${message.error}`);
         break;
       }  // end of switch
-  }
-
-  @action
-  onNodeClicked() {
-    /**
-     * Whenever a folder is clicked reset selected node list
-     *
-     * Otherwise user will see (newly opened) folder with no
-     * selected nodes - but with visible action buttons (delete, download...)!
-     * */
-    this.selected_nodes = A([]);
   }
 
   @action
