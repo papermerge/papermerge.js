@@ -1,0 +1,23 @@
+<li class="breadcrumb-item">
+  <button
+    class="btn btn-link"
+    {{on "click" (perform @onNodeClicked @node @hint)}}>
+      {{#if (is_equal @node.title ".inbox")}}
+        <Breadcrumb::Inbox />
+        {{#if this.show_spinner}}
+          <Spinner @inProgress={{true}} />
+        {{else}}
+          <Spinner @inProgress={{false}} />
+        {{/if}}
+      {{else if (is_equal @node.title ".home")}}
+        <Breadcrumb::Home />
+        {{#if this.show_spinner}}
+          <Spinner @inProgress={{true}} />
+        {{else}}
+          <Spinner @inProgress={{false}} />
+        {{/if}}
+      {{else}}
+        {{@node.title}}
+      {{/if}}
+  </button>
+</li>
