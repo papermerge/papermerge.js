@@ -15,6 +15,7 @@ export default class DualPanelBaseController extends Controller {
     'hint': undefined,
     'node_id': undefined
   });
+
   @tracked currently_loading_state = new TrackedObject({
     'hint': undefined,
     'node_id': undefined
@@ -42,6 +43,7 @@ export default class DualPanelBaseController extends Controller {
 
   @task({ drop: true })
   *onNodeClicked(node, hint) {
+
     let children,
       pagination,
       current_node,
@@ -67,6 +69,7 @@ export default class DualPanelBaseController extends Controller {
         pagination: pagination
       });
     } else {
+
       this.router.replaceWith('authenticated.nodes', node_id);
     }
   }
