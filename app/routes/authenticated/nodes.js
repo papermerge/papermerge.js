@@ -1,6 +1,8 @@
 import BaseRoute from 'papermerge/routes/base';
 import { service } from '@ember/service';
-
+import { tracked } from 'tracked-built-ins';
+import { action } from '@ember/object';
+import { TrackedObject } from 'tracked-built-ins';
 import { getPanelInfo } from './utils';
 
 
@@ -52,5 +54,33 @@ export default class NodesRoute extends BaseRoute {
     }
 
     return context;
+  }
+
+  @action
+  loading(transition, originRoute) {
+    let controller, node_id;
+
+    controller = this.controllerFor('authenticated.nodes');
+    node_id = originRoute.paramsFor('authenticated.nodes').node_id;
+
+    controller.set(
+      'currently_loading_state',
+      {
+        'node_id': node_id,
+        'hint': 'left'
+      }
+    );
+
+    transition.promise.finally(function() {
+        controller.set(
+          'currently_loading_state',
+          {
+            'node_id': undefined,
+            'hint': undefined
+          }
+        );
+    });
+
+    return false; // allows the loading template to be shown
   }
 }
