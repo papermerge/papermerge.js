@@ -15,7 +15,10 @@ export default class DualPanelBaseController extends Controller {
     'hint': undefined,
     'node_id': undefined
   });
-
+  @tracked currently_loading_state = new TrackedObject({
+    'hint': undefined,
+    'node_id': undefined
+  });
 
   get dualpanel_mode() {
     return this.extra_id;
@@ -39,15 +42,19 @@ export default class DualPanelBaseController extends Controller {
 
   @task({ drop: true })
   *onNodeClicked(node, hint) {
-    let children, pagination, current_node;
+    let children,
+      pagination,
+      current_node,
+      node_id;
 
+    node_id = node.get('id');
     console.log(`node=${node} from hint=${hint} clicked`);
 
-    this.node_clicked_state['node_id'] = node.get('id');
+    this.node_clicked_state['node_id'] = node_id;
     this.node_clicked_state['hint'] = hint;
 
     if (hint == 'right') {
-      this.extra_id = node.get('id');
+      this.extra_id = node_id;
       [{children, pagination}, current_node] = yield this.getPanelInfo({
         store: this.store,
         node_id: this.extra_id,
@@ -60,7 +67,7 @@ export default class DualPanelBaseController extends Controller {
         pagination: pagination
       });
     } else {
-      this.router.replaceWith('authenticated.nodes', node.get('id'));
+      this.router.replaceWith('authenticated.nodes', node_id);
     }
   }
 }

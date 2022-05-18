@@ -79,6 +79,7 @@
     @node={{@node}}
     @onNodeClicked={{@onNodeClicked}}
     @node_clicked_state={{@node_clicked_state}}
+    @currently_loading_state={{@currently_loading_state}}
     @hint={{@hint}} />
 
   {{#if this.is_empty_folder }}
@@ -100,12 +101,13 @@
                 class="btn btn-link"
                 {{on "click" (perform @onNodeClicked node @hint)}}>
                   {{node.title}}
-                  {{#if @onNodeClicked.isRunning}}
-                    {{#if (is_equal @node_clicked_state.node_id node.id)}}
-                      {{#if (is_equal @node_clicked_state.hint @hint)}}
-                        <Spinner @inProgress={{true}} />
-                      {{/if}}
-                    {{/if}}
+                  {{#if (node_in_transition
+                    node
+                    onNodeClicked=@onNodeClicked
+                    node_clicked_state=@node_clicked_state
+                    currently_loading_state=@currently_loading_state
+                    hint=@hint)}}
+                      <Spinner @inProgress={{true}} />
                   {{else}}
                     <Spinner @inProgress={{false}} />
                   {{/if}}
