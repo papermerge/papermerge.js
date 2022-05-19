@@ -19,22 +19,21 @@ export default class NodesController extends DualPanelBaseController {
       children, node, pagination;
 
     if (this.extra_id) {
-
-      if (hint === "right") {
-        // user decided to close left panel
-        this.router.replaceWith('authenticated.nodes', this.extra_id);
-      }
+      // closing secondary panel
       this.extra = null;
       this.extra_id = null;
       this.extra_type = null;
+      this.swap_panels = false;
     } else {
+      // opening secondary panel
       this.extra = new TrackedObject({});
 
       home_folder = yield this.currentUser.user.home_folder;
       this.extra_id = home_folder.get('id');
       this.extra_type = 'folder';
 
-      [{children, pagination}, node] = yield this.getPanelInfo({
+      this.loadNodeData.hint = undefined;
+      [{children, pagination}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
         page: 1
@@ -50,66 +49,40 @@ export default class NodesController extends DualPanelBaseController {
 
   @action
   onSwapPanels() {
-    let node_id,
-      query_params;
-
-    node_id = this.router.currentRoute.params['node_id'];
-    query_params = {
-      'queryParams': {
-        'extra_id': node_id,
-        'extra_type': 'folder'
-      }
-    }
-
-    if (this.extra_id && this.extra_type == 'folder') {
-      this.router.transitionTo(
-        'authenticated.nodes',
-        this.extra_id,
-        query_params
-      );
-    } else if (this.extra_id && this.extra_type == 'doc') {
-      this.router.transitionTo(
-        'authenticated.document',
-        this.extra_id,
-        query_params
-      );
-    }
+    this.swap_panels = !this.swap_panels;
   }
 
-  @action
-  onDuplicatePanel(hint) {
+  @task({ drop: true })
+  *onDuplicatePanel(hint) {
     let node_id = this.router.currentRoute.params['node_id'],
-      query_params;
-
+      query_params,
+      home_folder, that = this,
+      children, node, pagination;
 
     if (hint === 'left') {
-      query_params = {
-        'queryParams': {
-          'extra_id': node_id,
-          'extra_type': 'folder'
-        }
-      }
-
       if (this.extra_id) {
-        this.router.transitionTo(
-          'authenticated.nodes',
-          node_id,
-          query_params
-        );
+
+        this.extra_id = node_id;
+        this.extra_type = 'folder';
+
+        this.loadNodeData.hint = 'right';
+        [{children, pagination}, node] = yield this.loadNodeData.perform({
+          store: this.store,
+          node_id: this.extra_id,
+          page: 1
+        });
+
+        this.extra = new TrackedObject({
+          current_node: node,
+          children: children,
+          pagination: pagination
+        });
       }
     } else { // hint == 'right'
-      query_params = {
-        'queryParams': {
-          'extra_id': this.extra_id,
-          'extra_type': this.extra_type
-        }
-      }
-
       if (this.extra_type == 'folder') {
         this.router.transitionTo(
           'authenticated.nodes',
-          this.extra_id,
-          query_params
+          this.extra_id
         );
       } else {
         this.router.transitionTo(

@@ -1,4 +1,4 @@
-<div class="panels d-flex row">
+<div class="panels d-flex row {{if this.swap_panels 'flex-row-reverse'}}">
   <Commander
     @node={{@model.current_node}}
     @children={{@model.children}}
@@ -6,10 +6,12 @@
     {{! extranode/extradoc are passed to breadcrumb and local dual links }}
     @onPanelToggle={{this.onPanelToggle}}
     @onNodeClicked={{this.onNodeClicked}}
+    @loadNodeData={{this.loadNodeData}}
     @node_clicked_state={{this.node_clicked_state}}
     @currently_loading_state={{this.currently_loading_state}}
     @dualPanelMode={{this.dualpanel_mode}}
     @hint="left"
+    @swap_panels={{this.swap_panels}}
     @onSwapPanels={{this.onSwapPanels}}
     @onDuplicatePanel={{this.onDuplicatePanel}} />
 
@@ -32,10 +34,12 @@
         @children={{this.extra.children}}
         @pagination={{this.extra.pagination}}
         @onNodeClicked={{this.onNodeClicked}}
+        @loadNodeData={{this.loadNodeData}}
         @node_clicked_state={{this.node_clicked_state}}
         @currently_loading_state={{this.currently_loading_state}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
+        @swap_panels={{this.swap_panels}}
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />

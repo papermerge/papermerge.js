@@ -4,7 +4,7 @@ import { helper } from '@ember/component/helper';
 function node_in_transition(
   [node],
   {
-    onNodeClicked,
+    loadNodeData,
     node_clicked_state,
     currently_loading_state,
     hint
@@ -26,7 +26,7 @@ function node_in_transition(
     based on `currently_loading_state` dictionary.
 
     When node is in secondary panel check is performed
-    based on `onNodeClicked` task.
+    based on `loadNodeData` task.
   */
   let state1, state2;
 
@@ -37,7 +37,7 @@ function node_in_transition(
   }
 
   // case 2: `node` is in secondary panel
-  if (onNodeClicked.isRunning) {
+  if (loadNodeData.isRunning) {
     state1 = node_clicked_state;
     if (state1.node_id == node.id && state1.hint == hint) {
       return true;

@@ -3,7 +3,7 @@
     {{#each this.nodes as |node|}}
       <Breadcrumb::Item
         @onNodeClicked={{@onNodeClicked}}
-        @node_clicked_state={{@node_clicked_state}}
+        @loadNodeData={{@loadNodeData}}
         @currently_loading_state={{@currently_loading_state}}
         @node={{node}}
         @hint={{@hint}} />

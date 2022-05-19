@@ -5,18 +5,22 @@
     @viewMode={{@viewMode}} />
 
   <PanelModes
+    @node={{@node}}
     @dualPanelMode={{@dualPanelMode}}
     @hint={{@hint}}
     @onSwapPanels={{@onSwapPanels}}
+    @swap_panels={{@swap_panels}}
     @onDuplicatePanel={{@onDuplicatePanel}} />
 
   <div class="panel-mode">
     {{#if @dualPanelMode}}
-      <button type="button" class="btn btn-light mx-1"
-        {{tooltip title='Close panel' placement='bottom'}}
-        {{on "click" (perform @onPanelToggle @hint) }}>
-          <i class="bi-x"></i>
-      </button>
+      {{#if (is_equal @hint 'right')}}
+        <button type="button" class="btn btn-light mx-1"
+          {{tooltip title='Close panel' placement='bottom'}}
+          {{on "click" (perform @onPanelToggle @hint) }}>
+            <i class="bi-x"></i>
+        </button>
+      {{/if}}
     {{else}}
       <button type="button" class="btn btn-light mx-1"
         {{tooltip title='Split panel' placement='bottom'}}

@@ -1,22 +1,29 @@
-{{#if this.are_not_same_panels }}
-  {{#if @dualPanelMode}}
+{{#if @dualPanelMode}}
     <button
       type="button"
       class="btn btn-light mx-1"
       {{tooltip title='Duplicate panel' placement='bottom'}}
-      {{on 'click' (fn @onDuplicatePanel @hint)}}>
+      {{on 'click' (perform @onDuplicatePanel @hint)}}>
         {{#if (is_equal @hint "left")}}
-          <i class="bi-arrow-bar-right"></i>
+          {{#if @swap_panels}}
+            <i class="bi-arrow-bar-left"></i>
+          {{else}}
+            <i class="bi-arrow-bar-right"></i>
+          {{/if}}
         {{else}}
-           <i class="bi-arrow-bar-left"></i>
+          {{#if @swap_panels}}
+           <i class="bi-arrow-bar-right"></i>
+          {{else}}
+            <i class="bi-arrow-bar-left"></i>
+          {{/if}}
         {{/if}}
     </button>
 
-    <button type="button"
-      class="btn btn-light mx-1"
-      {{tooltip title='Swap panels' placement='bottom'}}
-      {{on 'click' @onSwapPanels}}>
-        <i class="bi-arrow-left-right"></i>
-    </button>
-  {{/if}}
+  <button type="button"
+    class="btn btn-light mx-1"
+    {{tooltip title='Swap panels' placement='bottom'}}
+    {{on 'click' @onSwapPanels}}>
+      <i class="bi-arrow-left-right"></i>
+  </button>
+
 {{/if}}

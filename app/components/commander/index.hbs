@@ -36,12 +36,14 @@
       @node={{@node}} />
 
     <Commander::ActionModes
+      @node={{@node}}
       @onPanelToggle={{@onPanelToggle}}
       @dualPanelMode={{@dualPanelMode}}
       @onViewModeChange={{this.onViewModeChange}}
       @viewMode={{this.view_mode}}
       @hint={{@hint}}
       @onSwapPanels={{@onSwapPanels}}
+      @swap_panels={{@swap_panels}}
       @onDuplicatePanel={{@onDuplicatePanel}} />
   </div>
 
@@ -78,8 +80,7 @@
   <Breadcrumb
     @node={{@node}}
     @onNodeClicked={{@onNodeClicked}}
-    @node_clicked_state={{@node_clicked_state}}
-
+    @loadNodeData={{@loadNodeData}}
     @currently_loading_state={{@currently_loading_state}}
     @hint={{@hint}} />
 
@@ -104,7 +105,7 @@
                   {{node.title}}
                   {{#if (node_in_transition
                     node
-                    onNodeClicked=@onNodeClicked
+                    loadNodeData=@loadNodeData
                     node_clicked_state=@node_clicked_state
                     currently_loading_state=@currently_loading_state
                     hint=@hint)}}
