@@ -79,6 +79,7 @@ export default class DualPanelBaseController extends Controller {
     if (hint == 'right') {
       this.extra_id = node_id;
       this.loadNodeData.hint = hint;
+      this.loadNodeData.node_id = this.extra_id;
       [{children, pagination}, current_node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,

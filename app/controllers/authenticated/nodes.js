@@ -33,6 +33,7 @@ export default class NodesController extends DualPanelBaseController {
       this.extra_type = 'folder';
 
       this.loadNodeData.hint = undefined;
+      this.loadNodeData.node_id = this.extra_id;
       [{children, pagination}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
@@ -66,6 +67,7 @@ export default class NodesController extends DualPanelBaseController {
         this.extra_type = 'folder';
 
         this.loadNodeData.hint = 'right';
+        this.loadNodeData.node_id = this.extra_id;
         [{children, pagination}, node] = yield this.loadNodeData.perform({
           store: this.store,
           node_id: this.extra_id,
