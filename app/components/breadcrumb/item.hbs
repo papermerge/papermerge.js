@@ -1,7 +1,7 @@
 <li class="breadcrumb-item">
   <button
     class="btn btn-link"
-    {{on "click" (perform @onNodeClicked @node @hint)}}>
+    {{on "click" (perform @onNodeClicked @node @hint 'folder')}}>
       {{#if (is_equal @node.title ".inbox")}}
         <Breadcrumb::Inbox />
         {{#if this.show_spinner}}

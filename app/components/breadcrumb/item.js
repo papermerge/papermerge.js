@@ -5,7 +5,7 @@ export default class BreadcrumbItemComponent extends Component {
   get show_spinner() {
     let state;
 
-    if (this.args.loadNodeData.isRunning) {
+    if (this.args.loadData && this.args.loadNodeData.isRunning) {
       if (this.args.loadNodeData.hint && this.args.hint) {
         if (this.args.loadNodeData.hint == this.args.hint) {
           return true;
@@ -15,7 +15,7 @@ export default class BreadcrumbItemComponent extends Component {
 
     state = this.args.currently_loading_state;
 
-    if (state.node_id && state.hint == this.args.hint) {
+    if (state && state.node_id && state.hint == this.args.hint) {
       return true;
     }
 

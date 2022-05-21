@@ -101,7 +101,7 @@
             @onDragendCancel={{this.onDragendCancel}}>
               <button
                 class="btn btn-link"
-                {{on "click" (perform @onNodeClicked node @hint)}}>
+                {{on "click" (perform @onNodeClicked node @hint node.nodeType)}}>
                   {{node.title}}
                   {{#if (node_in_transition
                     node

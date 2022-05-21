@@ -64,7 +64,7 @@ export default class DualPanelBaseController extends Controller {
   }
 
   @task({ drop: true })
-  *onNodeClicked(node, hint) {
+  *onNodeClicked(node, hint, node_type) {
 
     let children,
       pagination,
@@ -96,7 +96,11 @@ export default class DualPanelBaseController extends Controller {
       this.node_clicked_state['hint'] = undefined;
 
     } else {
-      this.router.replaceWith('authenticated.nodes', node_id);
+      if (node_type == 'folder') {
+        this.router.replaceWith('authenticated.nodes', node_id);
+      } else {
+        this.router.replaceWith('authenticated.document', node_id);
+      }
     }
   }
 }
