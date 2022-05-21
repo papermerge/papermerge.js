@@ -77,25 +77,33 @@ export default class DualPanelBaseController extends Controller {
     this.node_clicked_state['hint'] = hint;
 
     if (hint == 'right') {
-      this.extra_id = node_id;
-      this.loadNodeData.hint = hint;
-      this.loadNodeData.node_id = this.extra_id;
-      [{children, pagination}, current_node] = yield this.loadNodeData.perform({
-        store: this.store,
-        node_id: this.extra_id,
-        page: 1
-      });
+      // secondary panel
+      if (node_type == 'folder') {
+        // open commander in secondary panel
+        this.extra_id = node_id;
+        this.loadNodeData.hint = hint;
+        this.loadNodeData.node_id = this.extra_id;
+        [{children, pagination}, current_node] = yield this.loadNodeData.perform({
+          store: this.store,
+          node_id: this.extra_id,
+          page: 1
+        });
 
-      this.extra = new TrackedObject({
-        current_node: current_node,
-        children: children,
-        pagination: pagination
-      });
+        this.extra = new TrackedObject({
+          current_node: current_node,
+          children: children,
+          pagination: pagination
+        });
 
-      this.node_clicked_state['node_id'] = undefined;
-      this.node_clicked_state['hint'] = undefined;
+        this.node_clicked_state['node_id'] = undefined;
+        this.node_clicked_state['hint'] = undefined;
+      } else {
+        // open viewer in secondary panel
+        console.log(`Open viewer in secondary panel. node_id=${node_id}`);
+      }
 
     } else {
+      // primary panel
       if (node_type == 'folder') {
         this.router.replaceWith('authenticated.nodes', node_id);
       } else {

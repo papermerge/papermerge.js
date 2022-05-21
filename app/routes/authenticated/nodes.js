@@ -58,12 +58,24 @@ export default class NodesRoute extends BaseRoute {
 
   @action
   loading(transition, originRoute) {
-    let controller, node_id;
+    let nodes_controller, document_controller, node_id;
 
-    controller = this.controllerFor('authenticated.nodes');
+    nodes_controller = this.controllerFor('authenticated.nodes');
+    document_controller = this.controllerFor('authenticated.document');
     node_id = originRoute.paramsFor('authenticated.nodes').node_id;
 
-    controller.set(
+    // In commander will show rotating spinner
+    // when user clicked on breadcrumb item
+    nodes_controller.set(
+      'currently_loading_state',
+      {
+        'node_id': node_id,
+        'hint': 'left'
+      }
+    );
+    // In document viewer will show rotating spinner when
+    // user clicked on breadcrumb item
+    document_controller.set(
       'currently_loading_state',
       {
         'node_id': node_id,
@@ -72,7 +84,14 @@ export default class NodesRoute extends BaseRoute {
     );
 
     transition.promise.finally(function() {
-        controller.set(
+        nodes_controller.set(
+          'currently_loading_state',
+          {
+            'node_id': undefined,
+            'hint': undefined
+          }
+        );
+        document_controller.set(
           'currently_loading_state',
           {
             'node_id': undefined,

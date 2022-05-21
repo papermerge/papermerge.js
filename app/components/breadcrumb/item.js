@@ -2,10 +2,12 @@ import Component from '@glimmer/component';
 
 
 export default class BreadcrumbItemComponent extends Component {
+
   get show_spinner() {
     let state;
 
-    if (this.args.loadData && this.args.loadNodeData.isRunning) {
+
+    if (this.args.loadNodeData && this.args.loadNodeData.isRunning) {
       if (this.args.loadNodeData.hint && this.args.hint) {
         if (this.args.loadNodeData.hint == this.args.hint) {
           return true;
