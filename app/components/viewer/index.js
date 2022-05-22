@@ -82,10 +82,7 @@ export default class ViewerComponent extends Component {
      from server side.
      */
     let last_version,
-      page_adapter,
       that = this;
-
-    page_adapter = this.store.adapterFor('page');
 
     this.store.findRecord(
       'document',
@@ -94,14 +91,9 @@ export default class ViewerComponent extends Component {
     ).then((doc) => {
       last_version = doc.last_version;
 
-      //that._document_versions.push(last_version);
-      //that.__document_versions__ = last_version;
-
-      page_adapter.loadImages(last_version.pages, 'image/svg+xml').then(
-        (pages) => {
-          that._pages = pages;
-          that.__pages__ = pages;
-      });
+      that.__pages__ = that._pages = last_version.pages.map(
+        (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
+      );
     });
   }
 
@@ -128,7 +120,7 @@ export default class ViewerComponent extends Component {
         this.notify.error(message);
       }
     );
-  }
+   }
 
   @action
   onNodeClicked() {

@@ -6,6 +6,7 @@ import { getPanelInfo } from './utils';
 
 export default class DocumentRoute extends Route {
   @service store;
+  @service requests;
 
   queryParams = {
     extra_id: {
@@ -18,7 +19,6 @@ export default class DocumentRoute extends Route {
 
   async model(params) {
     let //doc_adapter,
-      page_adapter,
       extranode,
       doc,
       extra_doc,
@@ -26,8 +26,6 @@ export default class DocumentRoute extends Route {
       extra_last_version,
       pages_with_url,
       extra_pages_with_url;
-
-    page_adapter = this.store.adapterFor('page');
 
     doc = await this.store.findRecord(
       'document',
@@ -37,7 +35,9 @@ export default class DocumentRoute extends Route {
 
     last_version = doc.last_version;
 
-    pages_with_url = await page_adapter.loadImages(last_version.pages, 'image/svg+xml');
+    pages_with_url = last_version.pages.map(
+      (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
+    );
 
     if (params.extra_id && params.extra_type === 'doc') {
       extra_doc  = await this.store.findRecord(
@@ -46,7 +46,7 @@ export default class DocumentRoute extends Route {
         { reload: true }
       );
       extra_last_version = extra_doc.last_version;
-      extra_pages_with_url = await page_adapter.loadImages(
+      extra_pages_with_url = this.requests.loadImages.perform(
         extra_last_version.pages,
         'image/svg+xml'
       );
