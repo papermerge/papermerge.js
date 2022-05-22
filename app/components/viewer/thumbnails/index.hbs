@@ -8,17 +8,21 @@
 
   {{adjust_element_height}}>
   {{#each @pages as |page|}}
-    {{#if page.is_drop_placeholder}}
-      <Viewer::Thumbnail::DropPlaceholder />
+    {{#if page.isRunning}}
+      <Viewer::Thumbnail::Placeholder />
     {{else}}
-      <Viewer::Thumbnail
-        @doc={{@doc}}
-        @page={{page}}
-        @selectedPages={{@selectedPages}}
-        @onDblClick={{@onDblClick}}
-        @onDragendSuccess={{this.onDragendSuccess}}
-        @onDragendCancel={{this.onDragendCancel}}
-        @onCheckboxChange={{@onCheckboxChange}} />
+      {{#if page.is_drop_placeholder}}
+        <Viewer::Thumbnail::DropPlaceholder />
+      {{else}}
+        <Viewer::Thumbnail
+          @doc={{@doc}}
+          @page={{page.value}}
+          @selectedPages={{@selectedPages}}
+          @onDblClick={{@onDblClick}}
+          @onDragendSuccess={{this.onDragendSuccess}}
+          @onDragendCancel={{this.onDragendCancel}}
+          @onCheckboxChange={{@onCheckboxChange}} />
+      {{/if}}
     {{/if}}
   {{/each}}
 </div>
