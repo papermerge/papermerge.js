@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { tracked } from 'tracked-built-ins';
@@ -8,6 +9,9 @@ import { TrackedObject } from 'tracked-built-ins';
 export default class DualPanelBaseController extends Controller {
 
   @service currentUser;
+  @service store;
+  @service requests;
+
   @tracked extra_id = null;
   @tracked extra_type = null; // can be either 'doc' or 'node'
   @tracked extra;
@@ -69,7 +73,10 @@ export default class DualPanelBaseController extends Controller {
     let children,
       pagination,
       current_node,
-      node_id;
+      node_id,
+      doc,
+      last_version,
+      pages_with_url;
 
     node_id = node.get('id');
 
@@ -100,6 +107,25 @@ export default class DualPanelBaseController extends Controller {
       } else {
         // open viewer in secondary panel
         console.log(`Open viewer in secondary panel. node_id=${node_id}`);
+        doc = yield this.store.findRecord(
+          'document',
+          node_id,
+          { reload: true }
+        );
+    
+        last_version = doc.last_version;
+    
+        pages_with_url = last_version.pages.map(
+          (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
+        );
+
+        this.extra = new TrackedObject({
+          doc: doc,
+          document_versions: doc.versions,
+          last_document_version: doc.last_version,
+          pages: pages_with_url
+        });
+
       }
 
     } else {
@@ -111,4 +137,56 @@ export default class DualPanelBaseController extends Controller {
       }
     }
   }
+
+  @task *onPanelToggle(hint) {
+    /*
+      hint is either "left" or "right" depending where
+      the onPanelToggle originated from.
+    */
+    let home_folder,
+      children, node, pagination;
+
+    if (this.extra_id) {
+      // closing secondary panel
+      this.extra = null;
+      this.extra_id = null;
+      this.extra_type = null;
+      this.swap_panels = false;
+      localStorage.setItem('extra_id', undefined);
+      localStorage.setItem('extra_type', undefined);
+    } else {
+      // opening secondary panel
+      this.extra = new TrackedObject({});
+
+      home_folder = yield this.currentUser.user.home_folder;
+      this.extra_id = home_folder.get('id');
+      this.extra_type = 'folder';
+
+      this.loadNodeData.hint = undefined;
+      this.loadNodeData.node_id = this.extra_id;
+      [{children, pagination}, node] = yield this.loadNodeData.perform({
+        store: this.store,
+        node_id: this.extra_id,
+        page: 1
+      });
+
+      this.extra = new TrackedObject({
+        current_node: node,
+        children: children,
+        pagination: pagination
+      });
+
+      // save extra id/extra type for 'other' controller:
+      // if we are now in 'nodes controller',then 'other' is 'documents controller'
+      // if we are now in 'documents controller, then 'other' is 'nodes controller'
+      localStorage.setItem('extra_id', this.extra_id);
+      localStorage.setItem('extra_type', this.extra_type);
+    }
+  }
+
+  @action
+  onSwapPanels() {
+    this.swap_panels = !this.swap_panels;
+  }
+
 }

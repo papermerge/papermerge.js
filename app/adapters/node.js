@@ -1,5 +1,6 @@
 import ApplicationAdapter from './application';
 import { service } from '@ember/service';
+import ENV from 'papermerge/config/environment';
 
 
 export default class NodeAdapter extends ApplicationAdapter {
@@ -19,6 +20,7 @@ export default class NodeAdapter extends ApplicationAdapter {
     promise = fetch(url, {
       method: 'GET',
       headers: this.headers,
+      cache: ENV.APP.FETCH_CACHE
     }).then(
       response => response.json()
     ).then((nodes) => {

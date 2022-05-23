@@ -10,6 +10,8 @@ import { get_id } from 'papermerge/utils/array';
 import { task } from 'ember-concurrency';
 
 import { base_url } from 'papermerge/utils/host';
+import ENV from 'papermerge/config/environment';
+
 
 
 export default class Requests extends Service {
@@ -33,7 +35,8 @@ export default class Requests extends Service {
 
     return fetch(url, {
       method: 'GET',
-      headers: headers_copy
+      headers: headers_copy,
+      cache: ENV.APP.FETCH_CACHE
     });
   }
 

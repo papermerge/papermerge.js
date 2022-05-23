@@ -20,9 +20,11 @@
       <Viewer
         @doc={{this.extra.doc}}
         @pages={{this.extra.pages}}
-        @extranode={{@model.current_node}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
+        @onNodeClicked={{this.onNodeClicked}}
+        @loadNodeData={{this.loadNodeData}}
+        @currently_loading_state={{this.currently_loading_state}}
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />

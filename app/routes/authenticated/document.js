@@ -1,31 +1,17 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-
-import { getPanelInfo } from './utils';
+import { action } from '@ember/object';
 
 
 export default class DocumentRoute extends Route {
   @service store;
   @service requests;
 
-  queryParams = {
-    extra_id: {
-      refreshModel: true
-    },
-    extra_type: {
-      refreshModel: true
-    }
-  };
-
   async model(params) {
     let //doc_adapter,
-      extranode,
       doc,
-      extra_doc,
       last_version,
-      extra_last_version,
-      pages_with_url,
-      extra_pages_with_url;
+      pages_with_url;
 
     doc = await this.store.findRecord(
       'document',
@@ -39,58 +25,74 @@ export default class DocumentRoute extends Route {
       (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
     );
 
-    if (params.extra_id && params.extra_type === 'doc') {
-      extra_doc  = await this.store.findRecord(
-        'document',
-        params.extra_id,
-        { reload: true }
-      );
-      extra_last_version = extra_doc.last_version;
-      extra_pages_with_url = this.requests.loadImages.perform(
-        extra_last_version.pages,
-        'image/svg+xml'
-      );
-
-      return {
-        'doc': doc,
-        'document_versions': doc.versions,
-        'last_document_version': last_version,
-        'pages': pages_with_url,
-        'extra': {
-          'doc': extra_doc,
-          'document_versions': extra_doc.versions,
-          'last_document_version': extra_last_version,
-          'pages': extra_pages_with_url,
-        }
-      };
-    }
-
-    if (params.extra_id && params.extra_type === 'folder') {
-
-      extranode = await getPanelInfo({
-        store: this.store,
-        node_id: params.extra_id,
-        page: 1
-      });
-
-      return {
-        'doc': doc,
-        'document_versions': doc.versions,
-        'last_document_version': last_version,
-        'pages': pages_with_url,
-        'extra': {
-          'current_node':extranode.current_node,
-          'children':extranode.children,
-          'pagination':extranode.pagination
-        }
-      };
-    }
-
     return {
       'doc': doc,
       'document_versions': doc.versions,
       'last_document_version': last_version,
       'pages': pages_with_url
     };
+  }
+
+  @action
+  loading(transition, originRoute) {
+    let nodes_controller, document_controller, node_id;
+
+    nodes_controller = this.controllerFor('authenticated.nodes');
+    document_controller = this.controllerFor('authenticated.document');
+    node_id = originRoute.paramsFor('authenticated.nodes').node_id;
+
+    // In commander will show rotating spinner
+    // when user clicked on breadcrumb item
+    nodes_controller.set(
+      'currently_loading_state',
+      {
+        'node_id': node_id,
+        'hint': 'left'
+      }
+    );
+    // In document viewer will show rotating spinner when
+    // user clicked on breadcrumb item
+    document_controller.set(
+      'currently_loading_state',
+      {
+        'node_id': node_id,
+        'hint': 'left'
+      }
+    );
+
+    transition.promise.finally(function() {
+        nodes_controller.set(
+          'currently_loading_state',
+          {
+            'node_id': undefined,
+            'hint': undefined
+          }
+        );
+        document_controller.set(
+          'currently_loading_state',
+          {
+            'node_id': undefined,
+            'hint': undefined
+          }
+        );
+    });
+
+    return false; // allows the loading template to be shown
+  }
+
+  setupController(controller, model) {
+    super.setupController(controller, model);
+
+    let extra_id, extra_type;
+
+    extra_id = localStorage.getItem('extra_id');
+    extra_type = localStorage.getItem('extra_type');
+
+    if (extra_id) {
+      console.log(`Loading extra id ${extra_id}`);
+      console.log(`extra_type=${extra_type}`);
+    }
+
+    //this.controllerFor('document').set('extra', true);
   }
 }

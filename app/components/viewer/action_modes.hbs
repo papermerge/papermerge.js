@@ -4,16 +4,24 @@
     @dualPanelMode={{@dualPanelMode}}
     @hint={{@hint}}
     @onSwapPanels={{@onSwapPanels}}
+    @swap_panels="{{@swap_panels}}"
     @onDuplicatePanel={{@onDuplicatePanel}} />
 
   <div class="panel-mode">
-    <button type="button" class="btn btn-light mx-1"
-      {{on "click" (fn @onPanelToggle @hint)}}>
-      {{#if @dualPanelMode}}
-        <i class="bi-x"></i>
-      {{else}}
-        <i class="bi-layout-split"></i>
+    {{#if @dualPanelMode}}
+      {{#if (is_equal @hint 'right')}}
+        <button type="button" class="btn btn-light mx-1"
+          {{tooltip title='Close panel' placement='bottom'}}
+          {{on "click" (perform @onPanelToggle @hint) }}>
+            <i class="bi-x"></i>
+        </button>
       {{/if}}
-    </button>
+    {{else}}
+      <button type="button" class="btn btn-light mx-1"
+        {{tooltip title='Split panel' placement='bottom'}}
+        {{on "click" (perform @onPanelToggle @hint) }}>
+        <i class="bi-layout-split"></i>
+      </button>
+    {{/if}}
   </div>
 </div>

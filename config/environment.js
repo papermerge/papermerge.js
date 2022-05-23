@@ -19,9 +19,12 @@ module.exports = function (environment) {
 
     APP: {
       NAMESPACE: 'api',
-      WS_NAMESPACE: 'ws'  // websockets namespace
+      WS_NAMESPACE: 'ws',  // websockets namespace
       // Here you can pass flags/options to your application instance
       // when it is created
+      // value for fetch(url, {cache: FETCH_CACHE})
+      // see https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+      FETCH_CACHE: 'no-store'
     },
   };
 
@@ -54,6 +57,9 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    // value for fetch(url, {cache: FETCH_CACHE})
+    // see https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+    ENV.APP.FETCH_CACHE = 'force-cache';
   }
 
   return ENV;

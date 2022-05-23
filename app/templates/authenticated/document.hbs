@@ -1,4 +1,4 @@
-<div class="panels d-flex row">
+<div class="panels d-flex row {{if this.swap_panels 'flex-row-reverse'}}">
   <Viewer
     @doc={{@model.doc}}
     @pages={{@model.pages}}
@@ -11,26 +11,33 @@
     @onSwapPanels={{this.onSwapPanels}}
     @onDuplicatePanel={{this.onDuplicatePanel}} />
 
-  {{#if @model.extra}}
-    {{#if @model.extra.doc}}
+  {{#if this.extra}}
+    {{#if this.extra.doc}}
       <Viewer
-        @doc={{@model.extra.doc}}
-        @pages={{@model.extra.pages}}
-        @extranode={{@model.extra.current_node}}
-        @extradoc={{@model.doc}}
+        @doc={{this.extra.doc}}
+        @pages={{this.extra.pages}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
+        @onNodeClicked={{this.onNodeClicked}}
+        @loadNodeData={{this.loadNodeData}}
+        @currently_loading_state={{this.currently_loading_state}}
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />
+    {{else if this.onPanelToggle.isRunning }}
+      <Commander::Placeholder />
     {{else}}
       <Commander
-        @node={{@model.extra.current_node}}
-        @children={{@model.extra.children}}
-        @pagination={{@model.extra.pagination}}
-        @extradoc={{@model.doc}}
+        @node={{this.extra.current_node}}
+        @children={{this.extra.children}}
+        @pagination={{this.extra.pagination}}
+        @onNodeClicked={{this.onNodeClicked}}
+        @loadNodeData={{this.loadNodeData}}
+        @node_clicked_state={{this.node_clicked_state}}
+        @currently_loading_state={{this.currently_loading_state}}
         @onPanelToggle={{this.onPanelToggle}}
         @dualPanelMode={{this.dualpanel_mode}}
+        @swap_panels={{this.swap_panels}}
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
         @onDuplicatePanel={{this.onDuplicatePanel}} />

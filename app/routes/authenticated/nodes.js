@@ -1,8 +1,6 @@
 import BaseRoute from 'papermerge/routes/base';
 import { service } from '@ember/service';
-import { tracked } from 'tracked-built-ins';
 import { action } from '@ember/object';
-import { TrackedObject } from 'tracked-built-ins';
 import { getPanelInfo } from './utils';
 
 
@@ -18,9 +16,6 @@ export default class NodesRoute extends BaseRoute {
 
   async model(params) {
     let page_adapter,
-      extra_doc,
-      extra_last_version,
-      extra_pages_with_url,
       context = {};
 
     page_adapter = this.store.adapterFor('page');
@@ -31,27 +26,6 @@ export default class NodesRoute extends BaseRoute {
       node_id: params.node_id,
       page: params.page
     });
-
-    if (params.extra_id && params.extra_type === 'doc') {
-      extra_doc  = await this.store.findRecord(
-        'document',
-        params.extra_id,
-        { reload: true }
-      );
-      extra_last_version = extra_doc.last_version
-      extra_pages_with_url = await page_adapter.loadImages(
-        extra_last_version.pages,
-        'image/svg+xml'
-      );
-      context['extra'] = {
-        'doc': extra_doc,
-        'document_versions': extra_doc.versions,
-        'last_document_version': extra_last_version,
-        'pages': extra_pages_with_url,
-      }
-
-      return context;
-    }
 
     return context;
   }
@@ -101,5 +75,21 @@ export default class NodesRoute extends BaseRoute {
     });
 
     return false; // allows the loading template to be shown
+  }
+
+  setupController(controller, model) {
+    super.setupController(controller, model);
+
+    let extra_id, extra_type;
+
+    extra_id = localStorage.getItem('extra_id');
+    extra_type = localStorage.getItem('extra_type');
+
+    if (extra_id) {
+      console.log(`Loading extra id ${extra_id}`);
+      console.log(`extra_type=${extra_type}`);
+    }
+
+    //this.controllerFor('nodes').set('extra', true);
   }
 }
