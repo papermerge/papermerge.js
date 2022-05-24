@@ -47,7 +47,7 @@ export default class DualPanelBaseController extends Controller {
   }
 
   @task({drop: true})
-  *loadNodeData({store, node_id, page}) {
+  *loadNodeData({store, node_id, page, cache}) {
     /*
       Returns current_node model its
       children nodes models and associated pagination info.
@@ -60,7 +60,7 @@ export default class DualPanelBaseController extends Controller {
     adapter = store.adapterFor('node');
 
     result = yield Promise.all([
-      adapter.getChildren({node_id, page}),
+      adapter.getChildren({node_id, page, cache}),
       adapter.getFolder(node_id)
     ]);
 
@@ -104,9 +104,10 @@ export default class DualPanelBaseController extends Controller {
 
         this.node_clicked_state['node_id'] = undefined;
         this.node_clicked_state['hint'] = undefined;
+        localStorage.setItem('extra_id', node_id);
+        localStorage.setItem('extra_type', 'folder');
       } else {
         // open viewer in secondary panel
-        console.log(`Open viewer in secondary panel. node_id=${node_id}`);
         doc = yield this.store.findRecord(
           'document',
           node_id,
@@ -126,6 +127,12 @@ export default class DualPanelBaseController extends Controller {
           pages: pages_with_url
         });
 
+        // save extra id/extra type for 'other' controller:
+        // if we are now in 'nodes controller',then 'other' is 'documents controller'
+        // if we are now in 'documents controller, then 'other' is 'nodes controller'
+        localStorage.setItem('extra_id', doc.id);
+        localStorage.setItem('extra_type', 'doc');
+
       }
 
     } else {
@@ -138,7 +145,7 @@ export default class DualPanelBaseController extends Controller {
     }
   }
 
-  @task *onPanelToggle(hint) {
+  @task *onPanelToggle(operation, extra_id, cache) {
     /*
       hint is either "left" or "right" depending where
       the onPanelToggle originated from.
@@ -146,28 +153,33 @@ export default class DualPanelBaseController extends Controller {
     let home_folder,
       children, node, pagination;
 
-    if (this.extra_id) {
+    if (operation == 'close') {
       // closing secondary panel
       this.extra = null;
       this.extra_id = null;
       this.extra_type = null;
       this.swap_panels = false;
-      localStorage.setItem('extra_id', undefined);
-      localStorage.setItem('extra_type', undefined);
-    } else {
+      localStorage.removeItem('extra_id');
+      localStorage.removeItem('extra_type');
+    } else if (operation == 'open'){
       // opening secondary panel
       this.extra = new TrackedObject({});
 
-      home_folder = yield this.currentUser.user.home_folder;
-      this.extra_id = home_folder.get('id');
-      this.extra_type = 'folder';
+      if (extra_id) {
+        this.extra_id = extra_id;
+      } else {
+        home_folder = yield this.currentUser.user.home_folder;
+        this.extra_id = home_folder.get('id');
+      }
+      this.extra_type = 'folder';  
 
       this.loadNodeData.hint = undefined;
       this.loadNodeData.node_id = this.extra_id;
       [{children, pagination}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
-        page: 1
+        page: 1,
+        cache: cache
       });
 
       this.extra = new TrackedObject({

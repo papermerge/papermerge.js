@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
+import { setupDualController } from './utils';
 
 
 export default class DocumentRoute extends Route {
@@ -83,16 +84,10 @@ export default class DocumentRoute extends Route {
   setupController(controller, model) {
     super.setupController(controller, model);
 
-    let extra_id, extra_type;
-
-    extra_id = localStorage.getItem('extra_id');
-    extra_type = localStorage.getItem('extra_type');
-
-    if (extra_id) {
-      console.log(`Loading extra id ${extra_id}`);
-      console.log(`extra_type=${extra_type}`);
-    }
-
-    //this.controllerFor('document').set('extra', true);
+    setupDualController({
+      controller: controller,
+      store: this.store,
+      requests: this.requests
+    });
   }
 }

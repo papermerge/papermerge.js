@@ -18,7 +18,7 @@ export default class Requests extends Service {
   @service session;
   @service store;
 
-  async getImage(page_id, accept='image/jpeg') {
+  async getImage(page_id, accept='image/jpeg', cache=undefined) {
     /*
     * Requests binary image/jpeg from backend of the
     * page model based on `page_id`
@@ -36,23 +36,23 @@ export default class Requests extends Service {
     return fetch(url, {
       method: 'GET',
       headers: headers_copy,
-      cache: ENV.APP.FETCH_CACHE
+      cache: cache || ENV.APP.FETCH_CACHE
     });
   }
 
-  async loadImages(pages, accept='image/jpeg') {
+  async loadImages(pages, accept='image/jpeg', cache=undefined) {
     let all_proms,
       pages_with_url;
 
     all_proms = pages.map(
-      (page) => this.loadImage(page, accept)
+      (page) => this.loadImage(page, accept, cache)
     );
 
     pages_with_url = await Promise.all(all_proms);
     return pages_with_url;
   }
 
-  @task *loadImage(page, accept='image/jpeg') {
+  @task *loadImage(page, accept='image/jpeg', cache=undefined) {
     /*
     * Requests page's image from backend
 
@@ -66,7 +66,7 @@ export default class Requests extends Service {
       image_blob,
       image_object_url;
 
-    response = yield this.getImage(page.id, accept);
+    response = yield this.getImage(page.id, accept, cache);
 
     if (response.headers.get('content-type') == 'image/svg+xml') {
       page.svg_image = yield response.text();

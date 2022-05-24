@@ -7,7 +7,7 @@ export default class NodeAdapter extends ApplicationAdapter {
 
   @service store;
 
-  async getChildren({node_id, page}) {
+  async getChildren({node_id, page, cache}) {
     let url,
       promise;
 
@@ -20,7 +20,7 @@ export default class NodeAdapter extends ApplicationAdapter {
     promise = fetch(url, {
       method: 'GET',
       headers: this.headers,
-      cache: ENV.APP.FETCH_CACHE
+      cache: cache || ENV.APP.FETCH_CACHE
     }).then(
       response => response.json()
     ).then((nodes) => {

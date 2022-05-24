@@ -12,14 +12,14 @@
       {{#if (is_equal @hint 'right')}}
         <button type="button" class="btn btn-light mx-1"
           {{tooltip title='Close panel' placement='bottom'}}
-          {{on "click" (perform @onPanelToggle @hint) }}>
+          {{on "click" (perform @onPanelToggle "close" undefined undefined) }}>
             <i class="bi-x"></i>
         </button>
       {{/if}}
     {{else}}
       <button type="button" class="btn btn-light mx-1"
         {{tooltip title='Split panel' placement='bottom'}}
-        {{on "click" (perform @onPanelToggle @hint) }}>
+        {{on "click" (perform @onPanelToggle "open" undefined undefined) }}>
         <i class="bi-layout-split"></i>
       </button>
     {{/if}}

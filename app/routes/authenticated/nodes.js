@@ -1,12 +1,14 @@
 import BaseRoute from 'papermerge/routes/base';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { getPanelInfo } from './utils';
+import { getPanelInfo, setupDualController } from './utils';
+
 
 
 export default class NodesRoute extends BaseRoute {
   @service store;
   @service currentUser;
+  @service requests;
 
   queryParams = {
     page: {
@@ -80,16 +82,10 @@ export default class NodesRoute extends BaseRoute {
   setupController(controller, model) {
     super.setupController(controller, model);
 
-    let extra_id, extra_type;
-
-    extra_id = localStorage.getItem('extra_id');
-    extra_type = localStorage.getItem('extra_type');
-
-    if (extra_id) {
-      console.log(`Loading extra id ${extra_id}`);
-      console.log(`extra_type=${extra_type}`);
-    }
-
-    //this.controllerFor('nodes').set('extra', true);
+    setupDualController({
+      controller: controller,
+      store: this.store,
+      requests: this.requests
+    });
   }
 }
