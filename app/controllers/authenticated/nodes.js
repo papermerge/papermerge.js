@@ -33,7 +33,7 @@ export default class NodesController extends DualPanelBaseController {
         [{children, meta}, node] = yield this.loadNodeData.perform({
           store: this.store,
           node_id: this.extra_id,
-          page: this.extra_page
+          page: this.extra_page,
         });
 
         this.extra = new TrackedObject({

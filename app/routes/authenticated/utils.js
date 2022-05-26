@@ -80,14 +80,14 @@ function setupDualController({controller, store, requests}) {
   if (extra_id) { // There should be an extra panel?
     if (extra_type == 'folder') { // is that extra panel - commander panel?
       // if extra panel is already opened, leave it the way it is;
-      ex = controller.get('extra');
-      if (ex && ex.currentNode && ex.currentNode.id == extra_id) {
+      if (controller.get('extra_id')) {
         // do nothing;
         return;
       }
       // extra panel is supposed to be open, but it is not;
       // just open it via `onPanelToggle`
-      controller.onPanelToggle.perform('open', extra_id, extra_page, 'force-cache');
+      console.log(`onPanelToggle: open extra_id=${extra_id}, extra_page=${extra_page}`)
+      controller.onPanelToggle.perform('open', extra_id, extra_page);
     } else if (extra_type == 'doc'){
       // extra panel is viewer
       // if extra panel is already opened, leave it the way it is;

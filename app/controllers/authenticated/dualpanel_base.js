@@ -94,7 +94,7 @@ export default class DualPanelBaseController extends Controller {
   *onNodeClicked(node, hint, node_type) {
 
     let children,
-      pagination,
+      meta,
       current_node,
       node_id,
       doc,
@@ -113,7 +113,7 @@ export default class DualPanelBaseController extends Controller {
         this.extra_id = node_id;
         this.loadNodeData.hint = hint;
         this.loadNodeData.node_id = this.extra_id;
-        [{children, pagination}, current_node] = yield this.loadNodeData.perform({
+        [{children, meta}, current_node] = yield this.loadNodeData.perform({
           store: this.store,
           node_id: this.extra_id,
           page: 1
@@ -122,7 +122,7 @@ export default class DualPanelBaseController extends Controller {
         this.extra = new TrackedObject({
           current_node: current_node,
           children: children,
-          pagination: pagination
+          pages: setup_pages({meta})
         });
 
         this.node_clicked_state['node_id'] = undefined;
@@ -210,6 +210,7 @@ export default class DualPanelBaseController extends Controller {
 
       this.loadNodeData.hint = undefined;
       this.loadNodeData.node_id = this.extra_id;
+
       [{children, meta}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
