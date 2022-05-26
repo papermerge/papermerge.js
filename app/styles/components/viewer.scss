@@ -65,14 +65,21 @@
 
 .page-placeholder {
   background-color: white;
-  height: 40rem;
+  height: 60rem;
   margin: 1rem;
+
+  .content {
+    height: 60rem;
+  }
 }
 
 .thumbnail-placeholder {
   background-color: white;
   height: 8rem;
   margin: 1rem;
+  .content {
+    height: 8rem;
+  }
 }
 
 svg.ocr_status {
