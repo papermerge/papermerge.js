@@ -1,4 +1,3 @@
-import { action } from '@ember/object';
 import DualPanelBaseController from "./dualpanel_base";
 import { service } from '@ember/service';
 import { TrackedObject } from 'tracked-built-ins';
@@ -10,12 +9,10 @@ export default class NodesController extends DualPanelBaseController {
   @service router;
   @service store;
 
-
   @task({ drop: true })
   *onDuplicatePanel(hint) {
     let node_id = this.router.currentRoute.params['node_id'],
       query_params,
-      home_folder, that = this,
       children, node, pagination;
 
     if (hint === 'left') {
@@ -39,6 +36,7 @@ export default class NodesController extends DualPanelBaseController {
         });
       }
     } else { // hint == 'right'
+
       if (this.extra_type == 'folder') {
         this.router.transitionTo(
           'authenticated.nodes',
@@ -47,8 +45,7 @@ export default class NodesController extends DualPanelBaseController {
       } else {
         this.router.transitionTo(
           'authenticated.document',
-          this.extra_id,
-          query_params
+          this.extra_id
         );
       } // this.extra_type
     }

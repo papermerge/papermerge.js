@@ -8,7 +8,7 @@
               src="/assets/images/logo_bbg.svg"
               alt="Papermerge DMS"
               class="brand-image mx-2" />
-            <h4 class="brand-text">Papermerge</h4>
+            <h4 class="brand-text me-2">Papermerge</h4>
       </LinkTo>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
@@ -16,8 +16,7 @@
           <LinkTo
             @route="authenticated.nodes"
             @model="{{@home_folder_id}}"
-            @query={{hash extra_id=null extra_type=null}}
-            class="nav-link text-white" aria-current="page">
+            class="nav-link text-white">
             <i class="fa fa-home me-2"></i>Home
           </LinkTo>
         </li>
@@ -46,7 +45,6 @@
           <LinkTo
             @route="authenticated.nodes"
             @model="{{@inbox_folder_id}}"
-            @query={{hash extra_id=null extra_type=null}}
             class="nav-link text-white" aria-current="page">
             <i class="bi-inbox me-2"></i>Inbox ({{@inbox_count}})
           </LinkTo>

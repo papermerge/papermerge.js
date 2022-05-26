@@ -84,7 +84,7 @@ function setupDualController({controller, store, requests}) {
     } else if (extra_type == 'doc'){
       // extra panel is viewer
       // if extra panel is already opened, leave it the way it is;
-      console.log('Step 1');
+
       ex = controller.get('extra');
 
       if (ex && ex.doc && ex.doc.id == extra_id) {
@@ -97,7 +97,16 @@ function setupDualController({controller, store, requests}) {
         extra_id
       ).then((doc) => {
 
+        if (!doc) {
+          console.log('setupDualController: doc is undefined.');
+          return;
+        }
         last_version = doc.last_version;
+
+        if (!last_version) {
+          console.log('setupDualController: last_version is undefined');
+          return;
+        }
   
         pages_with_url = last_version.pages.map(
           (page) => requests.loadImage.perform(
@@ -115,6 +124,8 @@ function setupDualController({controller, store, requests}) {
         });
 
         controller.set('extra', extra);
+        controller.set('extra_id', doc.id);
+        controller.set('extra_type', 'doc');
       });
     }
   } else {

@@ -12,8 +12,29 @@ export default class DualPanelBaseController extends Controller {
   @service store;
   @service requests;
 
-  @tracked extra_id = null;
-  @tracked extra_type = null; // can be either 'doc' or 'node'
+  /*
+    Hold's ID of the node (which can be either document or folder) displayed
+    in extra panel.
+    Extra panel is the panel which initially opens on the right side,
+    that's why it is called 'right' panel as well.
+    Yet another convinient way to think of extra panel (right panel)
+    is as 'seconday panel'.
+    Throughout the code - 'right', 'extra' and 'secondary' panel mean
+    same thing.
+    'Left' panel is also called 'primary panel'.
+  */
+  @tracked extra_id = null; // Node ID displayed in right/secondary panel
+  @tracked extra_type = null; // = 'doc' | 'folder'
+  /*
+  If extra_type == 'folder':
+    extra = {current_node, children, pagination}
+
+  if extra_type == 'doc':
+    extra = { doc, document_versions, last_document_version, pages }
+
+  if extra_id and extra_type are null:
+    extra = null
+  */
   @tracked extra;
   /*
     Track loading information of a node clicked in secondary
@@ -40,6 +61,7 @@ export default class DualPanelBaseController extends Controller {
     'node_id': undefined
   });
 
+  /* When 'true' swap panel i.e. present panels in reverse order */
   @tracked swap_panels = false;
 
   get dualpanel_mode() {
@@ -107,6 +129,7 @@ export default class DualPanelBaseController extends Controller {
         localStorage.setItem('extra_id', node_id);
         localStorage.setItem('extra_type', 'folder');
       } else {
+
         // open viewer in secondary panel
         doc = yield this.store.findRecord(
           'document',
@@ -133,6 +156,8 @@ export default class DualPanelBaseController extends Controller {
         localStorage.setItem('extra_id', doc.id);
         localStorage.setItem('extra_type', 'doc');
 
+        this.extra_type = 'doc';
+        this.extra_id = doc.id;
       }
 
     } else {

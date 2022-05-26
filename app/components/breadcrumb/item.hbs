@@ -1,21 +1,27 @@
 <li class="breadcrumb-item">
+  {{#if (is_equal @node.title ".inbox")}}
+    {{#if this.show_spinner}}
+      <Spinner @inProgress={{true}} class="text-primary" />
+    {{else}}
+      <Spinner @inProgress={{false}} class="text-primary" />
+    {{/if}}
+      <Breadcrumb::Inbox />
+  {{else if (is_equal @node.title ".home")}}
+    {{#if this.show_spinner}}
+      <Spinner @inProgress={{true}} class="text-primary" />
+    {{else}}
+      <Spinner @inProgress={{false}} class="text-primary" />
+    {{/if}}
+    <Breadcrumb::Home />
+  {{/if}}
+
   <button
     class="btn btn-link"
     {{on "click" (perform @onNodeClicked @node @hint 'folder')}}>
       {{#if (is_equal @node.title ".inbox")}}
-        <Breadcrumb::Inbox />
-        {{#if this.show_spinner}}
-          <Spinner @inProgress={{true}} />
-        {{else}}
-          <Spinner @inProgress={{false}} />
-        {{/if}}
+        Inbox
       {{else if (is_equal @node.title ".home")}}
-        <Breadcrumb::Home />
-        {{#if this.show_spinner}}
-          <Spinner @inProgress={{true}} />
-        {{else}}
-          <Spinner @inProgress={{false}} />
-        {{/if}}
+        Home
       {{else}}
         {{@node.title}}
       {{/if}}

@@ -1,0 +1,11 @@
+.breadcrumb {
+    .breadcrumb-item {
+        .btn {
+            text-decoration: none;
+            padding: 0;
+        }
+        .btn:hover {
+            text-decoration: underline;
+        }
+    }
+}

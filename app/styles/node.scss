@@ -49,8 +49,11 @@
        //border: 1px solid $result_list_hover_border_color;
   }
   .title {
-    a {
-        text-decoration: none;
+    button {
+      text-decoration: none;
+    }
+    button:hover {
+      text-decoration: underline;
     }
     text-align: center;
     opacity: 1;
