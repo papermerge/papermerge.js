@@ -1,5 +1,5 @@
 {{#if this.more_than_one_page}}
-  <nav class="m-2">
+  <nav class="m-2" ...attributes>
     <ul class="pagination">
       {{#each @pages as |page|}}
         <li class="page-item {{if page.active 'active'}}">

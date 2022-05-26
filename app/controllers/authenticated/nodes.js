@@ -1,6 +1,6 @@
 import DualPanelBaseController from "./dualpanel_base";
 import { service } from '@ember/service';
-import { TrackedObject } from 'tracked-built-ins';
+import { tracked, TrackedObject, TrackedArray } from 'tracked-built-ins';
 import { task } from 'ember-concurrency';
 
 
@@ -8,11 +8,17 @@ export default class NodesController extends DualPanelBaseController {
 
   @service router;
   @service store;
+  
+  // pages attribute is updated in ``setupController`` of the ``route``
+  @tracked pages = new TrackedArray([]);
+
+
+  queryParams = ['page']
+  page = 1;
 
   @task({ drop: true })
   *onDuplicatePanel(hint) {
     let node_id = this.router.currentRoute.params['node_id'],
-      query_params,
       children, node, pagination;
 
     if (hint === 'left') {

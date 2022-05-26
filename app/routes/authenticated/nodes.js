@@ -1,7 +1,7 @@
 import BaseRoute from 'papermerge/routes/base';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
-import { getPanelInfo, setupDualController } from './utils';
+import { getPanelInfo, setupDualController, setup_pages } from './utils';
 
 
 
@@ -87,5 +87,9 @@ export default class NodesRoute extends BaseRoute {
       store: this.store,
       requests: this.requests
     });
+
+    controller.set(
+      'pages', setup_pages(model)
+    );
   }
 }

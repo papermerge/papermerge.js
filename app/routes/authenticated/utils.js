@@ -11,7 +11,7 @@ async function getPanelInfo({store, node_id, page}) {
   */
   let node;
   const adapter = store.adapterFor('node');
-  const {children, pagination} = await adapter.getChildren({node_id, page});
+  const {children, meta} = await adapter.getChildren({node_id, page});
 
 
   node = await adapter.getFolder(node_id);
@@ -19,7 +19,7 @@ async function getPanelInfo({store, node_id, page}) {
   return {
     current_node: node,
     children: children,
-    pagination: pagination
+    meta: meta
   };
 }
 

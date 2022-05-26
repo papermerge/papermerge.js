@@ -26,18 +26,7 @@ export default class NodeAdapter extends ApplicationAdapter {
     ).then((nodes) => {
         let folders,
           docs,
-          pagination,
           node_ids;
-
-        pagination = {
-          next: nodes.links.next, // url to next page
-          prev: nodes.links.prev, // url to prev page
-          first: nodes.links.first, // url to first page
-          last: nodes.links.last, // url to last page
-          page: nodes.meta.pagination.page, // current page number
-          pages: nodes.meta.pagination.pages, // total number of pages
-          count: nodes.meta.pagination.count, // total number of items
-        }
 
         node_ids = nodes.data.map(node => {
           let normalized_node;
@@ -62,7 +51,7 @@ export default class NodeAdapter extends ApplicationAdapter {
 
         return {
           children: folders.concat(docs),
-          pagination: pagination
+          meta: nodes.meta
         };
     });
 
