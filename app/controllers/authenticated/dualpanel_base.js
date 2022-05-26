@@ -171,7 +171,7 @@ export default class DualPanelBaseController extends Controller {
     }
   }
 
-  @task *onPanelToggle(operation, extra_id, cache) {
+  @task *onPanelToggle(operation, extra_id, page, cache) {
     /*
       hint is either "left" or "right" depending where
       the onPanelToggle originated from.
@@ -183,10 +183,14 @@ export default class DualPanelBaseController extends Controller {
       // closing secondary panel
       this.extra = null;
       this.extra_id = null;
+      this.extra_page = 1;
       this.extra_type = null;
       this.swap_panels = false;
+
       localStorage.removeItem('extra_id');
       localStorage.removeItem('extra_type');
+      localStorage.removeItem('extra_page');
+
     } else if (operation == 'open'){
       // opening secondary panel
       this.extra = new TrackedObject({});
@@ -197,6 +201,11 @@ export default class DualPanelBaseController extends Controller {
         home_folder = yield this.currentUser.user.home_folder;
         this.extra_id = home_folder.get('id');
       }
+
+      if (page) {
+        this.extra_page = page;
+      }
+
       this.extra_type = 'folder';
 
       this.loadNodeData.hint = undefined;
@@ -204,7 +213,7 @@ export default class DualPanelBaseController extends Controller {
       [{children, meta}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
-        page: 1,
+        page: this.extra_page,
         cache: cache
       });
 

@@ -65,10 +65,17 @@ function setupDualController({controller, store, requests}) {
 
     Secondary panel is opened by setting `extra` variable on the controller.
   */
-  let extra_id, extra_type, last_version, pages_with_url, extra, ex;
+  let extra_id,
+    extra_type,
+    extra_page,
+    last_version,
+    pages_with_url,
+    extra,
+    ex;
 
   extra_id = localStorage.getItem('extra_id');
   extra_type = localStorage.getItem('extra_type');
+  extra_page = localStorage.getItem('extra_page') || 1;
 
   if (extra_id) { // There should be an extra panel?
     if (extra_type == 'folder') { // is that extra panel - commander panel?
@@ -80,7 +87,7 @@ function setupDualController({controller, store, requests}) {
       }
       // extra panel is supposed to be open, but it is not;
       // just open it via `onPanelToggle`
-      controller.onPanelToggle.perform('open', extra_id, 'force-cache');
+      controller.onPanelToggle.perform('open', extra_id, extra_page, 'force-cache');
     } else if (extra_type == 'doc'){
       // extra panel is viewer
       // if extra panel is already opened, leave it the way it is;
