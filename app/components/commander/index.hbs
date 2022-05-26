@@ -120,6 +120,11 @@
     </div>
   {{/if}}
 
-<Pagination @pages={{@pages}} @route="authenticated.nodes" class="my-4" />
+<Pagination
+  @pages={{@pages}}
+  @route="authenticated.nodes"
+  @hint={{@hint}}
+  @onPageClick={{@onPaginationPageClick}}
+  class="my-4" />
 
 </div>

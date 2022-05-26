@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { tracked } from 'tracked-built-ins';
 import { TrackedObject } from 'tracked-built-ins';
+import { setup_pages } from '../../routes/authenticated/utils';
 
 
 export default class DualPanelBaseController extends Controller {
@@ -176,7 +177,7 @@ export default class DualPanelBaseController extends Controller {
       the onPanelToggle originated from.
     */
     let home_folder,
-      children, node, pagination;
+      children, node, meta;
 
     if (operation == 'close') {
       // closing secondary panel
@@ -196,11 +197,11 @@ export default class DualPanelBaseController extends Controller {
         home_folder = yield this.currentUser.user.home_folder;
         this.extra_id = home_folder.get('id');
       }
-      this.extra_type = 'folder';  
+      this.extra_type = 'folder';
 
       this.loadNodeData.hint = undefined;
       this.loadNodeData.node_id = this.extra_id;
-      [{children, pagination}, node] = yield this.loadNodeData.perform({
+      [{children, meta}, node] = yield this.loadNodeData.perform({
         store: this.store,
         node_id: this.extra_id,
         page: 1,
@@ -210,7 +211,7 @@ export default class DualPanelBaseController extends Controller {
       this.extra = new TrackedObject({
         current_node: node,
         children: children,
-        pagination: pagination
+        pages: setup_pages({meta})
       });
 
       // save extra id/extra type for 'other' controller:

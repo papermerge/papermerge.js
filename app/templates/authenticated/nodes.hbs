@@ -3,6 +3,7 @@
     @node={{@model.current_node}}
     @children={{@model.children}}
     @pages={{this.pages}}
+    @onPaginationPageClick={{this.onPaginationPageClick}}
     {{! extranode/extradoc are passed to breadcrumb and local dual links }}
     @onPanelToggle={{this.onPanelToggle}}
     @onNodeClicked={{this.onNodeClicked}}
@@ -34,7 +35,8 @@
       <Commander
         @node={{this.extra.current_node}}
         @children={{this.extra.children}}
-        @pagination={{this.extra.pagination}}
+        @pages={{this.extra.pages}}
+        @onPaginationPageClick={{this.onPaginationPageClick}}
         @onNodeClicked={{this.onNodeClicked}}
         @loadNodeData={{this.loadNodeData}}
         @node_clicked_state={{this.node_clicked_state}}

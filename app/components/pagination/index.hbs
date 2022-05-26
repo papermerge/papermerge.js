@@ -3,12 +3,21 @@
     <ul class="pagination">
       {{#each @pages as |page|}}
         <li class="page-item {{if page.active 'active'}}">
-          <LinkTo
-            @route={{@route}}
-            @query={{hash page=page.number}}
-            class="page-link">
-              {{page.number}}
+          {{#if @onPageClick}}
+            <LinkTo
+              @route={{@route}}
+              {{on "click" (perform @onPageClick page.number @hint)}}
+              class="page-link">
+                {{page.number}}
           </LinkTo>
+          {{else}}
+            <LinkTo
+              @route={{@route}}
+              @query={{hash page=page.number}}
+              class="page-link">
+                {{page.number}}
+            </LinkTo>
+          {{/if}}
         </li>
       {{/each}}
     </ul>

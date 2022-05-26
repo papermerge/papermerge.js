@@ -9,12 +9,25 @@ export default class NodesController extends DualPanelBaseController {
   @service router;
   @service store;
   
-  // pages attribute is updated in ``setupController`` of the ``route``
+  // pages attribute is updated in `setupController` of the `route`
   @tracked pages = new TrackedArray([]);
-
+  // pagination/pages for extra panel
 
   queryParams = ['page']
-  page = 1;
+  @tracked page = 1;
+  extra_page = 1;
+
+  @task({drop: true})
+  *onPaginationPageClick(page_number, hint) {
+    if (hint === 'right') {
+      if (this.extra_id) {
+        console.log(`Pagination page clicked on right panel, page.number=${page_number}`);
+      }
+    } else {
+      console.log(`Pagination page clicked on left panel, page=${page_number}`);
+      this.page = page_number;
+    }
+  }
 
   @task({ drop: true })
   *onDuplicatePanel(hint) {
@@ -32,7 +45,7 @@ export default class NodesController extends DualPanelBaseController {
         [{children, pagination}, node] = yield this.loadNodeData.perform({
           store: this.store,
           node_id: this.extra_id,
-          page: 1
+          page: this.extra_page
         });
 
         this.extra = new TrackedObject({
