@@ -59,7 +59,8 @@ module.exports = function (environment) {
     // here you can enable a production-specific feature
     // value for fetch(url, {cache: FETCH_CACHE})
     // see https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
-    ENV.APP.FETCH_CACHE = 'force-cache';
+    // ENV.APP.FETCH_CACHE = 'force-cache';  // use cache
+    ENV.APP.FETCH_CACHE = 'no-store';
   }
 
   return ENV;
