@@ -17,6 +17,15 @@ export default class WSBaseService extends Service {
       token = this.session.data.authenticated.token;
     }
 
+    // WebSocket function does not accept header parameters i.e. there
+    // is no direct way of passing HTTP Header.
+    // One way of passing auth token (so that websocket server will
+    // be able to authenticate)
+    // is via second param of WebSocket contructor (so called sub-protocols).
+    // All values passed (as array) in second parameter to WebSocket
+    // constructor end up as value for `Sec-WebSocket-Protocol` header.
+    // In this specific case:
+    // Sec-WebSocket-Protocol: access_token, <token>
     this._socket = new WebSocket(
       `${ws_base_url()}${this.url()}`, ['access_token', token]
     );
@@ -24,7 +33,7 @@ export default class WSBaseService extends Service {
     this._handlers = [];
 
     this._socket.onerror = function(event) {
-      console.error(event);
+      console.info(`Error while connecting to WebSocket event=${event}`);
     }
 
     this._socket.onmessage = function(event) {
