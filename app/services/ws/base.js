@@ -6,14 +6,26 @@ import { service } from '@ember/service';
 export default class WSBaseService extends Service {
 
   @service notify;
+  @service session;
 
   constructor(owner, args) {
     super(owner, args);
 
-    let that = this, message;
+    let that = this, message, token;
 
-    this._socket = new WebSocket(`${ws_base_url()}${this.url()}`);
+    if (this.session.isAuthenticated) {
+      token = this.session.data.authenticated.token;
+    }
+
+    this._socket = new WebSocket(
+      `${ws_base_url()}${this.url()}`, ['access_token', token]
+    );
+
     this._handlers = [];
+
+    this._socket.onerror = function(event) {
+      console.error(event);
+    }
 
     this._socket.onmessage = function(event) {
       that._handlers.forEach((item) => {
