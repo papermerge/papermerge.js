@@ -1,10 +1,13 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
+
 
 class ChangeUserPasswordComponent extends Component {
   @service router;
+  @service requests;
+  @service notify;
 
   @tracked new_password_1;
   @tracked new_password_2;
@@ -28,8 +31,19 @@ class ChangeUserPasswordComponent extends Component {
   onSubmit() {
     let user = this.args.user;
 
-    user.changePassword(this.new_password_1);
-    this.router.transitionTo('authenticated.users');
+    this.requests.changeUserPassword({
+      user_id: user.id,
+      password: this.new_password_1
+    }).then(
+      () => {
+        this.notify.info("Password successfully changed", 4000);
+        this.router.transitionTo('authenticated.users');
+      },
+      (message) => {
+        this.notify.error(message);
+      }
+    );
+
   }
 }
 

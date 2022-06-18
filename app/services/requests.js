@@ -140,6 +140,19 @@ export default class Requests extends Service {
     });
   }
 
+  async changeUserPassword({user_id, password}) {
+    /* Change password of the user
+
+    `user_id` may be different user than currently logged one.
+    After new user is added, this method is used to change his/her
+    password in next step.
+    */
+
+    return this._post(`/users/${user_id}/change-password/`, {
+      password: password
+    });
+  }
+
 
   async downloadDocumentVersion(document_version) {
     /**

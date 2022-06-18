@@ -1,7 +1,11 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
+import { service } from '@ember/service';
 
 
 class UserModel extends Model {
+
+  @service requests;
+
   @attr is_me;
   @attr username;
   @attr email;
@@ -18,9 +22,10 @@ class UserModel extends Model {
   @belongsTo('folder') inbox_folder;
 
   changePassword(new_password) {
-    const adapter = this.store.adapterFor('user');
-
-    return adapter.changePassword(this, new_password);
+    this.requests.changeUserPassword({
+      user_id: this.id,
+      password: new_password
+    });
   }
 
 }
