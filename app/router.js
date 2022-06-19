@@ -27,12 +27,6 @@ Router.map(function () {
       this.route('index', { path: '/' });
     });
 
-    this.route('roles', function () {
-      this.route('add');
-      this.route('edit', { path: '/:role_id/edit' });
-      this.route('index', { path: '/' });
-    });
-
     this.route('users', function () {
       this.route('add');
       this.route('edit', { path: '/:user_id/edit' });
@@ -41,6 +35,8 @@ Router.map(function () {
     });
 
     this.route('groups', function () {
+      this.route('add');
+      this.route('edit', { path: '/:group_id/edit' });
       this.route('index', { path: '/' });
     });
 

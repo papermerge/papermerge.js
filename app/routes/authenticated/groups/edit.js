@@ -3,12 +3,12 @@ import RSVP from 'rsvp';
 import BaseRoute from 'papermerge/routes/base';
 
 
-export default class EditRoleRoute extends BaseRoute {
+export default class EditGroupRoute extends BaseRoute {
   @service store;
 
   async model(params) {
     return RSVP.hash({
-      role: this.store.findRecord('role', params.role_id, {
+      group: this.store.findRecord('group', params.group_id, {
         include: 'permissions',
       }),
       all_permissions: this.store.findAll('permission'),

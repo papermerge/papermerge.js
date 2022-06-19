@@ -17,7 +17,7 @@ class UserModel extends Model {
   @attr date_joined;
   @attr created_at;
   @attr updated_at;
-  @belongsTo('role') role;
+
   @belongsTo('folder') home_folder;
   @belongsTo('folder') inbox_folder;
   @hasMany('group') groups;

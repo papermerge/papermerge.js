@@ -1,0 +1,7 @@
+<Button::New @route="authenticated.groups.add" class="groups-add"/>
+
+<Table @titles={{array 'title' 'action'}}>
+  {{#each @model as |group|}}
+    <Group::TableRow @group={{group}} />
+  {{/each}}
+</Table>

@@ -1,33 +1,13 @@
 <tr>
-{{#if  (is_equal this.edit_mode_id @group.id)}}
-  {{! inline edit }}
-  <td>
-      <Input
-        id="name"
-        @type="text"
-        @value={{@group.name}}
-        class="form-control"
-      />
-  </td>
-  <td>
-    <Button::Cancel
-      @onClick={{this.onCancel}} />
-    <Button::Submit
-        @onClick={{(fn this.onSaveChanges @group)}}
-        @enabled={{true}}
-        @text="Save Changes" />
-  </td>
-{{else}}
   <td>
     {{@group.name}}
   </td>
   <td>
-    <Button::Link
-      @text="Edit"
-      @onClick={{(fn this.onEdit @group)}} />
+    <LinkTo
+      @route="authenticated.groups.edit"
+      @model={{@group.id}}>Edit</LinkTo>
     <Button::Link
       @text="Remove"
       @onClick={{(fn this.onRemove @group)}} />
   </td>
-{{/if}}
 </tr>

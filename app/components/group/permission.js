@@ -5,13 +5,13 @@ class PermissionComponent extends Component {
   get isChecked() {
     /*
     A permission is checked only if given current permission
-    is part of current role model available via `this.args.role`.
+    is part of current parent_group_model model available via `this.args.parent_group_model`.
     */
-    let role_perm_ids;
+    let parent_group_model_perm_ids;
 
-    role_perm_ids = this.args.role.permissions.map((p) => p.id);
+    parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
 
-    return role_perm_ids.includes(this.args.permission.id);
+    return parent_group_model_perm_ids.includes(this.args.permission.id);
   }
 
   set isChecked(value) {
@@ -19,7 +19,7 @@ class PermissionComponent extends Component {
     Just forwards the event to parent component, which will take care of
     adding/removing permission.
     */
-    this.args.onChange(value, this.args.role, this.args.permission);
+    this.args.onChange(value, this.args.parent_group_model, this.args.permission);
   }
 }
 

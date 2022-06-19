@@ -8,8 +8,7 @@ class AddUserRoute extends BaseRoute {
 
   async model() {
     return RSVP.hash({
-      groups: this.store.findAll('group'),
-      roles: this.store.findAll('role'),
+      groups: this.store.findAll('group')
     });
   }
 }

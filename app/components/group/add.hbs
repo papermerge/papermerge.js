@@ -3,14 +3,14 @@
   <Input @value={{this.name}}
     class="form-control"
     id="name"
-    placeholder="Role's name" />
+    placeholder="Group's name" />
 </div>
 
 <div class="d-flex flex-wrap permissions">
   {{#each this.permission_groups as |perm_group|}}
-  <Role::PermissionGroup
+  <Group::PermissionGroup
     @perm_group={{perm_group}}
-    @role={{this.role}} />
+    @parent_group_model={{this.group}} />
   {{/each}}
 </div>
 

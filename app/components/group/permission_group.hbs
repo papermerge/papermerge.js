@@ -5,9 +5,9 @@
     {{on "change" this.onChangeGroupPermissions}} />
   <label>{{@perm_group.model}}</label>
   {{#each @perm_group.perms as |perm|}}
-    <Role::Permission
+    <Group::Permission
       @permission={{perm}}
-      @role={{@role}}
+      @parent_group_model={{@parent_group_model}}
       @onChange={{this.onChange}} />
   {{/each}}
 </div>

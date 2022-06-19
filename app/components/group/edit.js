@@ -1,9 +1,10 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { group_perms_by_model } from 'papermerge/utils';
 
-class EditRoleComponent extends Component {
+
+class EditGroupComponent extends Component {
   @service router;
 
   get permission_groups() {
@@ -12,11 +13,11 @@ class EditRoleComponent extends Component {
 
   @action
   onSubmit() {
-    let role = this.args.role;
+    let group = this.args.group;
 
-    role.save();
-    this.router.transitionTo('authenticated.roles');
+    group.save();
+    this.router.transitionTo('authenticated.groups');
   }
 }
 
-export default EditRoleComponent;
+export default EditGroupComponent;

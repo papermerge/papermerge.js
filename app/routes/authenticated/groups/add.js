@@ -2,7 +2,7 @@ import { service } from '@ember/service';
 import BaseRoute from 'papermerge/routes/base';
 
 
-export default class AddRoleRoute extends BaseRoute {
+export default class AddGroupRoute extends BaseRoute {
   @service store;
 
   async model() {

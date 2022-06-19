@@ -1,7 +1,11 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
+
 
 class GroupModel extends Model {
   @attr name;
+  @hasMany('permission') permissions;
+  @attr created_at;
+  @attr updated_at;
 }
 
 export default GroupModel;

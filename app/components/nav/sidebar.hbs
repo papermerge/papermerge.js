@@ -69,11 +69,6 @@
             <i class="fas fa-user-friends me-2"></i>Users
           </LinkTo>
         </li>
-        <li>
-          <LinkTo @route="authenticated.roles" class="nav-link text-white">
-            <i class="fas fa-user me-2"></i>Roles
-          </LinkTo>
-        </li>
       </ul>
   </div>
 {{else}}
@@ -138,14 +133,6 @@
           {{tooltip title="Users"}}
           class="nav-link text-white">
           <i class="fas fa-user-friends me-2"></i>
-        </LinkTo>
-      </li>
-      <li>
-        <LinkTo
-          @route="authenticated.roles"
-          {{tooltip title="Roles"}}
-          class="nav-link text-white">
-          <i class="fas fa-user me-2"></i>
         </LinkTo>
       </li>
     </ul>
