@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { service } from '@ember/service';
 
 
@@ -20,6 +20,7 @@ class UserModel extends Model {
   @belongsTo('role') role;
   @belongsTo('folder') home_folder;
   @belongsTo('folder') inbox_folder;
+  @hasMany('group') groups;
 
   changePassword(new_password) {
     this.requests.changeUserPassword({

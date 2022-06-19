@@ -39,7 +39,9 @@
   <div>
     {{#each @all_groups as |opt|}}
       <span class="m-2">
-        <Input @type="checkbox" />
+        <Input
+          @type="checkbox"
+          {{on 'change' (fn this.onGroupChange opt.id) }} />
         <Label @text={{opt.name}} />
       </span>
     {{/each}}
@@ -48,7 +50,8 @@
 
 <div class="mb-3">
   <Label @for="role" @text="Role" />
-  <select class="form-control">
+  <select class="form-control" {{on 'change' this.onRoleChange}}>
+    <option selected>-</option>
   {{#each @all_roles as |opt|}}
     <option value="{{opt.id}}">{{opt.name}}</option>
   {{/each}}

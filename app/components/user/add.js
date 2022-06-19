@@ -20,6 +20,8 @@ class AddUserComponent extends Component {
   @tracked is_staff;
   @tracked is_active;
 
+  groups = []
+
   constructor(owner, args) {
     super(owner, args);
 
@@ -35,6 +37,35 @@ class AddUserComponent extends Component {
   }
 
   @action
+  onRoleChange(event) {
+    let role_id = event.target.value, that = this;
+
+    this.store.findRecord('role', role_id).then(
+      (role) => {
+        that.role = role;
+      });
+  }
+
+  @action
+  onGroupChange(group_id, event) {
+    let that = this,
+      index;
+
+    if (event.target.checked) {
+      this.store.findRecord('group', group_id).then(
+        (group) => {
+          that.groups.push(group);
+        }
+      );
+    } else {
+      index = that.groups.findIndex((i) => i == group_id);
+      if (index > -1) {
+        that.group.splice(index, 1);
+      }
+    }
+  }
+
+  @action
   onSubmit() {
     if (this.new_user && this.username && this.email) {
       this.new_user.username = this.username;
@@ -44,6 +75,9 @@ class AddUserComponent extends Component {
       this.new_user.is_active = this.is_active;
       this.new_user.is_superuser = this.is_superuser;
       this.new_user.is_staff = this.is_staff;
+      this.new_user.role = this.role;
+      this.new_user.groups = this.groups;
+
       this.new_user.save();
     }
 
