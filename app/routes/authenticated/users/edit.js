@@ -9,7 +9,6 @@ export default class EditUserRoute extends BaseRoute {
   async model(params) {
     return RSVP.hash({
       user: this.store.findRecord('user', params.user_id),
-      roles: this.store.findAll('role'),
       groups: this.store.findAll('group'),
     });
   }

@@ -47,15 +47,6 @@
 </div>
 
 <div class="mb-3">
-  <Label @for="role" @text="Role" />
-  <select class="form-control">
-  {{#each @all_roles as |opt|}}
-    <option value="{{opt.id}}">{{opt.name}}</option>
-  {{/each}}
-</select>
-</div>
-
-<div class="mb-3">
   <Input
     @type="checkbox"
     @checked={{@user.is_superuser}} />
