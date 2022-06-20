@@ -50,25 +50,24 @@
           </LinkTo>
         </li>
         <li>
-          <LinkTo @route="authenticated.automates" class="nav-link text-white">
-            <i class="fas fa-robot me-2"></i>Automates
-          </LinkTo>
-        </li>
-        <li>
           <LinkTo @route="authenticated.tags" class="nav-link text-white">
             <i class="bi-tag me-2"></i>Tags
           </LinkTo>
         </li>
-        <li>
-          <LinkTo @route="authenticated.groups" class="nav-link text-white">
-            <i class="fas fa-users me-2"></i>Groups
-          </LinkTo>
-        </li>
-        <li>
-          <LinkTo @route="authenticated.users" class="nav-link text-white">
-            <i class="fas fa-user-friends me-2"></i>Users
-          </LinkTo>
-        </li>
+        {{#if (has_perm 'view_user') }}
+          <li>
+            <LinkTo @route="authenticated.users" class="nav-link text-white">
+              <i class="fas fa-user-friends me-2"></i>Users
+            </LinkTo>
+          </li>
+        {{/if}}
+        {{#if (has_perm 'view_group') }}
+          <li>
+            <LinkTo @route="authenticated.groups" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i>Groups
+            </LinkTo>
+          </li>
+        {{/if}}
       </ul>
   </div>
 {{else}}
@@ -102,15 +101,6 @@
           <i class="bi-inbox me-2"></i>
         </LinkTo>
       </li>
-
-      <li>
-        <LinkTo
-          @route="authenticated.automates"
-          {{tooltip title="Automates"}}
-          class="nav-link text-white">
-          <i class="fas fa-robot me-2"></i>
-        </LinkTo>
-      </li>
       <li>
         <LinkTo
           @route="authenticated.tags"
@@ -119,22 +109,26 @@
           <i class="bi-tag me-2"></i>
         </LinkTo>
       </li>
-      <li>
-        <LinkTo
-          @route="authenticated.groups"
-          {{tooltip title="Groups"}}
-          class="nav-link text-white">
-          <i class="fas fa-users me-2"></i>
-        </LinkTo>
-      </li>
-      <li>
-        <LinkTo
-          @route="authenticated.users"
-          {{tooltip title="Users"}}
-          class="nav-link text-white">
-          <i class="fas fa-user-friends me-2"></i>
-        </LinkTo>
-      </li>
+      {{#if (has_perm 'view_user') }}
+        <li>
+          <LinkTo
+            @route="authenticated.users"
+            {{tooltip title="Users"}}
+            class="nav-link text-white">
+            <i class="fas fa-user-friends me-2"></i>
+          </LinkTo>
+        </li>
+      {{/if}}
+      {{#if (has_perm 'view_group') }}
+        <li>
+          <LinkTo
+            @route="authenticated.groups"
+            {{tooltip title="Groups"}}
+            class="nav-link text-white">
+            <i class="fas fa-users me-2"></i>
+          </LinkTo>
+        </li>
+      {{/if}}
     </ul>
 </div>
 {{/if}}

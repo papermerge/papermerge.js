@@ -17,6 +17,7 @@ class UserModel extends Model {
   @attr date_joined;
   @attr created_at;
   @attr updated_at;
+  @attr perm_codenames;
 
   @belongsTo('folder') home_folder;
   @belongsTo('folder') inbox_folder;
@@ -27,6 +28,20 @@ class UserModel extends Model {
       user_id: this.id,
       password: new_password
     });
+  }
+
+  has_perm(codename) {
+    let codename_idx;
+
+    if (!this.perm_codenames) {
+      return this.is_superuser;
+    }
+
+    codename_idx = this.perm_codenames.findIndex(
+      (p) => p == codename
+    );
+
+    return codename_idx > -1 || this.is_superuser;
   }
 
 }

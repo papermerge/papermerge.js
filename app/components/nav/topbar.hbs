@@ -18,23 +18,29 @@
               <i class="fa fa-user mx-2"></i><span>{{this.currentUser.user.username}}</span>
             </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-            <li class="dropdown-item">
-              <i class="fa fa-user-secret mx-2"></i>
-              <LinkTo
-                @route='authenticated.tokens'
-                class="text-decoration-none">
-                  API Tokens
-              </LinkTo>
-            </li>
-            <li class="dropdown-item">
-              <i class="fa fa-cogs mx-2"></i>
-              <LinkTo
-                @route='authenticated.preferences'
-                class="text-decoration-none">
-                  Preferences
-              </LinkTo>
-            </li>
-            <li><hr class="dropdown-divider"></li>
+            {{#if (has_perm 'authtoken_view')}}
+              <li class="dropdown-item">
+                <i class="fa fa-user-secret mx-2"></i>
+                <LinkTo
+                  @route='authenticated.tokens'
+                  class="text-decoration-none">
+                    API Tokens
+                </LinkTo>
+              </li>
+            {{/if}}
+            {{#if (has_perm 'userpreferencemodel_view')}}
+              <li class="dropdown-item">
+                <i class="fa fa-cogs mx-2"></i>
+                <LinkTo
+                  @route='authenticated.preferences'
+                  class="text-decoration-none">
+                    Preferences
+                </LinkTo>
+              </li>
+            {{/if}}
+            {{#if this.show_first_divider}}
+              <li><hr class="dropdown-divider"></li>
+            {{/if}}
             <li class="dropdown-item">
               <i class="fa fa-book-open mx-2"></i>
               <a

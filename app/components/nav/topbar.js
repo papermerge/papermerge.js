@@ -21,4 +21,15 @@ export default class TopbarComponent extends Component {
   get rest_api_url() {
     return base_url();
   }
+
+  get show_first_divider() {
+    let show_prefs = this.currentUser.has_perm('userpreferencemodel_view'),
+      show_authtokens = this.currentUser.has_perm('authtoken_view');
+
+    // if either 'preferences' menu item is visible or
+    // 'authtoken' menu item is visible, then it makes sense
+    // to show devider (positioned right after mentioned menu items);
+    // otherwise it does not make sense to show the divider.
+    return show_prefs || show_authtokens;
+  }
 }

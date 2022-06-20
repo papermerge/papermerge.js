@@ -36,6 +36,7 @@ export default class UserAdapter extends ApplicationAdapter {
     record = await this.store.queryRecord(
         'user', { me: true }
     );
+
     window.localStorage.setItem('me', record.id);
 
     return record;
