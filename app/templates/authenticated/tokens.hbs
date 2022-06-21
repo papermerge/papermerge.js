@@ -1,4 +1,6 @@
-<Token::New />
+{{#if (has_perm 'add_authtoken')}}
+  <Token::New />
+{{/if}}
 
 <Table @titles={{array 'Digest' 'Expiry' 'Created' 'Action' }}>
   {{#each @model as |token|}}

@@ -1,4 +1,6 @@
-<Button::New @route="authenticated.users.add" class="users-add"/>
+{{#if (has_perm 'add_user')}}
+  <Button::New @route="authenticated.users.add" class="users-add"/>
+{{/if}}
 
 <Table @titles={{array
     'username'

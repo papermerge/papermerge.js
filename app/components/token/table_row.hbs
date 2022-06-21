@@ -7,8 +7,10 @@
   </td>
   <td>{{@token.created}}</td>
   <td>
-    <button class="btn btn-link" type="button" {{on "click" (fn this.onRemove @token)}}>
-    Remove
-    </button>
+    {{#if (has_perm 'delete_authtoken')}}
+      <button class="btn btn-link" type="button" {{on "click" (fn this.onRemove @token)}}>
+        Remove
+      </button>
+    {{/if}}
   </td>
 </tr>

@@ -1,4 +1,6 @@
-<Button::New @route="authenticated.groups.add" class="groups-add"/>
+{{#if (has_perm 'add_group')}}
+  <Button::New @route="authenticated.groups.add" class="groups-add"/>
+{{/if}}
 
 <Table @titles={{array 'title' 'action'}}>
   {{#each @model as |group|}}

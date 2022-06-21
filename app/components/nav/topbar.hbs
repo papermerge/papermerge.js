@@ -18,7 +18,7 @@
               <i class="fa fa-user mx-2"></i><span>{{this.currentUser.user.username}}</span>
             </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-            {{#if (has_perm 'authtoken_view')}}
+            {{#if (has_perm 'view_authtoken')}}
               <li class="dropdown-item">
                 <i class="fa fa-user-secret mx-2"></i>
                 <LinkTo
@@ -28,7 +28,7 @@
                 </LinkTo>
               </li>
             {{/if}}
-            {{#if (has_perm 'userpreferencemodel_view')}}
+            {{#if (has_perm 'view_userpreferencemodel')}}
               <li class="dropdown-item">
                 <i class="fa fa-cogs mx-2"></i>
                 <LinkTo

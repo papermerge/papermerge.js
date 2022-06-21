@@ -3,11 +3,15 @@
     {{@group.name}}
   </td>
   <td>
-    <LinkTo
-      @route="authenticated.groups.edit"
-      @model={{@group.id}}>Edit</LinkTo>
-    <Button::Link
-      @text="Remove"
-      @onClick={{(fn this.onRemove @group)}} />
+    {{#if (has_perm 'edit_group' )}}
+      <LinkTo
+        @route="authenticated.groups.edit"
+        @model={{@group.id}}>Edit</LinkTo>
+    {{/if}}
+    {{#if (has_perm 'delete_group' )}}
+      <Button::Link
+        @text="Remove"
+        @onClick={{(fn this.onRemove @group)}} />
+    {{/if}}
   </td>
 </tr>

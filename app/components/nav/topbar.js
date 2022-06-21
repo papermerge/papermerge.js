@@ -23,8 +23,8 @@ export default class TopbarComponent extends Component {
   }
 
   get show_first_divider() {
-    let show_prefs = this.currentUser.has_perm('userpreferencemodel_view'),
-      show_authtokens = this.currentUser.has_perm('authtoken_view');
+    let show_prefs = this.currentUser.has_perm('view_userpreferencemodel'),
+      show_authtokens = this.currentUser.has_perm('view_authtoken');
 
     // if either 'preferences' menu item is visible or
     // 'authtoken' menu item is visible, then it makes sense
