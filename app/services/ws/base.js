@@ -15,6 +15,9 @@ export default class WSBaseService extends Service {
 
     if (this.session.isAuthenticated) {
       token = this.session.data.authenticated.token;
+    } else {
+      console.log("WSBaseService - not authenticated");
+      return;
     }
 
     // WebSocket function does not accept header parameters i.e. there
@@ -53,6 +56,9 @@ export default class WSBaseService extends Service {
   }
 
   addHandler(handler, context) {
+    if (!this._socket) {
+      return;
+    }
     this._handlers.push({handler, context});
   }
 
