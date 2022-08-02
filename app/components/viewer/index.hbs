@@ -16,9 +16,11 @@
 
     <Viewer::ActionModes
       @onPanelToggle={{@onPanelToggle}}
-      @dualPanelMode={{@dualPanelMode}}
+      @extra_id={{@extra_id}}
+      @extra_type={{@extra_type}}
       @hint={{@hint}}
       @onSwapPanels={{@onSwapPanels}}
+      @swap_panels={{@swap_panels}}
       @onDuplicatePanel={{@onDuplicatePanel}} />
   </div>
 
@@ -26,7 +28,12 @@
     @selectedPages={{this.selected_pages}}
     @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
-    @openConfirmDeletionModal={{this.openConfirmDeletionModal}} />
+    @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @extra_id={{@extra_id}}
+    @extra_type={{@extra_type}}
+    @hint={{@hint}}
+    @node={{@doc}}
+    @swap_panels={{@swap_panels}} />
 
   <Modal::DeletePages
     id="delete-pages"

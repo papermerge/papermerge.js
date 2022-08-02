@@ -1,0 +1,16 @@
+<a class="dropdown-item" role="button">
+  {{#if (is_equal @hint 'left')}}
+    {{#if @swap_panels}}
+      <i class="bi bi-arrow-left-square mx-2"></i>
+    {{else}}
+      <i class="bi bi-arrow-right-square mx-2"></i>
+    {{/if}}
+  {{else}}
+    {{#if @swap_panels}}
+      <i class="bi bi-arrow-right-square mx-2"></i>
+    {{else}}
+      <i class="bi bi-arrow-left-square mx-2"></i>
+    {{/if}}
+  {{/if}}
+  Move
+</a>

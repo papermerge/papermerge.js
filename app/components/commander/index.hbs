@@ -19,9 +19,14 @@
     @openTagsModal={{this.openTagsModal}}
     @onSelectionChanged={{this.onSelectionChanged}}
     @nodes={{this.children}}
+    @node={{@node}}
     @selectedNodes={{this.selected_nodes}}
     @onDownloadNodes={{this.onDownloadNodes}}
-    @openRenameModal={{this.openRenameModal}} />
+    @openRenameModal={{this.openRenameModal}}
+    @extra_id={{@extra_id}}
+    @extra_type={{@extra_type}}
+    @hint={{@hint}}
+    @swap_panels={{@swap_panels}} />
 
   <div class="d-flex justify-content-between">
     <Commander::ActionButtons
@@ -38,7 +43,8 @@
     <Commander::ActionModes
       @node={{@node}}
       @onPanelToggle={{@onPanelToggle}}
-      @dualPanelMode={{@dualPanelMode}}
+      @extra_id={{@extra_id}}
+      @extra_type={{@extra_type}}
       @onViewModeChange={{this.onViewModeChange}}
       @viewMode={{this.view_mode}}
       @hint={{@hint}}

@@ -111,6 +111,7 @@ export default class DualPanelBaseController extends Controller {
       if (node_type == 'folder') {
         // open commander in secondary panel
         this.extra_id = node_id;
+        this.extra_type = 'folder';
         this.loadNodeData.hint = hint;
         this.loadNodeData.node_id = this.extra_id;
         [{children, meta}, current_node] = yield this.loadNodeData.perform({

@@ -1,14 +1,15 @@
 <div class="d-flex">
 
   <PanelModes
-    @dualPanelMode={{@dualPanelMode}}
+    @extra_id={{@extra_id}}
+    @extra_type={{@extra_type}}
     @hint={{@hint}}
     @onSwapPanels={{@onSwapPanels}}
-    @swap_panels="{{@swap_panels}}"
+    @swap_panels={{@swap_panels}}
     @onDuplicatePanel={{@onDuplicatePanel}} />
 
   <div class="panel-mode">
-    {{#if @dualPanelMode}}
+    {{#if @extra_id}}
       {{#if (is_equal @hint 'right')}}
         <button type="button" class="btn btn-light mx-1"
           {{tooltip title='Close panel' placement='bottom'}}
