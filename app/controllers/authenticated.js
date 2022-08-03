@@ -8,13 +8,11 @@ export default class AuthenticatedController extends Controller {
 
   @localStorage expanded_sidebar = false;
   @service ws_inbox_refresh;
-  @service ws_nodes_move;
   @service router;
 
   constructor() {
     super(...arguments);
     this.ws_inbox_refresh.addHandler(this.wsInboxRefreshHandler, this);
-    this.ws_nodes_move.addHandler(this.wsNodesMoveHandler, this);
   }
 
   wsInboxRefreshHandler() {

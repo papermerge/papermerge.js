@@ -8,7 +8,6 @@ import localStorage from 'papermerge/utils/localstorage';
 
 export default class CommanderComponent extends Component {
   @service websockets;
-  @service ws_nodes_move;
   @service store;
   @service requests;
   @service preferences;
