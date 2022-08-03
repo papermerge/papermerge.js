@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 
 
 export default class ContextMenuComponent extends Component {
@@ -25,6 +26,28 @@ export default class ContextMenuComponent extends Component {
 
   get multiple_nodes_selected() {
     return this.args.selectedNodes.length > 1;
+  }
+
+  get show_move_menu_item() {
+    /*
+    ``move menu item`` is the menu for "moving"
+    selection of nodes from current panel to the
+    target panel.
+    */
+    let extra_id = this.args.extra_id,
+      extra_type = this.args.extra_type,
+      node = this.args.node;
+
+    if (extra_type != 'folder') {
+      // It does not make sense to display 'move'
+      // menu item if other panel is document viewer as
+      // you cannot move "one or multiple nodes" into
+      // a document
+      return false;
+    }
+
+    // other panel shouldn't have same id as current one
+    return extra_id && node && extra_id != node.id;
   }
 
   @action
@@ -84,6 +107,20 @@ export default class ContextMenuComponent extends Component {
     this.args.openTagsModal(
       this.args.selectedNodes
     );
+  }
+
+  @action
+  onMoveMenuItem() {
+    this.args.onMoveMenuItem(
+      this.args.selectedNodes,
+      this.args.extra_id,
+    );
+  }
+
+  @action
+  callbacktest() {
+    console.log('callbacktest invoked');
+    this.router.refresh();
   }
 
   @action

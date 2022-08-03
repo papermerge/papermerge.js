@@ -8,7 +8,6 @@ import localStorage from 'papermerge/utils/localstorage';
 
 export default class CommanderComponent extends Component {
   @service websockets;
-  @service ws_nodes_move;
   @service store;
   @service requests;
   @service preferences;
@@ -132,6 +131,41 @@ export default class CommanderComponent extends Component {
   @action
   onDownloadNodes(selected_nodes) {
     return this.requests.downloadNodes(selected_nodes);
+  }
+
+  @action
+  async onMoveMenuItem(
+    selected_nodes,
+    target_node_id
+  ) {
+    /*
+    Invoked on when user selected couple of nodes and
+    clicks "Move" menu item.
+    This will trigger moving of selected nodes in one panel
+    to the target folder (target_node_id) in other panel.
+    */
+
+    await this.requests.nodesMove({
+      target_parent: {
+        id: target_node_id
+      },
+      nodes: selected_nodes.map(node => { return {id: node.id};})
+    });
+    this.show_confirm_move_pages_modal = false;
+
+    this._dual_refresh();
+  }
+
+  _dual_refresh() {
+    // refresh primary panel
+    this.router.refresh();
+
+    // refresh secondary panel
+    this.args.onNodeClicked.perform(
+      this.args.hint == 'right' ? this.args.node.id : this.args.extra_id,
+      'right', // perform reload of secondary panel
+      'folder'
+    );
   }
 
   @action
@@ -277,13 +311,7 @@ export default class CommanderComponent extends Component {
       }
 
       this.requests.nodesMove(nodes_move_data);
-      if (nodes_move_data.source_parent.id == this.currentUser.user.inbox_folder.get('id')) {
-        this.router.refresh();
-      }
-
-      if (nodes_move_data.target_parent.id == this.currentUser.user.inbox_folder.get('id')) {
-        this.router.refresh();
-      }
+      this._dual_refresh();
 
     } else if (data['application/x.desktop']) {
       // dropping items from the Desktop file manager

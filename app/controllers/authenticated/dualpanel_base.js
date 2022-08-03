@@ -91,17 +91,14 @@ export default class DualPanelBaseController extends Controller {
   }
 
   @task({ drop: true })
-  *onNodeClicked(node, hint, node_type) {
+  *onNodeClicked(node_id, hint, node_type) {
 
     let children,
       meta,
       current_node,
-      node_id,
       doc,
       last_version,
       pages_with_url;
-
-    node_id = node.get('id');
 
     this.node_clicked_state['node_id'] = node_id;
     this.node_clicked_state['hint'] = hint;
@@ -111,6 +108,7 @@ export default class DualPanelBaseController extends Controller {
       if (node_type == 'folder') {
         // open commander in secondary panel
         this.extra_id = node_id;
+        this.extra_type = 'folder';
         this.loadNodeData.hint = hint;
         this.loadNodeData.node_id = this.extra_id;
         [{children, meta}, current_node] = yield this.loadNodeData.perform({

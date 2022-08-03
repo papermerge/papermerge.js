@@ -6,9 +6,11 @@
     @onNodeClicked={{this.onNodeClicked}}
     @loadNodeData={{this.loadNodeData}}
     @currently_loading_state={{this.currently_loading_state}}
-    @dualPanelMode={{this.dualpanel_mode}}
+    @extra_id={{this.extra_id}}
+    @extra_type={{this.extra_type}}
     @hint="left"
     @onSwapPanels={{this.onSwapPanels}}
+    @swap_panels={{this.swap_panels}}
     @onDuplicatePanel={{this.onDuplicatePanel}} />
 
   {{#if this.extra}}
@@ -17,7 +19,9 @@
         @doc={{this.extra.doc}}
         @pages={{this.extra.pages}}
         @onPanelToggle={{this.onPanelToggle}}
-        @dualPanelMode={{this.dualpanel_mode}}
+        @extra_id={{@model.doc.id}}
+        @extra_type='doc'
+        @swap_panels={{this.swap_panels}}
         @onNodeClicked={{this.onNodeClicked}}
         @loadNodeData={{this.loadNodeData}}
         @currently_loading_state={{this.currently_loading_state}}
@@ -36,7 +40,8 @@
         @node_clicked_state={{this.node_clicked_state}}
         @currently_loading_state={{this.currently_loading_state}}
         @onPanelToggle={{this.onPanelToggle}}
-        @dualPanelMode={{this.dualpanel_mode}}
+        @extra_id={{this.extra_id}}
+        @extra_type={{this.extra_type}}
         @swap_panels={{this.swap_panels}}
         @hint="right"
         @onSwapPanels={{this.onSwapPanels}}
