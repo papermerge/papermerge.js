@@ -23,6 +23,7 @@
     @selectedNodes={{this.selected_nodes}}
     @onDownloadNodes={{this.onDownloadNodes}}
     @openRenameModal={{this.openRenameModal}}
+    @onMoveMenuItem={{this.onMoveMenuItem}}
     @extra_id={{@extra_id}}
     @extra_type={{@extra_type}}
     @hint={{@hint}}
@@ -107,7 +108,7 @@
             @onDragendCancel={{this.onDragendCancel}}>
               <button
                 class="btn btn-link"
-                {{on "click" (perform @onNodeClicked node @hint node.nodeType)}}>
+                {{on "click" (perform @onNodeClicked node.id @hint node.nodeType)}}>
                   {{node.title}}
                   {{#if (node_in_transition
                     node

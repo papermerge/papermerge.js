@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 
 
 export default class ContextMenuComponent extends Component {
@@ -106,6 +107,20 @@ export default class ContextMenuComponent extends Component {
     this.args.openTagsModal(
       this.args.selectedNodes
     );
+  }
+
+  @action
+  onMoveMenuItem() {
+    this.args.onMoveMenuItem(
+      this.args.selectedNodes,
+      this.args.extra_id,
+    );
+  }
+
+  @action
+  callbacktest() {
+    console.log('callbacktest invoked');
+    this.router.refresh();
   }
 
   @action

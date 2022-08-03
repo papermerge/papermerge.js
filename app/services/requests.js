@@ -199,18 +199,7 @@ export default class Requests extends Service {
   }
 
   async nodesMove(data) {
-    let url, headers_copy = {};
-
-    url = `${base_url()}/nodes/move/`;
-
-    Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
-    headers_copy['Content-Type'] = 'application/json';
-
-    return fetch(url, {
-      method: 'POST',
-      headers: headers_copy,
-      body: JSON.stringify(data)
-    });
+    return this._post('/nodes/move/', data);
   }
 
   async updateTagsOnNode({tags, node}) {

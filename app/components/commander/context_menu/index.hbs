@@ -60,7 +60,8 @@
       {{#if this.show_move_menu_item}}
         <Commander::ContextMenu::MoveMenuItem
           @hint={{@hint}}
-          @swap_panels={{@swap_panels}} />
+          @swap_panels={{@swap_panels}}
+          {{on "click" this.onMoveMenuItem}} />
       {{/if}}
     </li>
     <li><hr class="dropdown-divider"></li>
