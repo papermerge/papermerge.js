@@ -29,6 +29,8 @@
     @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @openExtractPagesModal={{this.openExtractPagesModal}}
+    @openMovePagesModal={{this.openMovePagesModal}}
     @extra_id={{@extra_id}}
     @extra_type={{@extra_type}}
     @hint={{@hint}}
@@ -45,6 +47,14 @@
     @node={{@doc}}
     @onClose={{this.onCloseRenameModal}}
     {{show-when this.show_rename_node_modal}} />
+
+  <Modal::ExtractPages
+    id="extract-pages"
+    @selected_pages={{this.selected_pages}}
+    @extra={{@extra}}
+    @doc={{@doc}}
+    @onSubmit={{this.onSubmitExtractPages}}
+    {{show-when this.show_extract_pages_modal}} />
 
   <Breadcrumb
     @node={{@doc}}

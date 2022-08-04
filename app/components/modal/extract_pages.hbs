@@ -1,0 +1,29 @@
+<Modal::Base
+  @title="Extract Pages"
+  @actionTitle="Yes"
+  @onClose={{this.onCancel}}
+  @onSubmit={{this.onSubmit}}
+  @submitButtonClass="btn-success"
+  @onCancel={{this.onCancel}}
+  ...attributes>
+  <p>
+    Do you want to extract selected pages to folder '{{this.dst_title}}' ?
+  </p>
+  <p>
+    <label for="title-format">Title format:</label>
+    <Input id="title-format" @value={{this.title_format}} />
+  </p>
+  <p>
+    <Input @checked={{this.single_page}}
+      @type="checkbox"
+      class="form-control-checkbox"
+      id="single_page" />
+    <Label
+      @for="single_page"
+      @text="Extract each page into separate document" />
+
+  {{#if this.error_message}}
+    <p class="text-danger">{{this.error_message}}</p>
+  {{/if}}
+  </p>
+</Modal::Base>

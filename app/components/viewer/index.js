@@ -3,10 +3,13 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
+import { task } from 'ember-concurrency';
 import {
   reposition_items,
   is_permuted
 } from 'papermerge/utils/array';
+import { delay } from 'papermerge/utils/time';
+
 
 
 export default class ViewerComponent extends Component {
@@ -40,6 +43,10 @@ export default class ViewerComponent extends Component {
   @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
+  // extract page = document -> folder
+  @tracked show_extract_pages_modal = false;
+  // move page = document -> document
+  @tracked show_move_pages_modal = false;
 
   initial_pages_memo = A([]);
 
@@ -95,6 +102,10 @@ export default class ViewerComponent extends Component {
         (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
       );
     });
+  }
+
+  get extract_pages_modal_dst_folder() {
+    return "blah";
   }
 
   @action
@@ -220,8 +231,39 @@ export default class ViewerComponent extends Component {
   }
 
   @action
+  openExtractPagesModal() {
+    this.show_extract_pages_modal = true;
+  }
+
+  @action
+  openMovePagesModal() {
+    this.show_move_pages_modal = true;
+  }
+
+  @action
   onCloseRenameModal() {
     this.show_rename_node_modal = false;
+  }
+
+  @task *onSubmitExtractPages({
+    page_ids,
+    target_folder,
+    single_page,
+    title_format
+  }) {
+    let result = yield this.requests.moveToFolder({
+      dst: target_folder,
+      page: page_ids,
+      single_page: single_page
+    });
+
+    yield delay(3000);
+
+    if (result.status >= 400) {
+      return "There was an issue. Extraction aborted.";
+    } else {
+      this.show_extract_pages_modal = false;
+    }
   }
 
   @action
