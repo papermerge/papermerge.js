@@ -71,8 +71,8 @@ export default class ExtractPagesComponent extends BaseComponent {
     this._title_format = value;
   }
 
-  get on_submit_task() {
-    return this.args.onSubmit;
+  get inProgress() {
+    return this.args.onSubmit.isRunning;
   }
 
   @action

@@ -102,6 +102,14 @@ export default class Requests extends Service {
     return this._delete('/pages/', {'pages': page_ids});
   }
 
+  async deleteDocument(document_id) {
+    if (!document_id) {
+      console.warn(`deleteDocument: document_id is empty`);
+      return;
+    }
+    return this._delete(`/documents/${document_id}/`);
+  }
+
   async rotatePages({page_ids, angle}) {
     let pages = [];
 

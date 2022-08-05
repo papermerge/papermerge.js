@@ -2,26 +2,33 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{@title}}</h5>
+        <h5 class="modal-title">Delete Document</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{yield}}
+        <p>
+          Do you want to delete <strong>{{this.title}}</strong> document?
+        </p>
+        <p>
+        {{#if this.error_message}}
+          <p class="text-danger">{{this.error_message}}</p>
+        {{/if}}
+        </p>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           class="btn btn-secondary"
           data-bs-dismiss="modal"
-          {{on "click" @onCancel}}>Cancel</button>
+          {{on "click" this.onCancel}}>No</button>
         <button
           type="button"
-          class="btn btn-primary {{this.submitButtonClass}}"
-          {{on "click" @onSubmit}}>
+          class="btn btn-primary btn-success"
+          {{on "click" this.onSubmit}}>
             {{#if this.inProgress}}
               <Spinner @inProgress={{this.inProgress}} />
             {{/if}}
-          {{@actionTitle}}
+          Yes
         </button>
       </div>
     </div>

@@ -29,8 +29,10 @@
     @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @openConfirmDeleteDocumentModal={{this.openConfirmDeleteDocumentModal}}
     @openExtractPagesModal={{this.openExtractPagesModal}}
     @openMovePagesModal={{this.openMovePagesModal}}
+
     @extra_id={{@extra_id}}
     @extra_type={{@extra_type}}
     @hint={{@hint}}
@@ -42,6 +44,12 @@
     @selectedPages={{this.selected_pages}}
     @onSubmit={{this.submitConfirmDeletionModal}}
     {{show-when this.show_confirm_pages_deletion_modal}} />
+
+  <Viewer::Modal::DeleteDocument
+    id="delete-document"
+    @doc={{@doc}}
+    @onSubmit={{this.submitConfirmDocumentDeleteModal}}
+    {{show-when this.show_confirm_document_delete_modal}} />
 
   <Modal::RenameNode
     @node={{@doc}}
