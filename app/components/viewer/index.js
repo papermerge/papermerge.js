@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
+import { task } from 'ember-concurrency';
 import {
   reposition_items,
   is_permuted
@@ -37,9 +38,14 @@ export default class ViewerComponent extends Component {
 
   @tracked selected_pages = A([]);
   @tracked show_confirm_pages_deletion_modal = false;
+  @tracked show_confirm_document_delete_modal = false;
   @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
+  // extract page = document -> folder
+  @tracked show_extract_pages_modal = false;
+  // move page = document -> document
+  @tracked show_move_pages_modal = false;
 
   initial_pages_memo = A([]);
 
@@ -95,6 +101,10 @@ export default class ViewerComponent extends Component {
         (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
       );
     });
+  }
+
+  get extract_pages_modal_dst_folder() {
+    return "blah";
   }
 
   @action
@@ -215,13 +225,50 @@ export default class ViewerComponent extends Component {
   }
 
   @action
+  openConfirmDeleteDocumentModal() {
+   this.show_confirm_document_delete_modal = true; 
+  }
+
+  @action
   openRenameDocumentModal() {
     this.show_rename_node_modal = true;
   }
 
   @action
+  openExtractPagesModal() {
+    this.show_extract_pages_modal = true;
+  }
+
+  @action
+  openMovePagesModal() {
+    this.show_move_pages_modal = true;
+  }
+
+  @action
   onCloseRenameModal() {
     this.show_rename_node_modal = false;
+  }
+
+  @task *onSubmitExtractPages({
+    page_ids,
+    target_folder,
+    single_page,
+    title_format
+  }) {
+    let result = yield this.requests.moveToFolder({
+      dst: target_folder,
+      page_ids: page_ids,
+      single_page: single_page
+    });
+
+    if (result.status >= 400) {
+      return "There was an issue. Extraction aborted.";
+    } else {
+      this.show_extract_pages_modal = false;
+    }
+
+    this.selected_pages = A([]);
+    this._dual_refresh();
   }
 
   @action
@@ -235,7 +282,24 @@ export default class ViewerComponent extends Component {
       this.router.refresh();
       this.notify.info('Page(s) deleted successfully');
     });
+  }
 
+  @task *submitConfirmDocumentDeleteModal() {
+
+    let doc_id, // id of the document to be deleted (current one)
+      parent_id, // parent of the document
+      result;
+
+    doc_id = this.args.doc.get('id');
+    parent_id = this.args.doc.parent.get('id');
+
+    result = yield this.requests.deleteDocument(doc_id);
+    this.show_confirm_document_delete_modal = false;
+    // redirect to parent node
+    this.router.replaceWith(
+      'authenticated.nodes',
+      parent_id
+    );
   }
 
   @action
@@ -352,5 +416,17 @@ export default class ViewerComponent extends Component {
 
   get has_page_order_changes() {
     return this.ordered_pages_change.has_changes;
+  }
+
+  _dual_refresh() {
+    // refresh primary panel
+    this.router.refresh();
+
+    // refresh secondary panel
+    this.args.onNodeClicked.perform(
+      this.args.hint == 'right' ? this.args.node.id : this.args.extra_id,
+      'right', // perform reload of secondary panel
+      'folder'
+    );
   }
 }

@@ -12,13 +12,13 @@
     {{#if this.show_move_item}}
       <Viewer::ContextMenu::Item::Move
         @hint={{@hint}}
-        @swap_panels={{@swap_panels}} />
-    {{/if}}
-
-    {{#if this.show_extract_item}}
+        @swap_panels={{@swap_panels}}
+        {{on "click" @openMovePagesModal}} />
+    {{else if this.show_extract_item}}
       <Viewer::ContextMenu::Item::Extract
         @hint={{@hint}}
-        @swap_panels={{@swap_panels}} />
+        @swap_panels={{@swap_panels}}
+        {{on "click" @openExtractPagesModal}} />
     {{/if}}
 
     <ContextMenu::Devider />
@@ -26,5 +26,10 @@
     <Viewer::ContextMenu::Item::DeletePages
       @openConfirmDeletionModal={{@openConfirmDeletionModal}} />
   {{/if}}
+
+  <ContextMenu::Devider />
+
+  <Viewer::ContextMenu::Item::DeleteDocument
+    @openConfirmDeleteDocumentModal={{@openConfirmDeleteDocumentModal}} />
 
 </ul>

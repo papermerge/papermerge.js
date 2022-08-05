@@ -1,16 +1,18 @@
-<a class="dropdown-item" role="button">
-  {{#if (is_equal @hint 'left')}}
-    {{#if @swap_panels}}
-      <i class="bi bi-arrow-left-square mx-2"></i>
+<li>
+  <a class="dropdown-item" role="button" ...attributes>
+    {{#if (is_equal @hint 'left')}}
+      {{#if @swap_panels}}
+        <i class="bi bi-arrow-left-square mx-2"></i>
+      {{else}}
+        <i class="bi bi-arrow-right-square mx-2"></i>
+      {{/if}}
     {{else}}
-      <i class="bi bi-arrow-right-square mx-2"></i>
+      {{#if @swap_panels}}
+        <i class="bi bi-arrow-right-square mx-2"></i>
+      {{else}}
+        <i class="bi bi-arrow-left-square mx-2"></i>
+      {{/if}}
     {{/if}}
-  {{else}}
-    {{#if @swap_panels}}
-      <i class="bi bi-arrow-right-square mx-2"></i>
-    {{else}}
-      <i class="bi bi-arrow-left-square mx-2"></i>
-    {{/if}}
-  {{/if}}
-  Extract
-</a>
+    Extract
+  </a>
+</li>

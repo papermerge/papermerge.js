@@ -1,0 +1,48 @@
+<div class="modal" tabindex="-1" ...attributes>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Extract Pages</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Do you want to extract selected pages to folder '{{this.dst_title}}' ?
+        </p>
+        <p>
+          <label for="title-format">Title format:</label>
+          <Input id="title-format" @value={{this.title_format}} />
+        </p>
+        <p>
+          <Input @checked={{this.single_page}}
+            @type="checkbox"
+            class="form-control-checkbox"
+            id="single_page" />
+          <Label
+            @for="single_page"
+            @text="Extract each page into separate document" />
+
+        {{#if this.error_message}}
+          <p class="text-danger">{{this.error_message}}</p>
+        {{/if}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          {{on "click" this.onCancel}}>Cancel</button>
+        <button
+          type="button"
+          class="btn btn-primary btn-success"
+          {{on "click" this.onSubmit}}>
+            {{#if this.inProgress}}
+              <Spinner @inProgress={{this.inProgress}} />
+            {{/if}}
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

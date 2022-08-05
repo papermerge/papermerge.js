@@ -29,6 +29,10 @@
     @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
+    @openConfirmDeleteDocumentModal={{this.openConfirmDeleteDocumentModal}}
+    @openExtractPagesModal={{this.openExtractPagesModal}}
+    @openMovePagesModal={{this.openMovePagesModal}}
+
     @extra_id={{@extra_id}}
     @extra_type={{@extra_type}}
     @hint={{@hint}}
@@ -41,10 +45,24 @@
     @onSubmit={{this.submitConfirmDeletionModal}}
     {{show-when this.show_confirm_pages_deletion_modal}} />
 
+  <Viewer::Modal::DeleteDocument
+    id="delete-document"
+    @doc={{@doc}}
+    @onSubmit={{this.submitConfirmDocumentDeleteModal}}
+    {{show-when this.show_confirm_document_delete_modal}} />
+
   <Modal::RenameNode
     @node={{@doc}}
     @onClose={{this.onCloseRenameModal}}
     {{show-when this.show_rename_node_modal}} />
+
+  <Modal::ExtractPages
+    id="extract-pages"
+    @selected_pages={{this.selected_pages}}
+    @extra={{@extra}}
+    @doc={{@doc}}
+    @onSubmit={{this.onSubmitExtractPages}}
+    {{show-when this.show_extract_pages_modal}} />
 
   <Breadcrumb
     @node={{@doc}}
