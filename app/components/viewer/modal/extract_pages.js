@@ -3,14 +3,14 @@ import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { tracked } from '@glimmer/tracking';
 
-import BaseComponent from "./base";
+import Component from "@glimmer/component";
 
 
-export default class ExtractPagesComponent extends BaseComponent {
+export default class ExtractPagesComponent extends Component {
   @service store;
   @service currentUser;
   @tracked single_page = true;
-  @tracked _title_format;
+  @tracked _title_format = undefined;
   @tracked error_message;
 
   get page_ids() {
@@ -26,12 +26,17 @@ export default class ExtractPagesComponent extends BaseComponent {
 
   @action
   async onSubmit() {
-    this.error_message = await this.args.onSubmit.perform({
+    let data = {
       page_ids: this.page_ids,
       target_folder: this.target_folder,
-      single_page: this.single_page,
-      title_format: this.title_format
-    });
+      single_page: this.single_page
+    };
+
+    if (this.title_format != undefined && this.title_format != '') {
+      data['title_format'] = this.title_format;
+    }
+
+    this.error_message = await this.args.onSubmit.perform(data);
   }
 
   get count() {
@@ -49,11 +54,19 @@ export default class ExtractPagesComponent extends BaseComponent {
   }
 
   get title_format() {
-    let title;
-
-    if (this._title_format) {
-      return this._title_format;
+    if (this._title_format === undefined) {
+      return this.default_title;
     }
+
+    return this._title_format;
+  }
+
+  set title_format(value) {
+    this._title_format = value;
+  }
+
+  get default_title() {
+    let title;
 
     if (this.args.doc && this.args.doc) {
       title = this.args.doc.title;
@@ -65,10 +78,6 @@ export default class ExtractPagesComponent extends BaseComponent {
     }
 
     return '';
-  }
-
-  set title_format(value) {
-    this._title_format = value;
   }
 
   get inProgress() {
