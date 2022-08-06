@@ -137,14 +137,19 @@ export default class Requests extends Service {
   }
 
   async moveToDocument({dst, pages, position}) {
-    return this._post('/pages/move-to-document/', {dst, pages, position});
+    return this._post(
+      '/pages/move-to-document/',
+      {dst, pages, position}
+    );
   }
 
-  async moveToFolder({dst, page_ids, single_page}) {
+  async moveToFolder({dst, page_ids, single_page, title_format}) {
+    
     return this._post('/pages/move-to-folder/', {
       dst: dst.id,
       pages: page_ids,
-      single_page: single_page
+      single_page: single_page,
+      title_format: title_format
     });
   }
 

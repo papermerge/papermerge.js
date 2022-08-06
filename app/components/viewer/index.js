@@ -258,7 +258,8 @@ export default class ViewerComponent extends Component {
     let result = yield this.requests.moveToFolder({
       dst: target_folder,
       page_ids: page_ids,
-      single_page: single_page
+      single_page: single_page,
+      title_format: title_format
     });
 
     if (result.status >= 400) {
