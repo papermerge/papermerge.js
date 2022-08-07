@@ -423,11 +423,29 @@ export default class ViewerComponent extends Component {
     // refresh primary panel
     this.router.refresh();
 
-    // refresh secondary panel
-    this.args.onNodeClicked.perform(
-      this.args.hint == 'right' ? this.args.node.id : this.args.extra_id,
-      'right', // perform reload of secondary panel
-      'folder'
-    );
+    // the whole point of this uglyness is to refresh secondary panel.
+    // Secondary panel can be either commander or viewer.
+    if (this.args.hint == 'left') {
+      // Current viewer is on the 'left' side.
+      // This means that secondary panel to refresh is on the 'right'
+      // side (primary panel is refreshed by this.router.refresh()).
+      // Current template is ``authenticated/document.hbs``.
+      this.args.onNodeClicked.perform(
+        this.args.extra_id,
+        'right', // perform reload of secondary panel
+        'folder' // panel = commander
+      );
+    } else {
+      // Current viewer is on the 'right' side.
+      // Secondary panel to refresh is on the 'left' side.
+      // Current template may be either ``authenticated/nodes.hbs``
+      // or ``authenticated/document.hbs``.
+      this.args.onNodeClicked.perform(
+        this.args.doc.id,
+        'right', // perform reload of secondary panel
+        'doc' // panel = viewer
+      );
+    }
+
   }
 }
