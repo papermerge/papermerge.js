@@ -7,16 +7,21 @@
   @onCancel={{this.onCancel}}
   ...attributes>
   <p>
-    You selected {{this.count}} page(s).
-    Do you want to move selected page(s) to folder {{this.dst_title}}?
+    Do you want to move selected pages to document {{this.dst_title}}?
   </p>
   <p>
-    <Input @checked={{this.single_page}}
+    <p>
+      Place pages at the:
+      <Select @options={{this.position}} name="position" />
+      of the target document
+    </p>
+ 
+    <Input @checked={{this.merge}}
       @type="checkbox"
       class="form-control-checkbox"
-      id="single_page" />
+      id="merge" />
     <Label
-      @for="single_page"
-      @text="Extract each page into separate document" />
+      @for="merge"
+      @text="Create new version ONLY from selected pages (merge)" />
   </p>
 </Modal::Base>

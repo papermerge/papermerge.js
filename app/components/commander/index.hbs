@@ -71,13 +71,6 @@
     @onClose={{this.closeConfirmDeletionModal}}
     {{show-when this.show_confirm_deletion_modal}} />
 
-  <Modal::MovePages
-    id="move-pages"
-    @page_ids={{this.move_pages_modal_page_ids}}
-    @dst_folder={{this.move_pages_modal_dst_folder}}
-    @onSubmit={{this.onSubmitMovePages}}
-    {{show-when this.show_confirm_move_pages_modal}} />
-
   <Modal::Tags
     @node={{this.first_selected_node}}
     @onSubmit={{this.onSubmitTagsModal}}

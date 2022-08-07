@@ -10,7 +10,12 @@ export default class MovePagesComponent extends Component {
   @service store;
   @service currentUser;
   @tracked single_page = true;
-
+  get position() {
+    return [
+      { key: '1', value: 'Begining' },
+      { key: '-1', value: 'End' },
+    ];
+  }
   get page_ids() {
     return this.args.page_ids;
   }

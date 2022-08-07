@@ -20,7 +20,7 @@ class ButtonCancelComponent extends Component {
 
     Render componet as <a> with given route:
 
-      <Button::Cancel @route="automates" />
+      <Button::Cancel @route="groups" />
   */
 
   get text() {

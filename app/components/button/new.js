@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 
+
 class ButtonNewComponent extends Component {
   /*
   "New Button" component. Renders a button as either
@@ -20,7 +21,7 @@ class ButtonNewComponent extends Component {
 
     Render componet as <a> with given route:
 
-      <Button::New @route="automates.add" />
+      <Button::New @route="groups.add" />
   */
 
   get text() {
