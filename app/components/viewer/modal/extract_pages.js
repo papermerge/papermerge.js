@@ -18,8 +18,8 @@ export default class ExtractPagesComponent extends Component {
   }
 
   get target_folder() {
-    if (this.args.extra && this.args.extra.current_node) {
-      return this.args.extra.current_node;
+    if (this.args.extra) {
+      return this.args.extra;
     }
     return undefined;
   }
@@ -37,6 +37,7 @@ export default class ExtractPagesComponent extends Component {
     }
 
     this.error_message = await this.args.onSubmit.perform(data);
+    this.reset();
   }
 
   get count() {
@@ -47,8 +48,8 @@ export default class ExtractPagesComponent extends Component {
   }
 
   get dst_title() {
-    if (this.args.extra && this.args.extra.current_node) {
-      return this.args.extra.current_node.title;
+    if (this.args.extra) {
+      return this.args.extra.title;
     }
     return '';
   }
@@ -84,8 +85,13 @@ export default class ExtractPagesComponent extends Component {
     return this.args.onSubmit.isRunning;
   }
 
+  reset() {
+    this._title_format = undefined;
+  }
+
   @action
   onCancel() {
+    this.reset();
   }
 
 }
