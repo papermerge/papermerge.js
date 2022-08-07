@@ -21,22 +21,22 @@ export default class MovePagesComponent extends Component {
   }
 
   get page_ids() {
-    return this.args.page_ids;
+    return this.args.selected_pages.map(page => page.id);
   }
 
   @action
   onSubmit() {
-    this.args.onSubmit({
+    this.args.onSubmit.perform({
       page_ids: this.page_ids,
-      dst: this.args.dst_folder,
-      single_page: this.single_page
+      target_doc: this.target_doc,
+      position: this._position,
+      merge: this.merge
     });
   }
 
   @action
   onPositionChanged(event) {
     this._position = event.target.value;
-    console.log(`this._position=${this._position}`);
   }
 
   get count() {
@@ -46,12 +46,24 @@ export default class MovePagesComponent extends Component {
     return 0;
   }
 
+  get target_doc() {
+    if (this.args.extra) {
+      return this.args.extra;
+    }
+
+    return undefined;
+  }
+
   get dst_title() {
     if (this.args.extra) {
       return this.args.extra.title;
     }
 
     return undefined;
+  }
+
+  get merge() {
+    return this._merge;
   }
 
   @action
