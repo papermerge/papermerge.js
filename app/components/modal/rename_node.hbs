@@ -8,11 +8,10 @@
   {{on-key 'Enter' this.onSubmit}}
   ...attributes
 >
-  {{this.title}}
   <label for="node-title" class="form-label">New title:</label>
   <Input
     id="node-title"
     class="form-control"
     @type="text"
-    @value={{this.new_title}} />
+    @value={{this.title}} />
 </Modal::Base>
