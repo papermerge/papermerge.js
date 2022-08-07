@@ -272,6 +272,14 @@ export default class ViewerComponent extends Component {
     this._dual_refresh();
   }
 
+  @task *onSubmitMovePages({
+    page_ids,
+    target_doc,
+    position
+  }) {
+    console.log('onSubmitMovePages');
+  }
+
   @action
   async submitConfirmDeletionModal() {
     let page_ids = [];

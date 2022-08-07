@@ -3,10 +3,10 @@ import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { tracked } from '@glimmer/tracking';
 
-import BaseComponent from "./base";
+import Component from "@glimmer/component";
 
 
-export default class MovePagesComponent extends BaseComponent {
+export default class MovePagesComponent extends Component {
   @service store;
   @service currentUser;
   @tracked single_page = true;
