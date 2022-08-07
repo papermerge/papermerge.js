@@ -9,6 +9,10 @@ export default class NewFolderComponent extends Component {
   @service store;
   @service currentUser;
 
+  reset() {
+    this.title = '';
+  }
+
   @action
   async onSubmit() {
     let new_folder, new_record;
@@ -19,12 +23,17 @@ export default class NewFolderComponent extends Component {
     new_record = await new_folder.save();
 
     this.args.onClose(new_record);
-    this.title = '';
+    this.reset();
   }
 
   @action
   onCancel() {
     this.args.onClose();
-    this.title = '';
+    this.reset();
+  }
+
+  @action
+  onHide() {
+    this.reset();
   }
 }
