@@ -37,6 +37,7 @@ export default class ExtractPagesComponent extends Component {
     }
 
     this.error_message = await this.args.onSubmit.perform(data);
+    this.reset();
   }
 
   get count() {
@@ -84,8 +85,13 @@ export default class ExtractPagesComponent extends Component {
     return this.args.onSubmit.isRunning;
   }
 
+  reset() {
+    this._title_format = undefined;
+  }
+
   @action
   onCancel() {
+    this.reset();
   }
 
 }
