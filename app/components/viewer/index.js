@@ -446,6 +446,5 @@ export default class ViewerComponent extends Component {
         'doc' // panel = viewer
       );
     }
-
   }
 }
