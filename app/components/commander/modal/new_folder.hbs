@@ -6,6 +6,7 @@
   @onSubmit={{this.onSubmit}}
   @onCancel={{this.onCancel}}
   {{on-key 'Enter' this.onSubmit}}
+  {{on "hide.bs.modal" this.onHide}}
   ...attributes
 >
   <label for="folder-title" class="form-label">Folder title:</label>

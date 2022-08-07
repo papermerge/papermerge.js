@@ -40,10 +40,12 @@ export default class RenameNodeComponent extends BaseComponent {
 
   @action
   onSubmit() {
-    this.node.title = this.title;
-    this.node.save();
-    this.args.onClose();
-    this.reset();
+    if (this.node) {
+      this.node.title = this.title;
+      this.node.save();
+      this.args.onClose();
+      this.reset();
+    }
   }
 
   @action
