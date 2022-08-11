@@ -272,6 +272,28 @@ export default class ViewerComponent extends Component {
     this._dual_refresh();
   }
 
+  @task *onSubmitMovePages({
+    page_ids,
+    target_doc,
+    position,
+    merge
+  }) {
+    let result = yield this.requests.moveToDocument({
+      dst: target_doc,
+      page_ids: page_ids,
+      position: position,
+      merge: merge
+    });
+
+    if (result.status >= 400) {
+      return "There was an issue. Extraction aborted.";
+    } else {
+      this.show_move_pages_modal = false;
+    }
+
+    this.selected_pages = A([]);
+  }
+
   @action
   async submitConfirmDeletionModal() {
     let page_ids = [];

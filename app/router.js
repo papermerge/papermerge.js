@@ -21,12 +21,6 @@ Router.map(function () {
 
     this.route('tokens');
 
-    this.route('automates', function () {
-      this.route('add');
-      this.route('edit', { path: '/:automate_id/edit' });
-      this.route('index', { path: '/' });
-    });
-
     this.route('users', function () {
       this.route('add');
       this.route('edit', { path: '/:user_id/edit' });

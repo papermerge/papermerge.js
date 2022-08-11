@@ -11,7 +11,7 @@ class PermissionGroupComponent extends Component {
 
   `this.args.parent_group_model` - current parent_group_model model.
   `this.args.perm_group.perms` - permissions in the group
-  `this.args.perm_group.model` - model name (e.g. User, Automate)
+  `this.args.perm_group.model` - model name (e.g. User)
   */
 
   get isChecked() {

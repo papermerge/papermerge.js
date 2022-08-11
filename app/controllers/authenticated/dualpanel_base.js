@@ -69,6 +69,14 @@ export default class DualPanelBaseController extends Controller {
     return this.extra_id;
   }
 
+  get extra_current_node_or_doc() {
+    if (!this.extra) {
+      return;
+    }
+
+    return this.extra.current_node || this.extra.doc;
+  }
+
   @task({drop: true})
   *loadNodeData({store, node_id, page, cache}) {
     /*

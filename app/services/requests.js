@@ -136,11 +136,13 @@ export default class Requests extends Service {
     return this._post('/pages/reorder/', {'pages': order_data});
   }
 
-  async moveToDocument({dst, pages, position}) {
-    return this._post(
-      '/pages/move-to-document/',
-      {dst, pages, position}
-    );
+  async moveToDocument({dst, page_ids, position, merge}) {
+    return this._post('/pages/move-to-document/', {
+      dst: dst.id,
+      pages: page_ids,
+      position: position,
+      merge: merge
+    });
   }
 
   async moveToFolder({dst, page_ids, single_page, title_format}) {

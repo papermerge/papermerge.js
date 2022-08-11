@@ -23,7 +23,7 @@ class ButtonSubmitComponent extends Component {
 
     Render componet as <a> with given route:
 
-      <Button::Submit @route="automates" />
+      <Button::Submit @route="groups" />
 
     Render disabled "Create Group" <button> based component:
 

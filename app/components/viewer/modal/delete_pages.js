@@ -2,10 +2,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 
-import BaseComponent from "./base";
+import Component from '@glimmer/component';
 
 
-export default class DeletePagesComponent extends BaseComponent {
+export default class DeletePagesComponent extends Component {
   @service store;
   @service currentUser;
 

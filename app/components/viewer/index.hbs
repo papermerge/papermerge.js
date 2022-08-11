@@ -39,7 +39,7 @@
     @node={{@doc}}
     @swap_panels={{@swap_panels}} />
 
-  <Modal::DeletePages
+  <Viewer::Modal::DeletePages
     id="delete-pages"
     @selectedPages={{this.selected_pages}}
     @onSubmit={{this.submitConfirmDeletionModal}}
@@ -63,6 +63,14 @@
     @doc={{@doc}}
     @onSubmit={{this.onSubmitExtractPages}}
     {{show-when this.show_extract_pages_modal}} />
+
+  <Viewer::Modal::MovePages
+    id="move-pages"
+    @selected_pages={{this.selected_pages}}
+    @extra={{@extra}}
+    @doc={{@doc}}
+    @onSubmit={{this.onSubmitMovePages}}
+    {{show-when this.show_move_pages_modal}} />    
 
   <Breadcrumb
     @node={{@doc}}

@@ -1,0 +1,35 @@
+<Modal::Base
+  @title="Confirm Page Move"
+  @actionTitle="Yes"
+  @onClose={{this.onCancel}}
+  @onSubmit={{this.onSubmit}}
+  @submitButtonClass="btn-success"
+  @onCancel={{this.onCancel}}
+  ...attributes>
+  <p>
+    Do you want to move selected pages to document '{{this.dst_title}}' ?
+  </p>
+  <p>
+    <p>
+      <Input @checked={{this._merge}}
+        @type="checkbox"
+        class="form-control-checkbox"
+        id="merge" />
+      <Label
+        @for="merge"
+        @text="Create new version ONLY from selected pages (merge)" />
+    </p>
+    <p>
+      {{#if this._merge}}
+        <!-- pass -->
+      {{else}}
+        Place pages at the:
+        <Select
+          @options={{this.position}}
+          @onChange={{this.onPositionChanged}}
+          name="position" />
+        of the target document
+      {{/if}}
+    </p>
+  </p>
+</Modal::Base>
