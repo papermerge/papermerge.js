@@ -45,4 +45,8 @@ export default class ViewerContextMenuComponent extends Component {
     return false;
   }
 
+  get show_merge_item() {
+    return this.show_move_item;
+  }
+
 }

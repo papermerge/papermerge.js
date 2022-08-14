@@ -39,6 +39,7 @@ export default class ViewerComponent extends Component {
   @tracked selected_pages = A([]);
   @tracked show_confirm_pages_deletion_modal = false;
   @tracked show_confirm_document_delete_modal = false;
+  @tracked show_confirm_document_merge_modal = false;
   @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
@@ -227,6 +228,11 @@ export default class ViewerComponent extends Component {
   @action
   openConfirmDeleteDocumentModal() {
    this.show_confirm_document_delete_modal = true; 
+  }
+
+  @action
+  openConfirmMergeDocumentModal() {
+   this.show_confirm_document_merge_modal = true; 
   }
 
   @action
