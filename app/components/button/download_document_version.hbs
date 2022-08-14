@@ -11,7 +11,10 @@
       <li>
         <a class="dropdown-item" href="#"
           {{on "click" (fn this.download document_version)}}>
-            version {{document_version.number}} {{document_version.short_description}}
+            version {{document_version.number}}
+            {{#if document_version.short_description}}
+              / {{document_version.short_description}}
+            {{/if}}
         </a>
       </li>
     {{/each}}
