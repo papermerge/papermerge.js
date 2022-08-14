@@ -331,6 +331,30 @@ export default class ViewerComponent extends Component {
     );
   }
 
+  @task *submitConfirmDocumentMergeModal() {
+    /*Triggered by document merge context menu item*/ 
+
+  let doc_id, // id of the document to be merged (current one)
+    parent_id, // parent of the document
+    result;
+
+    doc_id = this.args.doc.get('id');
+    parent_id = this.args.doc.parent.get('id');
+
+    result = yield this.requests.mergeDocument({
+      src: doc_id,
+      dst: this.args.extra_id
+    });
+
+    this.show_confirm_document_merge_modal = false;
+    // redirect to parent node
+    this.router.replaceWith(
+      'authenticated.nodes',
+      parent_id
+    );
+    this._refresh_secondary_panel();
+  }
+
   @action
   async onPageOrderApply() {
     this.apply_page_order_changes_in_progress = true;
@@ -450,7 +474,10 @@ export default class ViewerComponent extends Component {
   _dual_refresh() {
     // refresh primary panel
     this.router.refresh();
+    this._refresh_secondary_panel();
+  }
 
+  _refresh_secondary_panel() {
     // the whole point of this uglyness is to refresh secondary panel.
     // Secondary panel can be either commander or viewer.
     if (this.args.hint == 'left') {
