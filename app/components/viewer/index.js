@@ -298,6 +298,7 @@ export default class ViewerComponent extends Component {
     }
 
     this.selected_pages = A([]);
+    this._dual_refresh();
   }
 
   @action
@@ -481,6 +482,7 @@ export default class ViewerComponent extends Component {
   _refresh_secondary_panel() {
     // the whole point of this uglyness is to refresh secondary panel.
     // Secondary panel can be either commander or viewer.
+    debugger;
     if (this.args.hint == 'left') {
       // Current viewer is on the 'left' side.
       // This means that secondary panel to refresh is on the 'right'
