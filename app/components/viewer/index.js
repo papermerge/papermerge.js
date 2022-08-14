@@ -347,12 +347,13 @@ export default class ViewerComponent extends Component {
     });
 
     this.show_confirm_document_merge_modal = false;
-    // redirect to parent node
+
     this.router.replaceWith(
-      'authenticated.nodes',
-      parent_id
+      'authenticated.document',
+      this.args.extra_id
     );
-    this._refresh_secondary_panel();
+
+    this.args.onPanelToggle.perform('close');
   }
 
   @action
