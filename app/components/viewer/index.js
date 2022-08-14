@@ -39,6 +39,7 @@ export default class ViewerComponent extends Component {
   @tracked selected_pages = A([]);
   @tracked show_confirm_pages_deletion_modal = false;
   @tracked show_confirm_document_delete_modal = false;
+  @tracked show_confirm_document_merge_modal = false;
   @tracked show_rename_node_modal = false;
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
@@ -230,6 +231,11 @@ export default class ViewerComponent extends Component {
   }
 
   @action
+  openConfirmMergeDocumentModal() {
+   this.show_confirm_document_merge_modal = true; 
+  }
+
+  @action
   openRenameDocumentModal() {
     this.show_rename_node_modal = true;
   }
@@ -323,6 +329,31 @@ export default class ViewerComponent extends Component {
       'authenticated.nodes',
       parent_id
     );
+  }
+
+  @task *submitConfirmDocumentMergeModal() {
+    /*Triggered by document merge context menu item*/ 
+
+  let doc_id, // id of the document to be merged (current one)
+    parent_id, // parent of the document
+    result;
+
+    doc_id = this.args.doc.get('id');
+    parent_id = this.args.doc.parent.get('id');
+
+    result = yield this.requests.mergeDocument({
+      src: doc_id,
+      dst: this.args.extra_id
+    });
+
+    this.show_confirm_document_merge_modal = false;
+
+    this.router.replaceWith(
+      'authenticated.document',
+      this.args.extra_id
+    );
+
+    this.args.onPanelToggle.perform('close');
   }
 
   @action
@@ -444,7 +475,10 @@ export default class ViewerComponent extends Component {
   _dual_refresh() {
     // refresh primary panel
     this.router.refresh();
+    this._refresh_secondary_panel();
+  }
 
+  _refresh_secondary_panel() {
     // the whole point of this uglyness is to refresh secondary panel.
     // Secondary panel can be either commander or viewer.
     if (this.args.hint == 'left') {

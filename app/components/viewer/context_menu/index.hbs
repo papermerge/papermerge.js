@@ -25,7 +25,19 @@
 
     <Viewer::ContextMenu::Item::DeletePages
       @openConfirmDeletionModal={{@openConfirmDeletionModal}} />
-  {{/if}}
+  {{else}}
+    {{! No pages are selected }}
+    {{! Show document merge menu only if there are NO SELECTED PAGES }}
+    {{#if this.show_merge_item}}
+      {{! Show item only if there is another viewer opened }}
+      <ContextMenu::Devider />
+
+      <Viewer::ContextMenu::Item::Merge
+        @hint={{@hint}}
+        @swap_panels={{@swap_panels}}
+        {{on "click" @openConfirmMergeDocumentModal}} />
+    {{/if}}
+  {{/if}} {{! if this.one_or_multiple_pages_selected }}
 
   <ContextMenu::Devider />
 

@@ -110,6 +110,20 @@ export default class Requests extends Service {
     return this._delete(`/documents/${document_id}/`);
   }
 
+  async mergeDocument({src, dst}) {
+    if (!src) {
+      console.warn(`mergeDocument: src is empty`);
+      return;
+    }
+    if (!dst) {
+      console.warn(`mergeDocument: dst is empty`);
+      return;
+    }
+    return this._post(
+      '/documents/merge/', {src, dst}
+    );
+  }
+
   async rotatePages({page_ids, angle}) {
     let pages = [];
 

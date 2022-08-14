@@ -30,6 +30,9 @@
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
     @openConfirmDeleteDocumentModal={{this.openConfirmDeleteDocumentModal}}
+    @openConfirmMergeDocumentModal={{
+      this.openConfirmMergeDocumentModal
+    }}
     @openExtractPagesModal={{this.openExtractPagesModal}}
     @openMovePagesModal={{this.openMovePagesModal}}
 
@@ -50,6 +53,12 @@
     @doc={{@doc}}
     @onSubmit={{this.submitConfirmDocumentDeleteModal}}
     {{show-when this.show_confirm_document_delete_modal}} />
+
+  <Viewer::Modal::MergeDocument
+    id="merge-document"
+    @doc={{@doc}}
+    @onSubmit={{this.submitConfirmDocumentMergeModal}}
+    {{show-when this.show_confirm_document_merge_modal}} />    
 
   <Modal::RenameNode
     @node={{@doc}}
