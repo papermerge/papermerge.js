@@ -36,7 +36,7 @@ export default class MovePagesComponent extends Component {
 
   @action
   onPositionChanged(event) {
-    this._position = event.target.value;
+    this._position = parseInt(event.target.value);
   }
 
   get count() {
@@ -47,6 +47,7 @@ export default class MovePagesComponent extends Component {
   }
 
   get target_doc() {
+
     if (this.args.extra) {
       return this.args.extra;
     }

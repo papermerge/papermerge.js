@@ -17,7 +17,8 @@
 
   <button
     class="btn btn-link"
-    {{on "click" (perform @onNodeClicked @node.id @hint 'folder')}}>
+    {{on "click" (perform @onNodeClicked @node.id @hint 'folder')}}
+    {{tooltip title=@node.id placement='bottom' delay=4000}}>
       {{#if (is_equal @node.title ".inbox")}}
         Inbox
       {{else if (is_equal @node.title ".home")}}

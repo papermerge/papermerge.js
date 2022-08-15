@@ -6,6 +6,11 @@ export default class TooltipModifier extends Modifier {
 
   didReceiveArguments() {
     let { title, placement } = this.args.named;
+    let delay = 1000;
+
+    if (this.args.named['delay']) {
+      delay = this.args.named['delay'];
+    }
 
     if (!placement) {
       placement = 'right';
@@ -16,7 +21,8 @@ export default class TooltipModifier extends Modifier {
       {
         'title': title,
         'placement': placement,
-        'trigger': 'hover'
+        'trigger': 'hover',
+        'delay': delay
       }
     );
   }
