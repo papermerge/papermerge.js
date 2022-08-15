@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
 import { task } from 'ember-concurrency';
+import { delay } from 'papermerge/utils/time';
 import {
   reposition_items,
   is_permuted
@@ -284,6 +285,7 @@ export default class ViewerComponent extends Component {
     position,
     merge
   }) {
+
     let result = yield this.requests.moveToDocument({
       dst: target_doc,
       page_ids: page_ids,
@@ -297,8 +299,29 @@ export default class ViewerComponent extends Component {
       this.show_move_pages_modal = false;
     }
 
-    this.selected_pages = A([]);
-    this._dual_refresh();
+    if (this.args.pages.length == page_ids.length) {
+      // We are actually merging two documents
+      // Thus source will be deleted.
+
+      this.router.replaceWith(
+        'authenticated.document',
+        target_doc.id
+      );
+
+      this.router.refresh();
+
+      // without this short delay, the modal
+      // dialog is not properly closed (on left side)
+      yield delay(400);
+
+      this.args.onPanelToggle.perform('close');
+    } else {
+      // we moved pages from one document to another
+      // a dual refresh is ok
+      this.selected_pages = A([]);
+      this._dual_refresh();
+    }
+
   }
 
   @action
@@ -336,11 +359,9 @@ export default class ViewerComponent extends Component {
     /*Triggered by document merge context menu item*/ 
 
   let doc_id, // id of the document to be merged (current one)
-    parent_id, // parent of the document
     result;
 
     doc_id = this.args.doc.get('id');
-    parent_id = this.args.doc.parent.get('id');
 
     result = yield this.requests.mergeDocument({
       src: doc_id,
@@ -353,6 +374,12 @@ export default class ViewerComponent extends Component {
       'authenticated.document',
       this.args.extra_id
     );
+
+    this.router.refresh();
+
+    // without this short delay, the modal
+    // dialog is not properly closed
+    yield delay(400);
 
     this.args.onPanelToggle.perform('close');
   }
@@ -482,7 +509,7 @@ export default class ViewerComponent extends Component {
   _refresh_secondary_panel() {
     // the whole point of this uglyness is to refresh secondary panel.
     // Secondary panel can be either commander or viewer.
-    debugger;
+
     if (this.args.hint == 'left') {
       // Current viewer is on the 'left' side.
       // This means that secondary panel to refresh is on the 'right'
@@ -491,7 +518,7 @@ export default class ViewerComponent extends Component {
       this.args.onNodeClicked.perform(
         this.args.extra_id,
         'right', // perform reload of secondary panel
-        'folder' // panel = commander
+        this.args.extra_type
       );
     } else {
       // Current viewer is on the 'right' side.
