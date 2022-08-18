@@ -13,10 +13,17 @@ export default class MovePagesComponent extends Component {
   @tracked _position = 0;
   @tracked _merge = false;
 
+  get strategy_options() {
+    return [
+      { key: 'append', value: 'Append' },
+      { key: 'replace', value: 'Replace' },
+    ]
+  }
+
   get position() {
     return [
-      { key: 0, value: 'beginning' },
-      { key: -1, value: 'end' },
+      { key: 0, value: 'Beginning' },
+      { key: -1, value: 'End' },
     ];
   }
 
@@ -32,6 +39,18 @@ export default class MovePagesComponent extends Component {
       position: this._position,
       merge: this.merge
     });
+  }
+
+  @action
+  onStrategyChanged(event) {
+    let strategy = event.target.value;
+
+    if (strategy === 'replace') {
+      this._merge = true;
+    } else {
+      this._merge = false;
+    }
+
   }
 
   @action
