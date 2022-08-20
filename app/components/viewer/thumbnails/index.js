@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import Point from 'papermerge/utils/point';
 import { action } from '@ember/object';
+import RWDataTransfer from 'papermerge/utils/rw_data_transfer';
 
 
 export default class ViewerThumbnailsComponent extends Component {
@@ -27,7 +28,7 @@ export default class ViewerThumbnailsComponent extends Component {
     data = event.dataTransfer.getData('application/x.page');
 
     if (!data) {
-      console.warn('Accepts only application/x.page data');
+      console.warn('Thumbnails:onDrop: Accepts only application/x.page data');
       return;
     }
     json_data = JSON.parse(data);
@@ -61,6 +62,18 @@ export default class ViewerThumbnailsComponent extends Component {
     Creates DOM placeholder suggesting to user that here he/she can drop the page.
 
     Only one placeholder DOM element is allowed.
+
+    Data availability
+    -----------------
+
+    The HTML5 Drag and Drop Specification dictates a drag
+    data store mode. This may result in unexpected behavior, being
+    DataTransfer.getData() not returning an expected value, because not all
+    browsers enforce this restriction.
+
+    During the *dragstart* and *drop events, it is safe to access the data. For all
+    other events, the data should be considered unavailable. Despite this, the
+    items and their formats can still be enumerated.
     */
     let thumbnail_dom_items,
       cursor_coord,
@@ -69,22 +82,28 @@ export default class ViewerThumbnailsComponent extends Component {
       cursor_before_child = 0,
       outside_all_thumbnails = true,
       svg_or_img_element,
-      data,
-      json_data,
-      original_pos;
+      source_doc_id,
+      original_pos,
+      rw_data;
 
     if (!element) {
       return;
     }
 
-    data = event.dataTransfer.getData('application/x.page');
-    if (!data) {
-      console.warn('Accepts only application/x.page data');
-      return;
-    }
-    json_data = JSON.parse(data);
+    //get_data({
+    //  dataTransfer: event.dataTransfer,
+    //  format: "application/x.page/source_doc_id"
+    //});
 
-    original_pos = json_data['original_pos']
+    rw_data = new RWDataTransfer({
+      ro_data_transfer: event.dataTransfer
+    });
+
+    original_pos = rw_data.get('original_pos');
+    if (original_pos) {
+      original_pos = parseInt(original_pos);
+    }
+    source_doc_id = rw_data.get('source_doc_id');
 
     cursor_coord = new Point(event.clientX, event.clientY);
     thumbnail_dom_items = Array.from(element.children);
@@ -120,7 +139,7 @@ export default class ViewerThumbnailsComponent extends Component {
 
     // suggest position to drop ONLY if cursor is outside of all thumbnails
     if (outside_all_thumbnails) {
-      if (json_data['source_doc_id'] !== this.args.doc.id) {
+      if (source_doc_id !== this.args.doc.id) {
         // when dragging pages from source document target document (src != target)
         // then suggested thumbail can be inserted at any position
         event.preventDefault();
