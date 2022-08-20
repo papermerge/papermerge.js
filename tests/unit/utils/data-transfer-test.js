@@ -1,5 +1,8 @@
 import { module, test } from 'qunit';
-import RWDataTransfer from 'papermerge/utils/rw_data_transfer';
+import {
+  RWDataTransfer,
+  APPLICATION_XPAGE
+} from 'papermerge/utils/rw_data_transfer';
 
 
 class FakeRoDataTransfer {
@@ -18,7 +21,7 @@ class FakeRoDataTransfer {
 
 
 module('Unit | Utils | RWDataTransfer', function () {
-  test('instanciation RWDataTransfer', function (assert) {
+  test('instantiate basic RWDataTransfer', function (assert) {
     let rw_data;
 
     rw_data = new RWDataTransfer({
@@ -34,7 +37,7 @@ module('Unit | Utils | RWDataTransfer', function () {
 
     rw_data = new RWDataTransfer({
       ro_data_transfer: new FakeRoDataTransfer(),
-      format: "application/x.page"
+      format: APPLICATION_XPAGE
     });
 
     rw_data.set("source_doc_id", "123");
@@ -49,15 +52,37 @@ module('Unit | Utils | RWDataTransfer', function () {
     let rw_data, ro_data;
 
     ro_data = new FakeRoDataTransfer();
-    ro_data.setData('application/x.page/some_data/xyz', 'xyz');
+    ro_data.setData(
+      `${APPLICATION_XPAGE}/some_data/xyz-actual-data`,
+      'xyz-not-used' // discarded during `drag` event
+    );
 
     rw_data = new RWDataTransfer({
       ro_data_transfer: ro_data,
-      format: "application/x.page"
+      format: APPLICATION_XPAGE
     });
 
     assert.true(
-      rw_data.get("some_data") === "xyz"
+      rw_data.get("some_data") === "xyz-actual-data"
+    );
+  });
+
+  test('Retrieve data from RWDataTransfer 3', function (assert) {
+    let rw_data, ro_data;
+
+    ro_data = new FakeRoDataTransfer();
+    ro_data.setData(
+      `${APPLICATION_XPAGE}/some_data/xyz-actual-data`,
+      'xyz-not-used' // discarded during `drag` event
+    );
+
+    rw_data = new RWDataTransfer({
+      // use default format, which is "application/x.page"
+      ro_data_transfer: ro_data
+    });
+
+    assert.true(
+      rw_data.get("some_data") === "xyz-actual-data"
     );
   });
 

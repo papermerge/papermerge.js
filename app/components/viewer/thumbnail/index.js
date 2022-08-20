@@ -2,7 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 import { get_pos_within_siblings } from 'papermerge/utils/dom';
-import RWDataTransfer from 'papermerge/utils/rw_data_transfer';
+import {
+  RWDataTransfer,
+  APPLICATION_XPAGE
+} from 'papermerge/utils/rw_data_transfer';
 
 
 export default class ViewerThumbnailComponent extends Component {
@@ -45,17 +48,8 @@ export default class ViewerThumbnailComponent extends Component {
     rw_data.set('original_pos', original_pos);
     rw_data.set('source_doc_id', this.args.doc.id);
 
-    //data_transfer = new PageDataTransfer(event.dataTransfer);
-    //data_transfer.set("source_doc_id", )
-
-    //set_data({
-    //  dataTransfer: event.dataTransfer,
-    //  value: this.args.doc.id,
-    //  format: "application/x.page/source_doc_id/"
-    //});
-
     event.dataTransfer.setData(
-      'application/x.page',
+      APPLICATION_XPAGE,
       JSON.stringify(data)
     );
 

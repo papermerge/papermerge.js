@@ -217,7 +217,7 @@ export default class ViewerComponent extends Component {
       merge: false
     }).then(() => {
       this._pages = [];
-      this.router.refresh();
+      this._dual_refresh();
       this.notify.info("Page(s) moved successfully");
     });
   }
