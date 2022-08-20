@@ -1,7 +1,9 @@
 import Component from '@glimmer/component';
 import Point from 'papermerge/utils/point';
 import { action } from '@ember/object';
-import RWDataTransfer from 'papermerge/utils/rw_data_transfer';
+import {
+  RWDataTransfer
+} from 'papermerge/utils/rw_data_transfer';
 
 
 export default class ViewerThumbnailsComponent extends Component {
