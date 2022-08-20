@@ -41,6 +41,7 @@ export default class ViewerThumbnailsComponent extends Component {
       this.args.onThumbnailsPositionChanged(page_ids);
     } else {
       // pages moved to another document
+
       drop_placeholder_pos = this.args.pages.findIndex(
         item => item.is_drop_placeholder
       );

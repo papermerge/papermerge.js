@@ -1,5 +1,15 @@
 
 function get_id(item) {
+
+  if (item.value) { // item may be a task instance
+    if (item.value.id) {
+      return item.value.id;
+    }
+    if (item.value.get) {
+      return item.value.get('id');
+    }
+  }
+
   if (item.id) {
     return item.id;
   }
