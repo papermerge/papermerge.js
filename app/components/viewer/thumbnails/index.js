@@ -91,11 +91,6 @@ export default class ViewerThumbnailsComponent extends Component {
       return;
     }
 
-    //get_data({
-    //  dataTransfer: event.dataTransfer,
-    //  format: "application/x.page/source_doc_id"
-    //});
-
     rw_data = new RWDataTransfer({
       ro_data_transfer: event.dataTransfer
     });
