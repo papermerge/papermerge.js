@@ -41,6 +41,7 @@ export default class ViewerThumbnailComponent extends Component {
 
     element.classList.add('is-being-dragged');
 
+    // data used during `drag` event
     rw_data = new RWDataTransfer({
       ro_data_transfer: event.dataTransfer
     });
@@ -48,6 +49,7 @@ export default class ViewerThumbnailComponent extends Component {
     rw_data.set('original_pos', original_pos);
     rw_data.set('source_doc_id', this.args.doc.id);
 
+    // data used during `drop` event
     event.dataTransfer.setData(
       APPLICATION_XPAGE,
       JSON.stringify(data)
