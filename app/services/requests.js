@@ -160,7 +160,7 @@ export default class Requests extends Service {
   }
 
   async moveToFolder({dst, page_ids, single_page, title_format}) {
-    
+
     return this._post('/pages/move-to-folder/', {
       dst: dst.id,
       pages: page_ids,

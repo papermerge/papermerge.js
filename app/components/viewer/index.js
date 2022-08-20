@@ -211,12 +211,13 @@ export default class ViewerComponent extends Component {
   async onIncomingPages({page_ids, drop_pos}) {
 
     this.requests.moveToDocument({
-      dst: this.args.doc.id,
-      pages: page_ids,
-      position: drop_pos
+      dst: this.args.doc,
+      page_ids: page_ids,
+      position: drop_pos,
+      merge: false
     }).then(() => {
       this._pages = [];
-      this.router.refresh();
+      this._dual_refresh();
       this.notify.info("Page(s) moved successfully");
     });
   }

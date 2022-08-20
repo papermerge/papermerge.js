@@ -1,5 +1,22 @@
 
 function get_id(item) {
+  /*
+  Returns item's `id` value.
+
+  Item can be either `Page` instance or `TaskInstance`.
+  When item is a `Page`, the `id` attrr
+  */
+  if (item.value) {
+    // in this case item is task instance (ember concurrency task)
+    // in such case return `id` attribute via `item.value`
+    if (item.value.id) {
+      return item.value.id;
+    }
+    if (item.value.get) {
+      return item.value.get('id');
+    }
+  }
+  // item is `Page` model instance
   if (item.id) {
     return item.id;
   }
