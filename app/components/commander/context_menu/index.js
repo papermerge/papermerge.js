@@ -20,6 +20,14 @@ export default class ContextMenuComponent extends Component {
     return this.args.selectedNodes.length === 1;
   }
 
+  get is_document() {
+    if (this.one_node_selected) {
+      return this.args.selectedNodes[0].nodeType == 'document';
+    }
+
+    return false;
+  }
+
   get one_or_multiple_nodes_selected() {
     return this.args.selectedNodes.length >= 1;
   }
@@ -98,6 +106,13 @@ export default class ContextMenuComponent extends Component {
   @action
   onRename() {
     this.args.openRenameModal(
+      this.args.selectedNodes[0]
+    );
+  }
+
+  @action
+  onOCRedText() {
+    this.args.openOCRedTextModal(
       this.args.selectedNodes[0]
     );
   }

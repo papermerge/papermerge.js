@@ -79,6 +79,10 @@ export default class Requests extends Service {
     return page;
   }
 
+  async getOCRedText({doc_id}) {
+    return this._get(`/documents/${doc_id}/ocr-text`);
+  }
+
   async runOCR({doc_id, lang}) {
     /*
       Request sent with ContentType: application/json

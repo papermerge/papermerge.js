@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { task } from 'ember-concurrency';
 import localStorage from 'papermerge/utils/localstorage';
 
 
@@ -21,6 +22,9 @@ export default class CommanderComponent extends Component {
 
   // show rename node modal dialog?
   @tracked show_rename_node_modal = false;
+
+  // show OCRed text modal dialog?
+  @tracked show_ocred_text_modal = false;
 
   @tracked show_confirm_deletion_modal = false;
   @tracked show_tags_modal = false;
@@ -90,6 +94,20 @@ export default class CommanderComponent extends Component {
   @action
   openRenameModal() {
     this.show_rename_node_modal = true;
+  }
+
+  @action
+  openOCRedTextModal() {
+    this.show_ocred_text_modal = true;
+    this.getOcrText.perform({
+      doc_id: this.first_selected_node.id
+    });
+  }
+
+  @action
+  onCloseOCRedTextModal() {
+    this.show_ocred_text_modal = false;
+    this.selected_nodes = A([]);
   }
 
   @action
@@ -485,5 +503,13 @@ export default class CommanderComponent extends Component {
 
   get is_empty_folder() {
     return this.children.length === 0;
+  }
+
+  @task *getOcrText({doc_id}) {
+    let result = yield this.requests.getOCRedText(
+      {doc_id}
+    );
+
+    return result;
   }
 }
