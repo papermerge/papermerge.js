@@ -1,0 +1,29 @@
+<div class="modal" tabindex="-1" ...attributes>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{this.title}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center">
+          {{#if this.ocred_text.isRunning}}
+            <Spinner @inProgress={{true}}/>
+          {{else if this.ocred_text_result}}
+            {{this.ocred_text_result}}
+          {{else}}
+            Empty
+          {{/if}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          {{on "click" this.onClose}}>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -42,6 +42,11 @@ export default class ViewerComponent extends Component {
   @tracked show_confirm_document_delete_modal = false;
   @tracked show_confirm_document_merge_modal = false;
   @tracked show_rename_node_modal = false;
+
+  // show OCRed text modal dialog?
+  @tracked show_ocred_text_modal = false;
+  @tracked ocred_text_result;
+
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
   // extract page = document -> folder
@@ -229,17 +234,31 @@ export default class ViewerComponent extends Component {
 
   @action
   openConfirmDeleteDocumentModal() {
-   this.show_confirm_document_delete_modal = true; 
+   this.show_confirm_document_delete_modal = true;
   }
 
   @action
   openConfirmMergeDocumentModal() {
-   this.show_confirm_document_merge_modal = true; 
+   this.show_confirm_document_merge_modal = true;
   }
 
   @action
   openRenameDocumentModal() {
     this.show_rename_node_modal = true;
+  }
+
+  @action
+  openOCRedTextModal() {
+    this.show_ocred_text_modal = true;
+    this.getOcrText.perform({
+      doc_id: this.args.doc.get('id')
+    });
+  }
+
+  @action
+  onCloseOCRedTextModal() {
+    this.show_ocred_text_modal = false;
+    this.selected_nodes = A([]);
   }
 
   @action
@@ -499,6 +518,18 @@ export default class ViewerComponent extends Component {
 
   get has_page_order_changes() {
     return this.ordered_pages_change.has_changes;
+  }
+
+  @task *getOcrText({doc_id}) {
+    this.ocred_text_result = '';
+
+    let page_ids = this.selected_pages.map(page => page.id);
+    let result_1 = yield this.requests.getOCRedText(
+      {doc_id, page_ids}
+    );
+    let result_2 = yield result_1.json()
+
+    this.ocred_text_result = result_2['text'];
   }
 
   _dual_refresh() {

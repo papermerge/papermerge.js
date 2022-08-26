@@ -52,6 +52,10 @@
     <ul class="dropdown-menu"
       aria-expand="false"
       aria-labelledby="display-mode">
+
+      <Viewer::ContextMenu::Item::OcredText
+        @openOCRedTextModal={{@openOCRedTextModal}} />
+
       <li>
         <a class="dropdown-item" role='button'
           {{on "click" (fn @onRotateClockwise 270)}}>

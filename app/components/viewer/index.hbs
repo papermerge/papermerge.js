@@ -11,6 +11,7 @@
       @onPageOrderDiscard={{this.onPageOrderDiscard}}
       @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
       @openRenameDocumentModal={{this.openRenameDocumentModal}}
+      @openOCRedTextModal={{this.openOCRedTextModal}}
       @onRotateClockwise={{this.onRotateClockwise}}
       @onRunOCR={{this.onRunOCR}} />
 
@@ -28,6 +29,7 @@
     @selectedPages={{this.selected_pages}}
     @onRotateClockwise={{this.onRotateClockwise}}
     @openRenameDocumentModal={{this.openRenameDocumentModal}}
+    @openOCRedTextModal={{this.openOCRedTextModal}}
     @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
     @openConfirmDeleteDocumentModal={{this.openConfirmDeleteDocumentModal}}
     @openConfirmMergeDocumentModal={{
@@ -64,6 +66,13 @@
     @node={{@doc}}
     @onClose={{this.onCloseRenameModal}}
     {{show-when this.show_rename_node_modal}} />
+
+  <Modal::OcrText
+    @node={{@doc}}
+    @getOcrText={{this.getOcrText}}
+    @ocred_text_result={{this.ocred_text_result}}
+    @onClose={{this.onCloseOCRedTextModal}}
+    {{show-when this.show_ocred_text_modal}} />
 
   <Viewer::Modal::ExtractPages
     id="extract-pages"
