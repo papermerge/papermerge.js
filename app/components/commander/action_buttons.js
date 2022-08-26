@@ -24,6 +24,13 @@ export default class ActionButtonsComponent extends Component {
   }
 
   @action
+  onOCRedText() {
+    this.args.openOCRedTextModal(
+      this.args.selectedNodes[0]
+    );
+  }
+
+  @action
   onRename() {
     this.args.openRenameModal(
       this.args.selectedNodes[0]

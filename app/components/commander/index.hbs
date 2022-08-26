@@ -34,6 +34,7 @@
     <Commander::ActionButtons
       @openNewFolderModal={{this.openNewFolderModal}}
       @openRenameModal={{this.openRenameModal}}
+      @openOCRedTextModal={{this.openOCRedTextModal}}
       @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
       @openTagsModal={{this.openTagsModal}}
       @onCreateDocumentModel={{this.onCreateDocumentModel}}
@@ -69,6 +70,7 @@
   <Modal::OcrText
     @node={{this.first_selected_node}}
     @getOcrText={{this.getOcrText}}
+    @ocred_text_result={{this.ocred_text_result}}
     @onClose={{this.onCloseOCRedTextModal}}
     {{show-when this.show_ocred_text_modal}} />
 

@@ -25,6 +25,7 @@ export default class CommanderComponent extends Component {
 
   // show OCRed text modal dialog?
   @tracked show_ocred_text_modal = false;
+  @tracked ocred_text_result;
 
   @tracked show_confirm_deletion_modal = false;
   @tracked show_tags_modal = false;
@@ -506,10 +507,13 @@ export default class CommanderComponent extends Component {
   }
 
   @task *getOcrText({doc_id}) {
-    let result = yield this.requests.getOCRedText(
+    this.ocred_text_result = '';
+
+    let result_1 = yield this.requests.getOCRedText(
       {doc_id}
     );
+    let result_2 = yield result_1.json()
 
-    return result;
+    this.ocred_text_result = result_2['text'];
   }
 }

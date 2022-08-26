@@ -7,27 +7,23 @@ import Component from '@glimmer/component';
 export default class OCRTextComponent extends Component {
 
   get title() {
-    if (this._title === undefined) {
-      return this.default_title;
+    if (this.ocred_text.isRunning) {
+      return 'Loading...';
     }
 
-    return this._title;
-  }
-
-  get default_title() {
-    if (this.node) {
-      return this.node.title;
+    if (this.args.node) {
+      return `${this.args.node.title} OCRed Text`;
     }
 
     return 'noname';
   }
 
-  get node() {
-    return this.args.node;
+  get ocred_text() {
+    return this.args.getOcrText;
   }
 
-  get ocred_text() {
-    return this.args.getOCRedtext;
+  get ocred_text_result() {
+    return this.args.ocred_text_result;
   }
 
   @action

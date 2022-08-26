@@ -22,6 +22,14 @@
       aria-labelledby="display-mode">
       <li>
         <a class="dropdown-item"
+          role='button'
+          {{on "click" this.onOCRedText}}>
+          <i class="bi bi-eye"></i>
+          OCRed Text
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item"
             role='button'
             {{on "click" @openTagsModal}}>
           <i class="bi bi-tag"></i>

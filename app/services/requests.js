@@ -79,8 +79,18 @@ export default class Requests extends Service {
     return page;
   }
 
-  async getOCRedText({doc_id}) {
-    return this._get(`/documents/${doc_id}/ocr-text`);
+  async getOCRedText({doc_id, page_ids}) {
+    let params_str, params_map;
+
+    if (page_ids) {
+      params_map = page_ids.map(page_id => `page_ids[]=${page_id}`);
+      params_str = params_map.join('&');
+    }
+
+    return this._get(
+      `/documents/${doc_id}/ocr-text`,
+      params_str
+    );
   }
 
   async runOCR({doc_id, lang}) {
