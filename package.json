@@ -1,9 +1,9 @@
 {
   "name": "papermerge",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Small description for papermerge goes here",
-  "repository": "",
+  "version": "2.1.0a39",
+  "private": false,
+  "description": "Papermerge DMS frontend",
+  "repository": "https://github.com/papermerge/papermerge.js",
   "license": "Apache 2.0",
   "author": "Eugen Ciur <eugen@papermerge.com>",
   "directories": {
