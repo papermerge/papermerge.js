@@ -1,0 +1,41 @@
+<div class="modal" tabindex="-1" ...attributes>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">About</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h1 class="text-center">Papermerge DMS</h1>
+          <p class="text-center">Open source document management system designed
+          for scanned documents</p>
+        </div>
+        <div class="text-center">
+          <a href="https://github.com/papermerge/papermerge-core/blob/master/LICENSE">License Apache 2.0</a>
+        </div>
+        <p class="text-center">
+          <div>
+            <a href="https://github.com/papermerge/papermerge-core">Backend</a> version:
+            {{#if this.papermerge_version.isRunning}}
+              <Spinner @inProgress={{true}}/>
+            {{else}}
+              {{this.backend_version}}
+            {{/if}}
+          </div>
+          <div>
+            <a href="https://github.com/papermerge/papermerge.js">Frontend</a> version: {{this.frontend_version}}
+          </div>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          {{on "click" this.onClose}}>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

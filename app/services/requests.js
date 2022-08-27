@@ -93,6 +93,10 @@ export default class Requests extends Service {
     );
   }
 
+  async getPapermergeVersion() {
+    return this._get('/version');
+  }
+
   async runOCR({doc_id, lang}) {
     /*
       Request sent with ContentType: application/json

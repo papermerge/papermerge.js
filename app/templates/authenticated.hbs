@@ -8,9 +8,15 @@
   <div class="w-100 central-bar">
     <Notifications />
     <Nav::Topbar
-      @onSidebarToggle={{this.onSidebarToggle}} />
+      @onSidebarToggle={{this.onSidebarToggle}}
+      @openAboutModal={{this.openAboutModal}} />
     <div class="container-fluid mx-2 my-1">
       {{outlet}}
     </div>
   </div>
+  <Modal::About
+    @getPapermergeVersion={{this.getPapermergeVersion}}
+    @papermerge_version_result={{this.papermerge_version_result}}
+    @onClose={{this.onCloseAboutModal}}
+    {{show-when this.show_about_modal}} />
 </main>
