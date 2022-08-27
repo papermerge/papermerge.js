@@ -14,7 +14,7 @@
         class="btn btn-light"
         type="button"
         disabled
-        {{on "click" @onRunOCR}}>
+        {{on "click" @openRerunOCRModal}}>
           <OcrStatus @status={{@ocrStatus}} />
         Run OCR
       </button>
@@ -22,7 +22,7 @@
       <button
         class="btn btn-light"
         type="button"
-        {{on "click" @onRunOCR}}>
+        {{on "click" @openRerunOCRModal}}>
           <OcrStatus @status={{@ocrStatus}} />
         Run OCR
       </button>

@@ -47,6 +47,9 @@ export default class ViewerComponent extends Component {
   @tracked show_ocred_text_modal = false;
   @tracked ocred_text_result;
 
+  // show runOCR modal ?
+  @tracked show_run_ocr_modal = false;
+
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
   // extract page = document -> folder
@@ -253,6 +256,11 @@ export default class ViewerComponent extends Component {
     this.getOcrText.perform({
       doc_id: this.args.doc.get('id')
     });
+  }
+
+  @action
+  openRunOCRModal() {
+    this.show_run_ocr_modal = true;
   }
 
   @action
