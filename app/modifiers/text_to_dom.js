@@ -12,7 +12,7 @@ export default class TextToDom extends Modifier {
 
   Besides the fact that you cannot style plain text, it is also
   rendered with <em> tag.
-  To fix this problem hightlight text is concerted to DOM elements.
+  To fix this problem hightlight text is converted to DOM nodes.
   */
   didReceiveArguments() {
 
