@@ -24,7 +24,7 @@ export default class TextToDom extends Modifier {
       text_element;
 
     // inspired from https://stackoverflow.com/a/35385518
-    // HTML5's <template> tag can be used to convinently for converting
+    // HTML5's <template> tag can be used to convinently convert
     // text into DOM nodes
     template = document.createElement('template');
     template.innerHTML = text;
