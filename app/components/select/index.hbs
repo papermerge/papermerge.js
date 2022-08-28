@@ -3,6 +3,10 @@
   class="form-select"
   ...attributes>
   {{#each @options as |opt|}}
-    <option value="{{opt.key}}">{{opt.value}}</option>
+    {{#if opt.selected}}
+      <option value="{{opt.key}}" selected>{{opt.value}}</option>
+    {{else }}
+      <option value="{{opt.key}}">{{opt.value}}</option>
+    {{/if}}
   {{/each}}
 </select>

@@ -49,6 +49,7 @@ export default class ViewerComponent extends Component {
 
   // show runOCR modal ?
   @tracked show_run_ocr_modal = false;
+  @tracked ocr_languages;
 
   @tracked page_order_changed = false;
   @tracked apply_page_order_changes_in_progress = false;
@@ -118,12 +119,13 @@ export default class ViewerComponent extends Component {
   }
 
   @action
-  onRunOCR() {
+  onRunOCR(lang) {
     this.is_locked = true;
     this.requests.runOCR({
       doc_id: this.args.doc.id,
-      lang: 'deu'
+      lang: lang
     });
+    this.show_run_ocr_modal = false;
   }
 
   @action
@@ -261,6 +263,29 @@ export default class ViewerComponent extends Component {
   @action
   openRunOCRModal() {
     this.show_run_ocr_modal = true;
+    this.getOCRLanguages.perform();
+  }
+
+  @task *getOCRLanguages() {
+    let result1 = yield this.requests.preferences({
+      section_name: 'ocr'
+    });
+
+    let result2 = yield result1.json();
+    let ocr_language, languages, current_value;
+
+    ocr_language = result2.data.find(
+      item => item.attributes.identifier == 'ocr__language'
+    );
+
+    languages = ocr_language.attributes.additional_data.choices;
+    current_value = ocr_language.attributes.value;
+
+    this.ocr_languages = {
+      languages,
+      current_value
+    };
+
   }
 
   @action

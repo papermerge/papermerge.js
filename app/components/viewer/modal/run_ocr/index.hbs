@@ -10,10 +10,14 @@
           <Label
             @for="language"
             @text="OCR Language:" />
-          <Select
-            @options={{this.ocr_language_options}}
-            @onChange={{this.onLanguageChanged}}
-            name="ocr_language" />
+          {{#if this.getOCRLanguages.isRunning}}
+            <Spinner @inProgress={{true}} />
+          {{else}}
+            <Select
+              @options={{this.ocr_language_options}}
+              @onChange={{this.onLanguageChanged}}
+              name="ocr_language" />
+          {{/if}}
         </p>
       </div>
       <div class="modal-footer">

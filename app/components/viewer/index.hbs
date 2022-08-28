@@ -65,6 +65,8 @@
   <Viewer::Modal::RunOcr
     id="run-ocr"
     @doc={{@doc}}
+    @getOCRLanguages={{this.getOCRLanguages}}
+    @ocr_languages={{this.ocr_languages}}
     @onSubmit={{this.onRunOCR}}
     {{show-when this.show_run_ocr_modal}} />
 
