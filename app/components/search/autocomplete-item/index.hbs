@@ -1,5 +1,10 @@
-<li {{on "click" this.onClick}}>
-  <div class="icon {{@item.type}}"></div>
-  <div class="title">{{@item.title}}</div>
-  <div class="path text-muted">{{@item.path}}</div>
+<li
+  {{on "click" this.onClick}}>
+  <div class="d-flex flex-row">
+    <div class="icon {{@item.type}}"></div>
+    <div class="title">{{@item.title}}</div>
+    <div class="path text-muted">{{@item.path}}</div>
+  </div>
 </li>
+<div class="text-muted px-3 pb-3" {{textToDom @item.highlight}}>
+</div>
