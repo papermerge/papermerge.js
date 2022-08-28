@@ -1,7 +1,7 @@
 import Modifier from 'ember-modifier';
 
 
-export default class AutocompleteHighlights extends Modifier {
+export default class TextToDom extends Modifier {
   /*
   Converts plain text to HTML DOM elements and inserts them
   as children to `this.element`
