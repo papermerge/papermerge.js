@@ -1,0 +1,38 @@
+<div class="modal" tabindex="-1" ...attributes>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Run OCR</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <Label
+            @for="language"
+            @text="OCR Language:" />
+          {{#if this.getOCRLanguages.isRunning}}
+            <Spinner @inProgress={{true}} />
+          {{else}}
+            <Select
+              @options={{this.ocr_language_options}}
+              @onChange={{this.onLanguageChanged}}
+              name="ocr_language" />
+          {{/if}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          {{on "click" this.onCancel}}>Cancel</button>
+        <button
+          type="button"
+          class="btn btn-primary btn-success"
+          {{on "click" this.onSubmit}}>
+          Start
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

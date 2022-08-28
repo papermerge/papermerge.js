@@ -12,8 +12,8 @@
       @openConfirmDeletionModal={{this.openConfirmDeletionModal}}
       @openRenameDocumentModal={{this.openRenameDocumentModal}}
       @openOCRedTextModal={{this.openOCRedTextModal}}
-      @onRotateClockwise={{this.onRotateClockwise}}
-      @onRunOCR={{this.onRunOCR}} />
+      @openRerunOCRModal={{this.openRunOCRModal}}
+      @onRotateClockwise={{this.onRotateClockwise}} />
 
     <Viewer::ActionModes
       @onPanelToggle={{@onPanelToggle}}
@@ -61,6 +61,14 @@
     @doc={{@doc}}
     @onSubmit={{this.submitConfirmDocumentMergeModal}}
     {{show-when this.show_confirm_document_merge_modal}} />
+
+  <Viewer::Modal::RunOcr
+    id="run-ocr"
+    @doc={{@doc}}
+    @getOCRLanguages={{this.getOCRLanguages}}
+    @ocr_languages={{this.ocr_languages}}
+    @onSubmit={{this.onRunOCR}}
+    {{show-when this.show_run_ocr_modal}} />
 
   <Modal::RenameNode
     @node={{@doc}}
