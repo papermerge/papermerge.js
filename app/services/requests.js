@@ -18,23 +18,26 @@ export default class Requests extends Service {
   @service session;
   @service store;
 
-  async getImage(page_id, accept='image/jpeg', cache=undefined) {
+    async getImage(url, accept='image/jpeg', cache=undefined) {
     /*
     * Requests binary image/jpeg from backend of the
     * page model based on `page_id`
     */
-    let url, headers_copy = {};
-
-    url = `${base_url()}/pages/${page_id}/`;
+    let headers_copy = {}, new_url;
 
     // Important! don't change original this.headers
     // otherwise `PageAdapter` will continue
     // accepting only 'image/jpeg' content type for all subsequent requests
     Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
+
+    if (url && url.startsWith('https')) {
+      return fetch(url);
+    }
+
+    new_url = `${base_url()}/pages/${page_id}/`;
     headers_copy['Accept'] = accept;
 
-    return fetch(url, {
-      method: 'GET',
+    return fetch(new_url, {
       headers: headers_copy,
       cache: cache || ENV.APP.FETCH_CACHE
     });
@@ -55,7 +58,6 @@ export default class Requests extends Service {
   @task *loadImage(page, accept='image/jpeg', cache=undefined) {
     /*
     * Requests page's image from backend
-
       It can request image/jpeg or image/svg+xml. In case it asks
       for image/svg+xml media type and svg image is not available,
       server will return jpeg instead.
@@ -64,9 +66,31 @@ export default class Requests extends Service {
     */
     let response,
       image_blob,
-      image_object_url;
+      image_object_url,
+      url,
+      headers_copy = {},
+      page_image_url;
 
-    response = yield this.getImage(page.id, accept, cache);
+    Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
+    headers_copy['Accept'] = 'application/vnd.api+json';
+    url = `${base_url()}/pages/${page.id}/`;
+
+    response = yield fetch(
+      url, {
+        method: 'GET',
+        headers: headers_copy,
+        cache: cache || ENV.APP.FETCH_CACHE
+    });
+
+    response = yield response.json();
+
+    if (accept == 'image/jpeg') {
+      page_image_url = response.data.attributes['jpg_url'];
+    } else if (accept == 'image/svg+xml') {
+      page_image_url = response.data.attributes['svg_url'];
+    }
+
+    response = yield this.getImage(page_image_url, accept, cache);
 
     if (response.headers.get('content-type') == 'image/svg+xml') {
       page.svg_image = yield response.text();
