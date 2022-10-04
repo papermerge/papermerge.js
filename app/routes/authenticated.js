@@ -18,6 +18,8 @@ export default class AuthenticatedRoute extends BaseRoute {
     inbox_count = await this.requests.getInboxCount();
 
     if (this.currentUser.user) {
+      await this.currentUser.user.home_folder;
+      await this.currentUser.user.inbox_folder;
       home_folder_id = this.currentUser.user.home_folder.get('id');
       inbox_folder_id = this.currentUser.user.inbox_folder.get('id');
     }

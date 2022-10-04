@@ -143,9 +143,9 @@ export default class DualPanelBaseController extends Controller {
           node_id,
           { reload: true }
         );
-    
+
         last_version = doc.last_version;
-    
+
         pages_with_url = last_version.pages.map(
           (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
         );
