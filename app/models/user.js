@@ -19,9 +19,9 @@ class UserModel extends Model {
   @attr updated_at;
   @attr perm_codenames;
 
-  @belongsTo('folder') home_folder;
-  @belongsTo('folder') inbox_folder;
-  @hasMany('group') groups;
+  @belongsTo('folder', {async: true}) home_folder;
+  @belongsTo('folder', {async: true}) inbox_folder;
+  @hasMany('group', {async: true}) groups;
 
   changePassword(new_password) {
     this.requests.changeUserPassword({

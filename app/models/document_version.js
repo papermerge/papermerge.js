@@ -7,6 +7,6 @@ export default class DocumentVersionModel extends Model {
   @attr page_count; // total page count
   @attr lang; // languate used for this page
   @attr short_description;
-  @hasMany('pages') pages;
-  @belongsTo('document') document;
+  @hasMany('pages', {async: true}) pages;
+  @belongsTo('document', {async: true}) document;
 }

@@ -1,4 +1,4 @@
-FROM node:14 as build
+FROM node:18 as build
 
 LABEL author="Eugen Ciur <eugen@papermerge.com>"
 
@@ -10,6 +10,7 @@ COPY config ./config
 COPY public ./public
 COPY .ember-cli ./
 COPY ember-cli-build.js ./
+COPY package-lock.json ./
 COPY package.json ./
 
 RUN npm install

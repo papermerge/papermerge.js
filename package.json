@@ -1,6 +1,6 @@
 {
   "name": "papermerge",
-  "version": "2.1.0b4",
+  "version": "2.1.0b7",
   "private": false,
   "description": "Papermerge DMS frontend",
   "repository": "https://github.com/papermerge/papermerge.js",
@@ -35,7 +35,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.2.4",
     "ember-bootstrap-icons": "0.0.1",
-    "ember-cli": "^4.1.0",
+    "ember-cli": "^4.7.0",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-dependency-checker": "^3.2.0",
@@ -46,7 +46,8 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-cli-update": "^1.0.1",
-    "ember-data": "^4.1.0",
+    "ember-concurrency": "^2.2.1",
+    "ember-data": "^4.7.0",
     "ember-export-application-global": "^2.0.1",
     "ember-fetch": "^8.1.1",
     "ember-keyboard": "^7.0.0",
@@ -55,8 +56,8 @@
     "ember-page-title": "^7.0.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
-    "ember-simple-auth": "^4.1.1",
-    "ember-source": "^4.1.0",
+    "ember-simple-auth": "^4.2.2",
+    "ember-source": "^4.7.0",
     "ember-template-lint": "^3.16.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -70,8 +71,7 @@
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",
     "sass": "^1.47.0",
-    "tracked-built-ins": "^2.0.1",
-    "ember-concurrency": "^2.2.1"
+    "tracked-built-ins": "^2.0.1"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"

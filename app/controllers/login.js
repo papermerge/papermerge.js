@@ -37,6 +37,8 @@ export default class LoginController extends Controller {
     if (this.session.isAuthenticated) {
       // What to do with all this success?
       await this.currentUser.loadCurrentUser();
+      await this.currentUser.user.home_folder;
+
       this.router.transitionTo(
         'authenticated.nodes',
         this.currentUser.user.home_folder.get('id')

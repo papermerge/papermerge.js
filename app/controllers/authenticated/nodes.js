@@ -9,7 +9,7 @@ export default class NodesController extends DualPanelBaseController {
 
   @service router;
   @service store;
-  
+
   // pages attribute is updated in `setupController` of the `route`
   @tracked pages = new TrackedArray([]);
   // pagination/pages for extra panel
@@ -20,7 +20,7 @@ export default class NodesController extends DualPanelBaseController {
 
   @task({drop: true})
   *onPaginationPageClick(page_number, hint) {
-    
+
     let meta, children, node;
 
     if (hint === 'right') {
