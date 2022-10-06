@@ -107,10 +107,7 @@ export default class ViewerComponent extends Component {
       { reload: true }
     ).then((doc) => {
       last_version = doc.last_version;
-
-      that.__pages__ = that._pages = last_version.pages.map(
-        (page) => this.requests.loadImage.perform(page, 'image/svg+xml')
-      );
+      that.__pages__ = that._pages;
     });
   }
 
