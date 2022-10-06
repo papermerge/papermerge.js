@@ -69,7 +69,8 @@ export default class Requests extends Service {
       image_object_url,
       url,
       headers_copy = {},
-      page_image_url;
+      page_jpeg_url,
+      page_svg_url;
 
     Object.assign(headers_copy, this.headers);  // create a copy of `this.headers`
     headers_copy['Accept'] = 'application/vnd.api+json';
@@ -84,22 +85,24 @@ export default class Requests extends Service {
 
     response = yield response.json();
 
-    if (accept == 'image/jpeg') {
-      page_image_url = response.data.attributes['jpg_url'];
-    } else if (accept == 'image/svg+xml') {
-      page_image_url = response.data.attributes['svg_url'];
-    }
+    page_jpeg_url = response.data.attributes['jpg_url'];
+    page_svg_url = response.data.attributes['svg_url'];
 
-    response = yield this.getImage(page_image_url, accept, cache);
+    response = yield this.getImage(page_svg_url, 'image/svg+xml', cache);
 
-    if (response.headers.get('content-type') == 'image/svg+xml') {
+    if (response.status == 200) {
       page.svg_image = yield response.text();
     } else {
-      image_blob = yield response.blob();
-      image_object_url = URL.createObjectURL(image_blob);
-      page.url = image_object_url;
-    }
+      response = yield this.getImage(page_jpeg_url, 'image/jpeg', cache);
 
+      if (response.status == 200) {
+        image_blob = yield response.blob();
+        image_object_url = URL.createObjectURL(image_blob);
+        page.url = image_object_url;
+      } else {
+        // dummy page will be displayed
+      }
+    }
     return page;
   }
 
@@ -233,22 +236,35 @@ export default class Requests extends Service {
     *    file_name
     *    lang
     *    pages
+    *    download_url
     *    size
     *    page_count
     *    short_description
     *
     *  attributes which correspond to server side (or client side) DocumentVersion model
     */
-    let response, blob;
+    let response, blob, json_response, download_url;
 
-    response = await this._get(`/document-versions/${document_version.id}/download/`);
+    response = await this._get(`/document-versions/${document_version.id}/`);
 
-    blob = await response.blob();
+    if (response.status == 200) {
+      json_response = await response.json();
 
-    insert_blob(
-      document_version.file_name,
-      blob
-    );
+      download_url = json_response.data.attributes['download_url'];
+
+      if (download_url && download_url.startsWith('https')) {
+        response = await fetch(download_url);
+      } else {
+        response = await this._get(`/document-versions/${document_version.id}/download/`)
+      }
+
+      blob = await response.blob();
+
+      insert_blob(
+        document_version.file_name,
+        blob
+      );
+    }
   }
 
   async downloadNodes(selected_nodes) {

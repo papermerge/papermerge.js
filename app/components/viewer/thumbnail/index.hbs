@@ -13,8 +13,10 @@
     {{on "change" this.onCheckboxChange}} />
   {{#if @page.svg_image}}
     {{{@page.svg_image}}}
-  {{else}}
+  {{else if @page.url}}
     <img src="{{@page.url}}" />
+  {{else}}
+    Preview not ready yet
   {{/if}}
   <div class="number fs-3 m-3">
     {{@page.number}}
