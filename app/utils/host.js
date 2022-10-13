@@ -1,6 +1,20 @@
 import ENV from 'papermerge/config/environment';
 
 
+function location_url() {
+  let loc = `${window.location.protocol}//${window.location.host}`;
+
+  if (ENV.APP.HOST) {
+    // user can override BACKEND HOST by providing
+    // ENV.APP.HOST value
+    // e.g. ENV.APP.HOST = 'http://127.0.0.1:8000';
+    loc = ENV.APP.HOST;
+  }
+
+  return loc;
+}
+
+
 function base_url() {
   /*
   Returns backend's REST API base url.
@@ -10,7 +24,7 @@ function base_url() {
 
   Notice there is no `/` at the end of returned string.
   */
-  let base = `${window.location.protocol}//${window.location.host}`;
+  let base = location_url();
 
   if (ENV.APP.HOST) {
     // user can override BACKEND HOST by providing
@@ -55,4 +69,5 @@ function ws_base_url() {
 export {
   base_url,
   ws_base_url,
+  location_url
 };

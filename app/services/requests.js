@@ -9,7 +9,7 @@ import {
 import { get_id } from 'papermerge/utils/array';
 import { task } from 'ember-concurrency';
 
-import { base_url } from 'papermerge/utils/host';
+import { base_url, location_url } from 'papermerge/utils/host';
 import ENV from 'papermerge/config/environment';
 
 
@@ -18,7 +18,7 @@ export default class Requests extends Service {
   @service session;
   @service store;
 
-    async getImage(url, accept='image/jpeg', cache=undefined) {
+  async getImage(url, accept='image/jpeg', cache=undefined) {
     /*
     * Requests binary image/jpeg from backend of the
     * page model based on `page_id`
@@ -34,7 +34,8 @@ export default class Requests extends Service {
       return fetch(url);
     }
 
-    new_url = `${base_url()}/pages/${page_id}/`;
+    new_url = `${location_url()}${url}`;
+
     headers_copy['Accept'] = accept;
 
     return fetch(new_url, {
@@ -90,7 +91,7 @@ export default class Requests extends Service {
 
     response = yield this.getImage(page_svg_url, 'image/svg+xml', cache);
 
-    if (response.status == 200) {
+    if (response.headers.get('content-type') == 'image/svg+xml') {
       page.svg_image = yield response.text();
     } else {
       response = yield this.getImage(page_jpeg_url, 'image/jpeg', cache);
