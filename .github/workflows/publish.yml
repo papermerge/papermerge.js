@@ -1,3 +1,6 @@
+name: Publish
+
+on:
   workflow_dispatch:
     inputs:
       publish-to-dockerhub:
