@@ -25,7 +25,7 @@ jobs:
         id: step-version-bump
         uses: papermerge/banger@master
         with:
-          files_list: "package.json,app/version.js"
+          files_list: "package.json"
 
   build-and-publish-to-dockerhub:
     name: Dockerhub build/push
