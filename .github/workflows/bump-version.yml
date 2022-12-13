@@ -11,6 +11,21 @@ on:
           - major
           - minor
           - micro
+      publish-to-dockerhub:
+        description: 'Publish to Dockerhub?'
+        type: boolean
+        required: true
+        default: true
+      include_arm64_platform:
+        description: 'Also build for arm64 (DockerHub only)'
+        type: boolean
+        required: true
+        default: true
+      publish-to-ghcr:
+        description: 'Publish to ghcr?'
+        type: boolean
+        required: true
+        default: true          
 
 jobs:
   version-bump:
