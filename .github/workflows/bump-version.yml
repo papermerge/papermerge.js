@@ -2,14 +2,15 @@ name: Version Bump
 
 on:
   workflow_dispatch:
-    incremented_part:
-      type: choice
-      description: Incremented Part
-      default: 'micro'
-      options:
-        - major
-        - minor
-        - micro
+    inputs:
+      incremented_part:
+        type: choice
+        description: Incremented Part
+        default: 'micro'
+        options:
+          - major
+          - minor
+          - micro
 
 jobs:
   version-bump:
