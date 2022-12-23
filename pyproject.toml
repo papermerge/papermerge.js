@@ -9,8 +9,10 @@ packages = [{include = "towncrier_only"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-towncrier = "^22.12.0"
 
+
+[tool.poetry.group.dev.dependencies]
+towncrier = "^22.12.0"
 
 [build-system]
 requires = ["poetry-core"]
