@@ -47,5 +47,4 @@ export default class UploadButtonComponent extends Component {
     });
 
   }
-
 }
