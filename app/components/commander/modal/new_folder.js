@@ -2,10 +2,12 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { TrackedArray } from 'tracked-built-ins';
 
 
 export default class NewFolderComponent extends Component {
   @tracked title = '';
+  @tracked errors = new TrackedArray();
   @service store;
   @service currentUser;
 
@@ -20,7 +22,12 @@ export default class NewFolderComponent extends Component {
     new_folder = this.store.createRecord('folder');
     new_folder.title = this.title;
     new_folder.parent = this.args.node;
-    new_record = await new_folder.save();
+    try {
+      new_record = await new_folder.save();
+    } catch (exception) {
+      this.errors = exception['errors'];
+      return;
+    }
 
     this.args.onClose(new_record);
     this.reset();

@@ -16,4 +16,9 @@
     @type="text"
     @value={{this.title}}
   />
+  <div class="text-danger m-1">
+    {{#each this.errors as |error|}}
+      {{error.code}} - {{error.detail}}
+    {{/each}}
+  </div>
 </Modal::Base>

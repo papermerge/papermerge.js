@@ -45,6 +45,7 @@ export default class UploadButtonComponent extends Component {
       node: this.args.node,
       on_create_doc_callback: this.args.onCreateDocumentModel
     });
+
   }
 
 }
