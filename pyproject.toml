@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "towncrier-only"
+version = "0.1.0"
+description = "Towncrier changelog generator"
+authors = ["Eugen Ciur <eugen@papermerge.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "towncrier_only"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+towncrier = "^22.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
