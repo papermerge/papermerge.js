@@ -6,6 +6,7 @@ export default class Uploader extends Service {
 
   @service requests;
   @service store;
+  @service notify;
 
   upload({files, lang, node, on_create_doc_callback}) {
     Array.from(files, (file) => this.upload_file({
@@ -24,8 +25,17 @@ export default class Uploader extends Service {
       on_create_doc_callback(doc);
       // continue with actual file upload
       this._uploadFile({doc, file});
+    }).catch((err_response) => {
+      let message = "", error;
+
+      for (let i = 0; i < err_response.errors.length; i++) {
+        error = err_response.errors[i];
+        message += `${error.code} - ${error.detail}`;
+      }
+      this.notify.error(message);
     });
   }
+
 
   async _createDocumentModel({file, node, lang}) {
     /*

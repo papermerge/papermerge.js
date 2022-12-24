@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "towncrier-only"
+version = "0.1.0"
+description = "Towncrier changelog generator"
+authors = ["Eugen Ciur <eugen@papermerge.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "towncrier_only"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+towncrier = "^22.12.0"
+
+
+[tool.towncrier]
+directory = "changelog.d"
+filename = "changelog.md"
+start_string = "<!-- towncrier release notes start -->\n"
+underlines = ["", "", ""]
+template = "changelog.d/changelog_template.jinja"
+title_format = "## [{version}] - {project_date}"
+issue_format = "[issue#{issue}](https://github.com/ciur/papermerge/issues/{issue})"
+
+[[tool.towncrier.type]]
+directory = "security"
+name = "Security"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "removed"
+name = "Removed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecated"
+name = "Deprecated"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
