@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- towncrier release notes start -->
 
+## [2.1.2] - 2023-01-01
+
+
+### Removed
+
+- Adjust frontend to the backend which now runs without mptt [issue#501](https://github.com/ciur/papermerge/issues/501)
+
+
+### Fixed
+
+- Pagination should show correct current page [issue#487](https://github.com/ciur/papermerge/issues/487)
+
+
 ## [2.1.1] - 2022-12-24
 
 
