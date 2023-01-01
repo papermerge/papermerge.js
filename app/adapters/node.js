@@ -33,7 +33,7 @@ export default class NodeAdapter extends ApplicationAdapter {
 
           if (node.type === "folders") {
             normalized_node = this.store.normalize('folder', node);
-          } else if (node.type === "Document") {
+          } else if (node.type === "documents") {
             normalized_node = this.store.normalize('document', node);
           }
 
