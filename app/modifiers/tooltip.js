@@ -1,15 +1,21 @@
 import Modifier from 'ember-modifier';
 import bootstrap from 'bootstrap';
+import { registerDestructor } from '@ember/destroyable';
 
 
 export default class TooltipModifier extends Modifier {
 
-  didReceiveArguments() {
-    let { title, placement } = this.args.named;
+  constructor(owner, args) {
+    super(owner, args);
+    registerDestructor(this, this.cleanup);
+  }
+
+  modify(element, positional, named, { options }) {
+    let { title, placement } = named;
     let delay = 1000;
 
-    if (this.args.named['delay']) {
-      delay = this.args.named['delay'];
+    if (named['delay']) {
+      delay = named['delay'];
     }
 
     if (!placement) {
@@ -17,7 +23,7 @@ export default class TooltipModifier extends Modifier {
     }
 
     this.tooltip = new bootstrap.Tooltip(
-      this.element,
+      element,
       {
         'title': title,
         'placement': placement,
@@ -27,7 +33,7 @@ export default class TooltipModifier extends Modifier {
     );
   }
 
-  willDestroy() {
+  cleanup = () => {
     this.tooltip.hide();
   }
 }
