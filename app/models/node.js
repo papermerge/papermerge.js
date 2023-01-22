@@ -4,8 +4,22 @@ export default class NodeModel extends Model {
   @attr title;
   @attr tags;
   @attr model;
-  @belongsTo('node', { async: true, inverse: 'children', polymorphic: true }) parent;
-  @hasMany('node', {async: true, polymorphic: true, inverse: 'parent' }) children;
+  @belongsTo('node',
+    {
+      async: true,
+      inverse: 'children',
+      polymorphic: true,
+      as: 'node'
+    }
+  ) parent;
+  @hasMany('node',
+    {
+      async: true,
+      polymorphic: true,
+      inverse: 'parent',
+      as: 'node'
+    }
+  ) children;
 
   get is_folder() {
     return this.type === 'folder' || this.model === 'folder';
