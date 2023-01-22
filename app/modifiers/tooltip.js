@@ -10,7 +10,7 @@ export default class TooltipModifier extends Modifier {
     registerDestructor(this, this.cleanup);
   }
 
-  modify(element, positional, named, { options }) {
+  modify(element, positional, named) {
     let { title, placement } = named;
     let delay = 1000;
 
@@ -34,6 +34,8 @@ export default class TooltipModifier extends Modifier {
   }
 
   cleanup = () => {
-    this.tooltip.hide();
+    if (this.tooltip) {
+      this.tooltip.hide();
+    }
   }
 }

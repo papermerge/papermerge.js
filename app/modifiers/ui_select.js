@@ -244,37 +244,42 @@ export default class UISelectModifier extends Modifier {
 
   ui_select = undefined;
 
-  addEventListener() {
-    if (this.is_enabled) {
-      this.element.addEventListener('mousedown', this.onMouseDown);
-      this.element.addEventListener('mouseup', this.onMouseUp);
-      this.element.addEventListener('mousemove', this.onMouseMove);
+  addEventListener(view_mode, enabled_on, element) {
+
+    if (this.is_enabled(view_mode, enabled_on)) {
+      element.addEventListener('mousedown', this.onMouseDown);
+      element.addEventListener('mouseup', this.onMouseUp);
+      element.addEventListener('mousemove', this.onMouseMove);
     }
   }
 
-  removeEventListener() {
-    if (this.is_enabled) {
-      this.element.removeEventListener('mousedown', this.onMouseDown);
-      this.element.removeEventListener('mouseup', this.onMouseUp);
-      this.element.removeEventListener('mousemove', this.onMouseMove);
+  removeEventListener(view_mode, enabled_on, element) {
+    if (this.is_enabled(view_mode, enabled_on)) {
+      element.removeEventListener('mousedown', this.onMouseDown);
+      element.removeEventListener('mouseup', this.onMouseUp);
+      element.removeEventListener('mousemove', this.onMouseMove);
     }
   }
 
-  // lifecycle hooks
-  didReceiveArguments() {
-    if (this.is_enabled) {
-      this.removeEventListener();
-      this.addEventListener();
+  modify(element, positional, named) {
+    let view_mode = named['view_mode'],
+        enabled_on = named['enabled_on'];
+
+    if (this.is_enabled(view_mode, enabled_on)) {
+      this.removeEventListener(view_mode, enabled_on, element);
+      this.addEventListener(view_mode, enabled_on, element);
 
       this.ui_select = new UISelect(this.element);
     }
   }
 
+  /*
   willDestroy() {
     if (this.is_enabled) {
       this.removeEventListener();
     }
   }
+  */
 
   @action
   onMouseMove(event) {
@@ -309,10 +314,7 @@ export default class UISelectModifier extends Modifier {
     }
   }
 
-  get is_enabled() {
-    let view_mode = this.args.named['view_mode'],
-      enabled_on = this.args.named['enabled_on'];
-
+  is_enabled(view_mode, enabled_on) {
     return view_mode === enabled_on;
   }
 }

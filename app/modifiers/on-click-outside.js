@@ -1,5 +1,6 @@
 import { action } from '@ember/object';
 import Modifier from 'ember-modifier';
+import { registerDestructor } from '@ember/destroyable';
 
 
 export default class OnClickOutsideModifier extends Modifier {
@@ -17,21 +18,18 @@ export default class OnClickOutsideModifier extends Modifier {
 
   on_click_user_handler = null;
 
-  _init() {
-    document.addEventListener('click', this.onClick);
+  constructor(owner, args) {
+    super(owner, args);
+    registerDestructor(this, this.cleanup);
   }
 
-  _destroy() {
+  cleanup = () => {
     document.removeEventListener('click', this.onClick);
   }
 
-  didReceiveArguments() {
-    this.on_click_user_handler = this.args.positional[0];
-    this._init();
-  }
-
-  willDestroy() {
-    this._destroy();
+  modify(element, positional, named) {
+    this.on_click_user_handler = positional[0];
+    document.addEventListener('click', this.onClick);
   }
 
   @action
