@@ -11,10 +11,14 @@ export default class AdjustElementHeightModifier extends Modifier {
     elements' height) must be so that '.pages' and '.thumbnails' will
     ocupy whole visible screen area without overflowing it.
   */
-  didInstall() {
-    let height = this._getCorrectHeight();
+  didSetup = false;
 
-    this.element.style.height = `${height}px`;
+  modify(element, positional, named) {
+    if (!this.didSetup) {
+      let height = this._getCorrectHeight();
+      element.style.height = `${height}px`;
+      this.didSetup = true;
+    }
   }
 
   _getCorrectHeight() {

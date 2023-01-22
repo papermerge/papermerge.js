@@ -269,7 +269,7 @@ export default class UISelectModifier extends Modifier {
       this.removeEventListener(view_mode, enabled_on, element);
       this.addEventListener(view_mode, enabled_on, element);
 
-      this.ui_select = new UISelect(this.element);
+      this.ui_select = new UISelect(element);
     }
   }
 

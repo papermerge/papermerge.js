@@ -3,11 +3,11 @@ import Modifier from 'ember-modifier';
 
 export default class ScrollIntoViewModifier extends Modifier {
 
-  didReceiveArguments() {
+  modify(element, positional, named) {
     let page, scroll_to_page;
 
-    page = this.args.named['page'];
-    scroll_to_page = this.args.named['scroll_to_page'];
+    page = named['page'];
+    scroll_to_page = named['scroll_to_page'];
 
     if (!page) {
       return;
@@ -18,7 +18,7 @@ export default class ScrollIntoViewModifier extends Modifier {
     }
 
     if (page.id == scroll_to_page.id) {
-      this.element.scrollIntoView();
+      element.scrollIntoView();
     }
   }
 }
