@@ -24,16 +24,17 @@ export default class OnClickOutsideModifier extends Modifier {
   }
 
   cleanup = () => {
-    document.removeEventListener('click', this.onClick);
+    document.removeEventListener('click', this.CustomOnClick);
   }
 
-  modify(element, positional, named) {
-    this.on_click_user_handler = positional[0];
-    document.addEventListener('click', this.onClick);
+  modify(element, [onClick]) {
+    this.element = element;
+    this.on_click_user_handler = onClick;
+    document.addEventListener('click', this.CustomOnClick);
   }
 
   @action
-  onClick(event) {
+  CustomOnClick(event) {
     let path;
 
     // composedPath() method of the Event interface returns the event's path
