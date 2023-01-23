@@ -8,6 +8,7 @@ export default class BaseRoute extends Route {
   @service currentUser;
 
   async beforeModel(transition) {
+    await this.session.setup();
     await this.currentUser.loadCurrentUser();
     this.session.requireAuthentication(transition, 'login');
   }
