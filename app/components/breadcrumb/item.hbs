@@ -1,12 +1,12 @@
 <li class="breadcrumb-item">
-  {{#if (is_equal @node.title ".inbox")}}
+  {{#if (is_equal @node.[0] ".inbox")}}
     {{#if this.show_spinner}}
       <Spinner @inProgress={{true}} class="text-primary" />
     {{else}}
       <Spinner @inProgress={{false}} class="text-primary" />
     {{/if}}
       <Breadcrumb::Inbox />
-  {{else if (is_equal @node.title ".home")}}
+  {{else if (is_equal @node.[0] ".home")}}
     {{#if this.show_spinner}}
       <Spinner @inProgress={{true}} class="text-primary" />
     {{else}}
@@ -17,14 +17,14 @@
 
   <button
     class="btn btn-link"
-    {{on "click" (perform @onNodeClicked @node.id @hint 'folder')}}
-    {{tooltip title=@node.id placement='bottom' delay=4000}}>
-      {{#if (is_equal @node.title ".inbox")}}
+    {{on "click" (perform @onNodeClicked @node.[1] @hint 'folder')}}
+    {{tooltip title=@node.[1] placement='bottom' delay=4000}}>
+      {{#if (is_equal @node.[0] ".inbox")}}
         Inbox
-      {{else if (is_equal @node.title ".home")}}
+      {{else if (is_equal @node.[0] ".home")}}
         Home
       {{else}}
-        {{@node.title}}
+        {{@node.[0]}}
       {{/if}}
   </button>
 </li>

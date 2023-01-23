@@ -6,6 +6,7 @@ export default class DocumentModel extends NodeModel {
   @attr image;
   @attr lang;
   @attr ocr;
+  @attr breadcrumb;
   @attr ocr_status;
   // `versions` is an Array of DocumentVersion(s)
   @attr versions; // of type DocumentVersion

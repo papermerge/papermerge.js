@@ -4,6 +4,8 @@ export default class NodeModel extends Model {
   @attr title;
   @attr tags;
   @attr model;
+  @attr breadcrumb;
+
   @belongsTo('node',
     {
       async: true,
