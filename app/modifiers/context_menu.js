@@ -57,32 +57,17 @@ export default class ContextMenuModifier extends Modifier {
 
   context_menu = undefined;
 
-  addEventListener() {
-    this.element.addEventListener('contextmenu', this.onContextMenu);
-    this.element.addEventListener('click', this.onClick);
-  }
-
-  removeEventListener() {
-    this.element.removeEventListener('contextmenu', this.onMouseDown);
-    this.element.removeEventListener('click', this.onClick);
-  }
-
-  // lifecycle hooks
-  didReceiveArguments() {
-    let dom_el = this.element.querySelector('.context-menu');
+  modify(element, positional, named) {
+    let dom_el = element.querySelector('.context-menu');
 
     if (dom_el) {
-      this.removeEventListener();
-      this.addEventListener();
-
+      element.addEventListener('contextmenu', this.onContextMenu);
+      element.addEventListener('click', this.onClick);
       this.context_menu = new ContextMenu(dom_el);
     } else {
       console.error(`.context-menu element not found`);
     }
-  }
 
-  willDestroy() {
-    this.removeEventListener();
   }
 
   @action

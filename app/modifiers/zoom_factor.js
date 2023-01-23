@@ -2,10 +2,11 @@ import Modifier from 'ember-modifier';
 
 
 export default class ZoomFactorModifier extends Modifier {
-  didReceiveArguments() {
-    let zoom_factor = this.args.positional[0];
 
-    this.element.style.width = `${zoom_factor}%`;
+  modify(element, positional, named) {
+    let zoom_factor = positional[0];
+
+    element.style.width = `${zoom_factor}%`;
   }
 
 }

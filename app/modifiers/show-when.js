@@ -2,8 +2,8 @@ import { Modal } from 'bootstrap';
 import { modifier } from 'ember-modifier';
 
 
-export default modifier((element, [isDisplayed]) => {
-  let modal;
+export default modifier((element, positional, named) => {
+  let modal, isDisplayed = positional[0];
 
   modal = Modal.getOrCreateInstance(element);
 
@@ -12,4 +12,4 @@ export default modifier((element, [isDisplayed]) => {
   } else {
     modal.hide();
   }
-});
+}, {eager: false});

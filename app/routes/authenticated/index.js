@@ -8,9 +8,10 @@ export default class IndexRoute extends BaseRoute {
   to 'home folder' when user try to access root url
   */
   @service currentUser;
+  @service router;
 
   async model() {
-    this.transitionTo(
+    this.router.transitionTo(
       'authenticated.nodes',
       this.currentUser.user.home_folder.get('id')
     );

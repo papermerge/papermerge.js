@@ -4,28 +4,11 @@ import Modifier from 'ember-modifier';
 
 export default class DrappableModifier extends Modifier {
 
-  addEventListener() {
-    this.element.addEventListener('drop', this.onDrop);
-    this.element.addEventListener('dragover', this.onDragOver);
-    this.element.addEventListener('dragenter', this.onDragEnter);
-    this.element.addEventListener('dragleave', this.onDragLeave);
-  }
-
-  removeEventListener() {
-    this.element.removeEventListener('drop', this.onDrop);
-    this.element.removeEventListener('dragover', this.onDragOver);
-    this.element.removeEventListener('dragenter', this.onDragEnter);
-    this.element.removeEventListener('dragleave', this.onDragLeave);
-  }
-
-  // lifecycle hooks
-  didReceiveArguments() {
-    this.removeEventListener();
-    this.addEventListener();
-  }
-
-  willDestroy() {
-    this.removeEventListener();
+  modify(element, positional, named) {
+    element.addEventListener('drop', this.onDrop);
+    element.addEventListener('dragover', this.onDragOver);
+    element.addEventListener('dragenter', this.onDragEnter);
+    element.addEventListener('dragleave', this.onDragLeave);
   }
 
   @action

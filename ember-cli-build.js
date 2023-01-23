@@ -7,6 +7,9 @@ module.exports = function (defaults) {
     sassOptions: {
       extension: 'scss',
     },
+    'ember-simple-auth': {
+      useSessionSetupMethod: true,
+    }
   });
 
   app.import('node_modules/bootstrap-icons/font/bootstrap-icons.css');

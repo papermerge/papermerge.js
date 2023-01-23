@@ -14,9 +14,9 @@ export default class TextToDom extends Modifier {
   rendered with <em> tag.
   To fix this problem hightlight text is converted to DOM nodes.
   */
-  didReceiveArguments() {
+  modify(element, positional, named) {
 
-    let text = this.args.positional[0],
+    let text = positional[0],
       template,
       nodes,
       that = this,

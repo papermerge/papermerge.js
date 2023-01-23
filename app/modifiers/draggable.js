@@ -25,37 +25,16 @@ export default class DraggableModifier extends Modifier {
 
   model = null;
 
-  addEventListener() {
-    this.element.addEventListener(
+  modify(element, positional, named) {
+    element.addEventListener(
       'dragstart',
       this.onDragStart
     );
-    this.element.addEventListener(
+    element.addEventListener(
       'dragend',
       this.onDragEnd
     );
-  }
-
-  removeEventListener() {
-    this.element.removeEventListener(
-      'dragstart',
-      this.onDragStart
-    );
-    this.element.removeEventListener(
-      'dragend',
-      this.onDragEnd
-    );
-  }
-
-  // lifecycle hooks
-  didReceiveArguments() {
-    this.removeEventListener();
-    this.addEventListener();
-    this.element.setAttribute('draggable', true);
-  }
-
-  willDestroy() {
-    this.removeEventListener();
+    element.setAttribute('draggable', true);
   }
 
   @action
