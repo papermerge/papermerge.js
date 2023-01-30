@@ -1,6 +1,6 @@
 {
   "name": "papermerge",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "private": false,
   "description": "Papermerge DMS frontend",
   "repository": "https://github.com/papermerge/papermerge.js",

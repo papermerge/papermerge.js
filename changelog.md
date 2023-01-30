@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- towncrier release notes start -->
 
+## [2.1.3] - 2023-01-30
+
+
+### Fixed
+
+- Wrong breadcrumb path when openening document/folder [issue#509](https://github.com/ciur/papermerge/issues/509)
+- Empty page (no save button, no form controls) when adding new user/group [issue#513](https://github.com/ciur/papermerge/issues/513)
+
+
+### Misc
+
+- Upgrade to Ember 4.9 [issue#510](https://github.com/ciur/papermerge/issues/510)
+
+
 ## [2.1.2] - 2023-01-01
 
 
