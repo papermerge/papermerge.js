@@ -7,7 +7,7 @@
   {{#each @perm_group.perms as |perm|}}
     <Group::Permission
       @permission={{perm}}
-      @parent_group_model={{@parent_group_model}}
+      @new_group_perms={{@new_group_perms}}
       @onChange={{this.onChange}} />
   {{/each}}
 </div>
