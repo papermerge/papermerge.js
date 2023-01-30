@@ -9,8 +9,8 @@ class PermissionComponent extends Component {
     */
     let parent_group_model_perm_ids;
 
-    if (this.args.parent_group_model) {
-      parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
+    if (this.args.new_group_perms) {
+      parent_group_model_perm_ids = this.args.new_group_perms.map((p) => p.id);
     }
 
     if (parent_group_model_perm_ids) {

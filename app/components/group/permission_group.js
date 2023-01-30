@@ -30,8 +30,8 @@ class PermissionGroupComponent extends Component {
     */
     let parent_group_model_perm_ids, group_perm_ids;
 
-    if (this.args.parent_group_model) {
-      parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
+    if (this.args.new_group_perms) {
+      parent_group_model_perm_ids = this.args.new_group_perms.map((p) => p.id);
     }
     if (this.args.perm_group) {
       group_perm_ids = this.args.perm_group.perms.map((p) => p.id);
@@ -80,24 +80,32 @@ class PermissionGroupComponent extends Component {
       // user chose to select (he checked) all
       // permissions in the group
       this.args.perm_group.perms.forEach((perm) => {
-        that.addPermission(perm);
+        this.addPermission(perm);
       });
     } else {
       // user chose to unselect (i.e. he unchecked) all
       // permissions in the group
       this.args.perm_group.perms.forEach((perm) => {
-        that.removePermission(perm);
+        this.removePermission(perm);
       });
     }
   }
 
   addPermission(perm) {
-    this.args.new_group_perms.push(perm);
-    //parent_group_model.permissions.addObject(perm);
+    if (this.args.new_group_perms['push']) {
+      this.args.new_group_perms.push(perm);
+    } else if (this.args.new_group_perms['addObject']) {
+      this.args.new_group_perms.addObject(perm);
+    }
   }
 
   removePermission(perm) {
-    this.args.new_group_perms.pop(perm);
+    if (this.args.new_group_perms['pop']) {
+      this.args.new_group_perms.pop(perm);
+    } else if (this.args.new_group_perms['removeObject']) {
+      this.args.new_group_perms.removeObject(perm);
+    }
+
   }
 
 }
