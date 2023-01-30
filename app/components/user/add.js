@@ -22,12 +22,6 @@ class AddUserComponent extends Component {
 
   groups = []
 
-  constructor(owner, args) {
-    super(owner, args);
-
-    this.new_user = this.store.createRecord('user');
-  }
-
   get disabled() {
     /*
     Form can be submitted only when both
@@ -57,6 +51,9 @@ class AddUserComponent extends Component {
 
   @action
   onSubmit() {
+
+    this.new_user = this.store.createRecord('user');
+
     if (this.new_user && this.username && this.email) {
       this.new_user.username = this.username;
       this.new_user.email = this.email;

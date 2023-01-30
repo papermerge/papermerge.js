@@ -9,9 +9,15 @@ class PermissionComponent extends Component {
     */
     let parent_group_model_perm_ids;
 
-    parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
+    if (this.args.parent_group_model) {
+      parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
+    }
 
-    return parent_group_model_perm_ids.includes(this.args.permission.id);
+    if (parent_group_model_perm_ids) {
+      return parent_group_model_perm_ids.includes(this.args.permission.id);
+    }
+
+    return false;
   }
 
   set isChecked(value) {

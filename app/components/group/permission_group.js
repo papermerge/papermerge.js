@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
+
 class PermissionGroupComponent extends Component {
   /*
   A permission group is a set of four permissions
@@ -13,6 +14,7 @@ class PermissionGroupComponent extends Component {
   `this.args.perm_group.perms` - permissions in the group
   `this.args.perm_group.model` - model name (e.g. User)
   */
+
 
   get isChecked() {
     /*
@@ -28,10 +30,19 @@ class PermissionGroupComponent extends Component {
     */
     let parent_group_model_perm_ids, group_perm_ids;
 
-    parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
-    group_perm_ids = this.args.perm_group.perms.map((p) => p.id);
+    if (this.args.parent_group_model) {
+      parent_group_model_perm_ids = this.args.parent_group_model.permissions.map((p) => p.id);
+    }
+    if (this.args.perm_group) {
+      group_perm_ids = this.args.perm_group.perms.map((p) => p.id);
+    }
 
-    return group_perm_ids.every((v) => parent_group_model_perm_ids.includes(v));
+    if (parent_group_model_perm_ids) {
+      return group_perm_ids.every((v) => parent_group_model_perm_ids.includes(v));
+    }
+
+
+    return false;
   }
 
   set isChecked(value) {
@@ -63,31 +74,32 @@ class PermissionGroupComponent extends Component {
     of the group.
     */
     let value = event.target.checked,
-      parent_group_model = this.args.parent_group_model,
       that = this;
 
     if (value) {
       // user chose to select (he checked) all
       // permissions in the group
       this.args.perm_group.perms.forEach((perm) => {
-        that.addPermission(parent_group_model, perm);
+        that.addPermission(perm);
       });
     } else {
       // user chose to unselect (i.e. he unchecked) all
       // permissions in the group
       this.args.perm_group.perms.forEach((perm) => {
-        that.removePermission(parent_group_model, perm);
+        that.removePermission(perm);
       });
     }
   }
 
-  addPermission(parent_group_model, perm) {
-    parent_group_model.permissions.addObject(perm);
+  addPermission(perm) {
+    this.args.new_group_perms.push(perm);
+    //parent_group_model.permissions.addObject(perm);
   }
 
-  removePermission(parent_group_model, perm) {
-    parent_group_model.permissions.removeObject(perm);
+  removePermission(perm) {
+    this.args.new_group_perms.pop(perm);
   }
+
 }
 
 export default PermissionGroupComponent;
